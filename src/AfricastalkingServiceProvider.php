@@ -2,9 +2,9 @@
 
 namespace SamuelMwangiW\Africastalking;
 
+use SamuelMwangiW\Africastalking\Commands\AfricastalkingCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
-use SamuelMwangiW\Africastalking\Commands\AfricastalkingCommand;
 
 class AfricastalkingServiceProvider extends PackageServiceProvider
 {
