@@ -4,7 +4,7 @@ namespace SamuelMwangiW\Africastalking\ValueObjects;
 
 use SamuelMwangiW\Africastalking\Contracts\DTOContract;
 
-class AccountDTO implements DTOContract
+class Account implements DTOContract
 {
     public function __construct(
         public float $balance,
@@ -12,9 +12,9 @@ class AccountDTO implements DTOContract
     ) {
     }
 
-    public static function make(float $balance, string $currency): AccountDTO
+    public static function make(float $balance, string $currency): Account
     {
-        return new AccountDTO(
+        return new Account(
             balance: $balance,
             currency: $currency,
         );
@@ -29,7 +29,7 @@ class AccountDTO implements DTOContract
     {
         return [
             'amount' => $this->balance,
-            'curency' => $this->currency,
+            'currency' => $this->currency,
             'balance' => "{$this->currency} {$this->balance}",
         ];
     }

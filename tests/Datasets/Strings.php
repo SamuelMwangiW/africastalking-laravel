@@ -9,3 +9,11 @@ dataset('strings', function () {
     yield faker()->word();
     yield faker()->word();
 });
+
+dataset('sentence', function () {
+    yield faker()->bs();
+//    yield faker()->catchPhrase();
+//    yield faker()->catchPhrase();
+//    yield faker()->catchPhrase();
+//    yield faker()->catchPhrase();
+});

@@ -2,7 +2,7 @@
 
 use SamuelMwangiW\Africastalking\Domain\Application;
 use SamuelMwangiW\Africastalking\Facades\Africastalking;
-use SamuelMwangiW\Africastalking\ValueObjects\AccountDTO;
+use SamuelMwangiW\Africastalking\ValueObjects\Account;
 
 it('resolves the application class')
     ->expect(fn () => Africastalking::application())
@@ -10,5 +10,5 @@ it('resolves the application class')
 
 it('can fetch the application balance')
     ->expect(fn () => Africastalking::application()->balance())
-    ->toBeInstanceOf(AccountDTO::class)
+    ->toBeInstanceOf(Account::class)
     ->currency->toBe('KES');

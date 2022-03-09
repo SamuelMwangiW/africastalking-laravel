@@ -3,10 +3,17 @@
 namespace SamuelMwangiW\Africastalking\Requests;
 
 use JustSteveKing\Transporter\Request;
+use SamuelMwangiW\Africastalking\Traits\ChecksEnvironment;
 
 class AfricastalkingRequest extends Request
 {
+    use ChecksEnvironment;
+
     protected string $method = 'POST';
+
+    protected string $sandboxBaseUrl = 'https://api.sandbox.africastalking.com/version1/';
+
+    protected string $liveBaseUrl = 'https://api.africastalking.com/version1/';
 
     /**
      * @return array
@@ -18,7 +25,7 @@ class AfricastalkingRequest extends Request
         $response = $this->send();
 
         if ($response->failed()) {
-            /** @phpstan-ignore-next-line  */
+            /** @phpstan-ignore-next-line */
             throw $response->toException();
         }
 
@@ -34,21 +41,29 @@ class AfricastalkingRequest extends Request
         return $this;
     }
 
+    public function addIdempotencyKey(string|null $key): static
+    {
+        if ($key){
+            /** @phpstan-ignore-next-line  */
+            $this->withHeaders(['Idempotency-Key' => $key]);
+        }
+
+        return $this;
+    }
+
     private function setBaseUri(): void
     {
-        $this->baseUrl = config('africastalking.username') === 'sandbox'
-            ? 'https://api.sandbox.africastalking.com/version1/'
-            : 'https://api.africastalking.com/version1/';
+        $this->baseUrl = $this->isSandbox() ? $this->sandboxBaseUrl : $this->liveBaseUrl;
     }
 
     private function addHeaders(): void
     {
         /** @phpstan-ignore-next-line */
-        $this->withHeaders([
-            'apiKey' => config('africastalking.api-key'),
-            'accept' => 'application/json',
-            'Content-Type' => 'application/json',
-        ]);
+        $this->acceptJson()
+            ->asForm()
+            ->withHeaders([
+                'apiKey' => config('africastalking.api-key'),
+            ]);
     }
 
     private function addUsername(): void

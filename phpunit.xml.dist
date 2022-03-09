@@ -39,5 +39,6 @@
     <php>
         <env name="AFRICASTALKING_USERNAME" value="sandbox"/>
         <env name="AFRICASTALKING_API_KEY" value=""/>
+        <env name="AFRICASTALKING_FROM" value=""/>
     </php>
 </phpunit>
