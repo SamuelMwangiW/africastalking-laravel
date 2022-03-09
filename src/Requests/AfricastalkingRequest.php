@@ -55,13 +55,14 @@ class AfricastalkingRequest extends Request
     {
         if ($this->method === 'GET') {
             $this->withQuery([
-                'username' => config('africastalking.username')
+                'username' => config('africastalking.username'),
             ]);
+
             return;
         }
 
         $this->withData([
-            'username' => config('africastalking.username')
+            'username' => config('africastalking.username'),
         ]);
     }
 }
