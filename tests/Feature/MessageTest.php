@@ -5,6 +5,21 @@ use SamuelMwangiW\Africastalking\Facades\Africastalking;
 use SamuelMwangiW\Africastalking\ValueObjects\PhoneNumber;
 use SamuelMwangiW\Africastalking\ValueObjects\RecipientsApiResponse;
 
+it('can send bulk message when from is not set', function (string $phone, string $message) {
+    config()->set('africastalking.from',null);
+
+    $response = Africastalking::sms($message)
+        ->to($phone)
+        ->send();
+
+    expect($response)
+        ->toBeInstanceOf(Collection::class)
+        ->toHaveCount(1)
+        ->first()->toBeInstanceOf(RecipientsApiResponse::class)
+        ->first()->number->toBeInstanceOf(PhoneNumber::class)
+        ->first()->number->number->toBe($phone);
+})->with('phone-numbers', 'sentence')->only();
+
 it('can send bulk message', function (string $phone, string $message) {
     $response = Africastalking::sms($message)
         ->to($phone)
