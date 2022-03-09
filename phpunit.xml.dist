@@ -36,4 +36,8 @@
     <logging>
         <junit outputFile="build/report.junit.xml"/>
     </logging>
+    <php>
+        <env name="AFRICASTALKING_USERNAME" value="sandbox"/>
+        <env name="AFRICASTALKING_API_KEY" value=""/>
+    </php>
 </phpunit>
