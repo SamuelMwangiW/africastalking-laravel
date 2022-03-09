@@ -27,7 +27,7 @@ it('can construct an AccountDTO class', function () {
 
 it('can construct an Account using AccountFactory', function () {
     $account = \SamuelMwangiW\Africastalking\Factories\AccountFactory::make(
-        ['UserData'=>['balance'=>'UGX 9876.00']]
+        ['UserData' => ['balance' => 'UGX 9876.00']]
     );
 
     expect($account)
@@ -37,7 +37,7 @@ it('can construct an Account using AccountFactory', function () {
 });
 
 it('can make an Account statically', function () {
-    $account = Account::make(balance: 67890.00,currency: 'USD');
+    $account = Account::make(balance: 67890.00, currency: 'USD');
 
     expect($account)
         ->toBeInstanceOf(Account::class)

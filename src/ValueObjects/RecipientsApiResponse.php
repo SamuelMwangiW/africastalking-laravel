@@ -12,18 +12,17 @@ class RecipientsApiResponse implements DTOContract
         public string      $cost,
         public string      $status,
         public string      $messageId,
-    )
-    {
+    ) {
     }
 
     public static function make(array $attributes): RecipientsApiResponse
     {
         return new RecipientsApiResponse(
-            statusCode: intval(data_get($attributes,'statusCode')),
-            number: PhoneNumber::make(data_get($attributes,'number')),
-            cost: data_get($attributes,'cost'),
-            status: data_get($attributes,'status'),
-            messageId: data_get($attributes,'messageId'),
+            statusCode: intval(data_get($attributes, 'statusCode')),
+            number: PhoneNumber::make(data_get($attributes, 'number')),
+            cost: data_get($attributes, 'cost'),
+            status: data_get($attributes, 'status'),
+            messageId: data_get($attributes, 'messageId'),
         );
     }
 

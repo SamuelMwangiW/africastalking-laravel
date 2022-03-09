@@ -2,8 +2,6 @@
 
 namespace SamuelMwangiW\Africastalking\Traits;
 
-use JustSteveKing\Transporter\Request;
-
 trait HasIdempotency
 {
     public string|null $idempotencyKey = null;

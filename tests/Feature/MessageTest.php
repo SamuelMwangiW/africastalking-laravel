@@ -62,7 +62,7 @@ it('can change message senderID', function (string $phone, string $message) {
 })->with('phone-numbers', 'sentence');
 
 it('thows an exception for an invalid request', function () {
-    config()->set('africastalking.api-key','invalid-key-here');
+    config()->set('africastalking.api-key', 'invalid-key-here');
 
     Africastalking::sms('This is a dummy message')
         ->to('+225 0574825420') //number throws invalid Phone Number

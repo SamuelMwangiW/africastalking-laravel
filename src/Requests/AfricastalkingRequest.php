@@ -43,7 +43,7 @@ class AfricastalkingRequest extends Request
 
     public function addIdempotencyKey(string|null $key): static
     {
-        if ($key){
+        if ($key) {
             /** @phpstan-ignore-next-line  */
             $this->withHeaders(['Idempotency-Key' => $key]);
         }

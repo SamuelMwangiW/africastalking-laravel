@@ -1,6 +1,6 @@
 <?php
 
-dataset('phone-numbers',function (){
+dataset('phone-numbers', function () {
     yield '+254722005588';
 //    yield '+256783879001';
 //    yield '+260977528773';

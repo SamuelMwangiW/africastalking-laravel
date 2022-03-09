@@ -8,7 +8,7 @@ class PhoneNumber implements DTOContract
 {
     public string $number;
 
-    public function __construct(string $number,)
+    public function __construct(string $number)
     {
         $this->number = str_replace(search: [' ', '-', '.'], replace: '', subject: $number);
     }
@@ -32,6 +32,6 @@ class PhoneNumber implements DTOContract
 
     public function isValid(): bool
     {
-        return preg_match(pattern: '/^[+]{0,1}[0-9]{10,15}$/',subject: $this->number) !== false;
+        return preg_match(pattern: '/^[+]{0,1}[0-9]{10,15}$/', subject: $this->number) !== false;
     }
 }
