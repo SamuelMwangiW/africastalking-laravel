@@ -18,7 +18,7 @@ it('can send bulk message when from is not set', function (string $phone, string
         ->first()->toBeInstanceOf(RecipientsApiResponse::class)
         ->first()->number->toBeInstanceOf(PhoneNumber::class)
         ->first()->number->number->toBe($phone);
-})->with('phone-numbers', 'sentence')->only();
+})->with('phone-numbers', 'sentence');
 
 it('can send bulk message', function (string $phone, string $message) {
     $response = Africastalking::sms($message)
