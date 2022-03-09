@@ -6,7 +6,7 @@ use SamuelMwangiW\Africastalking\ValueObjects\PhoneNumber;
 use SamuelMwangiW\Africastalking\ValueObjects\RecipientsApiResponse;
 
 it('can send bulk message when from is not set', function (string $phone, string $message) {
-    config()->set('africastalking.from',null);
+    config()->set('africastalking.from', null);
 
     $response = Africastalking::sms($message)
         ->to($phone)
