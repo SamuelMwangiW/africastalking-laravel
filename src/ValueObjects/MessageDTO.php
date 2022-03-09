@@ -22,8 +22,7 @@ class MessageDTO implements DTOContract
         public string      $message,
         public Collection  $to,
         public string|null $from = null,
-    )
-    {
+    ) {
     }
 
     public function enqueue(bool $value = true): static
@@ -63,7 +62,6 @@ class MessageDTO implements DTOContract
 
     public function send(): void
     {
-
     }
 
     public function __toString(): string

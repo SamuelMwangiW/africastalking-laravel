@@ -8,7 +8,8 @@ class PhoneNumberDTO implements DTOContract
 {
     public function __construct(
         public string $number,
-    ){}
+    ) {
+    }
 
     public function __toString(): string
     {

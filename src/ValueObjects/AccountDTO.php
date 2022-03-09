@@ -12,7 +12,7 @@ class AccountDTO implements DTOContract
     ) {
     }
 
-    public static function make(float $balance, string $currency,): AccountDTO
+    public static function make(float $balance, string $currency): AccountDTO
     {
         return new AccountDTO(
             balance: $balance,
