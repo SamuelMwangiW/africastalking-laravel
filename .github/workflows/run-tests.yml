@@ -9,6 +9,8 @@ on:
 jobs:
   test:
     runs-on: ${{ matrix.os }}
+    env:
+      AFRICASTALKING_API_KEY: ${{ secrets.AFRICASTALKING_API_KEY }}
     strategy:
       fail-fast: true
       matrix:

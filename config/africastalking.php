@@ -2,5 +2,5 @@
 
 return [
     'username' => env('AFRICASTALKING_USERNAME','sandbox'),
-    'api-key' => env('AFRICASTALKING_API'),
+    'api-key' => env('AFRICASTALKING_API_KEY'),
 ];
