@@ -2,10 +2,12 @@
 
 namespace SamuelMwangiW\Africastalking;
 
+use SamuelMwangiW\Africastalking\Domain\Application;
+
 class Africastalking
 {
-    public function sms(): bool
+    public function application(): Application
     {
-        return true;
+        return app(Application::class);
     }
 }

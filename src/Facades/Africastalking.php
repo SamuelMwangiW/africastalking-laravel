@@ -6,7 +6,8 @@ use Illuminate\Support\Facades\Facade;
 use SamuelMwangiW\Africastalking\Africastalking as BaseClass;
 
 /**
- * @see \SamuelMwangiW\Africastalking\Africastalking
+ * @see BaseClass
+ * @mixin BaseClass
  */
 class Africastalking extends Facade
 {

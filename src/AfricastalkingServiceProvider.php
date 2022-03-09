@@ -10,7 +10,7 @@ class AfricastalkingServiceProvider extends PackageServiceProvider
     public function configurePackage(Package $package): void
     {
         $package
-            ->name('africastalking-laravel')
+            ->name('africastalking')
             ->hasConfigFile();
     }
 }
