@@ -13,7 +13,7 @@ class AccountFactory implements \SamuelMwangiW\Africastalking\Contracts\FactoryC
         $balance = Str::of(data_get($data,'UserData.balance'));
 
         return new AccountDTO(
-            balance: $balance->after(' ')->toString(),
+            balance: floatval($balance->after(' ')->toString()),
             currency: $balance->before(' ')->toString(),
         );
     }

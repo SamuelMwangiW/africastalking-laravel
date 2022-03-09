@@ -18,6 +18,7 @@ class AfricastalkingRequest extends Request
         $response = $this->send();
 
         if ($response->failed()) {
+            /** @phpstan-ignore-next-line  */
             throw $response->toException();
         }
 
