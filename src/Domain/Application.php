@@ -2,7 +2,6 @@
 
 namespace SamuelMwangiW\Africastalking\Domain;
 
-use Illuminate\Http\Client\Response;
 use SamuelMwangiW\Africastalking\Factories\AccountFactory;
 use SamuelMwangiW\Africastalking\Requests\Application\BalanceRequest;
 

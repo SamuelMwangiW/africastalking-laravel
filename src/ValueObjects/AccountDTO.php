@@ -9,7 +9,8 @@ class AccountDTO implements DTOContract
     public function __construct(
         public float $balance,
         public string $currency,
-    ){}
+    ) {
+    }
 
     public function __toString(): string
     {

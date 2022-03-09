@@ -7,10 +7,9 @@ use SamuelMwangiW\Africastalking\ValueObjects\AccountDTO;
 
 class AccountFactory implements \SamuelMwangiW\Africastalking\Contracts\FactoryContract
 {
-
     public static function make(array $data): AccountDTO
     {
-        $balance = Str::of(data_get($data,'UserData.balance'));
+        $balance = Str::of(data_get($data, 'UserData.balance'));
 
         return new AccountDTO(
             balance: $balance->after(' ')->toString(),
