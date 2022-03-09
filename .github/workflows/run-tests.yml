@@ -11,6 +11,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     env:
       AFRICASTALKING_API_KEY: ${{ secrets.AFRICASTALKING_API_KEY }}
+      AFRICASTALKING_FROM: ${{ secrets.AFRICASTALKING_FROM }}
     strategy:
       fail-fast: true
       matrix:
