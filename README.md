@@ -13,6 +13,8 @@ This is an unofficial Laravel SDK for interacting with [Africastalking](https://
 - [Collections](https://laravel.com/docs/9.x/collections#main-content)
 - Among many others
 
+Note: This package is a work in progress and might take a while to complete. If you are in need of a stable sdk, kindly check out the [official PHP SDK](https://github.com/africastalkingltd/africastalking-php) maintained by the Africastalking team
+
 ## Installation
 
 You can install the package via composer:
