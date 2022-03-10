@@ -98,14 +98,14 @@ WIP
 WIP
 
 ## Requests
-I intend to ship [Laravel Requests](https://laravel.com/docs/9.x/validation#creating-form-requests) that you can inject into your controller(s) for:
+We intend to ship [Laravel Requests](https://laravel.com/docs/9.x/validation#creating-form-requests) that you can inject into your controller(s) for:
 - USSD requests
 - Sms Callback requests
 - Airtime validation and delivery Callback request
 - Voice call Requests
 
 ## Notification
-I intend to allow for easily routing of notifications via Africastalking SMS
+We intend to allow for easily routing of notifications via Africastalking SMS
 ## Testing
 
 ```bash
