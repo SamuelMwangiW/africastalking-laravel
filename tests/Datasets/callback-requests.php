@@ -83,7 +83,7 @@ dataset('ussd-event-notification', [
             'retryCount' => faker()->numberBetween(0, 5),
             'input' => 'KEY BAR KEY',
             'networkCode' => '99999',
-            'status' => 'Incomplete'
+            'status' => 'Incomplete',
         ],
     ],
 ]);
