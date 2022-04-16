@@ -16,7 +16,7 @@
         }
     ],
     "require": {
-        "php": "^8.0",
+        "php": "^8.1",
         "illuminate/contracts": "^9.0",
         "juststeveking/laravel-transporter": "^1.0",
         "spatie/laravel-package-tools": "^1.9.2"
@@ -29,6 +29,7 @@
         "pestphp/pest": "^1.21",
         "pestphp/pest-plugin-faker": "^1.0",
         "pestphp/pest-plugin-laravel": "^1.1",
+        "pestphp/pest-plugin-parallel": "^1.0",
         "phpstan/extension-installer": "^1.1",
         "phpstan/phpstan-deprecation-rules": "^1.0",
         "phpstan/phpstan-phpunit": "^1.0",
