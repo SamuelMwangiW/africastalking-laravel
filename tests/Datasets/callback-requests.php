@@ -118,3 +118,20 @@ dataset('incoming-message-notification', [
         ],
     ],
 ]);
+
+dataset('subscription-notification', [
+    [
+        [
+            'phoneNumber' => '+254720123123',
+            'shortCode' => '6942',
+            'keyword' => 'ubwedede',
+            'updateType' => 'deletion',
+        ],
+        [
+            'phoneNumber' => '+254720123123',
+            'shortCode' => '6942',
+            'keyword' => 'Magnathombious',
+            'updateType' => 'addition',
+        ],
+    ]
+]);
