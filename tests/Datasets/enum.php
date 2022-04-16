@@ -58,3 +58,42 @@ dataset('status-values', [
     'Failed',
     'Sent',
 ]);
+
+dataset('hangup-causes', [
+    'NORMAL_CLEARING',
+    'CALL_REJECTED',
+    'NORMAL_TEMPORARY_FAILURE',
+    'RECOVERY_ON_TIMER_EXPIRE',
+    'ORIGINATOR_CANCEL',
+    'LOSE_RACE',
+    'USER_BUSY',
+    'NO_ANSWER',
+    'NO_USER_RESPONSE',
+    'SUBSCRIBER_ABSENT',
+    'SERVICE_UNAVAILABLE',
+    'USER_NOT_REGISTERED',
+    'UNALLOCATED_NUMBER',
+    'UNSPECIFIED',
+]);
+
+dataset('call-directions', ['inbound', 'outbound']);
+
+dataset('currencies', [
+    'KES',
+    'UGX',
+    'TZS',
+    'NGN',
+    'MWK',
+    'ZMK',
+    'ZAR',
+    'XOF',
+    'GHS',
+    'RWF',
+    'ETB',
+    'USD',
+]);
+
+dataset('update-types', [
+    'addition',
+    'deletion',
+]);
