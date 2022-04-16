@@ -1,6 +1,7 @@
 <?php
 
 use SamuelMwangiW\Africastalking\Domain\Application;
+use SamuelMwangiW\Africastalking\Enum\Currency;
 use SamuelMwangiW\Africastalking\Facades\Africastalking;
 use SamuelMwangiW\Africastalking\ValueObjects\Account;
 
@@ -11,4 +12,4 @@ it('resolves the application class')
 it('can fetch the application balance')
     ->expect(fn () => Africastalking::application()->balance())
     ->toBeInstanceOf(Account::class)
-    ->currency->toBe('KES');
+    ->currency->toBeInstanceOf(Currency::class);
