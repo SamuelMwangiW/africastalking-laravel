@@ -4,10 +4,12 @@ namespace SamuelMwangiW\Africastalking\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use SamuelMwangiW\Africastalking\Http\Requests\Concerns\HasPhoneNumber;
+use SamuelMwangiW\Africastalking\Http\Requests\Concerns\HasUniqueId;
 
 class AirtimeValidationRequest extends FormRequest
 {
     use HasPhoneNumber;
+    use HasUniqueId;
 
     public function rules(): array
     {
@@ -39,9 +41,9 @@ class AirtimeValidationRequest extends FormRequest
         ];
     }
 
-    public function id(): string
+    protected function idKey(): string
     {
-        return $this->get(key: 'transactionId');
+        return 'transactionId';
     }
 
     public function sourceIp(): string

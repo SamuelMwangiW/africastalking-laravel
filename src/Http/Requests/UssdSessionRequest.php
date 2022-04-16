@@ -7,11 +7,13 @@ use Illuminate\Validation\Rules\Enum;
 use SamuelMwangiW\Africastalking\Enum\Network;
 use SamuelMwangiW\Africastalking\Http\Requests\Concerns\HasNetworkCode;
 use SamuelMwangiW\Africastalking\Http\Requests\Concerns\HasPhoneNumber;
+use SamuelMwangiW\Africastalking\Http\Requests\Concerns\HasUniqueId;
 
 class UssdSessionRequest extends FormRequest
 {
     use HasNetworkCode;
     use HasPhoneNumber;
+    use HasUniqueId;
 
     public function rules(): array
     {
@@ -24,8 +26,8 @@ class UssdSessionRequest extends FormRequest
         ];
     }
 
-    public function id(): string
+    protected function idKey(): string
     {
-        return $this->get('sessionId');
+        return 'sessionId';
     }
 }

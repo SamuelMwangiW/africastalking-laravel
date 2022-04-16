@@ -9,11 +9,13 @@ use SamuelMwangiW\Africastalking\Enum\Network;
 use SamuelMwangiW\Africastalking\Enum\Status;
 use SamuelMwangiW\Africastalking\Http\Requests\Concerns\HasNetworkCode;
 use SamuelMwangiW\Africastalking\Http\Requests\Concerns\HasPhoneNumber;
+use SamuelMwangiW\Africastalking\Http\Requests\Concerns\HasUniqueId;
 
 class UssdEventRequest extends FormRequest
 {
     use HasNetworkCode;
     use HasPhoneNumber;
+    use HasUniqueId;
 
     public function rules(): array
     {
@@ -40,9 +42,9 @@ class UssdEventRequest extends FormRequest
         ];
     }
 
-    public function id(): string
+    protected function idKey(): string
     {
-        return $this->get('sessionId');
+        return 'sessionId';
     }
 
     public function userInput(): string
