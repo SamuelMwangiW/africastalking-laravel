@@ -65,7 +65,7 @@ it('can send message without enqueue', function (string $phone, string $message)
 it('can change message senderID', function (string $phone, string $message) {
     $response = Africastalking::sms($message)
         ->to($phone)
-        ->as('CHANGED')
+        ->as(config('africastalking.from-backup'))
         ->send();
 
     expect($response)

@@ -21,6 +21,6 @@ class TestCase extends Orchestra
 
     public function getEnvironmentSetUp($app)
     {
-//        config()->set('database.default', 'testing');
+        config()->set('africastalking.from-backup', $_ENV['AFRICASTALKING_BACKUP_SENDERID'] ?? null);
     }
 }

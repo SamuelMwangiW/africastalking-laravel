@@ -12,6 +12,7 @@ jobs:
     env:
       AFRICASTALKING_API_KEY: ${{ secrets.AFRICASTALKING_API_KEY }}
       AFRICASTALKING_FROM: ${{ secrets.AFRICASTALKING_FROM }}
+      AFRICASTALKING_BACKUP_SENDERID: ${{ secrets.AFRICASTALKING_BACKUP_SENDERID }}
     strategy:
       fail-fast: true
       matrix:
