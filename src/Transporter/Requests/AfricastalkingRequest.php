@@ -1,7 +1,8 @@
 <?php
 
-namespace SamuelMwangiW\Africastalking\Requests;
+namespace SamuelMwangiW\Africastalking\Transporter\Requests;
 
+use function config;
 use JustSteveKing\Transporter\Request;
 use SamuelMwangiW\Africastalking\Traits\ChecksEnvironment;
 
