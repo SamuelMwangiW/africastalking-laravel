@@ -68,4 +68,9 @@ class IncomingMessageRequest extends FormRequest
     {
         return $this->get(key: 'to');
     }
+
+    protected function phoneNumberKey(): string
+    {
+        return 'from';
+    }
 }

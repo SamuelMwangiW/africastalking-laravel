@@ -6,6 +6,7 @@ use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rules\Enum;
 use SamuelMwangiW\Africastalking\Enum\Status;
 use SamuelMwangiW\Africastalking\Http\Requests\Concerns\HasPhoneNumber;
+
 use SamuelMwangiW\Africastalking\Http\Requests\Concerns\HasUniqueId;
 
 class AirtimeStatusRequest extends FormRequest
