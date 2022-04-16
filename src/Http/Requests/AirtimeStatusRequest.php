@@ -1,9 +1,10 @@
 <?php
+
 namespace SamuelMwangiW\Africastalking\Http\Requests;
 
-use SamuelMwangiW\Africastalking\Enum\Status;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rules\Enum;
+use SamuelMwangiW\Africastalking\Enum\Status;
 
 class AirtimeStatusRequest extends FormRequest
 {
@@ -13,16 +14,16 @@ class AirtimeStatusRequest extends FormRequest
             'requestId' => [
                 'string',
                 'required',
-                'min:32'
+                'min:32',
             ],
             'phoneNumber' => [
                 'string',
                 'required',
-                'min:10'
+                'min:10',
             ],
             'description' => [
                 'string',
-                'required'
+                'required',
             ],
             'status' => [
                 'string',
@@ -32,12 +33,12 @@ class AirtimeStatusRequest extends FormRequest
             'value' => [
                 'string',
                 'required',
-                'string'
+                'string',
             ],
             'discount' => [
                 'string',
                 'required',
-                'string'
+                'string',
             ],
         ];
     }

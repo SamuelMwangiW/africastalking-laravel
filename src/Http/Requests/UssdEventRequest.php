@@ -2,10 +2,10 @@
 
 namespace SamuelMwangiW\Africastalking\Http\Requests;
 
-use SamuelMwangiW\Africastalking\Enum\Network;
-use SamuelMwangiW\Africastalking\Enum\Status;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rules\Enum;
+use SamuelMwangiW\Africastalking\Enum\Network;
+use SamuelMwangiW\Africastalking\Enum\Status;
 
 class UssdEventRequest extends FormRequest
 {
@@ -19,7 +19,7 @@ class UssdEventRequest extends FormRequest
             'networkCode' => [
                 'required',
                 'string',
-                new Enum(type: Network::class)
+                new Enum(type: Network::class),
             ],
             'status' => [
                 'required',

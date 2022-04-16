@@ -12,26 +12,26 @@ class AirtimeValidationRequest extends FormRequest
             'transactionId' => [
                 'string',
                 'required',
-                'min:32'
+                'min:32',
             ],
             'phoneNumber' => [
                 'string',
                 'required',
-                'min:10'
+                'min:10',
             ],
             'sourceIpAddress' => [
                 'required',
-                'ip'
+                'ip',
             ],
             'currencyCode' => [
                 'string',
                 'required',
-                'size:3'
+                'size:3',
             ],
             'amount' => [
                 'string',
                 'required',
-                'numeric'
+                'numeric',
             ],
         ];
     }

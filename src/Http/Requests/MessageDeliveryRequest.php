@@ -2,12 +2,12 @@
 
 namespace SamuelMwangiW\Africastalking\Http\Requests;
 
-use SamuelMwangiW\Africastalking\Enum\FailureReason;
-use SamuelMwangiW\Africastalking\Enum\Network;
-use SamuelMwangiW\Africastalking\Enum\Status;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules\Enum;
+use SamuelMwangiW\Africastalking\Enum\FailureReason;
+use SamuelMwangiW\Africastalking\Enum\Network;
+use SamuelMwangiW\Africastalking\Enum\Status;
 
 class MessageDeliveryRequest extends FormRequest
 {
@@ -17,21 +17,21 @@ class MessageDeliveryRequest extends FormRequest
             'id' => [
                 'required',
                 'string',
-                'min:32'
+                'min:32',
             ],
             'phoneNumber' => [
                 'required',
-                'string'
+                'string',
             ],
             'retryCount' => [
                 'required',
                 'integer',
-                'min:0'
+                'min:0',
             ],
             'status' => [
                 'string',
                 'required',
-                new Enum(Status::class)
+                new Enum(Status::class),
             ],
             'failureReason' => [
                 'nullable',
@@ -41,7 +41,7 @@ class MessageDeliveryRequest extends FormRequest
             'networkCode' => [
                 'string',
                 new Enum(Network::class),
-            ]
+            ],
         ];
     }
 

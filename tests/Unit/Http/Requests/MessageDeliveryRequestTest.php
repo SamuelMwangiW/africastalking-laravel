@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Validator;
 use SamuelMwangiW\Africastalking\Enum\Network;
 use SamuelMwangiW\Africastalking\Http\Requests\MessageDeliveryRequest;
 
-it('validates request', function (string $status,string $reason,array $data) {
+it('validates request', function (string $status, string $reason, array $data) {
     $request = new MessageDeliveryRequest();
 
     $data = array_merge(
@@ -18,9 +18,9 @@ it('validates request', function (string $status,string $reason,array $data) {
 
     expect($validator)
         ->passes()->toBeTrue();
-})->with('status-values','failure-reason-values','sms-delivery-report-notification');
+})->with('status-values', 'failure-reason-values', 'sms-delivery-report-notification');
 
-it('retrieves request data', function (string $status,string $reason,string $network,array $data) {
+it('retrieves request data', function (string $status, string $reason, string $network, array $data) {
     $data = array_merge(
         ['status' => $status],
         ['failureReason' => $reason],
@@ -36,4 +36,4 @@ it('retrieves request data', function (string $status,string $reason,string $net
         ->network()->not->toBeNull()->toBeInstanceOf(Network::class)
         ->deliveryFailed()->toBeBool()
         ->phone()->not->toBeNull()->toBe(data_get($data, 'phoneNumber'));
-})->with('status-values','failure-reason-values','network-codes','sms-delivery-report-notification');
+})->with('status-values', 'failure-reason-values', 'network-codes', 'sms-delivery-report-notification');
