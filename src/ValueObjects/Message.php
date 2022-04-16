@@ -4,8 +4,8 @@ namespace SamuelMwangiW\Africastalking\ValueObjects;
 
 use Illuminate\Support\Collection;
 use SamuelMwangiW\Africastalking\Contracts\DTOContract;
-use SamuelMwangiW\Africastalking\Requests\Messaging\BulkSmsRequest;
-use SamuelMwangiW\Africastalking\Requests\Messaging\PremiumSmsRequest;
+use SamuelMwangiW\Africastalking\Transporter\Requests\Messaging\BulkSmsRequest;
+use SamuelMwangiW\Africastalking\Transporter\Requests\Messaging\PremiumSmsRequest;
 
 class Message implements DTOContract
 {

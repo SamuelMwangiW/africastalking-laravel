@@ -1,9 +1,10 @@
 <?php
 
-namespace SamuelMwangiW\Africastalking\Requests;
+namespace SamuelMwangiW\Africastalking\Transporter\Requests;
 
 use JustSteveKing\Transporter\Request;
 use SamuelMwangiW\Africastalking\Traits\ChecksEnvironment;
+use function config;
 
 class AfricastalkingRequest extends Request
 {

@@ -4,7 +4,7 @@ namespace SamuelMwangiW\Africastalking\Domain;
 
 use Illuminate\Http\Client\RequestException;
 use SamuelMwangiW\Africastalking\Factories\AccountFactory;
-use SamuelMwangiW\Africastalking\Requests\Application\BalanceRequest;
+use SamuelMwangiW\Africastalking\Transporter\Requests\Application\BalanceRequest;
 use SamuelMwangiW\Africastalking\ValueObjects\Account;
 
 class Application
