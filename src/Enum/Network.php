@@ -29,7 +29,7 @@ enum Network: int
     case CODE_65010 = 65010;
     case CODE_99999 = 99999;
 
-    public function name()
+    public function name(): string
     {
         return match ($this) {
             Network::CODE_62120 => 'Airtel Nigeria',
