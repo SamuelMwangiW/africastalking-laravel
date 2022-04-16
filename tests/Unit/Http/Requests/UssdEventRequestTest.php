@@ -20,13 +20,18 @@ it('validates request', function (string $networkCode, string $status, array $da
 })->with('network-codes', 'status-values', 'ussd-event-notification');
 
 it('retrieves request data', function (string $networkCode, string $status, array $data) {
-    $request = new UssdEventRequest(request: $data);
+    $request = new UssdEventRequest(
+        request: array_merge(
+            $data,
+            ['networkCode' => $networkCode, 'status' => $status]
+        )
+    );
 
     expect($request)
         ->id()->not->toBeNull()->toBe(data_get($data, 'sessionId'))
         ->phone()->not->toBeNull()->toBe(data_get($data, 'phoneNumber'))
         ->network()->toBeInstanceOf(Network::class)
-        ->network()->value->toEqual(data_get($data, 'networkCode'))
+        ->network()->value->toEqual($networkCode)
         ->userInput()->toBe(data_get($data, 'input'))
         ->cost()->toEqual(data_get($data, 'cost'))
         ->hops()->toBeInt()->toBe(data_get($data, 'hopsCount'))

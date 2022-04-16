@@ -87,3 +87,34 @@ dataset('ussd-event-notification', [
         ],
     ],
 ]);
+
+dataset('incoming-message-notification', [
+    [
+        [
+            'date' => faker()->dateTime()->format('Y-m-d H:i:s'),
+            'from' => '+254720123123',
+            'id' => 'ATUid_5d3b4c2bc589f4811820a7184eed4df5',
+            'linkId' => 'ATUid_5d3b4c2bc589f4811820a7184eed4df5',
+            'text' => faker()->sentences(asText: true),
+            'to' => (string)faker()->numberBetween(1000, 99999),
+            'networkCode' => '99999',
+        ],
+        [
+            'date' => faker()->dateTime()->format('Y-m-d H:i:s'),
+            'from' => '+254720123123',
+            'id' => 'ATUid_5d3b4c2bc589f4811820a7184eed4df5',
+            'linkId' => '',
+            'text' => faker()->sentences(asText: true),
+            'to' => (string)faker()->numberBetween(1000, 99999),
+            'networkCode' => '99999',
+        ],
+        [
+            'date' => faker()->dateTime()->format('Y-m-d H:i:s'),
+            'from' => '+254720123123',
+            'id' => 'ATUid_5d3b4c2bc589f4811820a7184eed4df5',
+            'text' => faker()->sentences(asText: true),
+            'to' => (string)faker()->numberBetween(1000, 99999),
+            'networkCode' => '99999',
+        ],
+    ],
+]);

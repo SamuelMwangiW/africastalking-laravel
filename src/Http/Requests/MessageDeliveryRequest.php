@@ -29,6 +29,7 @@ class MessageDeliveryRequest extends FormRequest
                 'min:0',
             ],
             'status' => [
+                'required',
                 'string',
                 'required',
                 new Enum(Status::class),
@@ -39,6 +40,7 @@ class MessageDeliveryRequest extends FormRequest
                 new Enum(FailureReason::class),
             ],
             'networkCode' => [
+                'required',
                 'string',
                 new Enum(Network::class),
             ],
