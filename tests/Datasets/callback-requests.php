@@ -82,6 +82,7 @@ dataset('ussd-notification', [
             'sessionId' => 'ATUid_5d3b4c2bc589f4811820a7184eed4df5',
             'retryCount' => faker()->numberBetween(0, 5),
             'input' => 'KEY BAR KEY',
+            'networkCode' => '99999',
         ],
     ],
 ]);
