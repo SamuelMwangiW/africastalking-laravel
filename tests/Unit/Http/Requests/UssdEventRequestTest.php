@@ -16,7 +16,7 @@ it('validates request', function (string $networkCode, string $status, array $da
 
     expect($validator)
         ->passes()->toBeTrue();
-})->with('network-codes', 'status-values', 'ussd-notification');
+})->with('network-codes', 'status-values', 'ussd-event-notification');
 
 //it('retrieves request data', function (array $data) {
 //    $request = new BulkSmsOptOutRequest(request:$data);

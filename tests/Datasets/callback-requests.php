@@ -68,7 +68,7 @@ dataset('sms-delivery-report-notification', [
     ],
 ]);
 
-dataset('ussd-notification', [
+dataset('ussd-event-notification', [
     [
         [
             'durationInMillis' => faker()->numberBetween(100, 10000),
@@ -83,6 +83,7 @@ dataset('ussd-notification', [
             'retryCount' => faker()->numberBetween(0, 5),
             'input' => 'KEY BAR KEY',
             'networkCode' => '99999',
+            'status' => 'Incomplete'
         ],
     ],
 ]);
