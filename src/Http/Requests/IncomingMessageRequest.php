@@ -5,9 +5,14 @@ namespace SamuelMwangiW\Africastalking\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rules\Enum;
 use SamuelMwangiW\Africastalking\Enum\Network;
+use SamuelMwangiW\Africastalking\Http\Requests\Concerns\HasNetworkCode;
+use SamuelMwangiW\Africastalking\Http\Requests\Concerns\HasPhoneNumber;
 
 class IncomingMessageRequest extends FormRequest
 {
+    use HasNetworkCode;
+    use HasPhoneNumber;
+
     public function rules(): array
     {
         return [
@@ -57,20 +62,13 @@ class IncomingMessageRequest extends FormRequest
         return $this->get(key: 'linkId');
     }
 
-    public function network(): ?Network
-    {
-        return Network::tryFrom(
-            $this->get(key: 'networkCode')
-        );
-    }
-
-    public function phone(): string
-    {
-        return $this->get(key: 'from');
-    }
-
     public function recipient(): string
     {
         return $this->get(key: 'to');
+    }
+
+    protected function phoneNumberKey(): string
+    {
+        return 'from';
     }
 }

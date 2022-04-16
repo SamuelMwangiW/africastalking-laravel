@@ -8,9 +8,14 @@ use Illuminate\Validation\Rules\Enum;
 use SamuelMwangiW\Africastalking\Enum\FailureReason;
 use SamuelMwangiW\Africastalking\Enum\Network;
 use SamuelMwangiW\Africastalking\Enum\Status;
+use SamuelMwangiW\Africastalking\Http\Requests\Concerns\HasNetworkCode;
+use SamuelMwangiW\Africastalking\Http\Requests\Concerns\HasPhoneNumber;
 
 class MessageDeliveryRequest extends FormRequest
 {
+    use HasNetworkCode;
+    use HasPhoneNumber;
+
     public function rules(): array
     {
         return [
@@ -52,21 +57,9 @@ class MessageDeliveryRequest extends FormRequest
         return $this->get(key: 'id');
     }
 
-    public function phone(): string
-    {
-        return $this->get(key: 'phoneNumber');
-    }
-
     public function status(): string
     {
         return $this->get(key: 'status');
-    }
-
-    public function network(): ?Network
-    {
-        return Network::tryFrom(
-            $this->get(key: 'networkCode')
-        );
     }
 
     public function deliveryFailed(): bool

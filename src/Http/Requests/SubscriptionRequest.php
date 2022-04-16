@@ -5,9 +5,12 @@ namespace SamuelMwangiW\Africastalking\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rules\Enum;
 use SamuelMwangiW\Africastalking\Enum\UpdateType;
+use SamuelMwangiW\Africastalking\Http\Requests\Concerns\HasPhoneNumber;
 
 class SubscriptionRequest extends FormRequest
 {
+    use HasPhoneNumber;
+
     public function rules(): array
     {
         return [
@@ -16,11 +19,6 @@ class SubscriptionRequest extends FormRequest
             'keyword' => ['string', 'nullable', 'min:3', 'max:18'],
             'updateType' => ['string', 'required', new Enum(UpdateType::class)],
         ];
-    }
-
-    public function phone(): string
-    {
-        return $this->get('phoneNumber');
     }
 
     public function type(): UpdateType

@@ -5,9 +5,12 @@ namespace SamuelMwangiW\Africastalking\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rules\Enum;
 use SamuelMwangiW\Africastalking\Enum\Status;
+use SamuelMwangiW\Africastalking\Http\Requests\Concerns\HasPhoneNumber;
 
 class AirtimeStatusRequest extends FormRequest
 {
+    use HasPhoneNumber;
+
     public function rules(): array
     {
         return [
@@ -56,10 +59,5 @@ class AirtimeStatusRequest extends FormRequest
     public function discount(): string
     {
         return $this->get(key: 'discount');
-    }
-
-    public function phone(): string
-    {
-        return $this->get(key: 'phoneNumber');
     }
 }

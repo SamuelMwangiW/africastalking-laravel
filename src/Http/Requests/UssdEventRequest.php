@@ -4,13 +4,17 @@ namespace SamuelMwangiW\Africastalking\Http\Requests;
 
 use Carbon\CarbonInterval;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Support\Carbon;
 use Illuminate\Validation\Rules\Enum;
 use SamuelMwangiW\Africastalking\Enum\Network;
 use SamuelMwangiW\Africastalking\Enum\Status;
+use SamuelMwangiW\Africastalking\Http\Requests\Concerns\HasNetworkCode;
+use SamuelMwangiW\Africastalking\Http\Requests\Concerns\HasPhoneNumber;
 
 class UssdEventRequest extends FormRequest
 {
+    use HasNetworkCode;
+    use HasPhoneNumber;
+
     public function rules(): array
     {
         return [
@@ -39,18 +43,6 @@ class UssdEventRequest extends FormRequest
     public function id(): string
     {
         return $this->get('sessionId');
-    }
-
-    public function phone(): string
-    {
-        return $this->get('phoneNumber');
-    }
-
-    public function network(): ?Network
-    {
-        return Network::tryFrom(
-            $this->get('networkCode')
-        );
     }
 
     public function userInput(): string

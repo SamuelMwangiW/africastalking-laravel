@@ -3,9 +3,12 @@
 namespace SamuelMwangiW\Africastalking\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use SamuelMwangiW\Africastalking\Http\Requests\Concerns\HasPhoneNumber;
 
 class AirtimeValidationRequest extends FormRequest
 {
+    use HasPhoneNumber;
+
     public function rules(): array
     {
         return [
@@ -54,10 +57,5 @@ class AirtimeValidationRequest extends FormRequest
     public function currencyCode(): string
     {
         return $this->get(key: 'currencyCode');
-    }
-
-    public function phone(): string
-    {
-        return $this->get(key: 'phoneNumber');
     }
 }
