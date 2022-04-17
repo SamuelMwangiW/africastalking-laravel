@@ -3,16 +3,13 @@
 namespace SamuelMwangiW\Africastalking\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules\Enum;
-use SamuelMwangiW\Africastalking\Enum\FailureReason;
 use SamuelMwangiW\Africastalking\Enum\Network;
-use SamuelMwangiW\Africastalking\Enum\Status;
 use SamuelMwangiW\Africastalking\Http\Requests\Concerns\HasNetworkCode;
 use SamuelMwangiW\Africastalking\Http\Requests\Concerns\HasPhoneNumber;
 use SamuelMwangiW\Africastalking\Http\Requests\Concerns\HasUniqueId;
 
-class MessageDeliveryRequest extends FormRequest
+class IncomingMessageRequest extends FormRequest
 {
     use HasNetworkCode;
     use HasPhoneNumber;
@@ -21,30 +18,33 @@ class MessageDeliveryRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'date' => [
+                'required',
+                'date',
+            ],
+            'from' => [
+                'required',
+                'string',
+                'min:10',
+            ],
             'id' => [
                 'required',
                 'string',
                 'min:32',
             ],
-            'phoneNumber' => [
-                'required',
-                'string',
-            ],
-            'retryCount' => [
-                'required',
-                'integer',
-                'min:0',
-            ],
-            'status' => [
-                'required',
-                'string',
-                'required',
-                new Enum(Status::class),
-            ],
-            'failureReason' => [
+            'linkId' => [
                 'nullable',
-                Rule::requiredIf($this->deliveryFailed()),
-                new Enum(FailureReason::class),
+                'string',
+                'min:10',
+            ],
+            'text' => [
+                'required',
+                'string',
+            ],
+            'to' => [
+                'required',
+                'string',
+                'max:25',
             ],
             'networkCode' => [
                 'required',
@@ -59,16 +59,18 @@ class MessageDeliveryRequest extends FormRequest
         return 'id';
     }
 
-    public function status(): string
+    public function linkId(): ?string
     {
-        return $this->get(key: 'status');
+        return $this->get(key: 'linkId');
     }
 
-    public function deliveryFailed(): bool
+    public function recipient(): string
     {
-        return in_array(
-            needle: $this->get(key: 'status'),
-            haystack:['Rejected', 'Failed']
-        );
+        return $this->get(key: 'to');
+    }
+
+    protected function phoneNumberKey(): string
+    {
+        return 'from';
     }
 }

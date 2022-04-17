@@ -3,9 +3,14 @@
 namespace SamuelMwangiW\Africastalking\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use SamuelMwangiW\Africastalking\Http\Requests\Concerns\HasPhoneNumber;
+use SamuelMwangiW\Africastalking\Http\Requests\Concerns\HasUniqueId;
 
 class BulkSmsOptOutRequest extends FormRequest
 {
+    use HasPhoneNumber;
+    use HasUniqueId;
+
     public function rules(): array
     {
         return [
@@ -14,13 +19,8 @@ class BulkSmsOptOutRequest extends FormRequest
         ];
     }
 
-    public function id(): string
+    protected function idKey(): string
     {
-        return $this->get(key: 'senderId');
-    }
-
-    public function phone(): string
-    {
-        return $this->get(key: 'phoneNumber');
+        return 'senderId';
     }
 }

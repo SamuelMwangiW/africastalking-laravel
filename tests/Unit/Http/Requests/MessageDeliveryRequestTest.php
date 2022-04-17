@@ -5,12 +5,11 @@ use Illuminate\Support\Facades\Validator;
 use SamuelMwangiW\Africastalking\Enum\Network;
 use SamuelMwangiW\Africastalking\Http\Requests\MessageDeliveryRequest;
 
-it('validates request', function (string $status, string $reason, array $data) {
+it('validates request', function (string $networkCode, string $status, string $reason, array $data) {
     $request = new MessageDeliveryRequest();
 
     $data = array_merge(
-        ['status' => $status],
-        ['failureReason' => $reason],
+        ['status' => $status, 'failureReason' => $reason, 'networkCode' => $networkCode],
         $data
     );
 
@@ -18,7 +17,7 @@ it('validates request', function (string $status, string $reason, array $data) {
 
     expect($validator)
         ->passes()->toBeTrue();
-})->with('status-values', 'failure-reason-values', 'sms-delivery-report-notification');
+})->with('network-codes', 'status-values', 'failure-reason-values', 'sms-delivery-report-notification');
 
 it('retrieves request data', function (string $status, string $reason, string $network, array $data) {
     $data = array_merge(
@@ -28,7 +27,7 @@ it('retrieves request data', function (string $status, string $reason, string $n
         $data
     );
 
-    $request = new MessageDeliveryRequest(request:$data);
+    $request = new MessageDeliveryRequest(request: $data);
 
     expect($request)
         ->id()->not->toBeNull()->toBe(data_get($data, 'id'))

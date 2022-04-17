@@ -87,3 +87,93 @@ dataset('ussd-event-notification', [
         ],
     ],
 ]);
+
+dataset('incoming-message-notification', [
+    [
+        [
+            'date' => faker()->dateTime()->format('Y-m-d H:i:s'),
+            'from' => '+254720123123',
+            'id' => 'ATUid_5d3b4c2bc589f4811820a7184eed4df5',
+            'linkId' => 'ATUid_5d3b4c2bc589f4811820a7184eed4df5',
+            'text' => faker()->sentences(asText: true),
+            'to' => (string)faker()->numberBetween(1000, 99999),
+            'networkCode' => '99999',
+        ],
+        [
+            'date' => faker()->dateTime()->format('Y-m-d H:i:s'),
+            'from' => '+254720123123',
+            'id' => 'ATUid_5d3b4c2bc589f4811820a7184eed4df5',
+            'linkId' => '',
+            'text' => faker()->sentences(asText: true),
+            'to' => (string)faker()->numberBetween(1000, 99999),
+            'networkCode' => '99999',
+        ],
+        [
+            'date' => faker()->dateTime()->format('Y-m-d H:i:s'),
+            'from' => '+254720123123',
+            'id' => 'ATUid_5d3b4c2bc589f4811820a7184eed4df5',
+            'text' => faker()->sentences(asText: true),
+            'to' => (string)faker()->numberBetween(1000, 99999),
+            'networkCode' => '99999',
+        ],
+    ],
+]);
+
+dataset('subscription-notification', [
+    [
+        [
+            'phoneNumber' => '+254720123123',
+            'shortCode' => '6942',
+            'keyword' => 'ubwedede',
+            'updateType' => 'deletion',
+        ],
+        [
+            'phoneNumber' => '+254720123123',
+            'shortCode' => '6942',
+            'keyword' => 'Magnathombious',
+            'updateType' => 'addition',
+        ],
+    ],
+]);
+
+dataset('incoming-voice-call-notification', [
+    [
+        [
+            'isActive' => faker()->randomElement([0,1,true,false]),
+            'sessionId' => 'ATUid_5d3b4c2bc589f4811820a7184eed4df5',
+            'direction' => 'inbound',
+            'callerNumber' => '+254720123123',
+            'destinationNumber' => '+254709100100',
+        ],
+        [
+            'isActive' => faker()->randomElement([0,1,true,false]),
+            'sessionId' => 'ATUid_5d3b4c2bc589f4811820a7184eed4df5',
+            'direction' => 'outbound',
+            'callerNumber' => '+254720123123',
+            'destinationNumber' => '+254709100100',
+            'dtmfDigits' => '123456',
+        ],
+        [
+            'isActive' => faker()->randomElement([0,1,true,false]),
+            'sessionId' => 'ATVId_b2beff43fbe0d2749cc1693b4df4f585',
+            'direction' => 'inbound',
+            'callerNumber' => '+254720123123',
+            'destinationNumber' => '+254709100100',
+            'callSessionState' => 'Completed',
+            'callStartTime' => '2022-03-01+16:13:56',
+        ],
+    ],
+]);
+
+dataset('voice-event-notification', [
+    [
+        [
+            'isActive' => faker()->randomElement([0,1,true,false]),
+            'sessionId' => 'ATVId_b2beff43fbe0d2749cc1693b4df4f585',
+            'callerNumber' => '+254720123123',
+            'destinationNumber' => '+254709100100',
+            'callSessionState' => 'Completed',
+            'callStartTime' => '2022-03-01+16:13:56',
+        ],
+    ],
+]);
