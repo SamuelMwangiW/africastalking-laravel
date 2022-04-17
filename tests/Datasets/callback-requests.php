@@ -133,7 +133,7 @@ dataset('subscription-notification', [
             'keyword' => 'Magnathombious',
             'updateType' => 'addition',
         ],
-    ]
+    ],
 ]);
 
 dataset('incoming-voice-call-notification', [
@@ -162,7 +162,7 @@ dataset('incoming-voice-call-notification', [
             'callSessionState' => 'Completed',
             'callStartTime' => '2022-03-01+16:13:56',
         ],
-    ]
+    ],
 ]);
 
 dataset('voice-event-notification', [
@@ -175,5 +175,5 @@ dataset('voice-event-notification', [
             'callSessionState' => 'Completed',
             'callStartTime' => '2022-03-01+16:13:56',
         ],
-    ]
+    ],
 ]);

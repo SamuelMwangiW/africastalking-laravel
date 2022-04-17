@@ -17,9 +17,9 @@ it('retrieves request data', function (array $data) {
     $request = new SubscriptionRequest(request: $data);
 
     expect($request)
-        ->phone()->toBe(data_get($data,'phoneNumber'))
+        ->phone()->toBe(data_get($data, 'phoneNumber'))
         ->type()->toBeInstanceOf(UpdateType::class)
-        ->type()->value->toBe(data_get($data,'updateType'))
-        ->get('shortCode')->toBe(data_get($data,'shortCode'))
-        ->get('keyword')->toBe(data_get($data,'keyword'));
+        ->type()->value->toBe(data_get($data, 'updateType'))
+        ->get('shortCode')->toBe(data_get($data, 'shortCode'))
+        ->get('keyword')->toBe(data_get($data, 'keyword'));
 })->with('subscription-notification');

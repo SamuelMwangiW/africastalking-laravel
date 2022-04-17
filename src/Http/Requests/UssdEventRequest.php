@@ -65,7 +65,7 @@ class UssdEventRequest extends FormRequest
     public function duration(): CarbonInterval
     {
         return CarbonInterval::microseconds(
-            $this->get('durationInMillis',0)
+            $this->get('durationInMillis', 0)
         );
     }
 }
