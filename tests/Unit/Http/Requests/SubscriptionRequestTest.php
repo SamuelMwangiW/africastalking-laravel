@@ -22,5 +22,4 @@ it('retrieves request data', function (array $data) {
         ->type()->value->toBe(data_get($data, 'updateType'))
         ->get('shortCode')->toBe(data_get($data, 'shortCode'))
         ->get('keyword')->toBe(data_get($data, 'keyword'));
-
 })->with('subscription-notification');
