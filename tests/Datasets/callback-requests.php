@@ -88,6 +88,17 @@ dataset('ussd-event-notification', [
     ],
 ]);
 
+dataset('ussd-session-notification', [
+    [
+        [
+            'sessionId' => 'ATUid_5d3b4c2bc589f4811820a7184eed4df5',
+            'phoneNumber' => '+254720123123',
+            'serviceCode' => '*100#',
+            'text' => 'KEY BAR KEY',
+        ],
+    ],
+]);
+
 dataset('incoming-message-notification', [
     [
         [
