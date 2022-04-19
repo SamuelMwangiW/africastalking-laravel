@@ -1,7 +1,7 @@
 <?php
 
 it('overrides the idKey', function () {
-    $classWithoutKeyOverridden = new class {
+    $classWithoutKeyOverridden = new class () {
         use \SamuelMwangiW\Africastalking\Http\Requests\Concerns\HasUniqueId;
 
         public function getKey(): string
@@ -10,7 +10,7 @@ it('overrides the idKey', function () {
         }
     };
 
-    $classWithKeyOverridden = new class {
+    $classWithKeyOverridden = new class () {
         use \SamuelMwangiW\Africastalking\Http\Requests\Concerns\HasUniqueId;
 
         protected function idKey(): string
