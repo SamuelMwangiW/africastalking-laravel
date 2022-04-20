@@ -9,7 +9,6 @@ use SamuelMwangiW\Africastalking\Tests\Fixtures\BasicNotifiableNoTrait;
 use SamuelMwangiW\Africastalking\Tests\Fixtures\BasicNotificationNoToAfricastalking;
 use SamuelMwangiW\Africastalking\Tests\Fixtures\BasicNotificationReturnsObject;
 use SamuelMwangiW\Africastalking\Tests\Fixtures\BasicNotificationReturnsString;
-use SamuelMwangiW\Africastalking\Tests\Fixtures\FakeMessageDTO;
 use SamuelMwangiW\Africastalking\ValueObjects\RecipientsApiResponse;
 
 it('can resolve', function () {

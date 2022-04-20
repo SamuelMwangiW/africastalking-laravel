@@ -57,7 +57,7 @@ class AfricastalkingChannel
      */
     private function throwIfNotifiableHasNoRoute(object $notifiable): void
     {
-        if (!$notifiable instanceof ReceivesSmsMessages) {
+        if (! $notifiable instanceof ReceivesSmsMessages) {
             throw AfricastalkingException::NotifiableDoesNotImplementReceivesSmsMessages($notifiable::class);
         }
     }
@@ -67,7 +67,7 @@ class AfricastalkingChannel
      */
     private function throwIfNotificationHasNoToAfricastalking(Notification $notification): void
     {
-        if (!method_exists($notification, 'toAfricastalking')) {
+        if (! method_exists($notification, 'toAfricastalking')) {
             throw AfricastalkingException::NotificationHasNoToAfricastalking($notification::class);
         }
     }

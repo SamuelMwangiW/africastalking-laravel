@@ -10,7 +10,6 @@ class BasicNotifiable implements ReceivesSmsMessages
 {
     use Notifiable;
 
-
     public function routeNotificationForAfricastalking(Notification $notification): string
     {
         return '+254720123123';
