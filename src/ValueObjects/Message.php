@@ -4,6 +4,7 @@ namespace SamuelMwangiW\Africastalking\ValueObjects;
 
 use Illuminate\Support\Collection;
 use SamuelMwangiW\Africastalking\Contracts\DTOContract;
+use SamuelMwangiW\Africastalking\Exceptions\AfricastalkingException;
 use SamuelMwangiW\Africastalking\Transporter\Requests\Messaging\BulkSmsRequest;
 use SamuelMwangiW\Africastalking\Transporter\Requests\Messaging\PremiumSmsRequest;
 
@@ -114,6 +115,7 @@ class Message implements DTOContract
     /**
      * @return Collection<int,RecipientsApiResponse>
      * @throws \Illuminate\Http\Client\RequestException
+     * @throws AfricastalkingException
      */
     public function send(): Collection
     {
@@ -122,6 +124,12 @@ class Message implements DTOContract
             ->withData($this->data())
             ->fetch();
 
+        if (empty(data_get($response, 'SMSMessageData.Recipients'))) {
+            throw AfricastalkingException::messageSendingFailed(
+                message: data_get($response, 'SMSMessageData.Message')
+            );
+        }
+
         /** @phpstan-ignore-next-line */
         return collect(data_get($response, 'SMSMessageData.Recipients'))
             ->map(fn (array $recipient) => RecipientsApiResponse::make($recipient));
@@ -129,7 +137,9 @@ class Message implements DTOContract
 
     protected function from(): ?string
     {
-        return $this->from ?? config('africastalking.from');
+        $from = $this->from ?? config('africastalking.from');
+
+        return blank($from) ? null : $from;
     }
 
     private function request(): BulkSmsRequest|PremiumSmsRequest
@@ -152,7 +162,7 @@ class Message implements DTOContract
             'retryDurationInHours' => $this->retryDurationInHours,
             'message' => $this->message,
             'to' => $this->to?->toArray(),
-            'from' => $this->from,
+            'from' => $this->from(),
             'isBulk' => $this->isBulk,
             'isPremium' => ! $this->isBulk,
         ];

@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Collection;
+use SamuelMwangiW\Africastalking\Exceptions\AfricastalkingException;
 use SamuelMwangiW\Africastalking\Facades\Africastalking;
 use SamuelMwangiW\Africastalking\ValueObjects\PhoneNumber;
 use SamuelMwangiW\Africastalking\ValueObjects\RecipientsApiResponse;
@@ -142,3 +143,12 @@ it('can send premium messages with a linkid', function (string $phone, string $m
         ->first()->toBeInstanceOf(RecipientsApiResponse::class)
         ->first()->cost->toBe('0');
 })->with('phone-numbers', 'sentence');
+
+it('throws an exception for invalid sender id', function () {
+    $response = Africastalking::sms('test message')
+        ->to('+254720123123')
+        ->as('INVALID_SENDER')
+        ->send();
+
+    dd($response);
+})->throws(AfricastalkingException::class, 'InvalidSenderId');

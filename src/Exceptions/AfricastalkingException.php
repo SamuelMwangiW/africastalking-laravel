@@ -39,4 +39,15 @@ class AfricastalkingException extends \Exception
             message: "Notification object {$class} has no toAfricastalking()"
         );
     }
+
+    /**
+     * @param string $message
+     * @return AfricastalkingException
+     */
+    public static function messageSendingFailed(string $message): AfricastalkingException
+    {
+        return new AfricastalkingException(
+            message: $message
+        );
+    }
 }
