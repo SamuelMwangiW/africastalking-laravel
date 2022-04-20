@@ -3,6 +3,7 @@
 namespace SamuelMwangiW\Africastalking\Exceptions;
 
 use Illuminate\Notifications\Notifiable;
+use JetBrains\PhpStorm\Pure;
 use SamuelMwangiW\Africastalking\Contracts\ReceivesSmsMessages;
 
 class AfricastalkingException extends \Exception
@@ -37,6 +38,17 @@ class AfricastalkingException extends \Exception
     {
         return new AfricastalkingException(
             message: "Notification object {$class} has no toAfricastalking()"
+        );
+    }
+
+    /**
+     * @param string $message
+     * @return AfricastalkingException
+     */
+    public static function messageSendingFailed(string $message): AfricastalkingException
+    {
+        return new AfricastalkingException(
+            message: $message
         );
     }
 }
