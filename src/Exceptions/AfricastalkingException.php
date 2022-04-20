@@ -3,7 +3,6 @@
 namespace SamuelMwangiW\Africastalking\Exceptions;
 
 use Illuminate\Notifications\Notifiable;
-use JetBrains\PhpStorm\Pure;
 use SamuelMwangiW\Africastalking\Contracts\ReceivesSmsMessages;
 
 class AfricastalkingException extends \Exception

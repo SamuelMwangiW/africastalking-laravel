@@ -151,5 +151,4 @@ it('throws an exception for invalid sender id', function () {
         ->send();
 
     dd($response);
-
-})->throws(AfricastalkingException::class,'InvalidSenderId');
+})->throws(AfricastalkingException::class, 'InvalidSenderId');
