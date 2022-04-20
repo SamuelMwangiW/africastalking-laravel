@@ -50,7 +50,7 @@ class Message implements DTOContract
     }
 
     /**
-     * @param Collection<int,PhoneNumber> $recipients
+     * @param Collection<int,PhoneNumber>|string|array $recipients
      * @return $this
      */
     public function to(Collection|string|array $recipients): static
@@ -112,8 +112,8 @@ class Message implements DTOContract
     }
 
     /**
-     * @throws \Illuminate\Http\Client\RequestException
      * @return Collection<int,RecipientsApiResponse>
+     * @throws \Illuminate\Http\Client\RequestException
      */
     public function send(): Collection
     {
@@ -122,7 +122,7 @@ class Message implements DTOContract
             ->withData($this->data())
             ->fetch();
 
-        /** @phpstan-ignore-next-line  */
+        /** @phpstan-ignore-next-line */
         return collect(data_get($response, 'SMSMessageData.Recipients'))
             ->map(fn (array $recipient) => RecipientsApiResponse::make($recipient));
     }
@@ -174,7 +174,7 @@ class Message implements DTOContract
 
         return array_merge(
             array_filter($data),
-            ['from' => $this->from(),'bulkSMSMode' => $this->bulkSMSMode]
+            ['from' => $this->from(), 'bulkSMSMode' => $this->bulkSMSMode]
         );
     }
 }
