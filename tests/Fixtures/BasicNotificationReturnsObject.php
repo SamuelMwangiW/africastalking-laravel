@@ -15,7 +15,7 @@ class BasicNotificationReturnsObject extends Notification
 
     public function toAfricastalking($notifiable)
     {
-        return Africastalking::sms('sample message here')
+        return Africastalking::sms('Basic Notification message.')
             ->to($notifiable->routeNotificationForAfricastalking($this));
     }
 }

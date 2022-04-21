@@ -7,13 +7,13 @@ use SamuelMwangiW\Africastalking\Notifications\AfricastalkingChannel;
 
 class BasicNotificationReturnsString extends Notification
 {
-    public function via($notifiable)
+    public function via($notifiable): array
     {
         return [AfricastalkingChannel::class];
     }
 
-    public function toAfricastalking()
+    public function toAfricastalking(): string
     {
-        return 'sample message here';
+        return 'String notification string message';
     }
 }

@@ -41,9 +41,9 @@ it('throws an exception when notification has toAfricastalking()', function () {
     $channel->send($notifiable, $notification);
 })->throws(AfricastalkingException::class);
 
-it('sends a notification when toAfricastalking() returns string message', function () {
+it('sends a notification when toAfricastalking() returns string message', function (string $phone) {
     $channel = app(AfricastalkingChannel::class);
-    $notifiable = new BasicNotifiable();
+    $notifiable = new BasicNotifiable(phone: $phone);
     $notification = new BasicNotificationReturnsString();
 
     $results = $channel->send($notifiable, $notification);
@@ -52,11 +52,11 @@ it('sends a notification when toAfricastalking() returns string message', functi
         ->toBeInstanceOf(Collection::class)
         ->toHaveCount(1)
         ->first()->toBeInstanceOf(RecipientsApiResponse::class);
-});
+})->with('phone-numbers');
 
-it('sends a notification when toAfricastalking() returns a message object', function () {
+it('sends a notification when toAfricastalking() returns a message object', function (string $phone) {
     $channel = app(AfricastalkingChannel::class);
-    $notifiable = new BasicNotifiable();
+    $notifiable = new BasicNotifiable(phone: $phone);
     $notification = new BasicNotificationReturnsObject();
 
     $results = $channel->send($notifiable, $notification);
@@ -65,4 +65,4 @@ it('sends a notification when toAfricastalking() returns a message object', func
         ->toBeInstanceOf(Collection::class)
         ->toHaveCount(1)
         ->first()->toBeInstanceOf(RecipientsApiResponse::class);
-});
+})->with('phone-numbers');
