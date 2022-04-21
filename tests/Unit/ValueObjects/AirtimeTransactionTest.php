@@ -1,9 +1,9 @@
 <?php
 
-use function Pest\Faker\faker;
 use SamuelMwangiW\Africastalking\Enum\Currency;
 use SamuelMwangiW\Africastalking\ValueObjects\AirtimeTransaction;
 use SamuelMwangiW\Africastalking\ValueObjects\PhoneNumber;
+use function Pest\Faker\faker;
 
 it('can construct an object', function (string $phone, string $currency) {
     $transaction = new AirtimeTransaction(
@@ -25,7 +25,7 @@ it('can be cast to string', function (string $phone, string $currency) {
         1000
     );
 
-    $transactionString = '{"phoneNumber":"' . $phone . '","currencyCode":"' . $currency . '","amount":1000}';
+    $transactionString = '{"phoneNumber":"' . $phone . '","amount":"' . $currency . ' 1000"}';;
 
     expect(strval($transaction))
         ->toBe($transactionString);
@@ -38,7 +38,7 @@ it('can be encoded to string', function (string $phone, string $currency) {
         1000
     );
 
-    $transactionString = '{"phoneNumber":"' . $phone . '","currencyCode":"' . $currency . '","amount":1000}';
+    $transactionString = '{"phoneNumber":"' . $phone . '","amount":"' . $currency . ' 1000"}';
 
     expect((string)$transaction)
         ->toBe($transactionString);
