@@ -82,8 +82,9 @@ class Airtime
     /**
      * @throws \Illuminate\Http\Client\RequestException
      */
-    public function send()
+    public function send(): array
     {
+        /** @phpstan-ignore-next-line */
         return SendRequest::build()
             ->retry(3)
             ->withData($this->recipients())
