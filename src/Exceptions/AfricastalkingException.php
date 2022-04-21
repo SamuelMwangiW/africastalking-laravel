@@ -50,4 +50,15 @@ class AfricastalkingException extends \Exception
             message: $message
         );
     }
+
+    /**
+     * @param string $currencyCode
+     * @return AfricastalkingException
+     */
+    public static function invalidCurrencyCode(string $currencyCode): AfricastalkingException
+    {
+        return new AfricastalkingException(
+            message: "The currency {$currencyCode} is not supported at the moment"
+        );
+    }
 }
