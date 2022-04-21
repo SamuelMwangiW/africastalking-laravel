@@ -90,7 +90,46 @@ $response = Africastalking::sms('It is quality rather than quantity that matters
 ```
 The response is Collection of `\SamuelMwangiW\Africastalking\ValueObjects\RecipientsApiResponse` objects
 ### Airtime (Pending)
-TBA
+The most basic example to disburse airtime is
+```php
+use SamuelMwangiW\Africastalking\Facades\Africastalking;
+
+$response = Africastalking::airtime()
+        ->to('+254712345678','KES',100)
+        ->send();
+```
+
+You may also pass an instance of `AirtimeTransaction`
+
+```php
+use SamuelMwangiW\Africastalking\Facades\Africastalking;
+use SamuelMwangiW\Africastalking\ValueObjects\AirtimeTransaction;
+use SamuelMwangiW\Africastalking\ValueObjects\PhoneNumber;
+use SamuelMwangiW\Africastalking\Enum\Currency;
+
+$transaction = new AirtimeTransaction(PhoneNumber::make('+256769000000'),Currency::UGANDA,1000)
+
+$response = Africastalking::airtime()
+        ->to($transaction)
+        ->send();
+```
+
+The Airtime class provides an `add()` that's basically an alias to the `to()` and since either of these methods can be fluently chained, it unlocks capabilities such as adding the recipients in a loop and sending once at the end
+
+```php
+use App\Models\Clients;
+use SamuelMwangiW\Africastalking\Facades\Africastalking;
+
+$airtime = Africastalking::airtime();
+
+Clients::query()->chunk(1000, function ($clients) use($airtime) {
+    foreach ($clients as $client) {
+        $airtime->add($client->phone,'TZS',3000);
+    }
+});
+$results = $airtime->send();
+```
+
 ### Payments (Pending)
 WIP
 ### Voice (Pending)
@@ -98,15 +137,99 @@ WIP
 ### IOT (Pending)
 WIP
 
-## Requests
-We intend to ship [Laravel Requests](https://laravel.com/docs/9.x/validation#creating-form-requests) that you can inject into your controller(s) for:
-- USSD requests
-- Sms Callback requests
-- Airtime validation and delivery Callback request
-- Voice call Requests
+## HTTP Requests
+The package ships with the following [Laravel Requests](https://laravel.com/docs/9.x/validation#creating-form-requests) that you can inject into your application controllers:
+
+```php
+\SamuelMwangiW\Africastalking\Http\Requests\AirtimeStatusRequest::class;
+\SamuelMwangiW\Africastalking\Http\Requests\AirtimeValidationRequest::class;
+\SamuelMwangiW\Africastalking\Http\Requests\BulkSmsOptOutRequest::class;
+\SamuelMwangiW\Africastalking\Http\Requests\IncomingMessageRequest::class;
+\SamuelMwangiW\Africastalking\Http\Requests\MessageDeliveryRequest::class;
+\SamuelMwangiW\Africastalking\Http\Requests\SubscriptionRequest::class;
+\SamuelMwangiW\Africastalking\Http\Requests\UssdEventRequest::class;
+\SamuelMwangiW\Africastalking\Http\Requests\UssdSessionRequest::class;
+\SamuelMwangiW\Africastalking\Http\Requests\VoiceCallRequest::class;
+\SamuelMwangiW\Africastalking\Http\Requests\VoiceEventRequest::class;
+```
+
+Example for a Message Delivery callback action Controller
+
+```php
+<?php
+
+namespace App\Http\Controllers\Messaging;
+
+use App\Models\Message;
+use SamuelMwangiW\Africastalking\Http\Requests\MessageDeliveryRequest;
+
+class MessageDeliveredController{
+    public function __invoke(MessageDeliveryRequest $request){
+        $message = Message::query()
+                            ->where(['transaction_id'=>$request->id()])
+                            ->firstOrFail();
+                            
+        $message->markAsDelivered();
+        
+        return response('OK');
+    }
+}
+
+```
 
 ## Notification
-We intend to allow for easily routing of notifications via Africastalking SMS
+
+The package ships with a Channel to allow for easily routing of notifications via Africastalking SMS.
+
+To route a notification via Africastalking, return `SamuelMwangiW\Africastalking\Notifications\AfricastalkingChannel` in your notifications `via` method and the text message to be sent in the `toAfricastalking` method
+
+```php
+<?php
+
+namespace App\Notifications;
+
+use Illuminate\Notifications\Notification;
+use SamuelMwangiW\Africastalking\Facades\Africastalking;
+use SamuelMwangiW\Africastalking\Notifications\AfricastalkingChannel;
+
+class ExampleNotification extends Notification
+{
+    public function via($notifiable)
+    {
+        return [AfricastalkingChannel::class];
+    }
+
+    public function toAfricastalking($notifiable)
+    {
+        return 'Basic Notification message.';
+    }
+}
+
+```
+
+Also ensure that the notifiable model implements `SamuelMwangiW\Africastalking\Contracts\ReceivesSmsMessages` and that the model's `routeNotificationForAfricastalking()` returns the phone number to receive the message
+
+```php
+<?php
+
+namespace App\Models;
+
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Notifications\Notification;
+use SamuelMwangiW\Africastalking\Contracts\ReceivesSmsMessages;
+
+class User implements ReceivesSmsMessages
+{
+    protected $guarded = [];
+
+    public function routeNotificationForAfricastalking(Notification $notification): string
+    {
+        return $this->phone;
+    }
+}
+
+```
+
 ## Testing
 
 ```bash
