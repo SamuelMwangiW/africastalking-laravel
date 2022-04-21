@@ -26,7 +26,6 @@ it('can be cast to string', function (string $phone, string $currency) {
     );
 
     $transactionString = '{"phoneNumber":"' . $phone . '","amount":"' . $currency . ' 1000"}';
-    ;
 
     expect(strval($transaction))
         ->toBe($transactionString);
