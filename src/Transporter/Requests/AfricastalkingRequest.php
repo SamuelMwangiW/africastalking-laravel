@@ -3,10 +3,10 @@
 namespace SamuelMwangiW\Africastalking\Transporter\Requests;
 
 use Composer\InstalledVersions;
+use function config;
 use Illuminate\Http\Client\PendingRequest;
 use JustSteveKing\Transporter\Request;
 use SamuelMwangiW\Africastalking\Traits\ChecksEnvironment;
-use function config;
 
 /** @mixin PendingRequest */
 class AfricastalkingRequest extends Request
