@@ -89,7 +89,7 @@ $response = Africastalking::sms('It is quality rather than quantity that matters
 
 ```
 The response is Collection of `\SamuelMwangiW\Africastalking\ValueObjects\RecipientsApiResponse` objects
-### Airtime (Pending)
+### Airtime
 The most basic example to disburse airtime is
 ```php
 use SamuelMwangiW\Africastalking\Facades\Africastalking;
