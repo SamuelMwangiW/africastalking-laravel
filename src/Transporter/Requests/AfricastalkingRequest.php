@@ -2,10 +2,13 @@
 
 namespace SamuelMwangiW\Africastalking\Transporter\Requests;
 
+use Composer\InstalledVersions;
+use Illuminate\Http\Client\PendingRequest;
 use function config;
 use JustSteveKing\Transporter\Request;
 use SamuelMwangiW\Africastalking\Traits\ChecksEnvironment;
 
+/** @mixin PendingRequest */
 class AfricastalkingRequest extends Request
 {
     use ChecksEnvironment;
@@ -59,11 +62,13 @@ class AfricastalkingRequest extends Request
 
     private function addHeaders(): void
     {
-        /** @phpstan-ignore-next-line */
+        $version = InstalledVersions::getPrettyVersion('samuelmwangiw/africastalking-laravel');
+
         $this->acceptJson()
+            ->withUserAgent(userAgent: "samuelmwangiw/africastalking-laravel {$version}")
             ->asForm()
             ->withHeaders([
-                'apiKey' => config('africastalking.api-key'),
+                'apiKey' => config(key: 'africastalking.api-key'),
             ]);
     }
 
