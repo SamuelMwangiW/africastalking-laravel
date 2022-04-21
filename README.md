@@ -164,7 +164,8 @@ use App\Models\Message;
 use SamuelMwangiW\Africastalking\Http\Requests\MessageDeliveryRequest;
 
 class MessageDeliveredController{
-    public function __invoke(MessageDeliveryRequest $request){
+    public function __invoke(MessageDeliveryRequest $request)
+    {
         $message = Message::query()
                             ->where(['transaction_id'=>$request->id()])
                             ->firstOrFail();
