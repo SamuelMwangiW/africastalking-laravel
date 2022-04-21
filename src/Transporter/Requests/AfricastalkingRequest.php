@@ -3,10 +3,10 @@
 namespace SamuelMwangiW\Africastalking\Transporter\Requests;
 
 use Composer\InstalledVersions;
-use function config;
 use Illuminate\Http\Client\PendingRequest;
 use JustSteveKing\Transporter\Request;
 use SamuelMwangiW\Africastalking\Traits\ChecksEnvironment;
+use function config;
 
 /** @mixin PendingRequest */
 class AfricastalkingRequest extends Request
@@ -25,7 +25,7 @@ class AfricastalkingRequest extends Request
      */
     public function fetch(): array
     {
-        $this->decorate();
+        $this->decorate()->retry(times: 3);
         $response = $this->send();
 
         if ($response->failed()) {
@@ -47,10 +47,7 @@ class AfricastalkingRequest extends Request
 
     public function addIdempotencyKey(string|null $key): static
     {
-        if ($key) {
-            /** @phpstan-ignore-next-line  */
-            $this->withHeaders(['Idempotency-Key' => $key]);
-        }
+        $this->withHeaders(['Idempotency-Key' => $key]);
 
         return $this;
     }
