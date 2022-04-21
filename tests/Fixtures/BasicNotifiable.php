@@ -12,8 +12,7 @@ class BasicNotifiable implements ReceivesSmsMessages
 
     public function __construct(
         public string $phone = '+254720123123',
-    )
-    {
+    ) {
     }
 
     public function routeNotificationForAfricastalking(Notification $notification): string
