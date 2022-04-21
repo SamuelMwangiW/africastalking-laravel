@@ -2,6 +2,15 @@
 
 All notable changes to `africastalking-laravel` will be documented in this file.
 
+## 0.1.4 - 2022-04-21
+
+## What's Changed
+
+- Added User agent by @SamuelMwangiW in https://github.com/SamuelMwangiW/africastalking-laravel/pull/11
+- Added airtime by @SamuelMwangiW in https://github.com/SamuelMwangiW/africastalking-laravel/pull/12
+
+**Full Changelog**: https://github.com/SamuelMwangiW/africastalking-laravel/compare/v0.1.3...v0.1.4
+
 ## 0.1.2 - 2022-04-20
 
 ## What's Changed
