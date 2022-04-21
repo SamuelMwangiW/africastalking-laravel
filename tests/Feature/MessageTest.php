@@ -144,11 +144,10 @@ it('can send premium messages with a linkid', function (string $phone, string $m
         ->first()->cost->toBe('0');
 })->with('phone-numbers', 'sentence');
 
-it('throws an exception for invalid sender id', function () {
+it('throws an exception for invalid sender id', function (string $phone) {
     $response = Africastalking::sms('test message')
-        ->to('+254720123123')
+        ->to($phone)
         ->as('INVALID_SENDER')
         ->send();
-
-    dd($response);
-})->throws(AfricastalkingException::class, 'InvalidSenderId');
+})->with('phone-numbers')
+    ->throws(exception: AfricastalkingException::class, exceptionMessage: 'InvalidSenderId');
