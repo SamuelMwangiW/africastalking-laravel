@@ -12,7 +12,7 @@ use SamuelMwangiW\Africastalking\ValueObjects\PhoneNumber;
 class Airtime
 {
     /**
-     * @var Collection<int,AirtimeTransaction> $recipients ;
+     * @var Collection<int,AirtimeTransaction> ;
      */
     public Collection $recipients;
 
@@ -33,8 +33,7 @@ class Airtime
         AirtimeTransaction|string $phoneNumber,
         string                    $currencyCode = 'KES',
         int                       $amount = 0,
-    ): Airtime
-    {
+    ): Airtime {
         return $this->add($phoneNumber, $currencyCode, $amount);
     }
 
@@ -49,16 +48,15 @@ class Airtime
         AirtimeTransaction|string $phoneNumber,
         string                    $currencyCode = 'KES',
         int                       $amount = 0,
-    ): Airtime
-    {
-        if (is_string($phoneNumber) && !$this->currencyIsValid($currencyCode)) {
+    ): Airtime {
+        if (is_string($phoneNumber) && ! $this->currencyIsValid($currencyCode)) {
             throw AfricastalkingException::invalidCurrencyCode($currencyCode);
         }
-        if (is_string($phoneNumber) && !$this->minimumAmount($amount)) {
+        if (is_string($phoneNumber) && ! $this->minimumAmount($amount)) {
             throw AfricastalkingException::invalidCurrencyCode($currencyCode);
         }
 
-        if (!$phoneNumber instanceof AirtimeTransaction) {
+        if (! $phoneNumber instanceof AirtimeTransaction) {
             $phoneNumber = new AirtimeTransaction(
                 phoneNumber: PhoneNumber::make($phoneNumber),
                 currencyCode: Currency::from($currencyCode),
@@ -96,8 +94,8 @@ class Airtime
     {
         return [
             'recipients' => json_encode(
-                $this->recipients->map(fn(AirtimeTransaction $recipient) => $recipient->__toArray())->toArray()
-            )
+                $this->recipients->map(fn (AirtimeTransaction $recipient) => $recipient->__toArray())->toArray()
+            ),
         ];
     }
 }

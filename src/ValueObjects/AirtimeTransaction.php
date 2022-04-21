@@ -11,8 +11,7 @@ class AirtimeTransaction implements DTOContract
         public PhoneNumber $phoneNumber,
         public Currency    $currencyCode,
         public int         $amount,
-    )
-    {
+    ) {
     }
 
     public static function make(string $phoneNumber, Currency $currency, int $amount): AirtimeTransaction
