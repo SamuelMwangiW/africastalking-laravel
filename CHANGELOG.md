@@ -2,6 +2,14 @@
 
 All notable changes to `africastalking-laravel` will be documented in this file.
 
+## v0.2.2 - 2022-04-22
+
+## What's Changed
+
+- Helper function by @SamuelMwangiW in https://github.com/SamuelMwangiW/africastalking-laravel/pull/15
+
+**Full Changelog**: https://github.com/SamuelMwangiW/africastalking-laravel/compare/v0.2.1...v0.2.2
+
 ## v0.2.1 - 2022-04-22
 
 ## What's Changed
