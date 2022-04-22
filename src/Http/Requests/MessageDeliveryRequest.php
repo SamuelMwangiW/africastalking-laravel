@@ -10,6 +10,7 @@ use SamuelMwangiW\Africastalking\Enum\Network;
 use SamuelMwangiW\Africastalking\Enum\Status;
 use SamuelMwangiW\Africastalking\Http\Requests\Concerns\HasNetworkCode;
 use SamuelMwangiW\Africastalking\Http\Requests\Concerns\HasPhoneNumber;
+use SamuelMwangiW\Africastalking\Http\Requests\Concerns\HasStatus;
 use SamuelMwangiW\Africastalking\Http\Requests\Concerns\HasUniqueId;
 
 class MessageDeliveryRequest extends FormRequest
@@ -17,6 +18,7 @@ class MessageDeliveryRequest extends FormRequest
     use HasNetworkCode;
     use HasPhoneNumber;
     use HasUniqueId;
+    use HasStatus;
 
     public function rules(): array
     {
@@ -57,11 +59,6 @@ class MessageDeliveryRequest extends FormRequest
     protected function idKey(): string
     {
         return 'id';
-    }
-
-    public function status(): string
-    {
-        return $this->get(key: 'status');
     }
 
     public function deliveryFailed(): bool
