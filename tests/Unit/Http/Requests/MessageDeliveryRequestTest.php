@@ -1,8 +1,8 @@
 <?php
 
-
 use Illuminate\Support\Facades\Validator;
 use SamuelMwangiW\Africastalking\Enum\Network;
+use SamuelMwangiW\Africastalking\Enum\Status;
 use SamuelMwangiW\Africastalking\Http\Requests\MessageDeliveryRequest;
 
 it('validates request', function (string $networkCode, string $status, string $reason, array $data) {
@@ -21,9 +21,7 @@ it('validates request', function (string $networkCode, string $status, string $r
 
 it('retrieves request data', function (string $status, string $reason, string $network, array $data) {
     $data = array_merge(
-        ['status' => $status],
-        ['failureReason' => $reason],
-        ['networkCode' => $network],
+        ['status' => $status, 'failureReason' => $reason, 'networkCode' => $network],
         $data
     );
 
@@ -31,7 +29,8 @@ it('retrieves request data', function (string $status, string $reason, string $n
 
     expect($request)
         ->id()->not->toBeNull()->toBe(data_get($data, 'id'))
-        ->status()->not->toBeNull()->toBe(data_get($data, 'status'))
+        ->status()->not->toBeNull()->toBeInstanceOf(Status::class)
+        ->status()->value->toBe(data_get($data, 'status'))
         ->network()->not->toBeNull()->toBeInstanceOf(Network::class)
         ->deliveryFailed()->toBeBool()
         ->phone()->not->toBeNull()->toBe(data_get($data, 'phoneNumber'));
