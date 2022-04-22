@@ -8,7 +8,7 @@ use SamuelMwangiW\Africastalking\Enum\Status;
 /** @mixin FormRequest */
 trait HasStatus
 {
-    public function status()
+    public function status(): Status|string
     {
         return Status::tryFrom(
             $this->get('status')
