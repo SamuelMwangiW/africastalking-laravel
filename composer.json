@@ -44,7 +44,10 @@
     "autoload-dev": {
         "psr-4": {
             "SamuelMwangiW\\Africastalking\\Tests\\": "tests"
-        }
+        },
+        "files": [
+            "./helpers.php"
+        ]
     },
     "scripts": {
         "analyse": "vendor/bin/phpstan analyse",

@@ -50,6 +50,11 @@ class Message implements DTOContract
         return $this;
     }
 
+    public function message(string|null $message): static
+    {
+        return $this->text($message);
+    }
+
     /**
      * @param Collection<int,PhoneNumber>|string|array $recipients
      * @return $this
