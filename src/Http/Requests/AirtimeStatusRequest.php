@@ -7,12 +7,14 @@ use Illuminate\Validation\Rules\Enum;
 use SamuelMwangiW\Africastalking\Enum\Status;
 use SamuelMwangiW\Africastalking\Http\Requests\Concerns\HasPhoneNumber;
 
+use SamuelMwangiW\Africastalking\Http\Requests\Concerns\HasStatus;
 use SamuelMwangiW\Africastalking\Http\Requests\Concerns\HasUniqueId;
 
 class AirtimeStatusRequest extends FormRequest
 {
     use HasPhoneNumber;
     use HasUniqueId;
+    use HasStatus;
 
     public function rules(): array
     {
@@ -62,5 +64,13 @@ class AirtimeStatusRequest extends FormRequest
     public function discount(): string
     {
         return $this->get(key: 'discount');
+    }
+
+    public function deliveryFailed(): bool
+    {
+        return in_array(
+            needle: $this->get(key: 'status'),
+            haystack:['Rejected', 'Failed']
+        );
     }
 }

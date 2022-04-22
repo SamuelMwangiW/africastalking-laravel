@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Support\Collection;
-use function Pest\Faker\faker;
 use SamuelMwangiW\Africastalking\Domain\Airtime;
 use SamuelMwangiW\Africastalking\Enum\Currency;
 use SamuelMwangiW\Africastalking\Exceptions\AfricastalkingException;
@@ -13,12 +12,12 @@ it('resolves the application class')
     ->expect(fn () => Africastalking::airtime())
     ->toBeInstanceOf(Airtime::class);
 
-it('can add a recipient', function (string $phone, string $currency) {
+it('can add a recipient', function (string $phone, string $currency, int $amount) {
     $service = Africastalking::airtime()
         ->to(
             phoneNumber: $phone,
             currencyCode: $currency,
-            amount: faker()->numberBetween(100, 500)
+            amount: $amount
         );
 
     expect($service)
@@ -26,7 +25,7 @@ it('can add a recipient', function (string $phone, string $currency) {
         ->toHaveCount(1)
         ->recipients->first()->phoneNumber->toBeInstanceOf(PhoneNumber::class)
         ->recipients->first()->currencyCode->toBeInstanceOf(Currency::class);
-})->with('phone-numbers', 'currencies');
+})->with('phone-numbers', 'currencies', 'airtime-amount');
 
 it('can add a recipient from a transaction object', function (AirtimeTransaction $transaction) {
     $service = Africastalking::airtime()->to($transaction);
@@ -41,17 +40,17 @@ it('can add a recipient from a transaction object', function (AirtimeTransaction
         );
 })->with('airtime-transactions');
 
-it('can add multiple recipients', function (string $phone, string $currency) {
+it('can add multiple recipients', function (string $phone, string $currency, int $amount) {
     $service = Africastalking::airtime()
         ->add(
             phoneNumber: $phone,
             currencyCode: $currency,
-            amount: faker()->numberBetween(100, 500)
+            amount: $amount,
         )
         ->add(
-            phoneNumber: faker()->e164PhoneNumber(),
+            phoneNumber: '+256706123456',
             currencyCode: $currency,
-            amount: faker()->numberBetween(100, 500)
+            amount: $amount
         );
 
     expect($service)
@@ -63,16 +62,16 @@ it('can add multiple recipients', function (string $phone, string $currency) {
                 ->currencyCode->toBeInstanceOf(Currency::class)
                 ->amount->toBeInt()
         );
-})->with('phone-numbers', 'currencies');
+})->with('phone-numbers', 'currencies', 'airtime-amount');
 
-it('throws an exception for invalid currency', function (string $phone) {
+it('throws an exception for invalid currency', function (string $phone, int $amount) {
     Africastalking::airtime()
         ->to(
             phoneNumber: $phone,
             currencyCode: 'KPW',
-            amount: faker()->numberBetween(100, 500)
+            amount: $amount
         );
-})->with('phone-numbers')->throws(AfricastalkingException::class);
+})->with('phone-numbers', 'airtime-amount')->throws(AfricastalkingException::class);
 
 it('throws an exception for amounts less than 5', function (string $phone) {
     Africastalking::airtime()
@@ -99,15 +98,15 @@ it('sends airtime to a single recipient', function (AirtimeTransaction $transact
         ->toBeArray()
         ->toHaveCount(1);
 
-    expect($result['responses'][0])->toHaveKeys(['phoneNumber','errorMessage','requestId','discount']);
+    expect($result['responses'][0])->toHaveKeys(['phoneNumber', 'errorMessage', 'requestId', 'discount']);
 
     expect(data_get($result, 'numSent'))->toBe(1);
 })->with('airtime-transactions');
 
-it('sends airtime to multiple recipients', function (AirtimeTransaction $transaction) {
+it('sends airtime to multiple recipients', function (int $amount, AirtimeTransaction $transaction) {
     $result = Africastalking::airtime()
         ->to($transaction)
-        ->to(phoneNumber: '+254712345678', amount: 10)
+        ->to(phoneNumber: '+254712345678', amount: $amount)
         ->send();
 
     expect($result)
@@ -124,7 +123,7 @@ it('sends airtime to multiple recipients', function (AirtimeTransaction $transac
         ->toBeArray()
         ->toHaveCount(2);
 
-    expect($result['responses'][0])->toHaveKeys(['phoneNumber','errorMessage','requestId','discount']);
+    expect($result['responses'][0])->toHaveKeys(['phoneNumber', 'errorMessage', 'requestId', 'discount']);
 
     expect(data_get($result, 'numSent'))->toBe(2);
-})->with('airtime-transactions');
+})->with('airtime-amount', 'airtime-transactions');
