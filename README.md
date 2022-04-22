@@ -153,6 +153,15 @@ The package ships with the following [Laravel Requests](https://laravel.com/docs
 \SamuelMwangiW\Africastalking\Http\Requests\VoiceEventRequest::class;
 ```
 
+In addition to exposing the post params in a nice FormRequest object, these classes also include nice helper methods where applicable e.g.
+
+- `id()` to retrieve the unique ATPid associated with every request
+- `phone()` to retrieve the client's phone number
+- `userInput()` to retrieve ussd user input
+- `status()` to get transaction / request final status
+- `deliveryFailed()` returns a boolean `true` if sms or airtime delivery failed and `false` otherwise
+- among many others
+
 Example for a Message Delivery callback action Controller
 
 ```php
@@ -170,7 +179,10 @@ class MessageDeliveredController{
                             ->where(['transaction_id'=>$request->id()])
                             ->firstOrFail();
                             
-        $message->markAsDelivered();
+        $message->update([
+            'delivered_at'=>now(),
+            'status'=>$request->status(),
+        ]);
         
         return response('OK');
     }
@@ -193,7 +205,7 @@ use Illuminate\Notifications\Notification;
 use SamuelMwangiW\Africastalking\Facades\Africastalking;
 use SamuelMwangiW\Africastalking\Notifications\AfricastalkingChannel;
 
-class ExampleNotification extends Notification
+class WelcomeNotification extends Notification
 {
     public function via($notifiable)
     {
@@ -202,7 +214,7 @@ class ExampleNotification extends Notification
 
     public function toAfricastalking($notifiable)
     {
-        return 'Basic Notification message.';
+        return "Hi {$notifiable->name}. Your account at Unicorn Bank has been created. Hope you enjoy the service";
     }
 }
 
@@ -215,13 +227,14 @@ Also ensure that the notifiable model implements `SamuelMwangiW\Africastalking\C
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Notifications\Notification;
 use SamuelMwangiW\Africastalking\Contracts\ReceivesSmsMessages;
 
-class User implements ReceivesSmsMessages
+class User extends Model implements ReceivesSmsMessages
 {
-    protected $guarded = [];
+    protected $fillable = ['email','name','phone'];
 
     public function routeNotificationForAfricastalking(Notification $notification): string
     {
