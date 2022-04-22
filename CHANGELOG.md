@@ -2,6 +2,14 @@
 
 All notable changes to `africastalking-laravel` will be documented in this file.
 
+## v0.2.1 - 2022-04-22
+
+## What's Changed
+
+- tweaks to status() on FormRequests by @SamuelMwangiW in https://github.com/SamuelMwangiW/africastalking-laravel/pull/13
+
+**Full Changelog**: https://github.com/SamuelMwangiW/africastalking-laravel/compare/v0.2.0...v0.2.1
+
 ## v0.2.0 - 2022-04-22
 
 ## Added:
