@@ -39,15 +39,15 @@
     "autoload": {
         "psr-4": {
             "SamuelMwangiW\\Africastalking\\": "src"
-        }
-    },
-    "autoload-dev": {
-        "psr-4": {
-            "SamuelMwangiW\\Africastalking\\Tests\\": "tests"
         },
         "files": [
             "src/helpers.php"
         ]
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "SamuelMwangiW\\Africastalking\\Tests\\": "tests"
+        }
     },
     "scripts": {
         "analyse": "vendor/bin/phpstan analyse",
