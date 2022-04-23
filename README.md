@@ -149,6 +149,8 @@ Clients::query()->chunk(1000, function ($clients) use($airtime) {
 });
 $results = $airtime->send();
 ```
+### USSD Response
+WIP
 
 ### Payments (Pending)
 WIP
