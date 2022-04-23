@@ -36,7 +36,7 @@ class UssdEventRequest extends FormRequest
             'cost' => ['required','numeric'],
             'durationInMillis' => ['required','integer'],
             'hopsCount' => ['required','integer'],
-            'input' => ['required','string'],
+            'input' => ['nullable','string'],
             'lastAppResponse' => ['required','string'],
             'errorMessage' => ['nullable','string'],
         ];
