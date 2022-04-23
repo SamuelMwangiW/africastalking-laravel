@@ -1,9 +1,9 @@
 <?php
 
-use SamuelMwangiW\Africastalking\Facades\Africastalking;
 use SamuelMwangiW\Africastalking\Africastalking as BaseClass;
+use SamuelMwangiW\Africastalking\Facades\Africastalking;
 
-if (!function_exists('africastalking')) {
+if (! function_exists('africastalking')) {
     /**
      * @return BaseClass
      */
