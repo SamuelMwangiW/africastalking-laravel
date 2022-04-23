@@ -46,7 +46,7 @@
             "SamuelMwangiW\\Africastalking\\Tests\\": "tests"
         },
         "files": [
-            "./helpers.php"
+            "src/helpers.php"
         ]
     },
     "scripts": {
