@@ -13,8 +13,7 @@ class UssdResponse implements Responsable
     public function __construct(
         private string $response = '',
         private bool   $expectsInput = true
-    )
-    {
+    ) {
     }
 
     public function response(string $response): static
