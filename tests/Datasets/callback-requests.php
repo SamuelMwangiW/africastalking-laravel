@@ -85,6 +85,50 @@ dataset('ussd-event-notification', [
             'networkCode' => '99999',
             'status' => 'Incomplete',
         ],
+        [
+            'durationInMillis' => faker()->numberBetween(100, 10000),
+            'phoneNumber' => '+254720123123',
+            'errorMessage' => '',
+            'serviceCode' => '*100#',
+            'lastAppResponse' => 'CON Enter your Acc No.',
+            'hopsCount' => faker()->numberBetween(0, 10),
+            'cost' => faker()->numberBetween(0, 10),
+            'date' => faker()->dateTime()->format('Y-m-d H:i:s'),
+            'sessionId' => 'ATUid_5d3b4c2bc589f4811820a7184eed4df5',
+            'retryCount' => faker()->numberBetween(0, 5),
+            'input' => '',
+            'networkCode' => '99999',
+            'status' => 'Incomplete',
+        ],
+        [
+            'durationInMillis' => faker()->numberBetween(100, 10000),
+            'phoneNumber' => '+254720123123',
+            'errorMessage' => '',
+            'serviceCode' => '*100#',
+            'lastAppResponse' => 'CON Enter your Acc No.',
+            'hopsCount' => faker()->numberBetween(0, 10),
+            'cost' => faker()->numberBetween(0, 10),
+            'date' => faker()->dateTime()->format('Y-m-d H:i:s'),
+            'sessionId' => 'ATUid_5d3b4c2bc589f4811820a7184eed4df5',
+            'retryCount' => faker()->numberBetween(0, 5),
+            'input' => null,
+            'networkCode' => '99999',
+            'status' => 'Incomplete',
+        ],
+        [
+            'durationInMillis' => faker()->numberBetween(100, 10000),
+            'phoneNumber' => '+254720123123',
+            'errorMessage' => '',
+            'serviceCode' => '*100#',
+            'lastAppResponse' => 'CON Enter your Acc No.',
+            'hopsCount' => faker()->numberBetween(0, 10),
+            'cost' => faker()->numberBetween(0, 10),
+            'date' => faker()->dateTime()->format('Y-m-d H:i:s'),
+            'sessionId' => 'ATUid_5d3b4c2bc589f4811820a7184eed4df5',
+            'retryCount' => faker()->numberBetween(0, 5),
+            'networkCode' => '99999',
+            'status' => 'Incomplete',
+        ],
     ],
 ]);
 
@@ -150,14 +194,14 @@ dataset('subscription-notification', [
 dataset('incoming-voice-call-notification', [
     [
         [
-            'isActive' => faker()->randomElement([0,1,true,false]),
+            'isActive' => faker()->randomElement([0, 1, true, false]),
             'sessionId' => 'ATUid_5d3b4c2bc589f4811820a7184eed4df5',
             'direction' => 'inbound',
             'callerNumber' => '+254720123123',
             'destinationNumber' => '+254709100100',
         ],
         [
-            'isActive' => faker()->randomElement([0,1,true,false]),
+            'isActive' => faker()->randomElement([0, 1, true, false]),
             'sessionId' => 'ATUid_5d3b4c2bc589f4811820a7184eed4df5',
             'direction' => 'outbound',
             'callerNumber' => '+254720123123',
@@ -165,7 +209,7 @@ dataset('incoming-voice-call-notification', [
             'dtmfDigits' => '123456',
         ],
         [
-            'isActive' => faker()->randomElement([0,1,true,false]),
+            'isActive' => faker()->randomElement([0, 1, true, false]),
             'sessionId' => 'ATVId_b2beff43fbe0d2749cc1693b4df4f585',
             'direction' => 'inbound',
             'callerNumber' => '+254720123123',
@@ -179,7 +223,7 @@ dataset('incoming-voice-call-notification', [
 dataset('voice-event-notification', [
     [
         [
-            'isActive' => faker()->randomElement([0,1,true,false]),
+            'isActive' => faker()->randomElement([0, 1, true, false]),
             'sessionId' => 'ATVId_b2beff43fbe0d2749cc1693b4df4f585',
             'callerNumber' => '+254720123123',
             'destinationNumber' => '+254709100100',
