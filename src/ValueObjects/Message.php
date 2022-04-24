@@ -129,7 +129,7 @@ class Message implements DTOContract
             ->withData($this->data())
             ->fetch();
 
-        if (!data_get($response, 'SMSMessageData.Recipients')) {
+        if (! data_get($response, 'SMSMessageData.Recipients')) {
             throw AfricastalkingException::messageSendingFailed(
                 message: data_get($response, 'SMSMessageData.Message')
             );
