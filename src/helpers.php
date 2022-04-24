@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 use SamuelMwangiW\Africastalking\Africastalking as BaseClass;
 use SamuelMwangiW\Africastalking\Facades\Africastalking;
 

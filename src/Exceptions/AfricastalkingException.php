@@ -14,7 +14,7 @@ class AfricastalkingException extends \Exception
     public static function objectNotNotifiable(string $class): AfricastalkingException
     {
         return new AfricastalkingException(
-            message: "The class $class should use ".Notifiable::class." trait"
+            message: "The class {$class} should use ".Notifiable::class." trait"
         );
     }
 
@@ -25,7 +25,7 @@ class AfricastalkingException extends \Exception
     public static function NotifiableDoesNotImplementReceivesSmsMessages(string $class): AfricastalkingException
     {
         return new AfricastalkingException(
-            message: "Notifiable class $class does not implement ".ReceivesSmsMessages::class." contract"
+            message: "Notifiable class {$class} does not implement ".ReceivesSmsMessages::class." contract"
         );
     }
 
