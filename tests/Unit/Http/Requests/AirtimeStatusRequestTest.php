@@ -19,6 +19,8 @@ it('validates request', function (array $data, string $status) {
 it('retrieves request data', function (string $status, array $data) {
     $data = array_merge($data, ['status' => $status]);
 
+    $deliveryStatusIsFailed = in_array(needle: $status, haystack:['Rejected', 'Failed']);
+
     $request = new AirtimeStatusRequest(request: $data);
 
     expect($request)
@@ -27,5 +29,6 @@ it('retrieves request data', function (string $status, array $data) {
         ->discount()->not->toBeNull()->toBe(data_get($data, 'discount'))
         ->status()->not->toBeNull()->toBeInstanceOf(Status::class)
         ->status()->value->toBe(data_get($data, 'status'))
+        ->deliveryFailed()->toBeBool()->toBe($deliveryStatusIsFailed)
         ->phone()->not->toBeNull()->toBe(data_get($data, 'phoneNumber'));
 })->with('status-values', 'airtime-status-notification');
