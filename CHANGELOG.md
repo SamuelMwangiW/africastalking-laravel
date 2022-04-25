@@ -2,6 +2,15 @@
 
 All notable changes to `africastalking-laravel` will be documented in this file.
 
+## v0.2.4 - 2022-04-25
+
+## Changes
+
+- [Ussd input can be null](https://github.com/SamuelMwangiW/africastalking-laravel/commit/1040abe19c28a2c405a3b9034ad5b5db32e8d94b)
+- [Extra tests](https://github.com/SamuelMwangiW/africastalking-laravel/commit/ebc30a3ff0c2c0345efa5c414a837d46c0c7910d)
+
+**Full Changelog**: https://github.com/SamuelMwangiW/africastalking-laravel/compare/v0.2.3...v0.2.4
+
 ## v0.2.3 - 2022-04-24
 
 ## What's Changed
