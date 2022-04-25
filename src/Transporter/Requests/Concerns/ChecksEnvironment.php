@@ -1,6 +1,8 @@
 <?php
 
-namespace SamuelMwangiW\Africastalking\Traits;
+namespace SamuelMwangiW\Africastalking\Transporter\Requests\Concerns;
+
+use function config;
 
 trait ChecksEnvironment
 {

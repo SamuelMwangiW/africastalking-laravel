@@ -1,6 +1,6 @@
 <?php
 
-namespace SamuelMwangiW\Africastalking\Traits;
+namespace SamuelMwangiW\Africastalking\Transporter\Requests\Concerns;
 
 trait HasIdempotency
 {
