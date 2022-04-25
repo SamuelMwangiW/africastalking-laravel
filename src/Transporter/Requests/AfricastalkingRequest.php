@@ -5,8 +5,8 @@ namespace SamuelMwangiW\Africastalking\Transporter\Requests;
 use Composer\InstalledVersions;
 use Illuminate\Http\Client\PendingRequest;
 use JustSteveKing\Transporter\Request;
+use SamuelMwangiW\Africastalking\Concerns\HasIdempotency;
 use SamuelMwangiW\Africastalking\Transporter\Requests\Concerns\ChecksEnvironment;
-use SamuelMwangiW\Africastalking\Transporter\Requests\Concerns\HasIdempotency;
 use function config;
 
 /** @mixin PendingRequest */
@@ -47,13 +47,6 @@ class AfricastalkingRequest extends Request
         return $this;
     }
 
-    public function addIdempotencyKey(string|null $key): static
-    {
-        $this->withHeaders(['Idempotency-Key' => $key]);
-
-        return $this;
-    }
-
     private function setBaseUri(): void
     {
         $this->baseUrl = $this->isSandbox() ? $this->sandboxBaseUrl : $this->liveBaseUrl;
@@ -68,6 +61,7 @@ class AfricastalkingRequest extends Request
             ->asForm()
             ->withHeaders([
                 'apiKey' => config(key: 'africastalking.api-key'),
+                'Idempotency-Key' => $this->idempotencyKey,
             ]);
     }
 
