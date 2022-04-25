@@ -47,7 +47,7 @@ class UssdEventRequest extends FormRequest
         return 'sessionId';
     }
 
-    public function userInput(): string
+    public function userInput(): ?string
     {
         return $this->get('input');
     }

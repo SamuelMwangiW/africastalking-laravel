@@ -26,7 +26,7 @@ class UssdSessionRequest extends FormRequest
         ];
     }
 
-    public function userInput(): string
+    public function userInput(): ?string
     {
         return $this->get('text');
     }
