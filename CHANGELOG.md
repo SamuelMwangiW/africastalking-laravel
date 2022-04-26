@@ -2,6 +2,14 @@
 
 All notable changes to `africastalking-laravel` will be documented in this file.
 
+## v0.2.5 - 2022-04-26
+
+## What's Changed
+
+- [Bump minimum laravel/framework supported.](https://github.com/SamuelMwangiW/africastalking-laravel/commit/9a956decf111625350fa5e541da938477916fdaf)
+
+**Full Changelog**: https://github.com/SamuelMwangiW/africastalking-laravel/compare/v0.2.4...v0.2.5
+
 ## v0.2.4 - 2022-04-25
 
 ## Changes
