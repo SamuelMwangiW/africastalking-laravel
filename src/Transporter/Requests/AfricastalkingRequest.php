@@ -3,12 +3,12 @@
 namespace SamuelMwangiW\Africastalking\Transporter\Requests;
 
 use Composer\InstalledVersions;
+use function config;
 use Illuminate\Http\Client\PendingRequest;
 use Illuminate\Http\Client\RequestException;
 use JustSteveKing\Transporter\Request;
 use SamuelMwangiW\Africastalking\Concerns\HasIdempotency;
 use SamuelMwangiW\Africastalking\Transporter\Requests\Concerns\ChecksEnvironment;
-use function config;
 
 /** @mixin PendingRequest */
 class AfricastalkingRequest extends Request

@@ -105,7 +105,7 @@ it('sends airtime to a single recipient', function (AirtimeTransaction $transact
 
 it('sends airtime to multiple recipients', function (int $amount, string $phone) {
     $result = Africastalking::airtime()
-        ->to($phone,'KES',$amount)
+        ->to($phone, 'KES', $amount)
         ->to(phoneNumber: '+254712345678', amount: $amount)
         ->send();
 
