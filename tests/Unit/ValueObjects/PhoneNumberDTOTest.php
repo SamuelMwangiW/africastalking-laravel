@@ -39,9 +39,9 @@ it('can be cast to string', function (string $phone) {
 })->with('phone-numbers');
 
 it('can be cast to array', function (string $phone) {
-    $account = PhoneNumber::make(phone: $phone);
+    $account = (array)PhoneNumber::make(phone: $phone);
 
-    expect((array)$account)
+    expect($account)
         ->toBeArray()
         ->toBe(['number' => $phone]);
 })->with('phone-numbers');

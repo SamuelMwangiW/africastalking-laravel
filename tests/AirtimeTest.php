@@ -103,9 +103,9 @@ it('sends airtime to a single recipient', function (AirtimeTransaction $transact
     expect(data_get($result, 'numSent'))->toBe(1);
 })->with('airtime-transactions');
 
-it('sends airtime to multiple recipients', function (int $amount, AirtimeTransaction $transaction) {
+it('sends airtime to multiple recipients', function (int $amount, string $phone) {
     $result = Africastalking::airtime()
-        ->to($transaction)
+        ->to($phone,'KES',$amount)
         ->to(phoneNumber: '+254712345678', amount: $amount)
         ->send();
 
@@ -126,4 +126,4 @@ it('sends airtime to multiple recipients', function (int $amount, AirtimeTransac
     expect($result['responses'][0])->toHaveKeys(['phoneNumber', 'errorMessage', 'requestId', 'discount']);
 
     expect(data_get($result, 'numSent'))->toBe(2);
-})->with('airtime-amount', 'airtime-transactions');
+})->with('airtime-amount', 'phone-numbers');

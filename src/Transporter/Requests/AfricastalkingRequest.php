@@ -4,6 +4,7 @@ namespace SamuelMwangiW\Africastalking\Transporter\Requests;
 
 use Composer\InstalledVersions;
 use Illuminate\Http\Client\PendingRequest;
+use Illuminate\Http\Client\RequestException;
 use JustSteveKing\Transporter\Request;
 use SamuelMwangiW\Africastalking\Concerns\HasIdempotency;
 use SamuelMwangiW\Africastalking\Transporter\Requests\Concerns\ChecksEnvironment;
@@ -23,36 +24,32 @@ class AfricastalkingRequest extends Request
 
     /**
      * @return array
-     * @throws \Illuminate\Http\Client\RequestException
+     * @throws RequestException
      */
     public function fetch(): array
     {
-        $this->decorate()->retry(times: 3);
-        $response = $this->send();
-
-        if ($response->failed()) {
-            /** @phpstan-ignore-next-line */
-            throw $response->toException();
-        }
-
-        return $response->json();
+        return $this
+            ->decorate()
+            ->send()
+            ->throw()
+            ->json();
     }
 
     public function decorate(): static
     {
-        $this->setBaseUri();
-        $this->addUsername();
-        $this->addHeaders();
+        return $this->setBaseUri()
+            ->addUsername()
+            ->addHeaders();
+    }
+
+    private function setBaseUri(): static
+    {
+        $this->baseUrl = $this->isSandbox() ? $this->sandboxBaseUrl : $this->liveBaseUrl;
 
         return $this;
     }
 
-    private function setBaseUri(): void
-    {
-        $this->baseUrl = $this->isSandbox() ? $this->sandboxBaseUrl : $this->liveBaseUrl;
-    }
-
-    private function addHeaders(): void
+    private function addHeaders(): static
     {
         $version = InstalledVersions::getPrettyVersion('samuelmwangiw/africastalking-laravel');
 
@@ -61,22 +58,20 @@ class AfricastalkingRequest extends Request
             ->asForm()
             ->withHeaders([
                 'apiKey' => config(key: 'africastalking.api-key'),
-                'Idempotency-Key' => $this->idempotencyKey,
+                'Idempotency-Key' => $this->idempotencyKey(),
             ]);
+
+        return $this;
     }
 
-    private function addUsername(): void
+    private function addUsername(): static
     {
-        if ($this->method === 'GET') {
-            $this->withQuery([
-                'username' => config('africastalking.username'),
-            ]);
+        match (mb_strtoupper($this->method)) {
+            'GET' => $this->withQuery(['username' => config('africastalking.username')]),
+            'POST' => $this->withData(['username' => config('africastalking.username')]),
+            default => throw new \OutOfBoundsException('Only GET and POST methods are supported')
+        };
 
-            return;
-        }
-
-        $this->withData([
-            'username' => config('africastalking.username'),
-        ]);
+        return $this;
     }
 }
