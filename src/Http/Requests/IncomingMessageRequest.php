@@ -47,7 +47,7 @@ class IncomingMessageRequest extends FormRequest
                 'max:25',
             ],
             'networkCode' => [
-                'required',
+                'nullable',
                 'string',
                 new Enum(Network::class),
             ],
