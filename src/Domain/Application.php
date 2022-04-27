@@ -15,7 +15,7 @@ class Application
     public function balance(): Account
     {
         return AccountFactory::make(
-            data: BalanceRequest::build()->fetch()
+            data: BalanceRequest::build()->asForm()->fetch()
         );
     }
 }

@@ -126,6 +126,7 @@ class Message implements DTOContract
     {
         $response = $this
             ->request()
+            ->asForm()
             ->withData($this->data())
             ->fetch();
 

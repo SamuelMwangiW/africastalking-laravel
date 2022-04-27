@@ -55,7 +55,6 @@ class AfricastalkingRequest extends Request
 
         $this->acceptJson()
             ->withUserAgent(userAgent: "samuelmwangiw/africastalking-laravel {$version}")
-            ->asForm()
             ->withHeaders([
                 'apiKey' => config(key: 'africastalking.api-key'),
                 'Idempotency-Key' => $this->idempotencyKey(),
