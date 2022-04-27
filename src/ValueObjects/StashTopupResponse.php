@@ -11,17 +11,18 @@ class StashTopupResponse implements DTOContract
         public string $id,
         public Status $status,
         public string $description,
-    )
-    {}
+    ) {
+    }
 
     public static function make(array $attributes): StashTopupResponse
     {
         return new StashTopupResponse(
-            id: data_get($attributes,'transactionId'),
-            status: Status::from(data_get($attributes,'status')),
-            description: data_get($attributes,'description'),
+            id: data_get($attributes, 'transactionId'),
+            status: Status::from(data_get($attributes, 'status')),
+            description: data_get($attributes, 'description'),
         );
     }
+
     public function __toString(): string
     {
         return strval($this->__toArray());

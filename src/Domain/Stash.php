@@ -16,13 +16,12 @@ class Stash
     public function send(
         null|string|Currency $currency = null,
         int|null             $amount = null
-    ): StashTopupResponse
-    {
-        if (!is_null($currency)) {
+    ): StashTopupResponse {
+        if (! is_null($currency)) {
             $this->currency($currency);
         }
 
-        if (!is_null($amount)) {
+        if (! is_null($amount)) {
             $this->amount($amount);
         }
 
