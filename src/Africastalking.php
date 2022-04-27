@@ -4,6 +4,7 @@ namespace SamuelMwangiW\Africastalking;
 
 use SamuelMwangiW\Africastalking\Domain\Airtime;
 use SamuelMwangiW\Africastalking\Domain\Application;
+use SamuelMwangiW\Africastalking\Domain\Stash;
 use SamuelMwangiW\Africastalking\Response\UssdResponse;
 use SamuelMwangiW\Africastalking\ValueObjects\Message;
 
@@ -27,5 +28,10 @@ class Africastalking
     public function ussd(string $response = '', bool $expectsInput = true): UssdResponse
     {
         return app(UssdResponse::class, ['response' => $response, 'expectsInput' => $expectsInput]);
+    }
+
+    public function stash(): Stash
+    {
+        return app(Stash::class);
     }
 }
