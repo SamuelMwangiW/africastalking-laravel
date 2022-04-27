@@ -63,8 +63,16 @@ it('overrides productName values in config', function () {
     expect($this->subject->product('fooBarProduct'))->getProductName()->toBe('fooBarProduct');
 });
 
-it('can topup stash', function () {
+it('can topup stash via send', function () {
     $results = $this->subject->send(currency: 'KES', amount: 100);
+
+    expect($results)
+        ->toBeInstanceOf(StashTopupResponse::class)
+        ->status->toBeInstanceOf(Status::class);
+});
+
+it('can topup stash', function () {
+    $results = $this->subject->topup(currency: 'KES', amount: 100);
 
     expect($results)
         ->toBeInstanceOf(StashTopupResponse::class)
