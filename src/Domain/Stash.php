@@ -16,7 +16,7 @@ class Stash
     public function send(
         null|string|Currency $currency = null,
         int|null             $amount = null
-    )
+    ): StashTopupResponse
     {
         if (!is_null($currency)) {
             $this->currency($currency);
@@ -26,10 +26,11 @@ class Stash
             $this->amount($amount);
         }
 
+        /** @phpstan-ignore-next-line  */
         $result = StashTopupRequest::build()
+            ->withData($this->getData())
             ->retry(3)
             ->asJson()
-            ->withData($this->getData())
             ->fetch();
 
         return StashTopupResponse::make($result);

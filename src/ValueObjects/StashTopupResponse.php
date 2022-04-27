@@ -24,11 +24,15 @@ class StashTopupResponse implements DTOContract
     }
     public function __toString(): string
     {
-        // TODO: Implement __toString() method.
+        return strval($this->__toArray());
     }
 
     public function __toArray(): array
     {
-        // TODO: Implement __toArray() method.
+        return [
+            'id' => $this->id,
+            'status' => $this->status,
+            'description' => $this->description,
+        ];
     }
 }
