@@ -2,6 +2,7 @@
 
 use SamuelMwangiW\Africastalking\Domain\Stash;
 use SamuelMwangiW\Africastalking\Enum\Currency;
+use SamuelMwangiW\Africastalking\Enum\Status;
 use SamuelMwangiW\Africastalking\ValueObjects\StashTopupResponse;
 
 beforeEach(function () {
@@ -65,5 +66,7 @@ it('overrides productName values in config', function () {
 it('can topup stash', function () {
     $results = $this->subject->send(currency: 'KES', amount: 100);
 
-    expect($results)->toBeInstanceOf(StashTopupResponse::class);
+    expect($results)
+        ->toBeInstanceOf(StashTopupResponse::class)
+        ->status->toBeInstanceOf(Status::class);
 });
