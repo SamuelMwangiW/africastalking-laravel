@@ -87,6 +87,7 @@ class Airtime
         /** @phpstan-ignore-next-line */
         return SendRequest::build()
             ->retry(3)
+            ->asForm()
             ->withData($this->recipients())
             ->fetch();
     }

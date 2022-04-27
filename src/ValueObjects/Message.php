@@ -124,8 +124,10 @@ class Message implements DTOContract
      */
     public function send(): Collection
     {
+        /** @phpstan-ignore-next-line  */
         $response = $this
             ->request()
+            ->asForm()
             ->withData($this->data())
             ->fetch();
 
