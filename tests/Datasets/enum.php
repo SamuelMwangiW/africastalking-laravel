@@ -94,6 +94,6 @@ dataset('currencies', [
 ]);
 
 dataset('update-types', [
-    'addition',
-    'deletion',
+    'Addition',
+    'Deletion',
 ]);

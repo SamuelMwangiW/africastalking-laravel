@@ -4,6 +4,6 @@ namespace SamuelMwangiW\Africastalking\Enum;
 
 enum UpdateType: string
 {
-    case ADDITION = 'Addition';
-    case DELETION = 'Deletion';
+    case SUBSCRIBE = 'Addition';
+    case UNSUBSCRIBE = 'Deletion';
 }
