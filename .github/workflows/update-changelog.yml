@@ -20,6 +20,14 @@ jobs:
           # is not out of date.
           ref: ${{ github.event.release.target_commitish }}
 
+      - name: Import GPG key
+        id: import_gpg
+        uses: crazy-max/ghaction-import-gpg@v4
+        with:
+          gpg_private_key: ${{ secrets.GPG_PRIVATE_KEY }}
+          git_user_signingkey: true
+          git_commit_gpgsign: true
+
       - name: Extract release date from git tag
         id: release_date
         run: |
