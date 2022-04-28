@@ -3,11 +3,11 @@
 use SamuelMwangiW\Africastalking\Contracts\DTOContract;
 use SamuelMwangiW\Africastalking\Enum\Currency;
 use SamuelMwangiW\Africastalking\Factories\AccountFactory;
-use SamuelMwangiW\Africastalking\ValueObjects\Account;
+use SamuelMwangiW\Africastalking\ValueObjects\Balance;
 
 it('respects the DTOContract ', function () {
-    $account = new Account(
-        balance: 6000,
+    $account = new Balance(
+        amount: 6000,
         currency: Currency::UGANDA,
     );
 
@@ -16,15 +16,15 @@ it('respects the DTOContract ', function () {
 });
 
 it('can construct an AccountDTO class', function () {
-    $account = new Account(
-        balance: 6000,
+    $account = new Balance(
+        amount: 6000,
         currency: Currency::UGANDA,
     );
 
     expect($account)
-       ->toBeInstanceOf(Account::class)
+       ->toBeInstanceOf(Balance::class)
        ->currency->toBe(Currency::UGANDA)
-       ->balance->toBe(6000.00);
+       ->amount->toBe(6000.00);
 });
 
 it('can construct an Account using AccountFactory', function () {
@@ -33,9 +33,9 @@ it('can construct an Account using AccountFactory', function () {
     );
 
     expect($account)
-       ->toBeInstanceOf(Account::class)
+       ->toBeInstanceOf(Balance::class)
        ->currency->toBe(Currency::UGANDA)
-       ->balance->toBe(9876.00);
+       ->amount->toBe(9876.00);
 });
 
 test('AccountFactory defaults to USD for unknown currency', function () {
@@ -44,23 +44,23 @@ test('AccountFactory defaults to USD for unknown currency', function () {
     );
 
     expect($account)
-       ->toBeInstanceOf(Account::class)
+       ->toBeInstanceOf(Balance::class)
        ->currency->toBe(Currency::INTERNATIONAL)
-       ->balance->toBe(9876.00);
+       ->amount->toBe(9876.00);
 })->markAsRisky();
 
 it('can make an Account statically', function () {
-    $account = Account::make(balance: 67890.00, currency: Currency::INTERNATIONAL);
+    $account = Balance::make(balance: 67890.00, currency: Currency::INTERNATIONAL);
 
     expect($account)
-        ->toBeInstanceOf(Account::class)
+        ->toBeInstanceOf(Balance::class)
         ->currency->toBe(Currency::INTERNATIONAL)
-        ->balance->toBe(67890.00);
+        ->amount->toBe(67890.00);
 });
 
 it('can be cast to string', function () {
-    $account = new Account(
-        balance: 6000,
+    $account = new Balance(
+        amount: 6000,
         currency: Currency::UGANDA,
     );
 
@@ -69,8 +69,8 @@ it('can be cast to string', function () {
 });
 
 it('can be cast to array', function () {
-    $account = new Account(
-        balance: 345678.5,
+    $account = new Balance(
+        amount: 345678.5,
         currency: Currency::TANZANIA,
     );
 

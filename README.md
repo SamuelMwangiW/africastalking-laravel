@@ -48,7 +48,7 @@ You should configure the package by setting the `env` variables in your `.env` f
 ```php
 use SamuelMwangiW\Africastalking\Facades\Africastalking;
 
-/** @var \SamuelMwangiW\Africastalking\ValueObjects\Account $account */
+/** @var \SamuelMwangiW\Africastalking\ValueObjects\Balance $account */
 $account = Africastalking::application()->balance();
 
 // Or using the global helper function
