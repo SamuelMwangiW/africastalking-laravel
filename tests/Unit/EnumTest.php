@@ -5,6 +5,7 @@ use SamuelMwangiW\Africastalking\Enum\CallHangupCauses;
 use SamuelMwangiW\Africastalking\Enum\Currency;
 use SamuelMwangiW\Africastalking\Enum\FailureReason;
 use SamuelMwangiW\Africastalking\Enum\Network;
+use SamuelMwangiW\Africastalking\Enum\PaymentProvider;
 use SamuelMwangiW\Africastalking\Enum\Status;
 use SamuelMwangiW\Africastalking\Enum\UpdateType;
 
@@ -63,3 +64,11 @@ it('creates UpdateType::class from string', function (string $value) {
         ->toBeInstanceOf(UpdateType::class)
         ->not->toBeNull();
 })->with('update-types');
+
+it('creates PaymentProvider::class from string', function (string $value) {
+    $enum = PaymentProvider::tryFrom($value);
+
+    expect($enum)
+        ->toBeInstanceOf(PaymentProvider::class)
+        ->not->toBeNull();
+})->with('payment-providers');

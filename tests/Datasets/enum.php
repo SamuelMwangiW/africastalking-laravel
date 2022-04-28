@@ -97,3 +97,9 @@ dataset('update-types', [
     'Addition',
     'Deletion',
 ]);
+
+dataset('payment-providers', [
+    'Mpesa',
+    'TigoTanzania',
+    'Athena',
+]);

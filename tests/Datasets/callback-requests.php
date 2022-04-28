@@ -232,3 +232,32 @@ dataset('voice-event-notification', [
         ],
     ],
 ]);
+
+dataset('mobile-c2b-notification', [
+    [
+        [
+            'clientAccount' => faker()->word(),
+            'productName' => faker()->word(),
+            'phoneNumber' => faker()->e164PhoneNumber(),
+            'value' => 'KES ' . faker()->numberBetween(100, 1000),
+            'providerMetadata' => ['foo' => 'bar', 'baz' => 'quo']
+        ],
+        [
+            'productName' => faker()->word(),
+            'phoneNumber' => faker()->e164PhoneNumber(),
+            'value' => 'KES ' . faker()->numberBetween(100, 1000),
+            'providerMetadata' => ['foo' => 'bar', 'baz' => 'quo']
+        ],
+        [
+            'clientAccount' => faker()->word(),
+            'productName' => faker()->word(),
+            'phoneNumber' => faker()->e164PhoneNumber(),
+            'value' => 'KES ' . faker()->numberBetween(100, 1000),
+        ],
+        [
+            'productName' => faker()->word(),
+            'phoneNumber' => faker()->e164PhoneNumber(),
+            'value' => 'KES ' . faker()->numberBetween(100, 1000),
+        ],
+    ]
+]);
