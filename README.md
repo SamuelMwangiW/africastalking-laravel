@@ -37,6 +37,9 @@ return [
     'username' => env('AFRICASTALKING_USERNAME','sandbox'),
     'api-key' => env('AFRICASTALKING_API_KEY'),
     'from' => env('AFRICASTALKING_FROM'),
+    'payment' => [
+        'product-name' => env('AFRICASTALKING_PAYMENT_PRODUCT'),
+    ]
 ];
 ```
 
@@ -209,8 +212,44 @@ class UssdController extends Controller
 }
 ```
 
-### Payments (Pending)
-WIP
+### Payments (wip)
+
+#### Mobile Checkout
+
+```php
+africastalking()
+    ->payment()
+    ->mobileCheckout()
+    ->to('+254720123123')
+    ->amount(5000)
+    ->currency('KES')
+    ->send()
+```
+
+#### Wallet Balance
+
+```php
+/** @var \SamuelMwangiW\Africastalking\ValueObjects\Balance $balance **/
+$balance = africastalking()->wallet()->balance();
+```
+
+#### Stash top up
+
+```php
+africastalking()
+    ->stash()
+    ->topup('TZS',100000);
+
+//or fluently
+africastalking()
+    ->stash()
+    ->amount(10000)
+    ->currency('USD')
+    ->product('My Product') //To override the product name in config
+    ->topup(); //topup() has an alias named send() if you fancy
+
+```
+
 ### Voice (Pending)
 WIP
 ### IOT (Pending)
