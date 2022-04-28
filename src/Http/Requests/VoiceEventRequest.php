@@ -4,9 +4,9 @@ namespace SamuelMwangiW\Africastalking\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rules\Enum;
-use SamuelMwangiW\Africastalking\Enum\CallDirection;
 use SamuelMwangiW\Africastalking\Enum\CallHangupCauses;
 use SamuelMwangiW\Africastalking\Enum\Currency;
+use SamuelMwangiW\Africastalking\Enum\Direction;
 use SamuelMwangiW\Africastalking\Http\Requests\Concerns\HasPhoneNumber;
 use SamuelMwangiW\Africastalking\Http\Requests\Concerns\HasUniqueId;
 
@@ -20,7 +20,7 @@ class VoiceEventRequest extends FormRequest
         return [
             'isActive' => ['required', 'boolean'],
             'sessionId' => ['required', 'string', 'min:32'],
-            'direction' => ['required', 'string', new Enum(CallDirection::class)],
+            'direction' => ['required', 'string', new Enum(Direction::class)],
             'callerNumber' => ['required', 'string', 'min:10'],
             'destinationNumber' => ['required', 'string', 'min:10'],
             'dtmfDigits' => ['nullable', 'string'],

@@ -1,10 +1,11 @@
 <?php
 
-use SamuelMwangiW\Africastalking\Enum\CallDirection;
 use SamuelMwangiW\Africastalking\Enum\CallHangupCauses;
 use SamuelMwangiW\Africastalking\Enum\Currency;
+use SamuelMwangiW\Africastalking\Enum\Direction;
 use SamuelMwangiW\Africastalking\Enum\FailureReason;
 use SamuelMwangiW\Africastalking\Enum\Network;
+use SamuelMwangiW\Africastalking\Enum\PaymentProvider;
 use SamuelMwangiW\Africastalking\Enum\Status;
 use SamuelMwangiW\Africastalking\Enum\UpdateType;
 
@@ -41,10 +42,10 @@ it('creates HangupCause::class from string', function (string $value) {
 })->with('hangup-causes');
 
 it('creates CallDirection::class from string', function (string $value) {
-    $enum = CallDirection::tryFrom($value);
+    $enum = Direction::tryFrom($value);
 
     expect($enum)
-        ->toBeInstanceOf(CallDirection::class)
+        ->toBeInstanceOf(Direction::class)
         ->not->toBeNull();
 })->with('call-directions');
 
@@ -63,3 +64,11 @@ it('creates UpdateType::class from string', function (string $value) {
         ->toBeInstanceOf(UpdateType::class)
         ->not->toBeNull();
 })->with('update-types');
+
+it('creates PaymentProvider::class from string', function (string $value) {
+    $enum = PaymentProvider::tryFrom($value);
+
+    expect($enum)
+        ->toBeInstanceOf(PaymentProvider::class)
+        ->not->toBeNull();
+})->with('payment-providers');

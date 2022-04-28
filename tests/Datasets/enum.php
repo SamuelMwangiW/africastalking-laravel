@@ -76,7 +76,7 @@ dataset('hangup-causes', [
     'UNSPECIFIED',
 ]);
 
-dataset('call-directions', ['inbound', 'outbound']);
+dataset('call-directions', ['Inbound', 'Outbound']);
 
 dataset('currencies', [
     'KES',
@@ -96,4 +96,10 @@ dataset('currencies', [
 dataset('update-types', [
     'Addition',
     'Deletion',
+]);
+
+dataset('payment-providers', [
+    'Mpesa',
+    'TigoTanzania',
+    'Athena',
 ]);
