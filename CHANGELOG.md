@@ -2,6 +2,14 @@
 
 All notable changes to `africastalking-laravel` will be documented in this file.
 
+## v0.3.2 - 2022-04-29
+
+## What's Changed
+
+- Payment requests by @SamuelMwangiW in https://github.com/SamuelMwangiW/africastalking-laravel/pull/27
+
+**Full Changelog**: https://github.com/SamuelMwangiW/africastalking-laravel/compare/v0.3.1...v0.3.2
+
 ## v0.3.1 - 2022-04-28
 
 ## What's Changed
