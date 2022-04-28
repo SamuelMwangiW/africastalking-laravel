@@ -2,6 +2,15 @@
 
 All notable changes to `africastalking-laravel` will be documented in this file.
 
+## v0.3.0 - 2022-04-28
+
+## What's Changed
+
+- Stash topup by @SamuelMwangiW in https://github.com/SamuelMwangiW/africastalking-laravel/pull/19
+- Added Wallet balance check by @SamuelMwangiW in https://github.com/SamuelMwangiW/africastalking-laravel/pull/20
+
+**Full Changelog**: https://github.com/SamuelMwangiW/africastalking-laravel/compare/v0.2.5...v0.3.0
+
 ## v0.2.5 - 2022-04-26
 
 ## What's Changed
