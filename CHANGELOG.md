@@ -2,6 +2,15 @@
 
 All notable changes to `africastalking-laravel` will be documented in this file.
 
+## v0.3.1 - 2022-04-28
+
+## What's Changed
+
+- Mobile checkout by @SamuelMwangiW in https://github.com/SamuelMwangiW/africastalking-laravel/pull/21
+- Add documentation for progress thus far by @SamuelMwangiW in https://github.com/SamuelMwangiW/africastalking-laravel/pull/22
+
+**Full Changelog**: https://github.com/SamuelMwangiW/africastalking-laravel/compare/v0.3.0...v0.3.1
+
 ## v0.3.0 - 2022-04-28
 
 ## What's Changed
