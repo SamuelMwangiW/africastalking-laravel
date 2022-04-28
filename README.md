@@ -251,8 +251,7 @@ africastalking()
 ```
 
 ### Voice (Pending)
-WIP
-### IOT (Pending)
+
 WIP
 
 ## HTTP Requests
