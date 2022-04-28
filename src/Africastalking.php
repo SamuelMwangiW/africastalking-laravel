@@ -5,6 +5,7 @@ namespace SamuelMwangiW\Africastalking;
 use SamuelMwangiW\Africastalking\Domain\Airtime;
 use SamuelMwangiW\Africastalking\Domain\Application;
 use SamuelMwangiW\Africastalking\Domain\Stash;
+use SamuelMwangiW\Africastalking\Domain\Wallet;
 use SamuelMwangiW\Africastalking\Response\UssdResponse;
 use SamuelMwangiW\Africastalking\ValueObjects\Message;
 
@@ -33,5 +34,10 @@ class Africastalking
     public function stash(): Stash
     {
         return app(Stash::class);
+    }
+
+    public function wallet(): Wallet
+    {
+        return app(Wallet::class);
     }
 }
