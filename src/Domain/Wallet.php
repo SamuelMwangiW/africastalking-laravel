@@ -13,7 +13,7 @@ class Wallet
     {
         $response = WalletBalanceRequest::build()->fetch();
 
-        if (data_get($response,'status') !== 'Success'){
+        if (data_get($response, 'status') !== 'Success') {
             throw new \Exception('Failed to fetch wallet ballance');
         }
 
