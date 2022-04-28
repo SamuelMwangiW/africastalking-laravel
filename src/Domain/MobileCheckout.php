@@ -49,10 +49,8 @@ class MobileCheckout
         return $this;
     }
 
-    public function send(): mixed
+    public function send()
     {
-
-        /** @phpstan-ignore-next-line  **/
         $response = MobileCheckoutRequest::build()
             ->asJson()
             ->withData($this->data())
