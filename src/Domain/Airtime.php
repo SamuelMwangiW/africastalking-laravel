@@ -84,7 +84,6 @@ class Airtime
      */
     public function send(): array
     {
-        /** @phpstan-ignore-next-line */
         return SendRequest::build()
             ->retry(3)
             ->asForm()

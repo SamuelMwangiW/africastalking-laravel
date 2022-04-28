@@ -15,7 +15,6 @@ class Application
     public function balance(): Balance
     {
         return AccountFactory::make(
-        /** @phpstan-ignore-next-line  */
             data: BalanceRequest::build()->asForm()->fetch()
         );
     }

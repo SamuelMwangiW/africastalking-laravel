@@ -4,13 +4,21 @@ namespace SamuelMwangiW\Africastalking\Transporter\Requests;
 
 use Composer\InstalledVersions;
 use function config;
-use Illuminate\Http\Client\PendingRequest;
 use Illuminate\Http\Client\RequestException;
 use JustSteveKing\Transporter\Request;
 use SamuelMwangiW\Africastalking\Concerns\HasIdempotency;
 use SamuelMwangiW\Africastalking\Transporter\Requests\Concerns\ChecksEnvironment;
 
-/** @mixin PendingRequest */
+/**
+ * @method static acceptJson()
+ * @method static asJson()
+ * @method static asForm()
+ * @method static retry(int $times, int $sleep = 0, ?callable $when = null, bool $throw = true)
+ * @method static withData(array $data)
+ * @method static withHeaders(array $headers)
+ * @method static withUserAgent(string $userAgent)
+ */
+
 class AfricastalkingRequest extends Request
 {
     use ChecksEnvironment;

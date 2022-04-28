@@ -51,13 +51,10 @@ class MobileCheckout
 
     public function send(): array
     {
-        /** @phpstan-ignore-next-line  */
-        $response = MobileCheckoutRequest::build()
-            ->asJson()
+        return MobileCheckoutRequest::build()
             ->withData($this->data())
+            ->asJson()
             ->fetch();
-
-        return $response;
     }
 
     private function data(): array
