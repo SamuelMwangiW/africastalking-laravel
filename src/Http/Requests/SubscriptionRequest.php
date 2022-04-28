@@ -3,6 +3,7 @@
 namespace SamuelMwangiW\Africastalking\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Http\Request;
 use Illuminate\Validation\Rules\Enum;
 use SamuelMwangiW\Africastalking\Enum\UpdateType;
 use SamuelMwangiW\Africastalking\Http\Requests\Concerns\HasPhoneNumber;

@@ -48,3 +48,6 @@ jobs:
           branch: ${{ github.event.release.target_commitish }}
           commit_message: Update CHANGELOG
           file_pattern: CHANGELOG.md
+          commit_user_name: Samuel Mwangi
+          commit_user_email: samuel@samuelmwangi.co.ke
+          commit_author: Samuel Mwangi <samuel@samuelmwangi.co.ke>
