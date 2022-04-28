@@ -10,4 +10,7 @@ it('can be resolved via helper')
     ->expect(fn () => africastalking()->wallet())->toBeInstanceOf(Wallet::class);
 
 it('can fetch balance')
-    ->expect(fn () => app(Wallet::class)->balance())->toBeInstanceOf(Balance::class);
+    ->expect(fn() => app(Wallet::class)->balance())->toBeInstanceOf(Balance::class);
+
+it('can fetch balance via helper')
+    ->expect(fn() => africastalking()->wallet()->balance())->toBeInstanceOf(Balance::class);
