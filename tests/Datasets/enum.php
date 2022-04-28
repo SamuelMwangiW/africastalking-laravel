@@ -76,7 +76,7 @@ dataset('hangup-causes', [
     'UNSPECIFIED',
 ]);
 
-dataset('call-directions', ['inbound', 'outbound']);
+dataset('call-directions', ['Inbound', 'Outbound']);
 
 dataset('currencies', [
     'KES',

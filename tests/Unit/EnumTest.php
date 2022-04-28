@@ -1,6 +1,6 @@
 <?php
 
-use SamuelMwangiW\Africastalking\Enum\CallDirection;
+use SamuelMwangiW\Africastalking\Enum\Direction;
 use SamuelMwangiW\Africastalking\Enum\CallHangupCauses;
 use SamuelMwangiW\Africastalking\Enum\Currency;
 use SamuelMwangiW\Africastalking\Enum\FailureReason;
@@ -42,10 +42,10 @@ it('creates HangupCause::class from string', function (string $value) {
 })->with('hangup-causes');
 
 it('creates CallDirection::class from string', function (string $value) {
-    $enum = CallDirection::tryFrom($value);
+    $enum = Direction::tryFrom($value);
 
     expect($enum)
-        ->toBeInstanceOf(CallDirection::class)
+        ->toBeInstanceOf(Direction::class)
         ->not->toBeNull();
 })->with('call-directions');
 

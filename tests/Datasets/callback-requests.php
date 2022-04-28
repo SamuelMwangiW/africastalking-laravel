@@ -196,14 +196,14 @@ dataset('incoming-voice-call-notification', [
         [
             'isActive' => faker()->randomElement([0, 1, true, false]),
             'sessionId' => 'ATUid_5d3b4c2bc589f4811820a7184eed4df5',
-            'direction' => 'inbound',
+            'direction' => 'Inbound',
             'callerNumber' => '+254720123123',
             'destinationNumber' => '+254709100100',
         ],
         [
             'isActive' => faker()->randomElement([0, 1, true, false]),
             'sessionId' => 'ATUid_5d3b4c2bc589f4811820a7184eed4df5',
-            'direction' => 'outbound',
+            'direction' => 'Outbound',
             'callerNumber' => '+254720123123',
             'destinationNumber' => '+254709100100',
             'dtmfDigits' => '123456',
@@ -211,7 +211,7 @@ dataset('incoming-voice-call-notification', [
         [
             'isActive' => faker()->randomElement([0, 1, true, false]),
             'sessionId' => 'ATVId_b2beff43fbe0d2749cc1693b4df4f585',
-            'direction' => 'inbound',
+            'direction' => 'Inbound',
             'callerNumber' => '+254720123123',
             'destinationNumber' => '+254709100100',
             'callSessionState' => 'Completed',
