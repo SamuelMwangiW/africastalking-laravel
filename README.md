@@ -261,6 +261,8 @@ The package ships with the following [Laravel Requests](https://laravel.com/docs
 \SamuelMwangiW\Africastalking\Http\Requests\BulkSmsOptOutRequest::class;
 \SamuelMwangiW\Africastalking\Http\Requests\IncomingMessageRequest::class;
 \SamuelMwangiW\Africastalking\Http\Requests\MessageDeliveryRequest::class;
+\SamuelMwangiW\Africastalking\Http\Requests\MobileC2BValidationRequest::class;
+\SamuelMwangiW\Africastalking\Http\Requests\PaymentNotificationRequest::class;
 \SamuelMwangiW\Africastalking\Http\Requests\SubscriptionRequest::class;
 \SamuelMwangiW\Africastalking\Http\Requests\UssdEventRequest::class;
 \SamuelMwangiW\Africastalking\Http\Requests\UssdSessionRequest::class;
