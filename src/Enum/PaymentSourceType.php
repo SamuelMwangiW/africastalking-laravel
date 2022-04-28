@@ -8,4 +8,5 @@ enum PaymentSourceType: string
     case BANK = 'BankAccount';
     case CARD = 'Card';
     case WALLET = 'Wallet';
+    case STASH = 'UserStash';
 }
