@@ -7,7 +7,7 @@ use Illuminate\Validation\Rules\Enum;
 use SamuelMwangiW\Africastalking\Enum\PaymentProvider;
 use SamuelMwangiW\Africastalking\Http\Requests\Concerns\HasPhoneNumber;
 
-class MobileC2BRequest extends FormRequest
+class MobileC2BValidationRequest extends FormRequest
 {
     use HasPhoneNumber;
 

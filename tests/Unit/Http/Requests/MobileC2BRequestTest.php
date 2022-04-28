@@ -1,10 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Validator;
-use SamuelMwangiW\Africastalking\Http\Requests\MobileC2BRequest;
+use SamuelMwangiW\Africastalking\Http\Requests\MobileC2BValidationRequest;
 
 it('validates request', function (string $provider, array $data) {
-    $request = new MobileC2BRequest();
+    $request = new MobileC2BValidationRequest();
     $validator = Validator::make(
         array_merge(['provider' => $provider], $data),
         $request->rules()
@@ -17,7 +17,7 @@ it('validates request', function (string $provider, array $data) {
 it('retrieves request data', function (string $provider, array $data) {
     $data = array_merge(['provider' => $provider], $data);
 
-    $request = new MobileC2BRequest(request: $data);
+    $request = new MobileC2BValidationRequest(request: $data);
 
     expect($request)
         ->phone()->toBe(data_get($data, 'phoneNumber'))
