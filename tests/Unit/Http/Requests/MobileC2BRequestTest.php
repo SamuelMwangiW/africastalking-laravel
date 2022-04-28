@@ -2,7 +2,6 @@
 
 use Illuminate\Support\Facades\Validator;
 use SamuelMwangiW\Africastalking\Http\Requests\MobileC2BRequest;
-use SamuelMwangiW\Africastalking\Http\Requests\VoiceEventRequest;
 
 it('validates request', function (string $provider, array $data) {
     $request = new MobileC2BRequest();

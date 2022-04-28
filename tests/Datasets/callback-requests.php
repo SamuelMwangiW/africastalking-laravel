@@ -240,13 +240,13 @@ dataset('mobile-c2b-notification', [
             'productName' => faker()->word(),
             'phoneNumber' => faker()->e164PhoneNumber(),
             'value' => 'KES ' . faker()->numberBetween(100, 1000),
-            'providerMetadata' => ['foo' => 'bar', 'baz' => 'quo']
+            'providerMetadata' => ['foo' => 'bar', 'baz' => 'quo'],
         ],
         [
             'productName' => faker()->word(),
             'phoneNumber' => faker()->e164PhoneNumber(),
             'value' => 'KES ' . faker()->numberBetween(100, 1000),
-            'providerMetadata' => ['foo' => 'bar', 'baz' => 'quo']
+            'providerMetadata' => ['foo' => 'bar', 'baz' => 'quo'],
         ],
         [
             'clientAccount' => faker()->word(),
@@ -259,5 +259,5 @@ dataset('mobile-c2b-notification', [
             'phoneNumber' => faker()->e164PhoneNumber(),
             'value' => 'KES ' . faker()->numberBetween(100, 1000),
         ],
-    ]
+    ],
 ]);
