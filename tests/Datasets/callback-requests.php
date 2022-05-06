@@ -261,3 +261,38 @@ dataset('mobile-c2b-notification', [
         ],
     ],
 ]);
+
+dataset('payment-notification', [
+    [
+        [
+            'transactionId' => 'ATVId_b2beff43fbe0d2749cc1693b4df4f585',
+            'providerRefId' => 'QX123ERQT',
+            'providerChannel' => 'StashTopup',
+            'clientAccount' => '123',
+            'productName' => 'Test Product',
+            'source' => 'PaymentWallet',
+            'destination' => 'StashTopup',
+            'value' => 'KES 10000.00',
+            'description' => 'Topped up user stash. New Stash Balance: KES 9798391.5303',
+            'requestMetadata' => ['id'=>1233,'code'=>'UUID1234'],
+            'transactionDate' => '2022-04-29 01:44:51',
+            'origin' => 'ApiRequest',
+            'direction' => 'Inbound',
+        ],
+        [
+            'transactionId' => 'ATVId_b2beff43fbe0d2749cc1693b4df4f585',
+            'providerRefId' => 'QX123ERQT',
+            'providerChannel' => 'StashTopup',
+            'clientAccount' => '123',
+            'productName' => 'Test Product',
+            'source' => 'PaymentWallet',
+            'destination' => 'StashTopup',
+            'value' => 'KES 10000.00',
+            'description' => 'Topped up user stash. New Stash Balance: KES 9798391.5303',
+            'requestMetadata' => ['id'=>1233,'code'=>'UUID1234'],
+            'transactionDate' => '2022-04-29 01:44:51',
+            'origin' => 'ApiRequest',
+            'direction' => 'Outbound',
+        ]
+    ]
+]);

@@ -9,12 +9,16 @@ use SamuelMwangiW\Africastalking\ValueObjects\Balance;
 
 class Wallet
 {
+    /**
+     * @throws \Illuminate\Http\Client\RequestException
+     * @throws \Exception
+     */
     public function balance(): Balance
     {
         $response = WalletBalanceRequest::build()->fetch();
 
         if (data_get($response, 'status') !== 'Success') {
-            throw new \Exception('Failed to fetch wallet ballance');
+            throw new \Exception('Failed to fetch wallet balance');
         }
 
         $balance = Str::of($response['balance'])->after(' ')->toString();

@@ -103,3 +103,23 @@ dataset('payment-providers', [
     'TigoTanzania',
     'Athena',
 ]);
+
+dataset('payment-categories', [
+    'BankCheckout',
+    'CardCheckout',
+    'MobileCheckout',
+    'MobileC2B',
+    'MobileB2C',
+    'MobileB2B',
+    'BankTransfer',
+    'WalletTransfer',
+    'UserStashTopup',
+]);
+
+dataset('payment-source-types', [
+    'PhoneNumber',
+    'BankAccount',
+    'Card',
+    'Wallet',
+    'UserStash',
+]);
