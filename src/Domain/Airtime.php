@@ -85,7 +85,7 @@ class Airtime
     public function send(): array
     {
         return SendRequest::build()
-            ->retry(3)
+            ->retry(3,2)
             ->asForm()
             ->withData($this->recipients())
             ->fetch();
