@@ -274,7 +274,7 @@ dataset('payment-notification', [
             'destination' => 'StashTopup',
             'value' => 'KES 10000.00',
             'description' => 'Topped up user stash. New Stash Balance: KES 9798391.5303',
-            'requestMetadata' => ['id'=>1233,'code'=>'UUID1234'],
+            'requestMetadata' => ['id' => 1233,'code' => 'UUID1234'],
             'transactionDate' => '2022-04-29 01:44:51',
             'origin' => 'ApiRequest',
             'direction' => 'Inbound',
@@ -289,10 +289,10 @@ dataset('payment-notification', [
             'destination' => 'StashTopup',
             'value' => 'KES 10000.00',
             'description' => 'Topped up user stash. New Stash Balance: KES 9798391.5303',
-            'requestMetadata' => ['id'=>1233,'code'=>'UUID1234'],
+            'requestMetadata' => ['id' => 1233,'code' => 'UUID1234'],
             'transactionDate' => '2022-04-29 01:44:51',
             'origin' => 'ApiRequest',
             'direction' => 'Outbound',
-        ]
-    ]
+        ],
+    ],
 ]);
