@@ -3,6 +3,7 @@
 namespace SamuelMwangiW\Africastalking\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Str;
 use Illuminate\Validation\Rules\Enum;
 use SamuelMwangiW\Africastalking\Enum\Direction;
 use SamuelMwangiW\Africastalking\Enum\PaymentCategory;
@@ -41,6 +42,13 @@ class PaymentNotificationRequest extends FormRequest
             'direction' => ['nullable', 'string', new Enum(Direction::class)],
             'origin' => ['nullable', 'string'],
         ];
+    }
+
+    public function amount(): int
+    {
+        return intval(
+            str($this->get('value'))->after(' ')->value()
+        );
     }
 
     public function category(): ?PaymentCategory
