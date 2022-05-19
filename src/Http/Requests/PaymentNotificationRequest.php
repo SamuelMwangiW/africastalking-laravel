@@ -3,7 +3,6 @@
 namespace SamuelMwangiW\Africastalking\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Support\Str;
 use Illuminate\Validation\Rules\Enum;
 use SamuelMwangiW\Africastalking\Enum\Direction;
 use SamuelMwangiW\Africastalking\Enum\PaymentCategory;
