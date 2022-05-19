@@ -2,6 +2,14 @@
 
 All notable changes to `africastalking-laravel` will be documented in this file.
 
+## v0.3.3 - 2022-05-19
+
+## What's Changed
+
+- Add amount helper to payment notification by @SamuelMwangiW in https://github.com/SamuelMwangiW/africastalking-laravel/pull/28
+
+**Full Changelog**: https://github.com/SamuelMwangiW/africastalking-laravel/compare/v0.3.2...v0.3.3
+
 ## v0.3.2 - 2022-04-29
 
 ## What's Changed
