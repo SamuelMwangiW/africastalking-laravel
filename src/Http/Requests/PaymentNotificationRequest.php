@@ -43,6 +43,13 @@ class PaymentNotificationRequest extends FormRequest
         ];
     }
 
+    public function amount(): int
+    {
+        return intval(
+            str($this->get('value'))->after(' ')->value()
+        );
+    }
+
     public function category(): ?PaymentCategory
     {
         return PaymentCategory::tryFrom($this->get('category'));
