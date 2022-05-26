@@ -1,6 +1,7 @@
 <?php
 
 use SamuelMwangiW\Africastalking\Domain\MobileCheckout;
+use SamuelMwangiW\Africastalking\Enum\Currency;
 
 it('resolves the class')
     ->expect(fn () => app(MobileCheckout::class))->toBeInstanceOf(MobileCheckout::class);
@@ -50,7 +51,7 @@ it('sends a Mobile Checkout Request', function (string $phone, int $amount) {
         ->mobileCheckout()
         ->to($phone)
         ->amount($amount)
-        ->currency('KES')
+        ->currency(currency: Currency::KENYA)
         ->send();
 
     expect($result)->toBeArray();
