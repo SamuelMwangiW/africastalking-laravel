@@ -4,7 +4,6 @@ namespace SamuelMwangiW\Africastalking\ValueObjects\Voice;
 
 class Record implements Action
 {
-
     private Say $say;
     private ?string $finishOnKey;
     private ?int $timeout;
@@ -21,8 +20,7 @@ class Record implements Action
         bool        $playBeep = false,
         bool        $trimSilence = false,
         string|null $callbackUrl = null,
-    ): Record
-    {
+    ): Record {
         return (new Record())
             ->say($say)
             ->finishOnKey($finishOnKey)

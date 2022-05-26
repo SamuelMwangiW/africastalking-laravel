@@ -20,8 +20,7 @@ class Dial implements Action
         int         $maxDuration = 0,
         bool        $sequential = false,
         string|null $callerId = null,
-    ): Dial
-    {
+    ): Dial {
         return (new Dial())
             ->phoneNumbers($phoneNumbers)
             ->record($record)

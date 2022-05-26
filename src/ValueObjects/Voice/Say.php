@@ -12,8 +12,7 @@ class Say implements Action
         string      $message,
         bool        $playBeep = false,
         string|null $voice = null
-    ): static
-    {
+    ): static {
         return (new Say())
             ->message($message)
             ->playBeep($playBeep)
@@ -44,7 +43,7 @@ class Say implements Action
     public function build(): string
     {
         $options = '';
-        if (!is_null($this->voice)) {
+        if (! is_null($this->voice)) {
             $options .= " voice=\"$this->voice\"";
         }
 

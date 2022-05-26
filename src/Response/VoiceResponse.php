@@ -5,13 +5,11 @@ namespace SamuelMwangiW\Africastalking\Response;
 use Illuminate\Contracts\Support\Responsable;
 use Illuminate\Http\Response;
 use Illuminate\Routing\ResponseFactory;
-use Illuminate\Support\Str;
-use Illuminate\Support\Stringable;
 use JustSteveKing\StatusCode\Http;
 use SamuelMwangiW\Africastalking\ValueObjects\Voice\Dial;
 use SamuelMwangiW\Africastalking\ValueObjects\Voice\GetDigits;
-use SamuelMwangiW\Africastalking\ValueObjects\Voice\Record;
 use SamuelMwangiW\Africastalking\ValueObjects\Voice\Play;
+use SamuelMwangiW\Africastalking\ValueObjects\Voice\Record;
 use SamuelMwangiW\Africastalking\ValueObjects\Voice\Redirect;
 use SamuelMwangiW\Africastalking\ValueObjects\Voice\Reject;
 use SamuelMwangiW\Africastalking\ValueObjects\Voice\Say;
@@ -45,8 +43,7 @@ class VoiceResponse implements Responsable
         int|null    $timeout = null,
         int|null    $numDigits = null,
         string|null $callbackUrl = null,
-    ): static
-    {
+    ): static {
         $this->response .= GetDigits::make(
             say: $say,
             finishOnKey: $finishOnKey,
@@ -66,8 +63,7 @@ class VoiceResponse implements Responsable
         bool        $playBeep = false,
         bool        $trimSilence = false,
         string|null $callbackUrl = null,
-    ): static
-    {
+    ): static {
         $this->response .= Record::make(
             say: $say,
             finishOnKey: $finishOnKey,
@@ -88,8 +84,7 @@ class VoiceResponse implements Responsable
         int         $maxDuration = 0,
         bool        $sequential = false,
         string|null $callerId = null,
-    ): static
-    {
+    ): static {
         $this->response .= Dial::make(
             phoneNumbers: $phoneNumbers,
             record: $record,

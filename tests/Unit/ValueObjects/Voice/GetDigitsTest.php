@@ -52,4 +52,3 @@ it('sets the callbackUrl fluently')
             ->callbackUrl('https://test.example.com/callback')
             ->build()
     )->toBe('<GetDigits callbackUrl="https://test.example.com/callback"><Say>Some Test message here</Say></GetDigits>');
-

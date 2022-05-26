@@ -4,7 +4,6 @@ namespace SamuelMwangiW\Africastalking\ValueObjects\Voice;
 
 class GetDigits implements Action
 {
-
     private Say $say;
     private ?string $finishOnKey;
     private ?int $timeout;
@@ -17,8 +16,7 @@ class GetDigits implements Action
         int|null    $timeout = null,
         int|null    $numDigits = null,
         string|null $callbackUrl = null,
-    ): GetDigits
-    {
+    ): GetDigits {
         return (new GetDigits())
             ->say($say)
             ->finishOnKey($finishOnKey)

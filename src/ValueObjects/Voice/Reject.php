@@ -8,6 +8,7 @@ class Reject implements Action
     {
         return new Reject();
     }
+
     public function build(): string
     {
         return '<Reject/>';
