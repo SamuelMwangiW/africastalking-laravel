@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Contracts\Support\Responsable;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use SamuelMwangiW\Africastalking\Facades\Africastalking;
@@ -9,6 +10,10 @@ use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 it('resolves the application class')
     ->expect(fn () => Africastalking::ussd())
     ->toBeInstanceOf(UssdResponse::class);
+
+it('implements the Responsable class')
+    ->expect(fn () => Africastalking::ussd())
+    ->toBeInstanceOf(Responsable::class);
 
 it('can pass the response message while resolving')
     ->expect(fn () => Africastalking::ussd('Message here'))

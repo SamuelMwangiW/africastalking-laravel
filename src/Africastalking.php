@@ -8,6 +8,7 @@ use SamuelMwangiW\Africastalking\Domain\Payment;
 use SamuelMwangiW\Africastalking\Domain\Stash;
 use SamuelMwangiW\Africastalking\Domain\Wallet;
 use SamuelMwangiW\Africastalking\Response\UssdResponse;
+use SamuelMwangiW\Africastalking\Response\VoiceResponse;
 use SamuelMwangiW\Africastalking\ValueObjects\Message;
 
 class Africastalking
@@ -40,6 +41,11 @@ class Africastalking
     public function ussd(string $response = '', bool $expectsInput = true): UssdResponse
     {
         return app(UssdResponse::class, ['response' => $response, 'expectsInput' => $expectsInput]);
+    }
+
+    public function voice(): VoiceResponse
+    {
+        return app(VoiceResponse::class);
     }
 
     public function wallet(): Wallet

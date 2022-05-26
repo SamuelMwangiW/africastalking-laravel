@@ -89,7 +89,7 @@ it('can send premium messages', function (string $phone, string $message) {
     $response = Africastalking::sms($message)
         ->to($phone)
         ->premium()
-        ->as('9804')
+        ->as(config('africastalking.premium-shortcode'))
         ->send();
 
     expect($response)
@@ -104,7 +104,7 @@ it('can send premium messages in bulk mode', function (string $phone, string $me
         ->to($phone)
         ->premium()
         ->bulkMode()
-        ->as('9804')
+        ->as(config('africastalking.premium-shortcode'))
         ->send();
 
     expect($response)
@@ -119,7 +119,7 @@ it('can send premium messages with a keyword', function (string $phone, string $
         ->to($phone)
         ->premium()
         ->keyword('keyword')
-        ->as('9804')
+        ->as(config('africastalking.premium-shortcode'))
         ->send();
 
     expect($response)
@@ -134,7 +134,7 @@ it('can send premium messages with a linkid', function (string $phone, string $m
         ->to($phone)
         ->premium()
         ->linkId('9641a050-41f3-457c-a273-f246d3d5ba80')
-        ->as('9804')
+        ->as(config('africastalking.premium-shortcode'))
         ->send();
 
     expect($response)
