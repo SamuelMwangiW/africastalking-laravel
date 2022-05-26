@@ -6,9 +6,9 @@ use SamuelMwangiW\Africastalking\Domain\Airtime;
 use SamuelMwangiW\Africastalking\Domain\Application;
 use SamuelMwangiW\Africastalking\Domain\Payment;
 use SamuelMwangiW\Africastalking\Domain\Stash;
+use SamuelMwangiW\Africastalking\Domain\Voice;
 use SamuelMwangiW\Africastalking\Domain\Wallet;
 use SamuelMwangiW\Africastalking\Response\UssdResponse;
-use SamuelMwangiW\Africastalking\Response\VoiceResponse;
 use SamuelMwangiW\Africastalking\ValueObjects\Message;
 
 class Africastalking
@@ -43,9 +43,9 @@ class Africastalking
         return app(UssdResponse::class, ['response' => $response, 'expectsInput' => $expectsInput]);
     }
 
-    public function voice(): VoiceResponse
+    public function voice(): Voice
     {
-        return app(VoiceResponse::class);
+        return app(Voice::class);
     }
 
     public function wallet(): Wallet
