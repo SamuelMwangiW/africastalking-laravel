@@ -6,6 +6,9 @@ use Illuminate\Support\Collection;
 
 class Dial implements Action
 {
+    /**
+     * @var Collection<int,string>
+     */
     private Collection $recipients;
     private bool $record;
     private ?string $ringBackTone;

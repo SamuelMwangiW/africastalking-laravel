@@ -6,12 +6,12 @@ class Play implements Action
 {
     private string $url;
 
-    public static function make(string|null $url = ''): Play
+    public static function make(string $url = ''): Play
     {
         return (new Play())->url($url);
     }
 
-    public function url(?string $url): static
+    public function url(string $url): static
     {
         $this->url = $url;
 
