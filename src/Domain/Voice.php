@@ -2,7 +2,6 @@
 
 namespace SamuelMwangiW\Africastalking\Domain;
 
-use Illuminate\Support\Collection;
 use Illuminate\Support\Traits\ForwardsCalls;
 use SamuelMwangiW\Africastalking\Response\VoiceResponse;
 
@@ -11,7 +10,7 @@ class Voice
 {
     use ForwardsCalls;
 
-    public function call(Collection|string|array|null $recipients = null): VoiceCall
+    public function call(string|array|null $recipients = null): VoiceCall
     {
         return app(VoiceCall::class)->to($recipients);
     }
