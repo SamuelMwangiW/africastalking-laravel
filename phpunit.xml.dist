@@ -43,5 +43,6 @@
         <env name="AFRICASTALKING_BACKUP_SENDERID" value=""/>
         <env name="AFRICASTALKING_PAYMENT_PRODUCT" value=""/>
         <env name="AFRICASTALKING_PREMIUM_SHORTCODE" value=""/>
+        <env name="AFRICASTALKING_VOICE_PHONE_NUMBER" value=""/>
     </php>
 </phpunit>

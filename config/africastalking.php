@@ -6,5 +6,8 @@ return [
     'from' => env('AFRICASTALKING_FROM'), //to extract this to an sms group
     'payment' => [
         'product-name' => env('AFRICASTALKING_PAYMENT_PRODUCT'),
+    ],
+    'voice' => [
+        'from' => env('AFRICASTALKING_VOICE_PHONE_NUMBER'),
     ]
 ];
