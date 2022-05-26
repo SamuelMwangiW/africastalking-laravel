@@ -3,16 +3,21 @@
 use Illuminate\Contracts\Support\Responsable;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use SamuelMwangiW\Africastalking\Domain\Voice;
 use SamuelMwangiW\Africastalking\Facades\Africastalking;
 use SamuelMwangiW\Africastalking\Response\VoiceResponse;
 use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 
 it('resolves the application class')
     ->expect(fn () => Africastalking::voice())
+    ->toBeInstanceOf(Voice::class);
+
+it('forwards calls to VoiceResponse class')
+    ->expect(fn () => Africastalking::voice()->reject())
     ->toBeInstanceOf(VoiceResponse::class);
 
 it('implements the Responsable class')
-    ->expect(fn () => Africastalking::voice())
+    ->expect(fn () => app(VoiceResponse::class))
     ->toBeInstanceOf(Responsable::class);
 
 it('can chain actions fluently')
