@@ -8,8 +8,6 @@ it('throws an exception for any other method besides GET and POST', function () 
         protected string $method = 'PUT';
     }
 
-    ;
-
     app(TestClass::class)->decorate();
 })->expectException(OutOfBoundsException::class);
 
