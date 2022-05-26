@@ -12,8 +12,7 @@ class Say implements Action
         string      $message,
         bool        $playBeep = false,
         string|null $voice = null
-    ): Say
-    {
+    ): Say {
         return (new Say())
             ->message($message)
             ->playBeep($playBeep)
