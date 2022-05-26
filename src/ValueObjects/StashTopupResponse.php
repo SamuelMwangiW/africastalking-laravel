@@ -17,7 +17,7 @@ class StashTopupResponse implements DTOContract
     public static function make(array $attributes): StashTopupResponse
     {
         return new StashTopupResponse(
-            id: data_get($attributes, 'transactionId','Failed'),
+            id: data_get($attributes, 'transactionId', 'Failed'),
             status: Status::from(data_get($attributes, 'status')),
             description: data_get($attributes, 'description'),
         );
