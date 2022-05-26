@@ -6,7 +6,10 @@
 [![GitHub Code Style Action Status](https://img.shields.io/github/workflow/status/samuelmwangiw/africastalking-laravel/Check%20&%20fix%20styling?label=code%20style)](https://github.com/samuelmwangiw/africastalking-laravel/actions?query=workflow%3A"Check+%26+fix+styling"+branch%3Amain)
 [![Total Downloads](https://img.shields.io/packagist/dt/samuelmwangiw/africastalking-laravel.svg?style=flat-square)](https://packagist.org/packages/samuelmwangiw/africastalking-laravel)
 
-This is an unofficial Laravel SDK for interacting with [Africastalking](https://developers.africastalking.com/docs/sms/overview) APIs that takes advantage of native Laravel components such as 
+This is an unofficial Laravel SDK for interacting
+with [Africastalking](https://developers.africastalking.com/docs/sms/overview) APIs that takes advantage of native
+Laravel components such as
+
 - [HTTP Client](https://laravel.com/docs/9.x/http-client#main-content) in place of Guzzle client
 - [Service Container](https://laravel.com/docs/9.x/container#main-content) for a great dev experience
 - [Notifications](https://laravel.com/docs/9.x/notifications) to allow you route notifications via Africastalking
@@ -44,6 +47,7 @@ return [
 You should configure the package by setting the `env` variables in your `.env` file.
 
 ## Usage
+
 ### Application Balance
 
 ```php
@@ -55,8 +59,11 @@ $account = Africastalking::application()->balance();
 // Or using the global helper function
 $account = africastalking()->application()->balance();
 ```
+
 ### Bulk Messages
+
 The most basic example to send out a message is
+
 ```php
 use SamuelMwangiW\Africastalking\Facades\Africastalking;
 
@@ -69,7 +76,9 @@ $response = africastalking()->sms("Hello Mom")
         ->to('+254712345678')
         ->send();
 ```
+
 Other valid examples are
+
 ```php
 use SamuelMwangiW\Africastalking\Facades\Africastalking;
 
@@ -90,7 +99,9 @@ $response = africastalking()->sms()
 ```
 
 The response is Collection of `\SamuelMwangiW\Africastalking\ValueObjects\RecipientsApiResponse` objects
+
 ### Premium Messages
+
 ```php
 use SamuelMwangiW\Africastalking\Facades\Africastalking;
 
@@ -105,9 +116,13 @@ $response = Africastalking::sms('It is quality rather than quantity that matters
         ->send()
 
 ```
+
 The response is Collection of `\SamuelMwangiW\Africastalking\ValueObjects\RecipientsApiResponse` objects
+
 ### Airtime
+
 The most basic example to disburse airtime is
+
 ```php
 use SamuelMwangiW\Africastalking\Facades\Africastalking;
 
@@ -136,7 +151,8 @@ $response = Africastalking::airtime()
         ->send();
 ```
 
-The Airtime class provides an `add()` that's basically an alias to the `to()` and since either of these methods can be fluently chained, it unlocks capabilities such as adding the recipients in a loop and sending once at the end
+The Airtime class provides an `add()` that's basically an alias to the `to()` and since either of these methods can be
+fluently chained, it unlocks capabilities such as adding the recipients in a loop and sending once at the end
 
 ```php
 use App\Models\Clients;
@@ -150,21 +166,24 @@ Clients::query()->chunk(1000, function ($clients) use($airtime) {
 });
 $results = $airtime->send();
 ```
+
 ### USSD Response
 
-This package allows to easily create `USSD` response by exposing a `\SamuelMwangiW\Africastalking\Response\UssdResponse` class that implements Laravel's Responsable contract.
+This package allows to easily create `USSD` response by exposing a `\SamuelMwangiW\Africastalking\Response\UssdResponse`
+class that implements Laravel's Responsable contract.
 
 To send a ussd response, simply return `africastalking()->ussd()` in your controller.
 
 The `ussd` optionally takes 2 parameters and returns an instance of `UssdResponse`:
 
-- `response` - The response message to be displayed to the client 
+- `response` - The response message to be displayed to the client
 - `expectsInput` - A boolean whether or not to prompt for user input. The default value is `true`
 
 The `UssdResponse` class has the following methods that can be chained fluently
 
 - `response` - Receives the response message to be displayed to the client as an argument
-- `expectsInput` - Receives the expectsInput boolean to be displayed to the client as an argument. The default value is true
+- `expectsInput` - Receives the expectsInput boolean to be displayed to the client as an argument. The default value is
+  true
 - `end` - Is an alias `expectsInput()` but sets the boolean value `false` always
 
 See below an example controller that makes of the `UssdResponse` and Ussd's `HttpRequest`:
@@ -250,10 +269,161 @@ africastalking()
 
 ### Voice (Pending)
 
+#### Voice Responses
+
+This package provides an easy and intuitive voice response builder that allows any combination of the following:
+
+Note that all params marked as optional in
+the [documentation](https://developers.africastalking.com/docs/voice/actions/overview) are also optional
+
+```php
+<?php
+
+return africastalking()->voice()
+    ->say(message: '', playBeep: "false", voice: "en-US-Standard-C")
+    ->play(url: 'https://example.com/audio.wav')
+    ->getDigits(
+        say: 'Please enter your account number followed by the hash sign',
+        finishOnKey: '#',
+        timeout: '30',
+        callbackUrl: 'http://mycallbackURL.com',
+    )->dial(
+        phoneNumbers: ['+254711XXXYYY', '+25631XYYZZZZ', 'test@ke.sip.africastalking.com'],
+        record: true,
+        ringBackTone: 'http://mymediafile.com/playme.mp3',
+        maxDuration: 5,
+        sequential: false,
+        callerId: '+254711XXXYYY',
+    )->record(
+        say: 'Please enter your account number followed by the hash sign',
+        finishOnKey: '#',
+        timeout: '30',
+        maxLength: 10,
+        playBeep: true,
+        trimSilence: true
+    )->redirect(
+        url: 'http://www.myotherhandler.com/process.php',
+    )->reject();
+```
+
+See example in a controller below:
+
+```php
+<?php
+
+namespace App\Http\Controllers\CallCenter;
+
+use SamuelMwangiW\Africastalking\Http\Requests\VoiceCallRequest;
+
+class HandleCallsController
+{
+    public function __invoke(VoiceCallRequest $request)
+    {
+        if ($request->input('isActive')){
+            return africastalking()->voice()
+                       ->say('Welcome to Unicorn bank.')
+                       ->getDigits(
+                           say:'Please enter your account Number followed by the # key',
+                           finishOnKey: '#'
+                       )
+        }
+        
+        return response('OK');
+    }
+}
+
+```
+
+```php
+<?php
+
+namespace App\Http\Controllers\CallCenter;
+
+use SamuelMwangiW\Africastalking\Http\Requests\VoiceCallRequest;
+
+class RecordCallsController
+{
+    public function __invoke(VoiceCallRequest $request)
+    {
+        if ($request->input('isActive')){
+            return africastalking()->voice()
+                       ->say('Our working hours are 9AM - 7PM, Monday to to Friday')
+                       ->record(
+                            say: 'Please leave a message after the tone.',
+                            finishOnKey: '#',
+                            playBeep: true,
+                            maxLength: 10,
+                            trimSilence: true,
+                       );
+        }
+        
+        return response('OK');
+    }
+}
+
+```
+
+```php
+<?php
+
+namespace App\Http\Controllers\CallCenter;
+
+use SamuelMwangiW\Africastalking\Http\Requests\VoiceCallRequest;
+
+class RejectCallsController
+{
+    public function __invoke(VoiceCallRequest $request)
+    {
+        if ($request->input('isActive')){
+            return africastalking()->voice()
+                       ->say('Our working hours are 9AM - 7PM, Monday to to Friday')
+                       ->reject();
+        }
+        
+        return response('OK');
+    }
+}
+
+```
+
+
+```php
+<?php
+
+namespace App\Http\Controllers\CallCenter;
+
+use App\Models\Doctor;
+use SamuelMwangiW\Africastalking\Http\Requests\VoiceCallRequest;
+
+class ForwardCallsController
+{
+    public function __invoke(VoiceCallRequest $request)
+    {
+        if ($request->input('isActive')){
+            $doctor = Doctor::query()->onDuty()->first();
+            
+            return africastalking()->voice()
+                       ->dial(
+                            phoneNumbers: [$doctor->number],
+                            record: true,
+                            ringBackTone: "https://example.com/marketing-tone.wave"
+                       );
+        }
+        
+        return response('OK');
+    }
+}
+
+```
+
+#### Making Calls
+
 WIP
 
 ## HTTP Requests
-The package ships with the following [Laravel Requests](https://laravel.com/docs/9.x/validation#creating-form-requests) that you can inject into your application controllers:
+
+The package ships with the following [Laravel Requests](https://laravel.com/docs/9.x/validation#creating-form-requests)
+that you can inject into your application controllers:
 
 ```php
 \SamuelMwangiW\Africastalking\Http\Requests\AirtimeStatusRequest::class;
@@ -270,7 +440,8 @@ The package ships with the following [Laravel Requests](https://laravel.com/docs
 \SamuelMwangiW\Africastalking\Http\Requests\VoiceEventRequest::class;
 ```
 
-In addition to exposing the post params in a nice FormRequest object, these classes also include nice helper methods where applicable e.g.
+In addition to exposing the post params in a nice FormRequest object, these classes also include nice helper methods
+where applicable e.g.
 
 - `id()` to retrieve the unique ATPid associated with every request
 - `phone()` to retrieve the client's phone number
@@ -311,7 +482,8 @@ class MessageDeliveredController{
 
 The package ships with a Channel to allow for easily routing of notifications via Africastalking SMS.
 
-To route a notification via Africastalking, return `SamuelMwangiW\Africastalking\Notifications\AfricastalkingChannel` in your notifications `via` method and the text message to be sent in the `toAfricastalking` method
+To route a notification via Africastalking, return `SamuelMwangiW\Africastalking\Notifications\AfricastalkingChannel` in
+your notifications `via` method and the text message to be sent in the `toAfricastalking` method
 
 ```php
 <?php
@@ -337,7 +509,8 @@ class WelcomeNotification extends Notification
 
 ```
 
-Also ensure that the notifiable model implements `SamuelMwangiW\Africastalking\Contracts\ReceivesSmsMessages` and that the model's `routeNotificationForAfricastalking()` returns the phone number to receive the message
+Also ensure that the notifiable model implements `SamuelMwangiW\Africastalking\Contracts\ReceivesSmsMessages` and that
+the model's `routeNotificationForAfricastalking()` returns the phone number to receive the message
 
 ```php
 <?php
