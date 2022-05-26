@@ -1,16 +1,17 @@
 <?php
 
+use function Pest\Faker\faker;
 use SamuelMwangiW\Africastalking\Domain\VoiceCall;
 use SamuelMwangiW\Africastalking\Facades\Africastalking;
 use SamuelMwangiW\Africastalking\ValueObjects\PhoneNumber;
-use function Pest\Faker\faker;
 
 it('resolves the Voice class')
-    ->expect(fn() => Africastalking::voice()->call())
+    ->expect(fn () => Africastalking::voice()->call())
     ->toBeInstanceOf(VoiceCall::class);
 
 it('sets the recipients', function () {
-    expect(Africastalking::voice()
+    expect(
+        Africastalking::voice()
         ->call('+254720123123')
         ->done()
     )->toBeArray()->toHaveKeys(['entries', 'errorMessage']);
@@ -54,7 +55,7 @@ it('sets a call recipients from array', function () {
         ->data()
         ->toBeArray()
         ->toHaveKey('to')
-        ->toMatchArray(['to' => implode(',',$recipients)]);
+        ->toMatchArray(['to' => implode(',', $recipients)]);
 });
 
 it('sets a call clientRequestId', function (string $id) {

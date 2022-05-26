@@ -22,7 +22,7 @@ class VoiceCall
             $recipients = [$recipients];
         }
 
-        $this->recipients = collect($recipients)->map(fn($phone) => PhoneNumber::make($phone));
+        $this->recipients = collect($recipients)->map(fn ($phone) => PhoneNumber::make($phone));
 
         return $this;
     }
@@ -45,7 +45,6 @@ class VoiceCall
         return $this;
     }
 
-
     public function done(): array
     {
         return $this->send();
@@ -65,8 +64,8 @@ class VoiceCall
             "from" => $this->from()->number,
             "clientRequestId" => $this->clientRequestId,
             "to" => $this->recipients
-                ?->filter(fn(PhoneNumber $number) => $number->isValid())
-                ->map(fn(PhoneNumber $number) => $number->number)
+                ?->filter(fn (PhoneNumber $number) => $number->isValid())
+                ->map(fn (PhoneNumber $number) => $number->number)
                 ->implode(','),
         ];
     }
