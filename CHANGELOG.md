@@ -2,6 +2,14 @@
 
 All notable changes to `africastalking-laravel` will be documented in this file.
 
+## v0.3.6 - 2022-05-26
+
+## What's Changed
+
+- Voice call by @SamuelMwangiW in https://github.com/SamuelMwangiW/africastalking-laravel/pull/30
+
+**Full Changelog**: https://github.com/SamuelMwangiW/africastalking-laravel/compare/v0.3.5...v0.3.6
+
 ## v0.3.5 - 2022-05-26
 
 ## What's Changed
