@@ -2,6 +2,14 @@
 
 All notable changes to `africastalking-laravel` will be documented in this file.
 
+## v0.3.7 - 2022-05-27
+
+### Added
+
+- app() alias to Africastalking::class (7ca00c47fc9e14652ab3c3754f0ffd737a1ca975)
+
+**Full Changelog**: https://github.com/SamuelMwangiW/africastalking-laravel/compare/v0.3.6...v0.3.7
+
 ## v0.3.6 - 2022-05-26
 
 ## What's Changed
