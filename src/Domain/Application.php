@@ -18,4 +18,12 @@ class Application
             data: BalanceRequest::build()->asForm()->fetch()
         );
     }
+
+    /**
+     * @throws RequestException
+     */
+    public function data(): Balance
+    {
+        return $this->balance();
+    }
 }
