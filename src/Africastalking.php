@@ -17,7 +17,7 @@ class Africastalking
     {
         return app(Airtime::class);
     }
-    
+
     public function app(): Application
     {
         return $this->application();
