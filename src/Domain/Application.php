@@ -18,7 +18,7 @@ class Application
             data: BalanceRequest::build()->asForm()->fetch()
         );
     }
-    
+
     /**
      * @throws RequestException
      */
