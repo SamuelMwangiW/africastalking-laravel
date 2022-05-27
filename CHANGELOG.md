@@ -2,6 +2,14 @@
 
 All notable changes to `africastalking-laravel` will be documented in this file.
 
+## v0.3.8 - 2022-05-28
+
+## What's Changed
+
+- Adds an Application::data() alias  by @SamuelMwangiW in https://github.com/SamuelMwangiW/africastalking-laravel/pull/31
+
+**Full Changelog**: https://github.com/SamuelMwangiW/africastalking-laravel/compare/v0.3.7...v0.3.8
+
 ## v0.3.7 - 2022-05-27
 
 ### Added
