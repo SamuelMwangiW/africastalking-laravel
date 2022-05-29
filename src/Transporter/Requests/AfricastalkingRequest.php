@@ -15,6 +15,7 @@ use SamuelMwangiW\Africastalking\Transporter\Requests\Concerns\ChecksEnvironment
  * @method static asForm()
  * @method static retry(int $times, int $sleep = 0, ?callable $when = null, bool $throw = true)
  * @method static withData(array $data)
+ * @method static withoutVerifying()
  * @method static withHeaders(array $headers)
  * @method static withUserAgent(string $userAgent)
  */
