@@ -9,9 +9,9 @@ use SamuelMwangiW\Africastalking\ValueObjects\PhoneNumber;
 class VoiceCall
 {
     /** @var Collection<int,PhoneNumber> */
-    private Collection $recipients;
+    protected Collection $recipients;
     private PhoneNumber $from;
-    private ?string $clientRequestId = null;
+    protected ?string $clientRequestId = null;
 
     public function to(string|array|null $recipients): static
     {
@@ -74,5 +74,10 @@ class VoiceCall
     public function from(): PhoneNumber
     {
         return $this->from ?? PhoneNumber::make(config('africastalking.voice.from'));
+    }
+
+    public function calls(): ?Collection
+    {
+        return null;
     }
 }

@@ -91,7 +91,7 @@ class Airtime
             ->fetch();
     }
 
-    private function recipients(): array
+    protected function recipients(): array
     {
         return [
             'recipients' => json_encode(

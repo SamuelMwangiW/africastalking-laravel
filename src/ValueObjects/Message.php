@@ -174,7 +174,7 @@ class Message implements DTOContract
         ];
     }
 
-    private function data(): array
+    protected function data(): array
     {
         $data = [
             'enqueue' => $this->enqueue,
