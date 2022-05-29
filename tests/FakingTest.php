@@ -36,7 +36,6 @@ it('asserts Message sent', function (string $phone, string $message) {
         ->send();
 
     Africastalking::assertSmsSent();
-
 })->with('phone-numbers', 'sentence');
 
 it('asserts no sent', function (string $phone, string $message) {
@@ -49,7 +48,6 @@ it('asserts no sent', function (string $phone, string $message) {
         ->to([$phone,'+256706123123']);
 
     Africastalking::assertNoSmsSent();
-
 })->with('phone-numbers', 'sentence');
 
 it('asserts VoiceCall sent', function (string $phone, string $message) {
@@ -58,7 +56,6 @@ it('asserts VoiceCall sent', function (string $phone, string $message) {
     Africastalking::voice()->call($phone)->done();
 
     Africastalking::assertVoiceCallSent();
-
 })->with('phone-numbers', 'sentence');
 
 it('asserts no VoiceCall sent', function (string $phone, string $message) {
@@ -67,27 +64,24 @@ it('asserts no VoiceCall sent', function (string $phone, string $message) {
     Africastalking::voice()->call($phone);
 
     Africastalking::assertNoVoiceCallSent();
-
 })->with('phone-numbers', 'sentence');
 
 it('asserts AirtimeSent sent', function (string $phone, string $message) {
     Africastalking::fake();
 
-    Africastalking::airtime()->to(phoneNumber: $phone,currencyCode: 'KES',amount: 1_000)->send();
-    Africastalking::airtime()->to(phoneNumber: $phone,currencyCode: 'UGX',amount: 3_000)->send();
-    Africastalking::airtime()->to(phoneNumber: $phone,currencyCode: 'TZS',amount: 3_000)->send();
+    Africastalking::airtime()->to(phoneNumber: $phone, currencyCode: 'KES', amount: 1_000)->send();
+    Africastalking::airtime()->to(phoneNumber: $phone, currencyCode: 'UGX', amount: 3_000)->send();
+    Africastalking::airtime()->to(phoneNumber: $phone, currencyCode: 'TZS', amount: 3_000)->send();
 
     Africastalking::assertAirtimeSent();
-
 })->with('phone-numbers', 'sentence');
 
 it('asserts no AirtimeSent sent', function (string $phone, string $message) {
     Africastalking::fake();
 
-    Africastalking::airtime()->to(phoneNumber: $phone,currencyCode: 'KES',amount: 1_000);
-    Africastalking::airtime()->to(phoneNumber: $phone,currencyCode: 'UGX',amount: 3_000);
-    Africastalking::airtime()->to(phoneNumber: $phone,currencyCode: 'TZS',amount: 3_000);
+    Africastalking::airtime()->to(phoneNumber: $phone, currencyCode: 'KES', amount: 1_000);
+    Africastalking::airtime()->to(phoneNumber: $phone, currencyCode: 'UGX', amount: 3_000);
+    Africastalking::airtime()->to(phoneNumber: $phone, currencyCode: 'TZS', amount: 3_000);
 
     Africastalking::assertNoAirtimeSent();
-
 })->with('phone-numbers', 'sentence');

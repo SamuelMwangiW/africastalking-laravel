@@ -15,7 +15,7 @@ class VoiceCallFake extends VoiceCall
         if (is_null($this->calls)) {
             $this->calls = collect(
                 [
-                    $this->details()
+                    $this->details(),
                 ]
             );
 

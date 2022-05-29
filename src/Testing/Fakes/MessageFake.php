@@ -15,7 +15,7 @@ class MessageFake extends Message
         if (is_null($this->messages)) {
             $this->messages = collect(
                 [
-                    $this->details()
+                    $this->details(),
                 ]
             );
 
@@ -43,8 +43,8 @@ class MessageFake extends Message
             'message' => $this->message,
             'from' => $this->from(),
             'to' => $this->to
-                ?->filter(fn(PhoneNumber $number) => $number->isValid())
-                ->map(fn(PhoneNumber $number) => $number->number),
+                ?->filter(fn (PhoneNumber $number) => $number->isValid())
+                ->map(fn (PhoneNumber $number) => $number->number),
         ]);
     }
 }

@@ -17,7 +17,7 @@ class Africastalking extends Facade
     {
         collect(
             Fakable::cases()
-        )->each(fn(Fakable $fakable) => $fakable->fake());
+        )->each(fn (Fakable $fakable) => $fakable->fake());
 
         static::swap(new AfricastalkingFake());
     }

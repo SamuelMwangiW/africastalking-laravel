@@ -21,7 +21,7 @@ enum Fakable: string
      */
     public function fake(): void
     {
-         app()->singleton(
+        app()->singleton(
             abstract: $this->value,
             concrete: $this->implementation()
         );
@@ -32,7 +32,7 @@ enum Fakable: string
      */
     private function implementation(): string
     {
-        return match ($this){
+        return match ($this) {
             Fakable::AIRTIME => AirtimeFake::class,
             Fakable::MESSAGE => MessageFake::class,
             Fakable::VOICE => VoiceCallFake::class,

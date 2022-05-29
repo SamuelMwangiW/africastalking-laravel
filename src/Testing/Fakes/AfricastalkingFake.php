@@ -2,9 +2,8 @@
 
 namespace SamuelMwangiW\Africastalking\Testing\Fakes;
 
-use Closure;
-use SamuelMwangiW\Africastalking\Africastalking;
 use PHPUnit\Framework\Assert as PHPUnit;
+use SamuelMwangiW\Africastalking\Africastalking;
 use SamuelMwangiW\Africastalking\Domain\Airtime;
 use SamuelMwangiW\Africastalking\Domain\VoiceCall;
 use SamuelMwangiW\Africastalking\ValueObjects\Message;
