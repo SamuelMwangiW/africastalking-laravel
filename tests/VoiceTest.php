@@ -70,3 +70,9 @@ it('sets content-type to text/plain in the response', function () {
         ->headers->toBeInstanceOf(ResponseHeaderBag::class)
         ->headers->get('content-type')->toBe('application/xml');
 });
+
+it('makes a call', function () {
+    $response = africastalking()->voice()->call('+254711234567')->send();
+
+    expect($response)->toBeArray();
+});

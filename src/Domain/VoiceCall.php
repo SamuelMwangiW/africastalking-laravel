@@ -55,6 +55,7 @@ class VoiceCall
     {
         return CallRequest::build()
             ->withData($this->data())
+            ->withoutVerifying()
             ->asForm()
             ->fetch();
     }
