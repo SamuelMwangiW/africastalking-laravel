@@ -26,7 +26,8 @@ class Message implements DTOContract
         public string|null     $message = null,
         public Collection|null $to = null,
         public string|null     $from = null,
-    ) {
+    )
+    {
     }
 
     public function enqueue(bool $value = true): static
@@ -66,7 +67,7 @@ class Message implements DTOContract
         }
 
         if (is_array($recipients)) {
-            $recipients = collect($recipients)->map(fn ($phone) => PhoneNumber::make($phone));
+            $recipients = collect($recipients)->map(fn($phone) => PhoneNumber::make($phone));
         }
 
         $this->to = $recipients;
@@ -130,7 +131,7 @@ class Message implements DTOContract
             ->withData($this->data())
             ->fetch();
 
-        if (! data_get($response, 'SMSMessageData.Recipients')) {
+        if (!data_get($response, 'SMSMessageData.Recipients')) {
             throw AfricastalkingException::messageSendingFailed(
                 message: data_get($response, 'SMSMessageData.Message')
             );
@@ -138,7 +139,7 @@ class Message implements DTOContract
 
         /** @phpstan-ignore-next-line */
         return collect(data_get($response, 'SMSMessageData.Recipients'))
-            ->map(fn (array $recipient) => RecipientsApiResponse::make($recipient));
+            ->map(fn(array $recipient) => RecipientsApiResponse::make($recipient));
     }
 
     protected function from(): ?string
@@ -170,8 +171,16 @@ class Message implements DTOContract
             'to' => $this->to?->toArray(),
             'from' => $this->from(),
             'isBulk' => $this->isBulk,
-            'isPremium' => ! $this->isBulk,
+            'isPremium' => !$this->isBulk,
         ];
+    }
+
+    /**
+     * @return Collection<int,Collection<int,mixed>>|null
+     */
+    public function messages(): ?Collection
+    {
+        return null;
     }
 
     protected function data(): array
@@ -183,8 +192,8 @@ class Message implements DTOContract
             'retryDurationInHours' => $this->retryDurationInHours,
             'message' => $this->message,
             'to' => $this->to
-                ?->filter(fn (PhoneNumber $number) => $number->isValid())
-                ->map(fn (PhoneNumber $number) => $number->number)
+                ?->filter(fn(PhoneNumber $number) => $number->isValid())
+                ->map(fn(PhoneNumber $number) => $number->number)
                 ->implode(','),
         ];
 

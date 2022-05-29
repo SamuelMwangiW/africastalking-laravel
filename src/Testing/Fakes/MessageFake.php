@@ -8,8 +8,14 @@ use SamuelMwangiW\Africastalking\ValueObjects\PhoneNumber;
 
 class MessageFake extends Message
 {
+    /**
+     * @var Collection<int,mixed>|null
+     */
     private ?Collection $messages = null;
 
+    /**
+     * @return Collection<int,mixed>
+     */
     public function send(): Collection
     {
         if (is_null($this->messages)) {
@@ -19,19 +25,25 @@ class MessageFake extends Message
                 ]
             );
 
-            return collect([]);
+            return collect([[]]);
         }
 
         $this->messages->push($this->details());
 
-        return collect([]);
+        return collect([[]]);
     }
 
+    /**
+     * @return Collection<int,Collection<int,mixed>>|null
+     */
     public function messages(): ?Collection
     {
         return $this->messages;
     }
 
+    /**
+     * @return Collection<string,Collection<int, string>|int|string|null>
+     */
     private function details(): Collection
     {
         return collect([

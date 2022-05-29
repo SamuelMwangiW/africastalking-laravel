@@ -99,4 +99,9 @@ class Airtime
             ),
         ];
     }
+
+    public function transactions(): array
+    {
+        return [];
+    }
 }

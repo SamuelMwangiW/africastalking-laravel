@@ -8,6 +8,9 @@ use SamuelMwangiW\Africastalking\ValueObjects\VoiceCallDTO;
 
 class VoiceCallFake extends VoiceCall
 {
+    /**
+     * @var Collection<int,VoiceCallDTO>|null
+     */
     private ?Collection $calls = null;
 
     public function send(): array
@@ -27,12 +30,15 @@ class VoiceCallFake extends VoiceCall
         return [];
     }
 
+    /**
+     * @return Collection<int,VoiceCallDTO>|null
+     */
     public function calls(): ?Collection
     {
         return $this->calls;
     }
 
-    private function details(): object
+    private function details(): VoiceCallDTO
     {
         return new VoiceCallDTO(
             from: $this->from(),

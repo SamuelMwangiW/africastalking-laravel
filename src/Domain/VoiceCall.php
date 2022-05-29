@@ -5,6 +5,7 @@ namespace SamuelMwangiW\Africastalking\Domain;
 use Illuminate\Support\Collection;
 use SamuelMwangiW\Africastalking\Transporter\Requests\Voice\CallRequest;
 use SamuelMwangiW\Africastalking\ValueObjects\PhoneNumber;
+use SamuelMwangiW\Africastalking\ValueObjects\VoiceCallDTO;
 
 class VoiceCall
 {
@@ -76,6 +77,9 @@ class VoiceCall
         return $this->from ?? PhoneNumber::make(config('africastalking.voice.from'));
     }
 
+    /**
+     * @return Collection<int,VoiceCallDTO>|null
+     */
     public function calls(): ?Collection
     {
         return null;

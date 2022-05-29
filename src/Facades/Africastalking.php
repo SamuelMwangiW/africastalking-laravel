@@ -13,7 +13,7 @@ use SamuelMwangiW\Africastalking\Testing\Fakes\AfricastalkingFake;
  */
 class Africastalking extends Facade
 {
-    public static function fake()
+    public static function fake(): void
     {
         collect(
             Fakable::cases()
