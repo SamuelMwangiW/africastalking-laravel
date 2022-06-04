@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Collection;
+use Pest\Expectation;
 use SamuelMwangiW\Africastalking\Domain\Airtime;
 use SamuelMwangiW\Africastalking\Enum\Currency;
 use SamuelMwangiW\Africastalking\Exceptions\AfricastalkingException;
@@ -94,13 +95,19 @@ it('sends airtime to a single recipient', function (AirtimeTransaction $transact
             'responses',
         ]);
 
+    if (count($result['responses']) !== 1) {
+        dump($result['responses']);
+    }
+
     expect($result['responses'])
         ->toBeArray()
-        ->toHaveCount(1);
+        ->and($result['responses'])
+        ->each(
+            fn(Expectation $response) => $response->toHaveKeys(['phoneNumber', 'errorMessage', 'requestId', 'discount'])
+        )
+        ->and(data_get($result, 'numSent'))->toBe(1);
+//        ->toHaveCount(1);
 
-    expect($result['responses'][0])->toHaveKeys(['phoneNumber', 'errorMessage', 'requestId', 'discount']);
-
-    expect(data_get($result, 'numSent'))->toBe(1);
 })->with('airtime-transactions');
 
 it('sends airtime to multiple recipients', function (int $amount, string $phone) {
@@ -108,6 +115,10 @@ it('sends airtime to multiple recipients', function (int $amount, string $phone)
         ->to($phone, 'KES', $amount)
         ->to(phoneNumber: '+254712345678', amount: $amount)
         ->send();
+
+    if (count($result['responses']) !== 2) {
+        dump($result['responses']);
+    }
 
     expect($result)
         ->toBeArray()
@@ -117,13 +128,13 @@ it('sends airtime to multiple recipients', function (int $amount, string $phone)
             'totalAmount',
             'totalDiscount',
             'responses',
-        ]);
-
-    expect($result['responses'])
+        ])
+        ->and($result['responses'])
         ->toBeArray()
-        ->toHaveCount(2);
+//        ->toHaveCount(2)
+        ->and($result['responses'])
+        ->each(
+            fn(Expectation $response) => $response->toHaveKeys(['phoneNumber', 'errorMessage', 'requestId', 'discount'])
+        )->and(data_get($result, 'numSent'))->toBe(2);
 
-    expect($result['responses'][0])->toHaveKeys(['phoneNumber', 'errorMessage', 'requestId', 'discount']);
-
-    expect(data_get($result, 'numSent'))->toBe(2);
 })->with('airtime-amount', 'phone-numbers');

@@ -10,6 +10,7 @@ use SamuelMwangiW\Africastalking\Testing\Fakes\AfricastalkingFake;
 /**
  * @see BaseClass
  * @mixin BaseClass
+ * @mixin AfricastalkingFake
  */
 class Africastalking extends Facade
 {

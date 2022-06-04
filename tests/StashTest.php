@@ -10,10 +10,9 @@ beforeEach(function () {
 });
 
 it('can be resolved via base class')
-    ->expect(fn () => africastalking()->stash())->toBeInstanceOf(Stash::class);
+    ->expect(fn() => africastalking()->stash())->toBeInstanceOf(Stash::class);
 
-it('can be constructed')
-    ->expect(fn () => $this->subject)->toBeInstanceOf(Stash::class);
+it('can be constructed')->expect(fn() => $this->subject)->toBeInstanceOf(Stash::class);
 
 it('can set amount fluently', function () {
     expect(
@@ -24,43 +23,41 @@ it('can set amount fluently', function () {
 it('can set string currency fluently', function (string $currency) {
     expect(
         $this->subject->currency($currency)
-    )
-        ->getCurrency()->toBeInstanceOf(Currency::class)
+    )->getCurrency()->toBeInstanceOf(Currency::class)
         ->getCurrency()->value->toBe($currency);
 })->with('currencies');
 
 it('can set object currency fluently', function (string $currency) {
     expect(
         $this->subject->currency(Currency::from($currency))
-    )
-        ->getCurrency()->toBeInstanceOf(Currency::class)
+    )->getCurrency()->toBeInstanceOf(Currency::class)
         ->getCurrency()->value->toBe($currency);
 })->with('currencies');
 
 it('can set metadata fluently', function () {
     expect(
         $this->subject->metadata(['foo' => 'bar'])
-    )
-        ->getMetadata()->toBe(['foo' => 'bar']);
+    )->getMetadata()->toBe(['foo' => 'bar']);
 });
 
 it('can set the productName fluently', function () {
     expect(
         $this->subject->product('fooBarProduct')
-    )
-        ->getProductName()->toBe('fooBarProduct');
+    )->getProductName()->toBe('fooBarProduct');
 });
 
 it('reads the productName from config', function () {
     config()->set('africastalking.payment.product-name', 'fooBarProduct');
 
-    expect($this->subject)->getProductName()->toBe('fooBarProduct');
+    expect($this->subject)
+        ->getProductName()->toBe('fooBarProduct');
 });
 
 it('overrides productName values in config', function () {
     config()->set('africastalking.payment.product-name', 'ShouldBeOverriden');
 
-    expect($this->subject->product('fooBarProduct'))->getProductName()->toBe('fooBarProduct');
+    expect($this->subject->product('fooBarProduct'))
+        ->getProductName()->toBe('fooBarProduct');
 });
 
 it('can topup stash via send', function () {
