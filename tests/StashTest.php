@@ -76,5 +76,6 @@ it('can topup stash', function () {
 
     expect($results)
         ->toBeInstanceOf(StashTopupResponse::class)
-        ->status->toBeInstanceOf(Status::class);
+        ->status->toBeInstanceOf(Status::class)
+        ->description->toContain('Topped up user stash. New Stash Balance: ');
 });
