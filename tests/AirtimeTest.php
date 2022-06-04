@@ -103,11 +103,10 @@ it('sends airtime to a single recipient', function (AirtimeTransaction $transact
         ->toBeArray()
         ->and($result['responses'])
         ->each(
-            fn(Expectation $response) => $response->toHaveKeys(['phoneNumber', 'errorMessage', 'requestId', 'discount'])
+            fn (Expectation $response) => $response->toHaveKeys(['phoneNumber', 'errorMessage', 'requestId', 'discount'])
         )
         ->and(data_get($result, 'numSent'))->toBe(1);
 //        ->toHaveCount(1);
-
 })->with('airtime-transactions');
 
 it('sends airtime to multiple recipients', function (int $amount, string $phone) {
@@ -134,7 +133,6 @@ it('sends airtime to multiple recipients', function (int $amount, string $phone)
 //        ->toHaveCount(2)
         ->and($result['responses'])
         ->each(
-            fn(Expectation $response) => $response->toHaveKeys(['phoneNumber', 'errorMessage', 'requestId', 'discount'])
+            fn (Expectation $response) => $response->toHaveKeys(['phoneNumber', 'errorMessage', 'requestId', 'discount'])
         )->and(data_get($result, 'numSent'))->toBe(2);
-
 })->with('airtime-amount', 'phone-numbers');
