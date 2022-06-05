@@ -100,6 +100,7 @@ class Airtime
         ];
     }
 
+    /** @internal */
     public function transactions(): array
     {
         return [];

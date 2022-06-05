@@ -24,8 +24,8 @@ class Wallet
         $balance = Str::of($response['balance'])->after(' ')->toString();
         $currency = Str::of($response['balance'])->before(' ')->toString();
 
-        return new Balance(
-            amount: floatval($balance),
+        return Balance::make(
+            balance: floatval($balance),
             currency: Currency::from($currency),
         );
     }
