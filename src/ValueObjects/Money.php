@@ -7,12 +7,10 @@ use SamuelMwangiW\Africastalking\Enum\Currency;
 
 class Money implements DTOContract
 {
-
     public function __construct(
         public readonly float $amount,
         public readonly Currency $currency,
-    )
-    {
+    ) {
     }
 
     public function __toString(): string
