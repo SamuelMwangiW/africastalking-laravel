@@ -1,16 +1,16 @@
 <?php
 
 use Illuminate\Support\Collection;
+use function Pest\Faker\faker;
 use SamuelMwangiW\Africastalking\Contracts\DTOContract;
 use SamuelMwangiW\Africastalking\ValueObjects\Message;
 use SamuelMwangiW\Africastalking\ValueObjects\PhoneNumber;
-use function Pest\Faker\faker;
 
 it('resolves the Message::class')
-    ->expect(fn() => app(Message::class))->toBeInstanceOf(Message::class);
+    ->expect(fn () => app(Message::class))->toBeInstanceOf(Message::class);
 
 it('implements the DTO Contract')
-    ->expect(fn() => app(Message::class))->toBeInstanceOf(DTOContract::class);
+    ->expect(fn () => app(Message::class))->toBeInstanceOf(DTOContract::class);
 
 it('can be constructed', function (string $message) {
     $subject = new Message();
