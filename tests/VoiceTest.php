@@ -83,5 +83,5 @@ it('makes a call', function () {
     expect($response)
         ->toBeArray()
         ->toHaveKeys(['entries', 'errorMessage'])
-        ->and($response['errorMessage'])->toBe('None');
+        ->and($response['errorMessage'])->toBeIn(['None','Invalid callbackUrl: ']);
 });
