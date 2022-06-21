@@ -5,8 +5,8 @@ namespace SamuelMwangiW\Africastalking\ValueObjects;
 use Illuminate\Support\Collection;
 use SamuelMwangiW\Africastalking\Contracts\DTOContract;
 use SamuelMwangiW\Africastalking\Exceptions\AfricastalkingException;
-use SamuelMwangiW\Africastalking\Transporter\Requests\Messaging\BulkSmsRequest;
-use SamuelMwangiW\Africastalking\Transporter\Requests\Messaging\PremiumSmsRequest;
+use SamuelMwangiW\Africastalking\Saloon\Requests\Messaging\BulkSmsRequest;
+use SamuelMwangiW\Africastalking\Saloon\Requests\Messaging\PremiumSmsRequest;
 
 class Message implements DTOContract
 {
@@ -23,9 +23,9 @@ class Message implements DTOContract
      * @param string|null $from
      */
     public function __construct(
-        public string|null     $message = null,
+        public string|null $message = null,
         public Collection|null $to = null,
-        public string|null     $from = null,
+        public string|null $from = null,
     ) {
     }
 
@@ -119,26 +119,30 @@ class Message implements DTOContract
 
     /**
      * @return Collection<int,RecipientsApiResponse>
-     * @throws \Illuminate\Http\Client\RequestException
      * @throws AfricastalkingException
+     * @throws \Sammyjo20\Saloon\Exceptions\SaloonRequestException
      */
     public function send(): Collection
     {
-        $response = $this
-            ->request()
-            ->asForm()
-            ->withData($this->data())
-            ->fetch();
+        $request = $this->request();
 
-        if (! data_get($response, 'SMSMessageData.Recipients')) {
+        $response = $request->send();
+
+        if ($response->failed()) {
+            /** @phpstan-ignore-next-line */
+            throw $response->toException();
+        }
+
+        if (! $response->json('SMSMessageData.Recipients')) {
             throw AfricastalkingException::messageSendingFailed(
-                message: data_get($response, 'SMSMessageData.Message')
+                message: $response->json('SMSMessageData.Message')
             );
         }
 
         /** @phpstan-ignore-next-line */
-        return collect(data_get($response, 'SMSMessageData.Recipients'))
-            ->map(fn (array $recipient) => RecipientsApiResponse::make($recipient));
+        return collect(
+            $response->json('SMSMessageData.Recipients')
+        )->map(fn (array $recipient) => RecipientsApiResponse::make($recipient));
     }
 
     protected function from(): ?string
@@ -150,7 +154,9 @@ class Message implements DTOContract
 
     private function request(): BulkSmsRequest|PremiumSmsRequest
     {
-        return $this->isBulk ? BulkSmsRequest::build() : PremiumSmsRequest::build();
+        return $this->isBulk
+            ? new BulkSmsRequest($this->data())
+            : new PremiumSmsRequest($this->data());
     }
 
     public function __toString(): string

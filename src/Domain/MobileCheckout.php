@@ -3,7 +3,7 @@
 namespace SamuelMwangiW\Africastalking\Domain;
 
 use SamuelMwangiW\Africastalking\Enum\Currency;
-use SamuelMwangiW\Africastalking\Transporter\Requests\Payment\MobileCheckoutRequest;
+use SamuelMwangiW\Africastalking\Saloon\Requests\Payment\MobileCheckoutRequest;
 use SamuelMwangiW\Africastalking\ValueObjects\PhoneNumber;
 
 class MobileCheckout
@@ -51,10 +51,15 @@ class MobileCheckout
 
     public function send(): array
     {
-        return MobileCheckoutRequest::build()
-            ->withData($this->data())
-            ->asJson()
-            ->fetch();
+        $request = new MobileCheckoutRequest($this->data());
+        $response = $request->send();
+
+        if ($response->failed()) {
+            /** @phpstan-ignore-next-line */
+            throw $response->toException();
+        }
+
+        return $response->json();
     }
 
     private function data(): array

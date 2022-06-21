@@ -83,7 +83,7 @@ it('thows an exception for an invalid request', function () {
     Africastalking::sms('This is a dummy message')
         ->to('+225 0574825420') //number throws invalid Phone Number
         ->send();
-})->throws(\Illuminate\Http\Client\RequestException::class);
+})->throws(\Exception::class);
 
 it('can send premium messages', function (string $phone, string $message) {
     $response = Africastalking::sms($message)

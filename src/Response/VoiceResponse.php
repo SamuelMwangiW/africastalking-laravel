@@ -3,9 +3,7 @@
 namespace SamuelMwangiW\Africastalking\Response;
 
 use Illuminate\Contracts\Support\Responsable;
-use Illuminate\Http\Response;
 use Illuminate\Routing\ResponseFactory;
-use JustSteveKing\StatusCode\Http;
 use SamuelMwangiW\Africastalking\ValueObjects\Voice\Dial;
 use SamuelMwangiW\Africastalking\ValueObjects\Voice\GetDigits;
 use SamuelMwangiW\Africastalking\ValueObjects\Voice\Play;
@@ -13,6 +11,7 @@ use SamuelMwangiW\Africastalking\ValueObjects\Voice\Record;
 use SamuelMwangiW\Africastalking\ValueObjects\Voice\Redirect;
 use SamuelMwangiW\Africastalking\ValueObjects\Voice\Reject;
 use SamuelMwangiW\Africastalking\ValueObjects\Voice\Say;
+use Symfony\Component\HttpFoundation\Response;
 
 class VoiceResponse implements Responsable
 {
@@ -118,7 +117,7 @@ class VoiceResponse implements Responsable
 
         return $response->make(
             content: $this->getResponse(),
-            status: Http::OK,
+            status: Response::HTTP_OK,
             headers: ['Content-Type' => 'application/xml'],
         );
     }

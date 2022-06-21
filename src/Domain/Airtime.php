@@ -5,7 +5,7 @@ namespace SamuelMwangiW\Africastalking\Domain;
 use Illuminate\Support\Collection;
 use SamuelMwangiW\Africastalking\Enum\Currency;
 use SamuelMwangiW\Africastalking\Exceptions\AfricastalkingException;
-use SamuelMwangiW\Africastalking\Transporter\Requests\Airtime\SendRequest;
+use SamuelMwangiW\Africastalking\Saloon\Requests\Airtime\SendRequest;
 use SamuelMwangiW\Africastalking\ValueObjects\AirtimeTransaction;
 use SamuelMwangiW\Africastalking\ValueObjects\PhoneNumber;
 
@@ -31,8 +31,8 @@ class Airtime
      */
     public function to(
         AirtimeTransaction|string $phoneNumber,
-        string                    $currencyCode = 'KES',
-        int                       $amount = 0,
+        string $currencyCode = 'KES',
+        int $amount = 0,
     ): Airtime {
         return $this->add($phoneNumber, $currencyCode, $amount);
     }
@@ -46,8 +46,8 @@ class Airtime
      */
     public function add(
         AirtimeTransaction|string $phoneNumber,
-        string                    $currencyCode = 'KES',
-        int                       $amount = 0,
+        string $currencyCode = 'KES',
+        int $amount = 0,
     ): Airtime {
         if (is_string($phoneNumber) && ! $this->currencyIsValid($currencyCode)) {
             throw AfricastalkingException::invalidCurrencyCode($currencyCode);
@@ -84,20 +84,21 @@ class Airtime
      */
     public function send(): array
     {
-        return SendRequest::build()
-            ->retry(3, 2)
-            ->asForm()
-            ->withData($this->recipients())
-            ->fetch();
+        $response = (new SendRequest($this->recipients()))->send();
+
+        if ($response->failed()) {
+            /** @phpstan-ignore-next-line */
+            throw $response->toException();
+        }
+
+        return $response->json();
     }
 
-    protected function recipients(): array
+    private function recipients(): string
     {
-        return [
-            'recipients' => json_encode(
-                $this->recipients->map(fn (AirtimeTransaction $recipient) => $recipient->__toArray())->toArray()
-            ),
-        ];
+        return (string)json_encode(
+            $this->recipients->map(fn (AirtimeTransaction $recipient) => $recipient->__toArray())->toArray()
+        );
     }
 
     /** @internal */
