@@ -5,20 +5,20 @@ use SamuelMwangiW\Africastalking\ValueObjects\Balance;
 
 it('can be resolved')
     ->expect(
-        fn() => app(Wallet::class)
+        fn () => app(Wallet::class)
     )->toBeInstanceOf(Wallet::class);
 
 it('can be resolved via helper')
     ->expect(
-        fn() => africastalking()->wallet()
+        fn () => africastalking()->wallet()
     )->toBeInstanceOf(Wallet::class);
 
 it('can fetch balance')
     ->expect(
-        fn() => app(Wallet::class)->balance()
+        fn () => app(Wallet::class)->balance()
     )->toBeInstanceOf(Balance::class);
 
 it('can fetch balance via helper')
     ->expect(
-        fn() => africastalking()->wallet()->balance()
+        fn () => africastalking()->wallet()->balance()
     )->toBeInstanceOf(Balance::class);
