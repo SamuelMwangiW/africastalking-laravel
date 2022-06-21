@@ -3,7 +3,7 @@
 namespace SamuelMwangiW\Africastalking\Domain;
 
 use Illuminate\Support\Collection;
-use SamuelMwangiW\Africastalking\Transporter\Requests\Voice\CallRequest;
+use SamuelMwangiW\Africastalking\Saloon\Requests\Voice\CallRequest;
 use SamuelMwangiW\Africastalking\ValueObjects\PhoneNumber;
 
 class VoiceCall
@@ -53,11 +53,15 @@ class VoiceCall
 
     public function send(): array
     {
-        return CallRequest::build()
-            ->withData($this->data())
-            ->withoutVerifying()
-            ->asForm()
-            ->fetch();
+        $request = new CallRequest($this->data());
+        $response = $request->send();
+
+        if ($response->failed()) {
+            /** @phpstan-ignore-next-line */
+            throw $response->toException();
+        }
+
+        return $response->json();
     }
 
     public function data(): array

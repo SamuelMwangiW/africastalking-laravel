@@ -4,7 +4,7 @@ namespace SamuelMwangiW\Africastalking\Domain;
 
 use Illuminate\Support\Str;
 use SamuelMwangiW\Africastalking\Enum\Currency;
-use SamuelMwangiW\Africastalking\Transporter\Requests\Payment\WalletBalanceRequest;
+use SamuelMwangiW\Africastalking\Saloon\Requests\Payment\WalletBalanceRequest;
 use SamuelMwangiW\Africastalking\ValueObjects\Balance;
 
 class Wallet
@@ -15,14 +15,20 @@ class Wallet
      */
     public function balance(): Balance
     {
-        $response = WalletBalanceRequest::build()->fetch();
+        $request = new WalletBalanceRequest();
+        $response = $request->send();
 
-        if (data_get($response, 'status') !== 'Success') {
+        if ($response->failed()) {
+            /** @phpstan-ignore-next-line */
+            throw $response->toException();
+        }
+
+        if ($response->json('status') !== 'Success') {
             throw new \Exception('Failed to fetch wallet balance');
         }
 
-        $balance = Str::of($response['balance'])->after(' ')->toString();
-        $currency = Str::of($response['balance'])->before(' ')->toString();
+        $balance = Str::of($response->json('balance'))->after(' ')->toString();
+        $currency = Str::of($response->json('balance'))->before(' ')->toString();
 
         return new Balance(
             amount: floatval($balance),

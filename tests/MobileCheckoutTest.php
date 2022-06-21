@@ -54,5 +54,12 @@ it('sends a Mobile Checkout Request', function (string $phone, int $amount) {
         ->currency(currency: Currency::KENYA)
         ->send();
 
-    expect($result)->toBeArray();
+    expect($result)
+        ->toBeArray()
+        ->toHaveKeys([
+            "description",
+            "providerChannel",
+            "status",
+            "transactionId",
+        ]);
 })->with('phone-numbers', 'payment-amount');

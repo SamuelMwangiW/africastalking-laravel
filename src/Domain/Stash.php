@@ -3,7 +3,7 @@
 namespace SamuelMwangiW\Africastalking\Domain;
 
 use SamuelMwangiW\Africastalking\Enum\Currency;
-use SamuelMwangiW\Africastalking\Transporter\Requests\Payment\StashTopupRequest;
+use SamuelMwangiW\Africastalking\Saloon\Requests\Payment\StashTopupRequest;
 use SamuelMwangiW\Africastalking\ValueObjects\StashTopupResponse;
 
 class Stash
@@ -25,12 +25,16 @@ class Stash
             $this->amount($amount);
         }
 
+        $request = new StashTopupRequest($this->getData());
+        $response = $request->send();
+
+        if ($response->failed()) {
+            /** @phpstan-ignore-next-line */
+            throw $response->toException();
+        }
+
         return StashTopupResponse::make(
-            attributes: StashTopupRequest::build()
-                ->withData($this->getData())
-                ->retry(3)
-                ->asJson()
-                ->fetch()
+            attributes: $response->json()
         );
     }
 

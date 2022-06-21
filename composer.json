@@ -18,7 +18,7 @@
     "require": {
         "php": "^8.1",
         "illuminate/contracts": "^9.2",
-        "juststeveking/laravel-transporter": "^1.0",
+        "sammyjo20/saloon-laravel": "^1.4",
         "spatie/laravel-package-tools": "^1.9.2"
     },
     "require-dev": {
