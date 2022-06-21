@@ -4,18 +4,30 @@ namespace SamuelMwangiW\Africastalking\Domain;
 
 use Illuminate\Http\Client\RequestException;
 use SamuelMwangiW\Africastalking\Factories\AccountFactory;
-use SamuelMwangiW\Africastalking\Transporter\Requests\Application\BalanceRequest;
+use SamuelMwangiW\Africastalking\Saloon\Requests\Application\BalanceRequest;
 use SamuelMwangiW\Africastalking\ValueObjects\Balance;
 
 class Application
 {
     /**
-     * @throws RequestException
+     * @return Balance
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @throws \ReflectionException
+     * @throws \Sammyjo20\Saloon\Exceptions\SaloonException
+     * @throws \Sammyjo20\Saloon\Exceptions\SaloonRequestException
      */
     public function balance(): Balance
     {
+        $request = new BalanceRequest();
+        $response = $request->send();
+
+        if ($response->failed()) {
+            /** @phpstan-ignore-next-line */
+            throw $response->toException();
+        }
+
         return AccountFactory::make(
-            data: BalanceRequest::build()->asForm()->fetch()
+            data: $response->json()
         );
     }
 

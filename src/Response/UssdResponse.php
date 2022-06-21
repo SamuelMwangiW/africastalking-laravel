@@ -4,9 +4,8 @@ namespace SamuelMwangiW\Africastalking\Response;
 
 use Illuminate\Contracts\Support\Responsable;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use Illuminate\Routing\ResponseFactory;
-use JustSteveKing\StatusCode\Http;
+use Symfony\Component\HttpFoundation\Response;
 
 class UssdResponse implements Responsable
 {
@@ -46,7 +45,7 @@ class UssdResponse implements Responsable
 
         return $response->make(
             content: $this->getResponse(),
-            status: Http::OK,
+            status: Response::HTTP_OK,
             headers: ['Content-Type' => 'text/plain'],
         );
     }
