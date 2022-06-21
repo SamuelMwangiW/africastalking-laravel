@@ -49,14 +49,14 @@ class Airtime
         string $currencyCode = 'KES',
         int $amount = 0,
     ): Airtime {
-        if (is_string($phoneNumber) && !$this->currencyIsValid($currencyCode)) {
+        if (is_string($phoneNumber) && ! $this->currencyIsValid($currencyCode)) {
             throw AfricastalkingException::invalidCurrencyCode($currencyCode);
         }
-        if (is_string($phoneNumber) && !$this->minimumAmount($amount)) {
+        if (is_string($phoneNumber) && ! $this->minimumAmount($amount)) {
             throw AfricastalkingException::invalidCurrencyCode($currencyCode);
         }
 
-        if (!$phoneNumber instanceof AirtimeTransaction) {
+        if (! $phoneNumber instanceof AirtimeTransaction) {
             $phoneNumber = new AirtimeTransaction(
                 phoneNumber: PhoneNumber::make($phoneNumber),
                 currencyCode: Currency::from($currencyCode),
@@ -97,7 +97,7 @@ class Airtime
     private function recipients(): string
     {
         return (string)json_encode(
-            $this->recipients->map(fn(AirtimeTransaction $recipient) => $recipient->__toArray())->toArray()
+            $this->recipients->map(fn (AirtimeTransaction $recipient) => $recipient->__toArray())->toArray()
         );
     }
 }

@@ -4,10 +4,10 @@ use SamuelMwangiW\Africastalking\Domain\MobileCheckout;
 use SamuelMwangiW\Africastalking\Enum\Currency;
 
 it('resolves the class')
-    ->expect(fn() => app(MobileCheckout::class))->toBeInstanceOf(MobileCheckout::class);
+    ->expect(fn () => app(MobileCheckout::class))->toBeInstanceOf(MobileCheckout::class);
 
 it('resolves the class via the helper')
-    ->expect(fn() => africastalking()->payment()->mobileCheckout())->toBeInstanceOf(MobileCheckout::class);
+    ->expect(fn () => africastalking()->payment()->mobileCheckout())->toBeInstanceOf(MobileCheckout::class);
 
 it('uses the product set in the config', function () {
     $configuredProductName = config('africastalking.payment.product-name');

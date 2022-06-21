@@ -9,20 +9,20 @@ use SamuelMwangiW\Africastalking\Response\VoiceResponse;
 use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 
 it('resolves the application class')
-    ->expect(fn() => Africastalking::voice())
+    ->expect(fn () => Africastalking::voice())
     ->toBeInstanceOf(Voice::class);
 
 it('forwards calls to VoiceResponse class')
-    ->expect(fn() => Africastalking::voice()->reject())
+    ->expect(fn () => Africastalking::voice()->reject())
     ->toBeInstanceOf(VoiceResponse::class);
 
 it('implements the Responsable class')
-    ->expect(fn() => app(VoiceResponse::class))
+    ->expect(fn () => app(VoiceResponse::class))
     ->toBeInstanceOf(Responsable::class);
 
 it('can chain actions fluently')
     ->expect(
-        fn() => Africastalking::voice()
+        fn () => Africastalking::voice()
             ->say('Hey and welcome to Unicorn bank.')
             ->getDigits(
                 say: 'Enter your account followed by the hash key',
@@ -53,7 +53,7 @@ it('can chain actions fluently')
 
 it('can reject calls')
     ->expect(
-        fn() => Africastalking::voice()
+        fn () => Africastalking::voice()
             ->play('We are closed at the moment, kindly call tomorrow')
             ->reject()
             ->getResponse()

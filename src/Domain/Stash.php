@@ -28,7 +28,7 @@ class Stash
         $request = new StashTopupRequest($this->getData());
         $response = $request->send();
 
-        if ($response->failed()){
+        if ($response->failed()) {
             /** @phpstan-ignore-next-line */
             throw $response->toException();
         }

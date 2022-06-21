@@ -14,9 +14,7 @@ class SendRequest extends BaseRequest
 
     public function __construct(
         private readonly string $recipients
-    )
-    {
-
+    ) {
     }
 
     public function defineEndpoint(): string

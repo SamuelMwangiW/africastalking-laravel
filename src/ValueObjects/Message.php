@@ -66,7 +66,7 @@ class Message implements DTOContract
         }
 
         if (is_array($recipients)) {
-            $recipients = collect($recipients)->map(fn($phone) => PhoneNumber::make($phone));
+            $recipients = collect($recipients)->map(fn ($phone) => PhoneNumber::make($phone));
         }
 
         $this->to = $recipients;
@@ -133,7 +133,7 @@ class Message implements DTOContract
             throw $response->toException();
         }
 
-        if (!$response->json('SMSMessageData.Recipients')) {
+        if (! $response->json('SMSMessageData.Recipients')) {
             throw AfricastalkingException::messageSendingFailed(
                 message: $response->json('SMSMessageData.Message')
             );
@@ -142,7 +142,7 @@ class Message implements DTOContract
         /** @phpstan-ignore-next-line */
         return collect(
             $response->json('SMSMessageData.Recipients')
-        )->map(fn(array $recipient) => RecipientsApiResponse::make($recipient));
+        )->map(fn (array $recipient) => RecipientsApiResponse::make($recipient));
     }
 
     protected function from(): ?string
@@ -176,7 +176,7 @@ class Message implements DTOContract
             'to' => $this->to?->toArray(),
             'from' => $this->from(),
             'isBulk' => $this->isBulk,
-            'isPremium' => !$this->isBulk,
+            'isPremium' => ! $this->isBulk,
         ];
     }
 
@@ -189,8 +189,8 @@ class Message implements DTOContract
             'retryDurationInHours' => $this->retryDurationInHours,
             'message' => $this->message,
             'to' => $this->to
-                ?->filter(fn(PhoneNumber $number) => $number->isValid())
-                ->map(fn(PhoneNumber $number) => $number->number)
+                ?->filter(fn (PhoneNumber $number) => $number->isValid())
+                ->map(fn (PhoneNumber $number) => $number->number)
                 ->implode(','),
         ];
 

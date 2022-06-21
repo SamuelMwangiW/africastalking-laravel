@@ -56,7 +56,7 @@ class VoiceCall
         $request = new CallRequest($this->data());
         $response = $request->send();
 
-        if ($response->failed()){
+        if ($response->failed()) {
             /** @phpstan-ignore-next-line */
             throw $response->toException();
         }
