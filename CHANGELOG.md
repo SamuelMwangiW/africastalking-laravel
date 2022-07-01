@@ -2,6 +2,15 @@
 
 All notable changes to `africastalking-laravel` will be documented in this file.
 
+## v0.4.0 - 2022-06-21
+
+### What's Changed
+
+- Bump crazy-max/ghaction-import-gpg from 4 to 5 by @dependabot in https://github.com/SamuelMwangiW/africastalking-laravel/pull/34
+- Switch to Saloon by @SamuelMwangiW in https://github.com/SamuelMwangiW/africastalking-laravel/pull/36
+
+**Full Changelog**: https://github.com/SamuelMwangiW/africastalking-laravel/compare/v0.3.8...v0.4.0
+
 ## v0.3.8 - 2022-05-28
 
 ## What's Changed
