@@ -1,8 +1,8 @@
 <?php
 
-use function Pest\Faker\faker;
 use SamuelMwangiW\Africastalking\Enum\Currency;
 use SamuelMwangiW\Africastalking\ValueObjects\AirtimeTransaction;
+use function Pest\Faker\faker;
 
 dataset('airtime-transactions', function () {
     yield fn () => AirtimeTransaction::make(
