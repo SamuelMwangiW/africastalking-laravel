@@ -1,12 +1,12 @@
-name: Check & fix styling
+name: Check Code styling
 
-on:
-  push:
-    paths:
-      - '**.php'
+on: [push]
+
+permissions:
+  contents: write
 
 jobs:
-  php-cs-fixer:
+  pint-fixer:
     runs-on: ubuntu-latest
 
     steps:
@@ -14,24 +14,7 @@ jobs:
         uses: actions/checkout@v3
         with:
           ref: ${{ github.head_ref }}
-
-      - name: Import GPG key
-        id: import_gpg
-        uses: crazy-max/ghaction-import-gpg@v5
+      - name: "laravel-pint"
+        uses: aglipanci/laravel-pint-action@0.1.0
         with:
-          gpg_private_key: ${{ secrets.GPG_PRIVATE_KEY }}
-          git_user_signingkey: true
-          git_commit_gpgsign: true
-
-      - name: Run PHP CS Fixer
-        uses: docker://oskarstark/php-cs-fixer-ga
-        with:
-          args: --config=.php_cs.dist.php --allow-risky=yes
-
-      - name: Commit changes
-        uses: stefanzweifel/git-auto-commit-action@v4
-        with:
-          commit_message: Fix styling
-          commit_user_name: Samuel Mwangi
-          commit_user_email: samuel@samuelmwangi.co.ke
-          commit_author: Samuel Mwangi <samuel@samuelmwangi.co.ke>
+          testMode: true
