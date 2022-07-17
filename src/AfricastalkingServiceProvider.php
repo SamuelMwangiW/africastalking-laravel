@@ -2,6 +2,8 @@
 
 namespace SamuelMwangiW\Africastalking;
 
+use Composer\InstalledVersions;
+use Illuminate\Foundation\Console\AboutCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 
@@ -12,5 +14,16 @@ class AfricastalkingServiceProvider extends PackageServiceProvider
         $package
             ->name('africastalking')
             ->hasConfigFile();
+    }
+
+    public function packageRegistered()
+    {
+        AboutCommand::add('Africastalking', [
+            'sdk Version' => InstalledVersions::getPrettyVersion('samuelmwangiw/africastalking-laravel'),
+            'username' => config('africastalking.username'),
+            'SenderID' => config('africastalking.from'),
+            'API Key' => config('africastalking.api-key'),
+            'Voice Phone #' => config('africastalking.voice.from')
+        ]);
     }
 }
