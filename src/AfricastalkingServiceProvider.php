@@ -16,7 +16,7 @@ class AfricastalkingServiceProvider extends PackageServiceProvider
             ->hasConfigFile();
     }
 
-    public function packageRegistered()
+    public function packageRegistered(): void
     {
         AboutCommand::add('Africastalking', [
             'sdk Version' => InstalledVersions::getPrettyVersion('samuelmwangiw/africastalking-laravel'),

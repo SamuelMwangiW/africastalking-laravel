@@ -3,6 +3,7 @@
 use SamuelMwangiW\Africastalking\Domain\VoiceCall;
 use SamuelMwangiW\Africastalking\Facades\Africastalking;
 use SamuelMwangiW\Africastalking\ValueObjects\PhoneNumber;
+
 use function Pest\Faker\faker;
 
 it('resolves the Voice class')
