@@ -23,7 +23,8 @@ class AfricastalkingServiceProvider extends PackageServiceProvider
             'username' => config('africastalking.username'),
             'SenderID' => config('africastalking.from'),
             'API Key' => config('africastalking.api-key'),
-            'Voice Phone #' => config('africastalking.voice.from')
+            'Voice Phone #' => config('africastalking.voice.from'),
+            'Balance' => fn() => africastalking()->app()->balance()->amount
         ]);
     }
 }
