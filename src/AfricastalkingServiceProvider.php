@@ -25,9 +25,20 @@ class AfricastalkingServiceProvider extends PackageServiceProvider
             'API Key' => config('africastalking.api-key'),
             'Voice Phone #' => config('africastalking.voice.from'),
             'Payment Product' => config('africastalking.payment.product-name'),
-            'Balance' => function () {
+            'App Balance' => function () {
                 try {
                     return africastalking()->app()->balance()->amount;
+                } catch (\Exception) {
+                    return '<fg=red>FAILED</>';
+                }
+            },
+            'Payments Product Balance' => function () {
+                if (!config('africastalking.payment.product-name')) {
+                    return '<fg=yellow>Not setup</>';
+                }
+
+                try {
+                    return africastalking()->wallet()->balance()->amount;
                 } catch (\Exception) {
                     return '<fg=red>FAILED</>';
                 }
