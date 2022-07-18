@@ -24,7 +24,13 @@ class AfricastalkingServiceProvider extends PackageServiceProvider
             'SenderID' => config('africastalking.from'),
             'API Key' => config('africastalking.api-key'),
             'Voice Phone #' => config('africastalking.voice.from'),
-            'Balance' => fn() => africastalking()->app()->balance()->amount
+            'Balance' => function () {
+                try {
+                    return africastalking()->app()->balance()->amount;
+                } catch (\Exception) {
+                    return '<fg=red>FAILED</>';
+                }
+            },
         ]);
     }
 }
