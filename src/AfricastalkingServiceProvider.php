@@ -27,18 +27,22 @@ class AfricastalkingServiceProvider extends PackageServiceProvider
             'Payment Product' => config('africastalking.payment.product-name'),
             'App Balance' => function () {
                 try {
-                    return africastalking()->app()->balance()->amount;
+                    $balance = africastalking()->app()->balance();
+
+                    return $balance->currency->value . ' ' . number_format($balance->amount);
                 } catch (\Exception) {
                     return '<fg=red>FAILED</>';
                 }
             },
             'Payments Product Balance' => function () {
-                if (!config('africastalking.payment.product-name')) {
+                if (! config('africastalking.payment.product-name')) {
                     return '<fg=yellow>Not setup</>';
                 }
 
                 try {
-                    return africastalking()->wallet()->balance()->amount;
+                    $balance = africastalking()->wallet()->balance();
+
+                    return $balance->currency->value . ' ' . number_format($balance->amount);
                 } catch (\Exception) {
                     return '<fg=red>FAILED</>';
                 }
