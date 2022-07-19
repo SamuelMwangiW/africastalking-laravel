@@ -30,8 +30,8 @@ class Wallet
         $balance = Str::of($response->json('balance'))->after(' ')->toString();
         $currency = Str::of($response->json('balance'))->before(' ')->toString();
 
-        return new Balance(
-            amount: floatval($balance),
+        return Balance::make(
+            balance: floatval($balance),
             currency: Currency::from($currency),
         );
     }
