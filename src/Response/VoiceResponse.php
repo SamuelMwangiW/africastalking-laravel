@@ -42,8 +42,7 @@ class VoiceResponse implements Responsable
         int|null    $timeout = null,
         int|null    $numDigits = null,
         string|null $callbackUrl = null,
-    ): static
-    {
+    ): static {
         $this->response .= GetDigits::make(
             say: $say,
             finishOnKey: $finishOnKey,
@@ -63,8 +62,7 @@ class VoiceResponse implements Responsable
         bool        $playBeep = false,
         bool        $trimSilence = false,
         string|null $callbackUrl = null,
-    ): static
-    {
+    ): static {
         $this->response .= Record::make(
             say: $say,
             finishOnKey: $finishOnKey,
@@ -85,8 +83,7 @@ class VoiceResponse implements Responsable
         int         $maxDuration = 0,
         bool        $sequential = false,
         string|null $callerId = null,
-    ): static
-    {
+    ): static {
         $this->response .= Dial::make(
             phoneNumbers: $phoneNumbers,
             record: $record,
