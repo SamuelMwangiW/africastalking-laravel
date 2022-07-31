@@ -2,6 +2,14 @@
 
 All notable changes to `africastalking-laravel` will be documented in this file.
 
+## v0.4.2 - 2022-07-31
+
+### What's Changed
+
+- Dont show api key in about by @SamuelMwangiW in https://github.com/SamuelMwangiW/africastalking-laravel/pull/40
+
+**Full Changelog**: https://github.com/SamuelMwangiW/africastalking-laravel/compare/v0.4.1...v0.4.2
+
 ## v0.4.1 - 2022-07-19
 
 ### What's Changed
