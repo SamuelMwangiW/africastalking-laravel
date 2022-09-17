@@ -2,6 +2,24 @@
 
 All notable changes to `africastalking-laravel` will be documented in this file.
 
+## v0.4.2 - 2022-07-31
+
+### What's Changed
+
+- Dont show api key in about by @SamuelMwangiW in https://github.com/SamuelMwangiW/africastalking-laravel/pull/40
+
+**Full Changelog**: https://github.com/SamuelMwangiW/africastalking-laravel/compare/v0.4.1...v0.4.2
+
+## v0.4.1 - 2022-07-19
+
+### What's Changed
+
+- Formatting by @SamuelMwangiW in https://github.com/SamuelMwangiW/africastalking-laravel/pull/37
+- Bump dependabot/fetch-metadata from 1.3.1 to 1.3.3 by @dependabot in https://github.com/SamuelMwangiW/africastalking-laravel/pull/38
+- Add about by @SamuelMwangiW in https://github.com/SamuelMwangiW/africastalking-laravel/pull/39
+
+**Full Changelog**: https://github.com/SamuelMwangiW/africastalking-laravel/compare/v0.4.0...v0.4.1
+
 ## v0.4.0 - 2022-06-21
 
 ### What's Changed
