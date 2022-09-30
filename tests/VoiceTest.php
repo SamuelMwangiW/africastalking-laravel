@@ -35,21 +35,6 @@ it('can chain actions fluently')
     )->toBe(
         '<?xml version="1.0" encoding="UTF-8"?><Response><Say>Hey and welcome to Unicorn bank.</Say><GetDigits finishOnKey="#"><Say>Enter your account followed by the hash key</Say></GetDigits><Dial phoneNumbers="+2547123000,test@sip.ke.africastalking.com"/><Play url="https://example.com/playback.wav"/><Record><Say>Please be nice, you are being recorded</Say></Record><Redirect>https://example.com/redirect.jsp</Redirect></Response>'
     );
-/**
- * <?xml version="1.0" encoding="UTF-8"?>
- * <Response>
- *     <Say>Hey and welcome to Unicorn bank.</Say>
- *     <GetDigits finishOnKey="#">
- *          <Say>Enter your account followed by the hash key</Say>
- *     </GetDigits>
- *      <Dial phoneNumbers="+2547123000,test@sip.ke.africastalking.com"/>
- *      <Play url="https://example.com/playback.wav"/>
- *      <Record>
- *          <Say>Please be nice, you are being recorded</Say>
- *      </Record>
- *      <Redirect>https://example.com/redirect.jsp</Redirect>
- * </Response>
- */
 
 it('can reject calls')
     ->expect(
