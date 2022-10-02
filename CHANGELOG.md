@@ -2,6 +2,15 @@
 
 All notable changes to `africastalking-laravel` will be documented in this file.
 
+## v0.4.3 - 2022-10-02
+
+### What's Changed
+
+- Bump aglipanci/laravel-pint-action from 0.1.0 to 1.0.0 by @dependabot in https://github.com/SamuelMwangiW/africastalking-laravel/pull/41
+- WebRTC Capability Token by @SamuelMwangiW in https://github.com/SamuelMwangiW/africastalking-laravel/pull/42
+
+**Full Changelog**: https://github.com/SamuelMwangiW/africastalking-laravel/compare/v0.4.2...v0.4.3
+
 ## v0.4.2 - 2022-07-31
 
 ### What's Changed
