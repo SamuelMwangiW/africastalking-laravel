@@ -8,14 +8,6 @@ use SamuelMwangiW\Africastalking\AfricastalkingServiceProvider;
 
 class TestCase extends Orchestra
 {
-<<<<<<< HEAD
-=======
-    protected function setUp(): void
-    {
-        parent::setUp();
-    }
-
->>>>>>> main
     protected function getPackageProviders($app): array
     {
         return [
