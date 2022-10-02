@@ -27,7 +27,6 @@ class WebRTCToken
 
     public function send()
     {
-
     }
 
     public function clientName(): string
