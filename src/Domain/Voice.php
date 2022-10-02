@@ -15,6 +15,11 @@ class Voice
         return app(VoiceCall::class)->to($recipients);
     }
 
+    public function webrtc(?string $clientName = null): WebRTCToken
+    {
+        return app(WebRTCToken::class)->for($clientName);
+    }
+
     public function __call(string $method, array $arguments): VoiceResponse
     {
         return $this->forwardCallTo(
