@@ -11,6 +11,7 @@ enum Service
     case DATA;
     case PAYMENT;
     case VOICE;
+    case WEBRTC;
 
     public function liveBaseUrl(): string
     {
@@ -21,7 +22,8 @@ enum Service
             self::CONTENT => 'https://content.africastalking.com/version1/',
             self::DATA,
             self::PAYMENT => 'https://payments.africastalking.com/',
-            self::VOICE => 'https://voice.africastalking.com/'
+            self::VOICE => 'https://voice.africastalking.com/',
+            self::WEBRTC => 'https://webrtc.africastalking.com',
         };
     }
 
@@ -38,6 +40,7 @@ enum Service
             self::PAYMENT => 'https://payments.sandbox.africastalking.com/',
             self::VOICE => 'https://voice.sandbox.africastalking.com/',
             self::DATA => throw new \Exception('Mobile data is not supported on Sandbox'),
+            self::WEBRTC => throw new \Exception('WebRTC not supported on Sandbox environment'),
         };
     }
 }

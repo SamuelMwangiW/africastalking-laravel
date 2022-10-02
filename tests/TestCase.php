@@ -3,14 +3,24 @@
 namespace SamuelMwangiW\Africastalking\Tests;
 
 use Orchestra\Testbench\TestCase as Orchestra;
+use Sammyjo20\SaloonLaravel\SaloonServiceProvider;
 use SamuelMwangiW\Africastalking\AfricastalkingServiceProvider;
 
 class TestCase extends Orchestra
 {
+<<<<<<< HEAD
+=======
+    protected function setUp(): void
+    {
+        parent::setUp();
+    }
+
+>>>>>>> main
     protected function getPackageProviders($app): array
     {
         return [
             AfricastalkingServiceProvider::class,
+            SaloonServiceProvider::class,
         ];
     }
 
