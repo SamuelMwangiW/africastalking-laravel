@@ -77,13 +77,6 @@ it('initiates a webrtc object')
         fn () => africastalking()->voice()->webrtc()
     )->toBeInstanceOf(WebRTCToken::class);
 
-it('webrtc object uses configured values')
-    ->tap(fn () => config()->set('africastalking.api-key', 'test-api-key'))
-    ->tap(fn () => config()->set('africastalking.username', 'spacex'))
-    ->expect(fn () => africastalking()->voice()->webrtc())
-    ->apiKey()->toBe('test-api-key')
-    ->username()->toBe('spacex');
-
 it('sets the client while initiating a webrtc object')
     ->expect(
         fn () => africastalking()->voice()->webrtc('John.Doe')
