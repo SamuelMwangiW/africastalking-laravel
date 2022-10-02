@@ -16,11 +16,11 @@ class CapabilityToken implements DTOContract
     ) {
     }
 
-    public static function fromSaloon(SaloonResponse $response): static
+    public static function fromSaloon(SaloonResponse $response): CapabilityToken
     {
         $data = $response->json();
 
-        return new static(
+        return new CapabilityToken(
             clientName: data_get($data, 'clientName'),
             incoming: data_get($data, 'incoming'),
             lifeTimeSec: data_get($data, 'lifeTimeSec'),
@@ -31,7 +31,7 @@ class CapabilityToken implements DTOContract
 
     public function __toString(): string
     {
-        return json_encode($this);
+        return $this->token;
     }
 
     public function __toArray(): array

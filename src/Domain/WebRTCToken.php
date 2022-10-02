@@ -2,7 +2,10 @@
 
 namespace SamuelMwangiW\Africastalking\Domain;
 
+use GuzzleHttp\Exception\GuzzleException;
 use Illuminate\Support\Str;
+use Sammyjo20\Saloon\Exceptions\SaloonException;
+use Sammyjo20\Saloon\Exceptions\SaloonRequestException;
 use SamuelMwangiW\Africastalking\Saloon\Requests\Voice\CapabilityTokenRequest;
 use SamuelMwangiW\Africastalking\ValueObjects\CapabilityToken;
 use SamuelMwangiW\Africastalking\ValueObjects\PhoneNumber;
@@ -31,8 +34,16 @@ class WebRTCToken
         return $this;
     }
 
+    /**
+     * @return CapabilityToken
+     * @throws \ReflectionException
+     * @throws GuzzleException
+     * @throws SaloonException
+     * @throws SaloonRequestException
+     */
     public function send(): CapabilityToken
     {
+        /** @phpstan-ignore-next-line  */
         return CapabilityTokenRequest::make($this->data())
             ->send()
             ->throw()
