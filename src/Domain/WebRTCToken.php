@@ -3,13 +3,15 @@
 namespace SamuelMwangiW\Africastalking\Domain;
 
 use Illuminate\Support\Str;
+use SamuelMwangiW\Africastalking\Saloon\Requests\Voice\CapabilityTokenRequest;
+use SamuelMwangiW\Africastalking\ValueObjects\CapabilityToken;
+use SamuelMwangiW\Africastalking\ValueObjects\PhoneNumber;
 
 class WebRTCToken
 {
-    public ?string $apiKey = null;
     public ?string $username = null;
     public ?string $clientName;
-    public ?string $phone;
+    public ?PhoneNumber $phone;
 
     public function for(?string $name = null): static
     {
@@ -18,15 +20,23 @@ class WebRTCToken
         return $this;
     }
 
-    public function from(?string $phoneNo = null): static
+    public function from(string|PhoneNumber|null $phoneNo = null): static
     {
+        if (is_string($phoneNo)) {
+            $phoneNo = PhoneNumber::make($phoneNo);
+        }
+
         $this->phone = $phoneNo;
 
         return $this;
     }
 
-    public function send()
+    public function send(): CapabilityToken
     {
+        return CapabilityTokenRequest::make($this->data())
+            ->send()
+            ->throw()
+            ->dto();
     }
 
     public function clientName(): string
@@ -36,21 +46,32 @@ class WebRTCToken
 
     public function phone(): string
     {
-        return $this->phone ?? config('africastalking.voice.from');
+        return $this->phone?->number ?? config('africastalking.voice.from');
     }
 
-    public function incoming(): bool
+    public function incoming(): string
     {
-        return true;
+        return 'true';
     }
 
-    public function outgoing(): bool
+    public function outgoing(): string
     {
-        return true;
+        return 'true';
     }
 
     public function expire(): string
     {
         return '86400s';
+    }
+
+    private function data(): array
+    {
+        return [
+            'phoneNumber' => $this->phone(),
+            'clientName' => $this->clientName(),
+            'incoming' => $this->incoming(),
+            'outgoing' => $this->outgoing(),
+            'expire' => $this->expire(),
+        ];
     }
 }

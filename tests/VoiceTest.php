@@ -3,27 +3,31 @@
 use Illuminate\Contracts\Support\Responsable;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Sammyjo20\Saloon\Http\MockResponse;
+use Sammyjo20\SaloonLaravel\Facades\Saloon;
 use SamuelMwangiW\Africastalking\Domain\Voice;
 use SamuelMwangiW\Africastalking\Domain\WebRTCToken;
 use SamuelMwangiW\Africastalking\Facades\Africastalking;
 use SamuelMwangiW\Africastalking\Response\VoiceResponse;
+use SamuelMwangiW\Africastalking\Saloon\Requests\Voice\CapabilityTokenRequest;
+use SamuelMwangiW\Africastalking\ValueObjects\CapabilityToken;
 use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 
 it('resolves the application class')
-    ->expect(fn () => Africastalking::voice())
+    ->expect(fn() => Africastalking::voice())
     ->toBeInstanceOf(Voice::class);
 
 it('forwards calls to VoiceResponse class')
-    ->expect(fn () => Africastalking::voice()->reject())
+    ->expect(fn() => Africastalking::voice()->reject())
     ->toBeInstanceOf(VoiceResponse::class);
 
 it('implements the Responsable class')
-    ->expect(fn () => app(VoiceResponse::class))
+    ->expect(fn() => app(VoiceResponse::class))
     ->toBeInstanceOf(Responsable::class);
 
 it('can chain actions fluently')
     ->expect(
-        fn () => Africastalking::voice()
+        fn() => Africastalking::voice()
             ->say('Hey and welcome to Unicorn bank.')
             ->getDigits(
                 say: 'Enter your account followed by the hash key',
@@ -39,7 +43,7 @@ it('can chain actions fluently')
 
 it('can reject calls')
     ->expect(
-        fn () => Africastalking::voice()
+        fn() => Africastalking::voice()
             ->play('We are closed at the moment, kindly call tomorrow')
             ->reject()
             ->getResponse()
@@ -74,17 +78,50 @@ it('makes a call', function () {
 
 it('initiates a webrtc object')
     ->expect(
-        fn () => africastalking()->voice()->webrtc()
+        fn() => africastalking()->voice()->webrtc()
     )->toBeInstanceOf(WebRTCToken::class);
 
 it('sets the client while initiating a webrtc object')
     ->expect(
-        fn () => africastalking()->voice()->webrtc('John.Doe')
+        fn() => africastalking()->voice()->webrtc('John.Doe')
     )->toBeInstanceOf(WebRTCToken::class)
     ->clientName->toBe('John.Doe');
 
 it('sets the client for a webrtc object')
     ->expect(
-        fn () => africastalking()->voice()->webrtc()->for('John.Doe')
+        fn() => africastalking()->voice()->webrtc()->for('John.Doe')
     )->toBeInstanceOf(WebRTCToken::class)
     ->clientName->toBe('John.Doe');
+
+it('webrtc capability token not supported on sandbox')
+    ->tap(fn() => config()->set('africastalking.username', 'sandbox'))
+    ->throws(exception: \Exception::class, exceptionMessage: 'WebRTC not supported on Sandbox environment')
+    ->expect(
+        fn() => africastalking()->voice()->webrtc()->send()
+    );
+
+it('requests a webrtc capability token', function () {
+    config()->set('africastalking.username', 'not_sandbox');
+
+    Saloon::fake([
+        CapabilityTokenRequest::class => MockResponse::make([
+            'clientName' => 'John.Doe',
+            'incoming' => true,
+            'lifeTimeSec' => '86400',
+            'outgoing' => true,
+            'token' => 'ATCAPtkn_somerandomtexthere',
+        ], 200),
+    ]);
+
+    $response = africastalking()->voice()
+        ->webrtc()
+        ->send();
+
+    expect($response)
+        ->toBeInstanceOf(CapabilityToken::class)
+        ->clientName->toBe('John.Doe')
+        ->incoming->toBeTrue()
+        ->outgoing->toBeTrue()
+        ->lifeTimeSec->toBe('86400')
+        ->token->toBe('ATCAPtkn_somerandomtexthere');
+});
