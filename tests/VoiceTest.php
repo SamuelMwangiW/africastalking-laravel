@@ -125,3 +125,28 @@ it('requests a webrtc capability token', function () {
         ->lifeTimeSec->toBe('86400')
         ->token->toBe('ATCAPtkn_somerandomtexthere');
 });
+it('WebRTC token has a token alias for send', function () {
+    config()->set('africastalking.username', 'not_sandbox');
+
+    Saloon::fake([
+        CapabilityTokenRequest::class => MockResponse::make([
+            'clientName' => 'John.Doe',
+            'incoming' => true,
+            'lifeTimeSec' => '86400',
+            'outgoing' => true,
+            'token' => 'ATCAPtkn_somerandomtexthere',
+        ], 200),
+    ]);
+
+    $response = africastalking()->voice()
+        ->webrtc()
+        ->token();
+
+    expect($response)
+        ->toBeInstanceOf(CapabilityToken::class)
+        ->clientName->toBe('John.Doe')
+        ->incoming->toBeTrue()
+        ->outgoing->toBeTrue()
+        ->lifeTimeSec->toBe('86400')
+        ->token->toBe('ATCAPtkn_somerandomtexthere');
+});
