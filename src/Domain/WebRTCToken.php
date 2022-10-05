@@ -50,6 +50,17 @@ class WebRTCToken
             ->dto();
     }
 
+    /**
+     * @throws \ReflectionException
+     * @throws GuzzleException
+     * @throws SaloonException
+     * @throws SaloonRequestException
+     */
+    public function token(): CapabilityToken
+    {
+        return $this->send();
+    }
+
     public function clientName(): string
     {
         return $this->clientName ?? Str::random();
