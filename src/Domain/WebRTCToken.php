@@ -43,7 +43,6 @@ class WebRTCToken
      */
     public function send(): CapabilityToken
     {
-        /** @phpstan-ignore-next-line  */
         return CapabilityTokenRequest::make($this->data())
             ->send()
             ->throw()
