@@ -7,7 +7,7 @@
 [![Total Downloads](https://img.shields.io/packagist/dt/samuelmwangiw/africastalking-laravel.svg?style=flat-square)](https://packagist.org/packages/samuelmwangiw/africastalking-laravel)
 
 This is an unofficial Laravel SDK for interacting
-with [Africastalking](https://developers.africastalking.com/docs/sms/overview) APIs that takes advantage of native
+with [Africa's Talking](https://developers.africastalking.com/docs/sms/overview) APIs that takes advantage of native
 Laravel components such as
 
 - [HTTP Client](https://laravel.com/docs/9.x/http-client#main-content) in place of Guzzle client
