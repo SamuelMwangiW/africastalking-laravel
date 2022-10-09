@@ -91,7 +91,7 @@ class Message implements DTOContract
 
     public function bulkMode(int $value = 1): static
     {
-        $this->bulkSMSMode = $value;
+        $this->bulkSMSMode = $value === 1 ? 1 : 0;
 
         return $this;
     }
@@ -180,7 +180,15 @@ class Message implements DTOContract
         ];
     }
 
-    private function data(): array
+    /**
+     * @return Collection<int,Collection<int,mixed>>|null
+     */
+    public function messages(): ?Collection
+    {
+        return null;
+    }
+
+    protected function data(): array
     {
         $data = [
             'enqueue' => $this->enqueue,

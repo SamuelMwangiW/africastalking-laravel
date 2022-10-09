@@ -67,14 +67,14 @@ it('sets content-type to text/plain in the response', function () {
         ->headers->get('content-type')->toBe('application/xml');
 });
 
-it('makes a call', function () {
-    $response = africastalking()->voice()->call('+254711234567')->send();
+it('makes a call', function (string $phone) {
+    $response = africastalking()->voice()->call($phone)->send();
 
     expect($response)
         ->toBeArray()
         ->toHaveKeys(['entries', 'errorMessage'])
         ->and($response['errorMessage'])->toBeIn(['None', 'Invalid callbackUrl: ', 'Invalid callerId: ']);
-});
+})->with('phone-numbers');
 
 it('initiates a webrtc object')
     ->expect(

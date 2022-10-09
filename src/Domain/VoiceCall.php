@@ -5,13 +5,14 @@ namespace SamuelMwangiW\Africastalking\Domain;
 use Illuminate\Support\Collection;
 use SamuelMwangiW\Africastalking\Saloon\Requests\Voice\CallRequest;
 use SamuelMwangiW\Africastalking\ValueObjects\PhoneNumber;
+use SamuelMwangiW\Africastalking\ValueObjects\VoiceCallDTO;
 
 class VoiceCall
 {
     /** @var Collection<int,PhoneNumber> */
-    private Collection $recipients;
+    protected Collection $recipients;
     private PhoneNumber $from;
-    private ?string $clientRequestId = null;
+    protected ?string $clientRequestId = null;
 
     public function to(string|array|null $recipients): static
     {
@@ -79,5 +80,13 @@ class VoiceCall
     public function from(): PhoneNumber
     {
         return $this->from ?? PhoneNumber::make(config('africastalking.voice.from'));
+    }
+
+    /**
+     * @return Collection<int,VoiceCallDTO>|null
+     */
+    public function calls(): ?Collection
+    {
+        return null;
     }
 }

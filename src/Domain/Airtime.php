@@ -100,4 +100,10 @@ class Airtime
             $this->recipients->map(fn (AirtimeTransaction $recipient) => $recipient->__toArray())->toArray()
         );
     }
+
+    /** @internal */
+    public function transactions(): array
+    {
+        return [];
+    }
 }
