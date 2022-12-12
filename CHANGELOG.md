@@ -2,6 +2,18 @@
 
 All notable changes to `africastalking-laravel` will be documented in this file.
 
+## v0.4.5 - 2022-12-12
+
+### What's Changed
+
+- Fix styling by @SamuelMwangiW in https://github.com/SamuelMwangiW/africastalking-laravel/pull/35
+- Add Testables by @SamuelMwangiW in https://github.com/SamuelMwangiW/africastalking-laravel/pull/33
+- Bump dependabot/fetch-metadata from 1.3.4 to 1.3.5 by @dependabot in https://github.com/SamuelMwangiW/africastalking-laravel/pull/45
+- Bump ramsey/composer-install from 1 to 2 by @dependabot in https://github.com/SamuelMwangiW/africastalking-laravel/pull/46
+- php 8.2 by @SamuelMwangiW in https://github.com/SamuelMwangiW/africastalking-laravel/pull/47
+
+**Full Changelog**: https://github.com/SamuelMwangiW/africastalking-laravel/compare/v0.4.4...v0.4.5
+
 ## v0.4.3 - 2022-10-02
 
 ### What's Changed
