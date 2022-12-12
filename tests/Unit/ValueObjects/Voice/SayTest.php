@@ -39,7 +39,7 @@ it('sets the voice option')
 
 it('sets synthesized speech attributes with a break', function () {
     $say = Say::make(
-        fn(SynthesisedSpeech $speech) => $speech
+        fn (SynthesisedSpeech $speech) => $speech
             ->say('Take a deep breath.')
             ->break('200ms')
             ->say('exhale.'),
@@ -52,7 +52,7 @@ it('sets synthesized speech attributes with a break', function () {
 
 it('sets synthesized speech attributes with say as', function () {
     $say = Say::make(
-        fn(SynthesisedSpeech $speech) => $speech
+        fn (SynthesisedSpeech $speech) => $speech
             ->say('There are ')
             ->sayAsCardinal('2006')
             ->say(' people on the waiting list to attend the ')
@@ -65,8 +65,7 @@ it('sets synthesized speech attributes with say as', function () {
             ->sayAsCurrency('$20', 'en-US')
             ->say(' payable at ')
             ->sayAsDate('6:42AM')
-            ->bleep(' not so nice words')
-        ,
+            ->bleep(' not so nice words'),
         voice: 'en-US-Wavenet-C'
     )->build();
 
@@ -78,9 +77,8 @@ it('sets synthesized speech attributes with say as', function () {
 
 it('sets synthesized speech attributes with emphasis', function () {
     $say = Say::make(
-        fn(SynthesisedSpeech $speech) => $speech
-            ->emphasis('Please call back.','strong')
-        ,
+        fn (SynthesisedSpeech $speech) => $speech
+            ->emphasis('Please call back.', 'strong'),
         voice: 'en-US-Wavenet-C'
     )->build();
 

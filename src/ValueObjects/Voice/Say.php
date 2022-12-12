@@ -18,10 +18,10 @@ class Say implements Action
         bool        $playBeep = false,
         string|null $voice = null
     ): Say {
-        if (is_callable($message)){
+        if (is_callable($message)) {
             $synthesisedSpeechParts = $message(new SynthesisedSpeech());
 
-            if (!$synthesisedSpeechParts instanceof SynthesisedSpeech){
+            if (! $synthesisedSpeechParts instanceof SynthesisedSpeech) {
                 throw AfricastalkingException::notSynthesisedSpeech();
             }
 
