@@ -130,4 +130,4 @@ it('sends airtime to multiple recipients', function (int $amount, string $phone)
         ->each(
             fn (Expectation $response) => $response->toHaveKeys(['phoneNumber', 'errorMessage', 'requestId', 'discount'])
         )->and(data_get($result, 'numSent'))->toBe(2);
-})->with('airtime-amount', 'phone-numbers');
+})->with('airtime-amount', 'phone-numbers')->markAsRisky();
