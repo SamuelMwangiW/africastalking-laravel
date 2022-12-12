@@ -4,6 +4,7 @@ namespace SamuelMwangiW\Africastalking\Exceptions;
 
 use Illuminate\Notifications\Notifiable;
 use SamuelMwangiW\Africastalking\Contracts\ReceivesSmsMessages;
+use SamuelMwangiW\Africastalking\ValueObjects\Voice\SynthesisedSpeech;
 
 class AfricastalkingException extends \Exception
 {
@@ -14,7 +15,7 @@ class AfricastalkingException extends \Exception
     public static function objectNotNotifiable(string $class): AfricastalkingException
     {
         return new AfricastalkingException(
-            message: "The class {$class} should use ".Notifiable::class." trait"
+            message: "The class {$class} should use " . Notifiable::class . " trait"
         );
     }
 
@@ -25,7 +26,7 @@ class AfricastalkingException extends \Exception
     public static function NotifiableDoesNotImplementReceivesSmsMessages(string $class): AfricastalkingException
     {
         return new AfricastalkingException(
-            message: "Notifiable class {$class} does not implement ".ReceivesSmsMessages::class." contract"
+            message: "Notifiable class {$class} does not implement " . ReceivesSmsMessages::class . " contract"
         );
     }
 
@@ -59,6 +60,13 @@ class AfricastalkingException extends \Exception
     {
         return new AfricastalkingException(
             message: "The currency {$currencyCode} is not supported at the moment"
+        );
+    }
+
+    public static function notSynthesisedSpeech(): AfricastalkingException
+    {
+        return new AfricastalkingException(
+            message: "The returned object must be an instance of " . SynthesisedSpeech::class
         );
     }
 }

@@ -11,6 +11,7 @@ use SamuelMwangiW\Africastalking\Facades\Africastalking;
 use SamuelMwangiW\Africastalking\Response\VoiceResponse;
 use SamuelMwangiW\Africastalking\Saloon\Requests\Voice\CapabilityTokenRequest;
 use SamuelMwangiW\Africastalking\ValueObjects\CapabilityToken;
+use SamuelMwangiW\Africastalking\ValueObjects\Voice\SynthesisedSpeech;
 use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 
 it('resolves the application class')
@@ -39,6 +40,22 @@ it('can chain actions fluently')
             ->getResponse()
     )->toBe(
         '<?xml version="1.0" encoding="UTF-8"?><Response><Say>Hey and welcome to Unicorn bank.</Say><GetDigits finishOnKey="#"><Say>Enter your account followed by the hash key</Say></GetDigits><Dial phoneNumbers="+2547123000,test@sip.ke.africastalking.com"/><Play url="https://example.com/playback.wav"/><Record><Say>Please be nice, you are being recorded</Say></Record><Redirect>https://example.com/redirect.jsp</Redirect></Response>'
+    );
+
+it('can chain synthesized speech actions fluently')
+    ->expect(
+        fn () => Africastalking::voice()
+            ->say(
+                fn (SynthesisedSpeech $speech) => $speech
+                    ->say('Hey and welcome to Unicorn bank.')
+                    ->emphasis(' where we treat you ')
+                    ->bleep('very nicely')
+                    ->sayAsOrdinal('SAP')
+                    ->sayAsCurrency('$100', 'en-US')
+            )->play('https://example.com/playback.wav')
+            ->getResponse()
+    )->toBe(
+        '<?xml version="1.0" encoding="UTF-8"?><Response><Say><speak>Hey and welcome to Unicorn bank.<emphasis level="strong"> where we treat you </emphasis><say-as interpret-as="bleep">very nicely</say-as><say-as interpret-as="ordinal">SAP</say-as><say-as interpret-as="currency" language="en-US">$100</say-as></speak></Say><Play url="https://example.com/playback.wav"/></Response>'
     );
 
 it('can reject calls')
