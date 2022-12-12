@@ -4,6 +4,7 @@ namespace SamuelMwangiW\Africastalking\Response;
 
 use Illuminate\Contracts\Support\Responsable;
 use Illuminate\Routing\ResponseFactory;
+use SamuelMwangiW\Africastalking\Exceptions\AfricastalkingException;
 use SamuelMwangiW\Africastalking\ValueObjects\Voice\Dial;
 use SamuelMwangiW\Africastalking\ValueObjects\Voice\GetDigits;
 use SamuelMwangiW\Africastalking\ValueObjects\Voice\Play;
@@ -22,7 +23,10 @@ class VoiceResponse implements Responsable
         $this->response = '';
     }
 
-    public function say(string $message, bool $playBeep = false, string|null $voice = null): static
+    /**
+     * @throws AfricastalkingException
+     */
+    public function say(string|callable $message, bool $playBeep = false, string|null $voice = null): static
     {
         $this->response .= Say::make($message, $playBeep, $voice)->build();
 
