@@ -2,6 +2,14 @@
 
 All notable changes to `africastalking-laravel` will be documented in this file.
 
+## v0.4.6 - 2022-12-13
+
+### What's Changed
+
+- Feature/syntesised speech by @SamuelMwangiW in https://github.com/SamuelMwangiW/africastalking-laravel/pull/48
+
+**Full Changelog**: https://github.com/SamuelMwangiW/africastalking-laravel/compare/v0.4.5...v0.4.6
+
 ## v0.4.5 - 2022-12-12
 
 ### What's Changed
