@@ -63,7 +63,7 @@ class AfricastalkingException extends \Exception
         );
     }
 
-    public static function notSynthesisedSpeech()
+    public static function notSynthesisedSpeech(): AfricastalkingException
     {
         return new AfricastalkingException(
             message: "The returned object must be an instance of " . SynthesisedSpeech::class
