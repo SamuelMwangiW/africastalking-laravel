@@ -51,15 +51,10 @@ class MobileCheckout
 
     public function send(): array
     {
-        $request = new MobileCheckoutRequest($this->data());
-        $response = $request->send();
-
-        if ($response->failed()) {
-            /** @phpstan-ignore-next-line */
-            throw $response->toException();
-        }
-
-        return $response->json();
+        return MobileCheckoutRequest::make($this->data())
+            ->send()
+            ->throw()
+            ->json();
     }
 
     private function data(): array

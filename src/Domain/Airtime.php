@@ -80,24 +80,24 @@ class Airtime
     }
 
     /**
-     * @throws \Illuminate\Http\Client\RequestException
+     * @return array
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @throws \ReflectionException
+     * @throws \Sammyjo20\Saloon\Exceptions\SaloonException
+     * @throws \Sammyjo20\Saloon\Exceptions\SaloonRequestException
      */
     public function send(): array
     {
-        $response = (new SendRequest($this->recipients()))->send();
-
-        if ($response->failed()) {
-            /** @phpstan-ignore-next-line */
-            throw $response->toException();
-        }
-
-        return $response->json();
+        return SendRequest::make($this->recipients())
+            ->send()
+            ->throw()
+            ->json();
     }
 
     private function recipients(): string
     {
         return (string)json_encode(
-            $this->recipients->map(fn (AirtimeTransaction $recipient) => $recipient->__toArray())->toArray()
+            $this->recipients->map(fn (AirtimeTransaction $recipient) => $recipient->toArray())->toArray()
         );
     }
 

@@ -65,7 +65,7 @@ it('can topup stash via send', function () {
 
     expect($results)
         ->toBeInstanceOf(StashTopupResponse::class)
-        ->status->toBeInstanceOf(Status::class);
+        ->status->toBeInstanceOf(Status::class)->toBe(Status::SUCCESS);
 });
 
 it('can topup stash', function () {

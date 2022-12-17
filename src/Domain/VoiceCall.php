@@ -54,15 +54,10 @@ class VoiceCall
 
     public function send(): array
     {
-        $request = new CallRequest($this->data());
-        $response = $request->send();
-
-        if ($response->failed()) {
-            /** @phpstan-ignore-next-line */
-            throw $response->toException();
-        }
-
-        return $response->json();
+        return CallRequest::make($this->data())
+            ->send()
+            ->throw()
+            ->json();
     }
 
     public function data(): array

@@ -2,10 +2,14 @@
 
 namespace SamuelMwangiW\Africastalking\ValueObjects;
 
+use Illuminate\Contracts\Support\Arrayable;
 use SamuelMwangiW\Africastalking\Contracts\DTOContract;
 use SamuelMwangiW\Africastalking\Enum\Currency;
 
-class AirtimeTransaction implements DTOContract
+/**
+ * @implements Arrayable<string, string>
+ */
+class AirtimeTransaction implements DTOContract, Arrayable
 {
     public function __construct(
         public PhoneNumber $phoneNumber,
@@ -30,11 +34,16 @@ class AirtimeTransaction implements DTOContract
         );
     }
 
-    public function __toArray(): array
+    public function toArray(): array
     {
         return [
             "phoneNumber" => $this->phoneNumber->number,
             "amount" => "{$this->currencyCode->value} {$this->amount}",
         ];
+    }
+
+    public function __toArray(): array
+    {
+        return $this->toArray();
     }
 }

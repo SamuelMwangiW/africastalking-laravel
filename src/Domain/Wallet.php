@@ -10,18 +10,17 @@ use SamuelMwangiW\Africastalking\ValueObjects\Balance;
 class Wallet
 {
     /**
-     * @throws \Illuminate\Http\Client\RequestException
+     * @return Balance
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @throws \ReflectionException
+     * @throws \Sammyjo20\Saloon\Exceptions\SaloonException
+     * @throws \Sammyjo20\Saloon\Exceptions\SaloonRequestException
      * @throws \Exception
      */
     public function balance(): Balance
     {
         $request = new WalletBalanceRequest();
-        $response = $request->send();
-
-        if ($response->failed()) {
-            /** @phpstan-ignore-next-line */
-            throw $response->toException();
-        }
+        $response = $request->send()->throw();
 
         if ($response->json('status') !== 'Success') {
             throw new \Exception('Failed to fetch wallet balance');
