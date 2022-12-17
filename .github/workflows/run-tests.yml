@@ -5,6 +5,8 @@ on:
     branches: [main]
   pull_request:
     branches: [main]
+  schedule:
+    - cron: '0 2 * * *'
 
 jobs:
   test:
@@ -26,6 +28,8 @@ jobs:
         include:
           - laravel: 9.*
             testbench: 7.*
+          - laravel: dev-master
+            testbench: dev-master
 
     name: P${{ matrix.php }} - L${{ matrix.laravel }} - ${{ matrix.stability }} - ${{ matrix.os }}
 
