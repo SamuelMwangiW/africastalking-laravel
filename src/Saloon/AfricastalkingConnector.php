@@ -13,6 +13,9 @@ class AfricastalkingConnector extends SaloonConnector
 
     protected Service $service;
 
+    /**
+     * @throws \Exception
+     */
     public function defineBaseUrl(): string
     {
         return $this->isSandboxEnvironment()
@@ -31,7 +34,7 @@ class AfricastalkingConnector extends SaloonConnector
     {
         return [
             'apiKey' => config(key: 'africastalking.api-key'),
-            'User-Agent' => 'samuelmwangiw/africastalking-laravel ',
+            'User-Agent' => 'samuelmwangiw/africastalking-laravel',
         ];
     }
 
@@ -42,7 +45,7 @@ class AfricastalkingConnector extends SaloonConnector
 
     public function username(): string
     {
-        return config('africastalking.username');
+        return config(key: 'africastalking.username');
     }
 
     private function isSandboxEnvironment(): bool
