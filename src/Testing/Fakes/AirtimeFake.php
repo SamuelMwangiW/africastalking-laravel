@@ -12,7 +12,6 @@ class AirtimeFake extends Base
     public function send(): array
     {
         $this->trans[] = $this->recipients->map(fn (AirtimeTransaction $recipient) => $recipient->__toArray())->toArray();
-        /** @phpstan-ignore-next-line */
         $this->recipients = collect([]);
 
         return [];
