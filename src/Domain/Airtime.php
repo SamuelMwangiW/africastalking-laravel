@@ -18,7 +18,6 @@ class Airtime
 
     public function __construct()
     {
-        /** @phpstan-ignore-next-line */
         $this->recipients = collect();
     }
 
