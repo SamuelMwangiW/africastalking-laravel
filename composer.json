@@ -23,7 +23,7 @@
     },
     "require-dev": {
         "guzzlehttp/guzzle": "^7.4",
-        "nunomaduro/collision": "^6.0",
+        "nunomaduro/collision": "^6.0|^7.0",
         "nunomaduro/larastan": "^2.0.1",
         "orchestra/testbench": "^8.0",
         "pestphp/pest": "^2.x-dev",
