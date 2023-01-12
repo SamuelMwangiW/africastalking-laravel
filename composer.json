@@ -18,7 +18,7 @@
     "require": {
         "php": "^8.1",
         "illuminate/contracts": "^9.33|^10.0",
-        "sammyjo20/saloon-laravel": "^1.4",
+        "sammyjo20/saloon-laravel": "dev-laravel-10",
         "spatie/laravel-package-tools": "^1.9.2"
     },
     "require-dev": {
@@ -28,7 +28,7 @@
         "orchestra/testbench": "^7.0|^8.0",
         "pestphp/pest": "^1.21",
         "pestphp/pest-plugin-faker": "^1.0",
-        "pestphp/pest-plugin-laravel": "1.x-dev",
+        "pestphp/pest-plugin-laravel": "^1.1",
         "pestphp/pest-plugin-mock": "^1.0",
         "pestphp/pest-plugin-parallel": "^1.1",
         "phpstan/extension-installer": "^1.1",
@@ -71,6 +71,12 @@
             }
         }
     },
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/SamuelMwangiW/saloon-laravel"
+        }
+    ],
     "minimum-stability": "dev",
     "prefer-stable": true
 }
