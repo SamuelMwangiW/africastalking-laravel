@@ -18,8 +18,7 @@ class Airtime
 
     public function __construct()
     {
-        /** @phpstan-ignore-next-line */
-        $this->recipients = collect();
+        $this->recipients = collect([]);
     }
 
     /**
@@ -81,10 +80,9 @@ class Airtime
 
     /**
      * @return array
-     * @throws \GuzzleHttp\Exception\GuzzleException
      * @throws \ReflectionException
-     * @throws \Sammyjo20\Saloon\Exceptions\SaloonException
-     * @throws \Sammyjo20\Saloon\Exceptions\RequestException
+     * @throws \Saloon\Exceptions\InvalidResponseClassException
+     * @throws \Saloon\Exceptions\PendingRequestException
      */
     public function send(): array
     {

@@ -30,7 +30,6 @@ abstract class BaseRequest extends Request implements HasBody
     {
         $connector = new AfricastalkingConnector();
         $connector->service($this->service);
-        $this->body()->add('username', $this->username());
 
         return $connector->send($this);
     }

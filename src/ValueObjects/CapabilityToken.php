@@ -2,7 +2,7 @@
 
 namespace SamuelMwangiW\Africastalking\ValueObjects;
 
-use Saloon\Http\Response;
+use Saloon\Contracts\Response;
 use SamuelMwangiW\Africastalking\Contracts\DTOContract;
 
 class CapabilityToken implements DTOContract
