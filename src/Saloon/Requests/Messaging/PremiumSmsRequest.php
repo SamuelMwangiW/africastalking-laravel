@@ -2,13 +2,14 @@
 
 namespace SamuelMwangiW\Africastalking\Saloon\Requests\Messaging;
 
-use Sammyjo20\Saloon\Traits\Plugins\HasFormParams;
+use Saloon\Contracts\Body\HasBody;
+use Saloon\Traits\Body\HasFormBody;
 use SamuelMwangiW\Africastalking\Enum\Service;
 use SamuelMwangiW\Africastalking\Saloon\Requests\BaseRequest;
 
-class PremiumSmsRequest extends BaseRequest
+class PremiumSmsRequest extends BaseRequest implements HasBody
 {
-    use HasFormParams;
+    use HasFormBody;
 
     public Service $service = Service::CONTENT;
 
@@ -16,12 +17,12 @@ class PremiumSmsRequest extends BaseRequest
     {
     }
 
-    public function defineEndpoint(): string
+    public function resolveEndpoint(): string
     {
         return 'messaging';
     }
 
-    public function defaultData(): array
+    public function defaultBody(): array
     {
         return array_merge(
             $this->data,

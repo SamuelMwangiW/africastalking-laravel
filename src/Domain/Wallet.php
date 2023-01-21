@@ -14,7 +14,7 @@ class Wallet
      * @throws \GuzzleHttp\Exception\GuzzleException
      * @throws \ReflectionException
      * @throws \Sammyjo20\Saloon\Exceptions\SaloonException
-     * @throws \Sammyjo20\Saloon\Exceptions\SaloonRequestException
+     * @throws \Sammyjo20\Saloon\Exceptions\RequestException
      * @throws \Exception
      */
     public function balance(): Balance

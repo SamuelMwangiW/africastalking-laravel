@@ -4,8 +4,8 @@ namespace SamuelMwangiW\Africastalking\Domain;
 
 use GuzzleHttp\Exception\GuzzleException;
 use Illuminate\Support\Str;
-use Sammyjo20\Saloon\Exceptions\SaloonException;
-use Sammyjo20\Saloon\Exceptions\SaloonRequestException;
+use Saloon\Exceptions\SaloonException;
+use Saloon\Exceptions\RequestException;
 use SamuelMwangiW\Africastalking\Saloon\Requests\Voice\CapabilityTokenRequest;
 use SamuelMwangiW\Africastalking\ValueObjects\CapabilityToken;
 use SamuelMwangiW\Africastalking\ValueObjects\PhoneNumber;
@@ -39,7 +39,7 @@ class WebRTCToken
      * @throws \ReflectionException
      * @throws GuzzleException
      * @throws SaloonException
-     * @throws SaloonRequestException
+     * @throws RequestException
      */
     public function send(): CapabilityToken
     {
@@ -53,7 +53,7 @@ class WebRTCToken
      * @throws \ReflectionException
      * @throws GuzzleException
      * @throws SaloonException
-     * @throws SaloonRequestException
+     * @throws RequestException
      */
     public function token(): CapabilityToken
     {

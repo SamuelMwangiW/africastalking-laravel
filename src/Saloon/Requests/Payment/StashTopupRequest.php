@@ -2,11 +2,12 @@
 
 namespace SamuelMwangiW\Africastalking\Saloon\Requests\Payment;
 
-use Sammyjo20\Saloon\Traits\Plugins\HasJsonBody;
+use Saloon\Contracts\Body\HasBody;
+use Saloon\Traits\Body\HasJsonBody;
 use SamuelMwangiW\Africastalking\Enum\Service;
 use SamuelMwangiW\Africastalking\Saloon\Requests\BaseRequest;
 
-class StashTopupRequest extends BaseRequest
+class StashTopupRequest extends BaseRequest implements HasBody
 {
     use HasJsonBody;
 
@@ -16,12 +17,12 @@ class StashTopupRequest extends BaseRequest
     {
     }
 
-    public function defineEndpoint(): string
+    public function resolveEndpoint(): string
     {
         return 'topup/stash';
     }
 
-    public function defaultData(): array
+    public function defaultBody(): array
     {
         return array_merge(
             $this->data,

@@ -120,7 +120,7 @@ class Message implements DTOContract
     /**
      * @return Collection<int,RecipientsApiResponse>
      * @throws AfricastalkingException
-     * @throws \Sammyjo20\Saloon\Exceptions\SaloonRequestException
+     * @throws \Sammyjo20\Saloon\Exceptions\RequestException
      */
     public function send(): Collection
     {

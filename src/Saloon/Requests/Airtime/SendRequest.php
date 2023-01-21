@@ -2,13 +2,14 @@
 
 namespace SamuelMwangiW\Africastalking\Saloon\Requests\Airtime;
 
-use Sammyjo20\Saloon\Traits\Plugins\HasFormParams;
+use Saloon\Contracts\Body\HasBody;
+use Saloon\Traits\Body\HasFormBody;
 use SamuelMwangiW\Africastalking\Enum\Service;
 use SamuelMwangiW\Africastalking\Saloon\Requests\BaseRequest;
 
-class SendRequest extends BaseRequest
+class SendRequest extends BaseRequest implements HasBody
 {
-    use HasFormParams;
+    use HasFormBody;
 
     public Service $service = Service::AIRTIME;
 
@@ -17,12 +18,12 @@ class SendRequest extends BaseRequest
     ) {
     }
 
-    public function defineEndpoint(): string
+    public function resolveEndpoint(): string
     {
         return 'airtime/send';
     }
 
-    public function defaultData(): array
+    public function defaultBody(): array
     {
         return [
             'recipients' => $this->recipients,

@@ -13,7 +13,7 @@ class Application
      * @throws \GuzzleHttp\Exception\GuzzleException
      * @throws \ReflectionException
      * @throws \Sammyjo20\Saloon\Exceptions\SaloonException
-     * @throws \Sammyjo20\Saloon\Exceptions\SaloonRequestException
+     * @throws \Sammyjo20\Saloon\Exceptions\RequestException
      */
     public function balance(): Balance
     {
@@ -32,7 +32,7 @@ class Application
      * @throws \GuzzleHttp\Exception\GuzzleException
      * @throws \ReflectionException
      * @throws \Sammyjo20\Saloon\Exceptions\SaloonException
-     * @throws \Sammyjo20\Saloon\Exceptions\SaloonRequestException
+     * @throws \Sammyjo20\Saloon\Exceptions\RequestException
      */
     public function data(): Balance
     {
