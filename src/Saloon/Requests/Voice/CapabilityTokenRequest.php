@@ -3,10 +3,8 @@
 namespace SamuelMwangiW\Africastalking\Saloon\Requests\Voice;
 
 use Saloon\Contracts\Body\HasBody;
-use Saloon\Contracts\DataObjects\WithResponse;
 use Saloon\Contracts\Response;
 use Saloon\Traits\Body\HasJsonBody;
-use Saloon\Traits\Responses\HasResponse;
 use SamuelMwangiW\Africastalking\Enum\Service;
 use SamuelMwangiW\Africastalking\Saloon\Requests\BaseRequest;
 use SamuelMwangiW\Africastalking\ValueObjects\CapabilityToken;
