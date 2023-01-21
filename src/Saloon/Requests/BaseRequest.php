@@ -14,12 +14,10 @@ use SamuelMwangiW\Africastalking\Saloon\AfricastalkingConnector;
 /**
  * @mixin AfricastalkingConnector
  */
-
 abstract class BaseRequest extends Request implements HasBody
 {
     public Service $service;
     protected Method $method = Method::POST;
-    protected ?string $connector = AfricastalkingConnector::class;
 
     /**
      * @throws InvalidResponseClassException
@@ -28,10 +26,9 @@ abstract class BaseRequest extends Request implements HasBody
      */
     public function send(): Response
     {
-        $connector = new AfricastalkingConnector();
-        $connector->service($this->service);
-
-        return $connector->send($this);
+        return (new AfricastalkingConnector())
+            ->service($this->service)
+            ->send($this);
     }
 
     public function defaultHeaders(): array

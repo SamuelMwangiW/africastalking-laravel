@@ -30,9 +30,11 @@ class AfricastalkingConnector extends Connector
         ];
     }
 
-    public function service(Service $service): void
+    public function service(Service $service): static
     {
         $this->service = $service;
+
+        return $this;
     }
 
     public function username(): string
