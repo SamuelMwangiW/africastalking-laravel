@@ -83,7 +83,10 @@ it('throws an exception for amounts less than 5', function (string $phone) {
 })->with('phone-numbers')->throws(AfricastalkingException::class);
 
 it('sends airtime to a single recipient', function (AirtimeTransaction $transaction) {
-    $result = Africastalking::airtime()->to($transaction)->send();
+    $result = Africastalking::airtime()
+        ->idempotent(fake()->uuid())
+        ->to($transaction)
+        ->send();
 
     expect($result)
         ->toBeArray()
@@ -106,6 +109,7 @@ it('sends airtime to a single recipient', function (AirtimeTransaction $transact
 
 it('sends airtime to multiple recipients', function (int $amount, string $phone) {
     $result = Africastalking::airtime()
+        ->idempotent(fake()->uuid())
         ->to($phone, 'KES', $amount)
         ->to(phoneNumber: '+254712345678', amount: $amount)
         ->send();

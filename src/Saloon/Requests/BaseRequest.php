@@ -26,9 +26,13 @@ abstract class BaseRequest extends Request implements HasBody
      */
     public function send(): Response
     {
-        return (new AfricastalkingConnector())
-            ->service($this->service)
-            ->send($this);
+        $connector = new AfricastalkingConnector();
+
+        if(method_exists($this,'idempotencyKey') && $this->idempotencyKey()){
+            $this->headers()->add('Idempotency-Key',$this->idempotencyKey());
+        }
+
+        return $connector->service($this->service)->send($this);
     }
 
     public function defaultHeaders(): array

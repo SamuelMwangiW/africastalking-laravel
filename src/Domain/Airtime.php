@@ -3,6 +3,7 @@
 namespace SamuelMwangiW\Africastalking\Domain;
 
 use Illuminate\Support\Collection;
+use SamuelMwangiW\Africastalking\Concerns\HasIdempotency;
 use SamuelMwangiW\Africastalking\Enum\Currency;
 use SamuelMwangiW\Africastalking\Exceptions\AfricastalkingException;
 use SamuelMwangiW\Africastalking\Saloon\Requests\Airtime\SendRequest;
@@ -11,6 +12,8 @@ use SamuelMwangiW\Africastalking\ValueObjects\PhoneNumber;
 
 class Airtime
 {
+    use HasIdempotency;
+
     /**
      * @var Collection<int,AirtimeTransaction> ;
      */
