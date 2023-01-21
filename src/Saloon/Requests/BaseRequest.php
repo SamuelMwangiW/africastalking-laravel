@@ -28,8 +28,8 @@ abstract class BaseRequest extends Request implements HasBody
     {
         $connector = new AfricastalkingConnector();
 
-        if(method_exists($this,'idempotencyKey') && $this->idempotencyKey()){
-            $this->headers()->add('Idempotency-Key',$this->idempotencyKey());
+        if (method_exists($this, 'idempotencyKey') && $this->idempotencyKey()) {
+            $this->headers()->add('Idempotency-Key', $this->idempotencyKey());
         }
 
         return $connector->service($this->service)->send($this);
