@@ -91,7 +91,6 @@ it('sends airtime to a single recipient', function (AirtimeTransaction $transact
         ->send();
 
     if (
-        0 !== count($result['responses']) &&
         'A duplicate request was received within the last 5 minutes' === data_get($result, 'errorMessage')
     ) {
         test()->doesNotPerformAssertions();
@@ -128,7 +127,6 @@ it('sends airtime to multiple recipients', function (int $amount, string $phone)
         ->send();
 
     if (
-        0 !== count($result['responses']) &&
         'A duplicate request was received within the last 5 minutes' === data_get($result, 'errorMessage')
     ) {
         test()->doesNotPerformAssertions();
