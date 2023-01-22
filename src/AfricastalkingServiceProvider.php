@@ -6,6 +6,7 @@ namespace SamuelMwangiW\Africastalking;
 
 use Composer\InstalledVersions;
 use Illuminate\Foundation\Console\AboutCommand;
+use SamuelMwangiW\Africastalking\Saloon\AfricastalkingConnector;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 
@@ -49,5 +50,10 @@ class AfricastalkingServiceProvider extends PackageServiceProvider
                 }
             },
         ]);
+
+        $this->app->singleton(
+            abstract: AfricastalkingConnector::class,
+            concrete: fn () => new AfricastalkingConnector(),
+        );
     }
 }

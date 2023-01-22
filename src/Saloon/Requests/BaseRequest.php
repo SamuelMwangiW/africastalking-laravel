@@ -29,7 +29,7 @@ abstract class BaseRequest extends Request implements HasBody
      */
     public function send(): Response
     {
-        return (new AfricastalkingConnector())
+        return app(AfricastalkingConnector::class)
             ->service($this->service)
             ->send($this);
     }
