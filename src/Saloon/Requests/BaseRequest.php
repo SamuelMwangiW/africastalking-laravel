@@ -26,21 +26,17 @@ abstract class BaseRequest extends Request implements HasBody
      */
     public function send(): Response
     {
-        $connector = new AfricastalkingConnector();
-
-        if (method_exists($this, 'idempotencyKey') && $this->idempotencyKey()) {
-            $this->headers()->add('Idempotency-Key', $this->idempotencyKey());
-        }
-
-        return $connector->service($this->service)->send($this);
+        return (new AfricastalkingConnector())
+            ->service($this->service)
+            ->send($this);
     }
 
     public function defaultHeaders(): array
     {
-        return [
+        return array_filter([
             'apiKey' => config(key: 'africastalking.api-key'),
             'User-Agent' => 'samuelmwangiw/africastalking-laravel',
-        ];
+        ]);
     }
 
     public function username(): string

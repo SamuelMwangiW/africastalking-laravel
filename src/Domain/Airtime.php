@@ -89,10 +89,13 @@ class Airtime
      */
     public function send(): array
     {
-        return SendRequest::make($this->recipients())
-            ->send()
-            ->throw()
-            ->json();
+        $request = SendRequest::make($this->recipients());
+
+        if ($this->idempotencyKey()) {
+            $request->headers()->add('Idempotency-Key', $this->idempotencyKey());
+        }
+
+        return $request->send()->throw()->json();
     }
 
     private function recipients(): string
