@@ -20,17 +20,17 @@ class SentMessageRecipient implements DTOContract
 
     public function __toString(): string
     {
-        return json_encode($this);
+        return json_encode($this) ?: '';
     }
 
     public function __toArray(): array
     {
         return [
-            "statusCode" => 101,
-            "number" => "+254700072929",
-            "cost" => "KES 0.8000",
-            "status" => "Success",
-            "messageId" => "ATXid_6eeffa0cc57b469e02c9716f6bb678c2",
+            "statusCode" => $this->statusCode,
+            "number" => $this->number->number,
+            "cost" => $this->cost,
+            "status" => $this->status->value,
+            "messageId" => $this->id,
         ];
     }
 }

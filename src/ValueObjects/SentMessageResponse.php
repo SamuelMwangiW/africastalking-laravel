@@ -11,6 +11,10 @@ use SamuelMwangiW\Africastalking\Enum\Status;
 
 class SentMessageResponse implements DTOContract
 {
+    /**
+     * @param string $message
+     * @param Collection<int,SentMessageRecipient> $recipients
+     */
     public function __construct(
         public readonly string $message,
         public readonly Collection $recipients
@@ -23,6 +27,7 @@ class SentMessageResponse implements DTOContract
 
         return new SentMessageResponse(
             message: data_get($data, 'Message'),
+            /** @phpstan-ignore-next-line  */
             recipients: collect(data_get($data, 'Recipients'))
                 ->map(
                     fn (array $recipient) => new SentMessageRecipient(
