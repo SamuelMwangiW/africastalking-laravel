@@ -12,7 +12,7 @@ use SamuelMwangiW\Africastalking\ValueObjects\AirtimeTransaction;
 use SamuelMwangiW\Africastalking\ValueObjects\PhoneNumber;
 
 it('resolves the application class')
-    ->expect(fn () => Africastalking::airtime())
+    ->expect(fn() => Africastalking::airtime())
     ->toBeInstanceOf(Airtime::class);
 
 it('can add a recipient', function (string $phone, string $currency, int $amount): void {
@@ -36,7 +36,7 @@ it('can add a recipient from a transaction object', function (AirtimeTransaction
     expect($service)
         ->recipients->toHaveCount(1)
         ->recipients->each(
-            fn ($recipient) => $recipient
+            fn($recipient) => $recipient
                 ->phoneNumber->toBe($transaction->phoneNumber)
                 ->currencyCode->toBe($transaction->currencyCode)
                 ->amount->toBeInt()
@@ -60,7 +60,7 @@ it('can add multiple recipients', function (string $phone, string $currency, int
         ->recipients->toBeInstanceOf(Collection::class)
         ->toHaveCount(2)
         ->recipients->each(
-            fn ($recipient) => $recipient
+            fn($recipient) => $recipient
                 ->phoneNumber->toBeInstanceOf(PhoneNumber::class)
                 ->currencyCode->toBeInstanceOf(Currency::class)
                 ->amount->toBeInt()
@@ -95,27 +95,28 @@ it('sends airtime to a single recipient', function (AirtimeTransaction $transact
         'A duplicate request was received within the last 5 minutes' === data_get($result, 'errorMessage')
     ) {
         test()->doesNotPerformAssertions();
-    } else {
-        expect($result)
-            ->toBeArray()
-            ->toHaveKeys([
-                'errorMessage',
-                'numSent',
-                'totalAmount',
-                'totalDiscount',
-                'responses',
-            ])
-            ->and($result['responses'])
-            ->toBeArray()
-            ->toHaveCount(1)
-            ->and($result['responses'])
-            ->each(
-                fn (Expectation $response) => $response->toHaveKeys(
-                    ['phoneNumber', 'errorMessage', 'requestId', 'discount']
-                )
-            )
-            ->and(data_get($result, 'numSent'))->toBe(1);
+        return;
     }
+
+    expect($result)
+        ->toBeArray()
+        ->toHaveKeys([
+            'errorMessage',
+            'numSent',
+            'totalAmount',
+            'totalDiscount',
+            'responses',
+        ])
+        ->and($result['responses'])
+        ->toBeArray()
+        ->toHaveCount(1)
+        ->and($result['responses'])
+        ->each(
+            fn(Expectation $response) => $response->toHaveKeys(
+                ['phoneNumber', 'errorMessage', 'requestId', 'discount']
+            )
+        )
+        ->and(data_get($result, 'numSent'))->toBe(1);
 })->with('airtime-transactions');
 
 it('sends airtime to multiple recipients', function (int $amount, string $phone): void {
@@ -130,24 +131,25 @@ it('sends airtime to multiple recipients', function (int $amount, string $phone)
         'A duplicate request was received within the last 5 minutes' === data_get($result, 'errorMessage')
     ) {
         test()->doesNotPerformAssertions();
-    } else {
-        expect($result)
-            ->toBeArray()
-            ->toHaveKeys([
-                'errorMessage',
-                'numSent',
-                'totalAmount',
-                'totalDiscount',
-                'responses',
-            ])
-            ->and($result['responses'])
-            ->toBeArray()
-            ->toHaveCount(2)
-            ->and($result['responses'])
-            ->each(
-                fn (Expectation $response) => $response->toHaveKeys(
-                    ['phoneNumber', 'errorMessage', 'requestId', 'discount']
-                )
-            )->and(data_get($result, 'numSent'))->toBe(2);
+        return;
     }
+
+    expect($result)
+        ->toBeArray()
+        ->toHaveKeys([
+            'errorMessage',
+            'numSent',
+            'totalAmount',
+            'totalDiscount',
+            'responses',
+        ])
+        ->and($result['responses'])
+        ->toBeArray()
+        ->toHaveCount(2)
+        ->and($result['responses'])
+        ->each(
+            fn(Expectation $response) => $response->toHaveKeys(
+                ['phoneNumber', 'errorMessage', 'requestId', 'discount']
+            )
+        )->and(data_get($result, 'numSent'))->toBe(2);
 })->with('airtime-amount', 'phone-numbers')->markAsRisky();
