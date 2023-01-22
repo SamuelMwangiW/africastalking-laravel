@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 use SamuelMwangiW\Africastalking\ValueObjects\Voice\Action;
 use SamuelMwangiW\Africastalking\ValueObjects\Voice\Say;
 use SamuelMwangiW\Africastalking\ValueObjects\Voice\SynthesisedSpeech;
@@ -37,7 +39,7 @@ it('sets the voice option')
             ->build()
     )->toBe(expected: '<Say voice="en-US-Standard-C">Test say action message</Say>');
 
-it('sets synthesized speech attributes with a break', function () {
+it('sets synthesized speech attributes with a break', function (): void {
     $say = Say::make(
         fn (SynthesisedSpeech $speech) => $speech
             ->say('Take a deep breath.')
@@ -50,7 +52,7 @@ it('sets synthesized speech attributes with a break', function () {
         ->toBe('<Say voice="en-US-Wavenet-C"><speak>Take a deep breath.<break time="200ms"/>exhale.</speak></Say>');
 });
 
-it('sets synthesized speech attributes with say as', function () {
+it('sets synthesized speech attributes with say as', function (): void {
     $say = Say::make(
         fn (SynthesisedSpeech $speech) => $speech
             ->say('There are ')
@@ -75,7 +77,7 @@ it('sets synthesized speech attributes with say as', function () {
         );
 });
 
-it('sets synthesized speech attributes with emphasis', function () {
+it('sets synthesized speech attributes with emphasis', function (): void {
     $say = Say::make(
         fn (SynthesisedSpeech $speech) => $speech
             ->emphasis('Please call back.', 'strong'),

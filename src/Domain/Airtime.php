@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace SamuelMwangiW\Africastalking\Domain;
 
 use Illuminate\Support\Collection;
@@ -9,6 +11,7 @@ use SamuelMwangiW\Africastalking\Exceptions\AfricastalkingException;
 use SamuelMwangiW\Africastalking\Saloon\Requests\Airtime\SendRequest;
 use SamuelMwangiW\Africastalking\ValueObjects\AirtimeTransaction;
 use SamuelMwangiW\Africastalking\ValueObjects\PhoneNumber;
+use ReflectionException;
 
 class Airtime
 {
@@ -58,7 +61,7 @@ class Airtime
             throw AfricastalkingException::invalidCurrencyCode($currencyCode);
         }
 
-        if (! $phoneNumber instanceof AirtimeTransaction) {
+        if ( ! $phoneNumber instanceof AirtimeTransaction) {
             $phoneNumber = new AirtimeTransaction(
                 phoneNumber: PhoneNumber::make($phoneNumber),
                 currencyCode: Currency::from($currencyCode),
@@ -73,7 +76,7 @@ class Airtime
 
     private function currencyIsValid(string $currencyCode): bool
     {
-        return Currency::tryFrom($currencyCode) !== null;
+        return null !== Currency::tryFrom($currencyCode);
     }
 
     private function minimumAmount(int $amount): bool
@@ -83,7 +86,7 @@ class Airtime
 
     /**
      * @return array
-     * @throws \ReflectionException
+     * @throws ReflectionException
      * @throws \Saloon\Exceptions\InvalidResponseClassException
      * @throws \Saloon\Exceptions\PendingRequestException
      */

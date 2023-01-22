@@ -1,9 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 use Illuminate\Support\Facades\Validator;
 use SamuelMwangiW\Africastalking\Http\Requests\AirtimeValidationRequest;
 
-it('validates request', function (array $data) {
+it('validates request', function (array $data): void {
     $request = new AirtimeValidationRequest();
 
     $validator = Validator::make($data, $request->rules());
@@ -12,7 +14,7 @@ it('validates request', function (array $data) {
         ->passes()->toBeTrue();
 })->with('airtime-validation-notification');
 
-it('retrieves request data', function (array $data) {
+it('retrieves request data', function (array $data): void {
     $request = new AirtimeValidationRequest(request:$data);
 
     expect($request)

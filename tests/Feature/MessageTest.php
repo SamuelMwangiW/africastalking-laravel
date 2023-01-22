@@ -1,12 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 use Illuminate\Support\Collection;
 use SamuelMwangiW\Africastalking\Exceptions\AfricastalkingException;
 use SamuelMwangiW\Africastalking\Facades\Africastalking;
 use SamuelMwangiW\Africastalking\ValueObjects\PhoneNumber;
 use SamuelMwangiW\Africastalking\ValueObjects\RecipientsApiResponse;
 
-it('can send bulk message when from is not set', function (string $phone, string $message) {
+it('can send bulk message when from is not set', function (string $phone, string $message): void {
     config()->set('africastalking.from', null);
 
     $response = Africastalking::sms($message)
@@ -21,7 +23,7 @@ it('can send bulk message when from is not set', function (string $phone, string
         ->first()->number->number->toBe($phone);
 })->with('phone-numbers', 'sentence');
 
-it('can send bulk message', function (string $phone, string $message) {
+it('can send bulk message', function (string $phone, string $message): void {
     $response = Africastalking::sms($message)
         ->to($phone)
         ->send();
@@ -34,7 +36,7 @@ it('can send bulk message', function (string $phone, string $message) {
         ->first()->number->number->toBe($phone);
 })->with('phone-numbers', 'sentence');
 
-it('can enqueue bulk message', function (string $phone, string $message) {
+it('can enqueue bulk message', function (string $phone, string $message): void {
     $response = Africastalking::sms($message)
         ->to($phone)
         ->enqueue()
@@ -48,7 +50,7 @@ it('can enqueue bulk message', function (string $phone, string $message) {
         ->first()->number->number->toBe($phone);
 })->with('phone-numbers', 'sentence');
 
-it('can send message without enqueue', function (string $phone, string $message) {
+it('can send message without enqueue', function (string $phone, string $message): void {
     $response = Africastalking::sms($message)
         ->to($phone)
         ->enqueue(value: false)
@@ -63,7 +65,7 @@ it('can send message without enqueue', function (string $phone, string $message)
         ->first()->number->number->toBe($phone);
 })->with('phone-numbers', 'sentence');
 
-it('can change message senderID', function (string $phone, string $message) {
+it('can change message senderID', function (string $phone, string $message): void {
     $response = Africastalking::sms($message)
         ->to($phone)
         ->as(config('africastalking.from-backup'))
@@ -77,7 +79,7 @@ it('can change message senderID', function (string $phone, string $message) {
         ->first()->number->number->toBe($phone);
 })->with('phone-numbers', 'sentence');
 
-it('thows an exception for an invalid request', function () {
+it('thows an exception for an invalid request', function (): void {
     config()->set('africastalking.api-key', 'invalid-key-here');
 
     Africastalking::sms('This is a dummy message')
@@ -85,7 +87,7 @@ it('thows an exception for an invalid request', function () {
         ->send();
 })->throws(\Exception::class);
 
-it('can send premium messages', function (string $phone, string $message) {
+it('can send premium messages', function (string $phone, string $message): void {
     $response = Africastalking::sms($message)
         ->to($phone)
         ->premium()
@@ -99,7 +101,7 @@ it('can send premium messages', function (string $phone, string $message) {
         ->first()->cost->toBe('0');
 })->with('phone-numbers', 'sentence');
 
-it('can send premium messages in bulk mode', function (string $phone, string $message) {
+it('can send premium messages in bulk mode', function (string $phone, string $message): void {
     $response = Africastalking::sms($message)
         ->to($phone)
         ->premium()
@@ -114,7 +116,7 @@ it('can send premium messages in bulk mode', function (string $phone, string $me
         ->first()->cost->not->toBe('0');
 })->with('phone-numbers', 'sentence');
 
-it('can send premium messages with a keyword', function (string $phone, string $message) {
+it('can send premium messages with a keyword', function (string $phone, string $message): void {
     $response = Africastalking::sms($message)
         ->to($phone)
         ->premium()
@@ -129,7 +131,7 @@ it('can send premium messages with a keyword', function (string $phone, string $
         ->first()->cost->toBe('0');
 })->with('phone-numbers', 'sentence');
 
-it('can send premium messages with a linkid', function (string $phone, string $message) {
+it('can send premium messages with a linkid', function (string $phone, string $message): void {
     $response = Africastalking::sms($message)
         ->to($phone)
         ->premium()
@@ -144,7 +146,7 @@ it('can send premium messages with a linkid', function (string $phone, string $m
         ->first()->cost->toBe('0');
 })->with('phone-numbers', 'sentence');
 
-it('throws an exception for invalid sender id', function (string $phone) {
+it('throws an exception for invalid sender id', function (string $phone): void {
     $response = Africastalking::sms('test message')
         ->to($phone)
         ->as('INVALID_SENDER')

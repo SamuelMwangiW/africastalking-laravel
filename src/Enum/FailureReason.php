@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace SamuelMwangiW\Africastalking\Enum;
 
 enum FailureReason: string

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace SamuelMwangiW\Africastalking\Domain;
 
 use Illuminate\Support\Collection;
@@ -14,17 +16,26 @@ class VoiceCall
     private PhoneNumber $from;
     protected ?string $clientRequestId = null;
 
-    public function to(string|array|null $recipients): static
+    public function to(PhoneNumber|string|array|null $recipients): static
     {
-        if (is_null($recipients)) {
+        if (null === $recipients) {
             return $this;
         }
 
-        if (is_string($recipients)) {
+        if (
+            is_string($recipients) ||
+            $recipients instanceof PhoneNumber
+        ) {
             $recipients = [$recipients];
         }
 
-        $this->recipients = collect($recipients)->map(fn ($phone) => PhoneNumber::make($phone));
+        $this->recipients = collect($recipients)->map(function ($phone) {
+            if ($phone instanceof PhoneNumber) {
+                return $phone;
+            }
+
+            return PhoneNumber::make($phone);
+        });
 
         return $this;
     }

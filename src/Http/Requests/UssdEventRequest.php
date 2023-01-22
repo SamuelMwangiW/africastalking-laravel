@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace SamuelMwangiW\Africastalking\Http\Requests;
 
 use Carbon\CarbonInterval;
@@ -26,7 +28,7 @@ class UssdEventRequest extends FormRequest
             'phoneNumber' => ['required', 'string'],
             'networkCode' => [
                 'required',
-                'string',
+                'integer',
                 new Enum(type: Network::class),
             ],
             'status' => [
@@ -40,6 +42,13 @@ class UssdEventRequest extends FormRequest
             'lastAppResponse' => ['required','string'],
             'errorMessage' => ['nullable','string'],
         ];
+    }
+
+    protected function prepareForValidation(): void
+    {
+        $this->merge([
+            'networkCode' => $this->integer('networkCode')
+        ]);
     }
 
     protected function idKey(): string

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 use Illuminate\Support\Collection;
 use Pest\Expectation;
 use SamuelMwangiW\Africastalking\Domain\Airtime;
@@ -13,7 +15,7 @@ it('resolves the application class')
     ->expect(fn () => Africastalking::airtime())
     ->toBeInstanceOf(Airtime::class);
 
-it('can add a recipient', function (string $phone, string $currency, int $amount) {
+it('can add a recipient', function (string $phone, string $currency, int $amount): void {
     $service = Africastalking::airtime()
         ->to(
             phoneNumber: $phone,
@@ -28,7 +30,7 @@ it('can add a recipient', function (string $phone, string $currency, int $amount
         ->recipients->first()->currencyCode->toBeInstanceOf(Currency::class);
 })->with('phone-numbers', 'currencies', 'airtime-amount');
 
-it('can add a recipient from a transaction object', function (AirtimeTransaction $transaction) {
+it('can add a recipient from a transaction object', function (AirtimeTransaction $transaction): void {
     $service = Africastalking::airtime()->to($transaction);
 
     expect($service)
@@ -41,7 +43,7 @@ it('can add a recipient from a transaction object', function (AirtimeTransaction
         );
 })->with('airtime-transactions');
 
-it('can add multiple recipients', function (string $phone, string $currency, int $amount) {
+it('can add multiple recipients', function (string $phone, string $currency, int $amount): void {
     $service = Africastalking::airtime()
         ->add(
             phoneNumber: $phone,
@@ -65,7 +67,7 @@ it('can add multiple recipients', function (string $phone, string $currency, int
         );
 })->with('phone-numbers', 'currencies', 'airtime-amount');
 
-it('throws an exception for invalid currency', function (string $phone, int $amount) {
+it('throws an exception for invalid currency', function (string $phone, int $amount): void {
     Africastalking::airtime()
         ->to(
             phoneNumber: $phone,
@@ -74,7 +76,7 @@ it('throws an exception for invalid currency', function (string $phone, int $amo
         );
 })->with('phone-numbers', 'airtime-amount')->throws(AfricastalkingException::class);
 
-it('throws an exception for amounts less than 5', function (string $phone) {
+it('throws an exception for amounts less than 5', function (string $phone): void {
     Africastalking::airtime()
         ->to(
             phoneNumber: $phone,
@@ -82,11 +84,19 @@ it('throws an exception for amounts less than 5', function (string $phone) {
         );
 })->with('phone-numbers')->throws(AfricastalkingException::class);
 
-it('sends airtime to a single recipient', function (AirtimeTransaction $transaction) {
+it('sends airtime to a single recipient', function (AirtimeTransaction $transaction): void {
     $result = Africastalking::airtime()
         ->idempotent(fake()->uuid())
         ->to($transaction)
         ->send();
+
+    if (
+        'A duplicate request was received within the last 5 minutes' === data_get($result, 'errorMessage')
+    ) {
+        test()->doesNotPerformAssertions();
+
+        return;
+    }
 
     expect($result)
         ->toBeArray()
@@ -102,20 +112,26 @@ it('sends airtime to a single recipient', function (AirtimeTransaction $transact
         ->toHaveCount(1)
         ->and($result['responses'])
         ->each(
-            fn (Expectation $response) => $response->toHaveKeys(['phoneNumber', 'errorMessage', 'requestId', 'discount'])
+            fn (Expectation $response) => $response->toHaveKeys(
+                ['phoneNumber', 'errorMessage', 'requestId', 'discount']
+            )
         )
         ->and(data_get($result, 'numSent'))->toBe(1);
 })->with('airtime-transactions');
 
-it('sends airtime to multiple recipients', function (int $amount, string $phone) {
+it('sends airtime to multiple recipients', function (int $amount, string $phone): void {
     $result = Africastalking::airtime()
         ->idempotent(fake()->uuid())
         ->to($phone, 'KES', $amount)
         ->to(phoneNumber: '+254712345678', amount: $amount)
         ->send();
 
-    if (count($result['responses']) !== 2) {
-        dump($result['responses']);
+    if (
+        'A duplicate request was received within the last 5 minutes' === data_get($result, 'errorMessage')
+    ) {
+        test()->doesNotPerformAssertions();
+
+        return;
     }
 
     expect($result)
@@ -129,9 +145,11 @@ it('sends airtime to multiple recipients', function (int $amount, string $phone)
         ])
         ->and($result['responses'])
         ->toBeArray()
-       ->toHaveCount(2)
+        ->toHaveCount(2)
         ->and($result['responses'])
         ->each(
-            fn (Expectation $response) => $response->toHaveKeys(['phoneNumber', 'errorMessage', 'requestId', 'discount'])
+            fn (Expectation $response) => $response->toHaveKeys(
+                ['phoneNumber', 'errorMessage', 'requestId', 'discount']
+            )
         )->and(data_get($result, 'numSent'))->toBe(2);
 })->with('airtime-amount', 'phone-numbers')->markAsRisky();

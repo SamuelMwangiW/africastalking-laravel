@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace SamuelMwangiW\Africastalking\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
@@ -20,10 +22,17 @@ class UssdSessionRequest extends FormRequest
         return [
             'sessionId' => ['string', 'required', 'min:32'],
             'phoneNumber' => ['string', 'required', 'min:10', 'max:25'],
-            'networkCode' => ['string', 'required', new Enum(Network::class)],
+            'networkCode' => ['integer', 'required', new Enum(Network::class)],
             'serviceCode' => ['string', 'required', 'min:3'],
             'text' => ['string', 'nullable'],
         ];
+    }
+
+    protected function prepareForValidation(): void
+    {
+        $this->merge([
+            'networkCode' => $this->integer('networkCode'),
+        ]);
     }
 
     public function userInput(): ?string

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace SamuelMwangiW\Africastalking\Testing\Fakes;
 
 use Illuminate\Support\Collection;
@@ -15,7 +17,7 @@ class VoiceCallFake extends VoiceCall
 
     public function send(): array
     {
-        if (is_null($this->calls)) {
+        if (null === $this->calls) {
             $this->calls = collect(
                 [
                     $this->details(),

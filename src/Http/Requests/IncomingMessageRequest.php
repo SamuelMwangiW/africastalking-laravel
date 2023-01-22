@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace SamuelMwangiW\Africastalking\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
@@ -48,10 +50,17 @@ class IncomingMessageRequest extends FormRequest
             ],
             'networkCode' => [
                 'nullable',
-                'string',
+                'integer',
                 new Enum(Network::class),
             ],
         ];
+    }
+
+    protected function prepareForValidation(): void
+    {
+        $this->merge([
+            'networkCode' => $this->integer('networkCode')
+        ]);
     }
 
     protected function idKey(): string

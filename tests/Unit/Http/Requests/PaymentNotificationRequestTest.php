@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 use Illuminate\Support\Facades\Validator;
 use SamuelMwangiW\Africastalking\Enum\Direction;
 use SamuelMwangiW\Africastalking\Enum\PaymentCategory;
@@ -8,7 +10,7 @@ use SamuelMwangiW\Africastalking\Enum\PaymentSourceType;
 use SamuelMwangiW\Africastalking\Enum\Status;
 use SamuelMwangiW\Africastalking\Http\Requests\PaymentNotificationRequest;
 
-it('validates request', function (string $provider, string $category, string $source, string $status, array $data) {
+it('validates request', function (string $provider, string $category, string $source, string $status, array $data): void {
     $request = new PaymentNotificationRequest();
     $data = array_merge(
         ['provider' => $provider, 'category' => $category, 'sourceType' => $source, 'destinationType' => $source, 'status' => $status],
@@ -21,7 +23,7 @@ it('validates request', function (string $provider, string $category, string $so
         ->passes()->toBeTrue();
 })->with('payment-providers', 'payment-categories', 'payment-source-types', 'status-values', 'payment-notification');
 
-it('retrieves request data', function (string $provider, string $category, string $source, string $status, array $data) {
+it('retrieves request data', function (string $provider, string $category, string $source, string $status, array $data): void {
     $request = new PaymentNotificationRequest(
         request: array_merge(
             ['provider' => $provider, 'category' => $category, 'sourceType' => $source, 'destinationType' => $source, 'status' => $status],

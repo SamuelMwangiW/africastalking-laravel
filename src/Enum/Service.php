@@ -1,6 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace SamuelMwangiW\Africastalking\Enum;
+
+use Exception;
 
 enum Service
 {
@@ -28,7 +32,7 @@ enum Service
     }
 
     /**
-     * @throws \Exception
+     * @throws Exception
      */
     public function sandboxBaseUrl(): string
     {
@@ -39,8 +43,8 @@ enum Service
             self::CONTENT => 'https://api.sandbox.africastalking.com/version1/',
             self::PAYMENT => 'https://payments.sandbox.africastalking.com/',
             self::VOICE => 'https://voice.sandbox.africastalking.com/',
-            self::DATA => throw new \Exception('Mobile data is not supported on Sandbox'),
-            self::WEBRTC => throw new \Exception('WebRTC not supported on Sandbox environment'),
+            self::DATA => throw new Exception('Mobile data is not supported on Sandbox'),
+            self::WEBRTC => throw new Exception('WebRTC not supported on Sandbox environment'),
         };
     }
 }

@@ -1,10 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 use Illuminate\Support\Facades\Validator;
 use SamuelMwangiW\Africastalking\Enum\UpdateType;
 use SamuelMwangiW\Africastalking\Http\Requests\SubscriptionRequest;
 
-it('validates request', function (array $data) {
+it('validates request', function (array $data): void {
     $request = new SubscriptionRequest();
 
     $validator = Validator::make($data, $request->rules());
@@ -13,7 +15,7 @@ it('validates request', function (array $data) {
         ->passes()->toBeTrue();
 })->with('subscription-notification');
 
-it('retrieves request data', function (array $data) {
+it('retrieves request data', function (array $data): void {
     $request = new SubscriptionRequest(request: $data);
 
     expect($request)

@@ -1,9 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 use Illuminate\Support\Facades\Validator;
 use SamuelMwangiW\Africastalking\Http\Requests\VoiceEventRequest;
 
-it('validates request', function (string $direction, array $data) {
+it('validates request', function (string $direction, array $data): void {
     $request = new VoiceEventRequest();
     $validator = Validator::make(
         array_merge(['direction' => $direction], $data),
@@ -11,10 +13,10 @@ it('validates request', function (string $direction, array $data) {
     );
 
     expect($validator)
-       ->passes()->toBeTrue();
+        ->passes()->toBeTrue();
 })->with('call-directions', 'voice-event-notification');
 
-it('retrieves request data', function (array $data) {
+it('retrieves request data', function (array $data): void {
     $request = new VoiceEventRequest(request: $data);
 
     expect($request)

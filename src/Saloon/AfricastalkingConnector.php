@@ -1,11 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace SamuelMwangiW\Africastalking\Saloon;
 
 use Illuminate\Support\Str;
 use Saloon\Http\Connector;
 use Saloon\Traits\Plugins\AcceptsJson;
 use SamuelMwangiW\Africastalking\Enum\Service;
+use Exception;
 
 class AfricastalkingConnector extends Connector
 {
@@ -14,7 +17,7 @@ class AfricastalkingConnector extends Connector
     protected Service $service;
 
     /**
-     * @throws \Exception
+     * @throws Exception
      */
     public function resolveBaseUrl(): string
     {

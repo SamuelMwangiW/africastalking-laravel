@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 use Illuminate\Contracts\Support\Responsable;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -68,7 +70,7 @@ it('can reject calls')
         '<?xml version="1.0" encoding="UTF-8"?><Response><Play url="We are closed at the moment, kindly call tomorrow"/><Reject/></Response>'
     );
 
-it('sets content-type to text/plain in the response', function () {
+it('sets content-type to text/plain in the response', function (): void {
     $request = Request::create(uri: '/');
 
     $response = Africastalking::voice()
@@ -84,7 +86,7 @@ it('sets content-type to text/plain in the response', function () {
         ->headers->get('content-type')->toBe('application/xml');
 });
 
-it('makes a call', function (string $phone) {
+it('makes a call', function (string $phone): void {
     $response = africastalking()->voice()->call($phone)->send();
 
     expect($response)
@@ -117,7 +119,7 @@ it('webrtc capability token not supported on sandbox')
         fn () => africastalking()->voice()->webrtc()->send()
     );
 
-it('requests a webrtc capability token', function () {
+it('requests a webrtc capability token', function (): void {
     config()->set('africastalking.username', 'not_sandbox');
 
     Saloon::fake([
@@ -142,7 +144,7 @@ it('requests a webrtc capability token', function () {
         ->lifeTimeSec->toBe('86400')
         ->token->toBe('ATCAPtkn_somerandomtexthere');
 });
-it('WebRTC token has a token alias for send', function () {
+it('WebRTC token has a token alias for send', function (): void {
     config()->set('africastalking.username', 'not_sandbox');
 
     Saloon::fake([

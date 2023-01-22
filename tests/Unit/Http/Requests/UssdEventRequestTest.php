@@ -1,10 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 use Illuminate\Support\Facades\Validator;
 use SamuelMwangiW\Africastalking\Enum\Network;
 use SamuelMwangiW\Africastalking\Http\Requests\UssdEventRequest;
 
-it('validates request', function (string $networkCode, string $status, array $data) {
+it('validates request', function (int $networkCode, string $status, array $data): void {
     $request = new UssdEventRequest();
 
     $validator = Validator::make(
@@ -19,7 +21,7 @@ it('validates request', function (string $networkCode, string $status, array $da
         ->passes()->toBeTrue();
 })->with('network-codes', 'status-values', 'ussd-event-notification');
 
-it('retrieves request data', function (string $networkCode, string $status, array $data) {
+it('retrieves request data', function (int $networkCode, string $status, array $data): void {
     $request = new UssdEventRequest(
         request: array_merge(
             $data,

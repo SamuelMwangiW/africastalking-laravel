@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 return [
     'username' => env('AFRICASTALKING_USERNAME', 'sandbox'),
     'api-key' => env('AFRICASTALKING_API_KEY'),

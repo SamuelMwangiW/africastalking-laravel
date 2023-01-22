@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 use SamuelMwangiW\Africastalking\Domain\Airtime;
 use SamuelMwangiW\Africastalking\Domain\VoiceCall;
 use SamuelMwangiW\Africastalking\Facades\Africastalking;
@@ -8,7 +10,7 @@ use SamuelMwangiW\Africastalking\Testing\Fakes\MessageFake;
 use SamuelMwangiW\Africastalking\Testing\Fakes\VoiceCallFake;
 use SamuelMwangiW\Africastalking\ValueObjects\Message;
 
-it('swaps out implementation when a fake implementation', function () {
+it('swaps out implementation when a fake implementation', function (): void {
     Africastalking::fake();
 
     expect(app(Message::class))
@@ -17,14 +19,14 @@ it('swaps out implementation when a fake implementation', function () {
         ->and(app(VoiceCall::class))->toBeInstanceOf(VoiceCallFake::class);
 });
 
-it('swapping does not persist', function () {
+it('swapping does not persist', function (): void {
     expect(app(Message::class))
         ->toBeInstanceOf(Message::class)
         ->and(app(Airtime::class))->toBeInstanceOf(Airtime::class)
         ->and(app(VoiceCall::class))->toBeInstanceOf(VoiceCall::class);
 });
 
-it('asserts Message sent', function (string $phone, string $message) {
+it('asserts Message sent', function (string $phone, string $message): void {
     Africastalking::fake();
 
     Africastalking::sms($message)
@@ -38,7 +40,7 @@ it('asserts Message sent', function (string $phone, string $message) {
     Africastalking::assertSmsSent();
 })->with('phone-numbers', 'sentence');
 
-it('asserts no sent', function (string $phone, string $message) {
+it('asserts no sent', function (string $phone, string $message): void {
     Africastalking::fake();
 
     Africastalking::sms($message)
@@ -50,7 +52,7 @@ it('asserts no sent', function (string $phone, string $message) {
     Africastalking::assertNoSmsSent();
 })->with('phone-numbers', 'sentence');
 
-it('asserts VoiceCall sent', function (string $phone, string $message) {
+it('asserts VoiceCall sent', function (string $phone, string $message): void {
     Africastalking::fake();
 
     Africastalking::voice()->call($phone)->done();
@@ -58,7 +60,7 @@ it('asserts VoiceCall sent', function (string $phone, string $message) {
     Africastalking::assertVoiceCallSent();
 })->with('phone-numbers', 'sentence');
 
-it('asserts no VoiceCall sent', function (string $phone, string $message) {
+it('asserts no VoiceCall sent', function (string $phone, string $message): void {
     Africastalking::fake();
 
     Africastalking::voice()->call($phone);
@@ -66,7 +68,7 @@ it('asserts no VoiceCall sent', function (string $phone, string $message) {
     Africastalking::assertNoVoiceCallSent();
 })->with('phone-numbers', 'sentence');
 
-it('asserts AirtimeSent sent', function (string $phone, string $message) {
+it('asserts AirtimeSent sent', function (string $phone, string $message): void {
     Africastalking::fake();
 
     Africastalking::airtime()->to(phoneNumber: $phone, currencyCode: 'KES', amount: 1_000)->send();
@@ -76,7 +78,7 @@ it('asserts AirtimeSent sent', function (string $phone, string $message) {
     Africastalking::assertAirtimeSent();
 })->with('phone-numbers', 'sentence');
 
-it('asserts no AirtimeSent sent', function (string $phone, string $message) {
+it('asserts no AirtimeSent sent', function (string $phone, string $message): void {
     Africastalking::fake();
 
     Africastalking::airtime()->to(phoneNumber: $phone, currencyCode: 'KES', amount: 1_000);

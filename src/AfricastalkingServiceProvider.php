@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace SamuelMwangiW\Africastalking;
 
 use Composer\InstalledVersions;
@@ -28,20 +30,20 @@ class AfricastalkingServiceProvider extends PackageServiceProvider
                 try {
                     $balance = africastalking()->app()->balance();
 
-                    return $balance->currency->value . ' ' . number_format($balance->amount);
+                    return $balance->currency->value.' '.number_format($balance->amount);
                 } catch (\Exception) {
                     return '<fg=red>FAILED</>';
                 }
             },
             'Payments Product Balance' => function () {
-                if (! config('africastalking.payment.product-name')) {
+                if ( ! config('africastalking.payment.product-name')) {
                     return '<fg=yellow>Not setup</>';
                 }
 
                 try {
                     $balance = africastalking()->wallet()->balance();
 
-                    return $balance->currency->value . ' ' . number_format($balance->amount);
+                    return $balance->currency->value.' '.number_format($balance->amount);
                 } catch (\Exception) {
                     return '<fg=red>FAILED</>';
                 }

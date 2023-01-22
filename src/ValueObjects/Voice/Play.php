@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace SamuelMwangiW\Africastalking\ValueObjects\Voice;
 
 class Play implements Action
@@ -20,6 +22,6 @@ class Play implements Action
 
     public function build(): string
     {
-        return "<Play url=\"$this->url\"/>";
+        return "<Play url=\"{$this->url}\"/>";
     }
 }

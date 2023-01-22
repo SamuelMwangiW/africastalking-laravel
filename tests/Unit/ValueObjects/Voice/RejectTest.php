@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 use SamuelMwangiW\Africastalking\ValueObjects\Voice\Action;
 use SamuelMwangiW\Africastalking\ValueObjects\Voice\Reject;
 

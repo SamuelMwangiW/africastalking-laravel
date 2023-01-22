@@ -1,9 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 use Illuminate\Support\Facades\Validator;
 use SamuelMwangiW\Africastalking\Http\Requests\BulkSmsOptOutRequest;
 
-it('validates request', function (array $data) {
+it('validates request', function (array $data): void {
     $request = new BulkSmsOptOutRequest();
 
     $validator = Validator::make($data, $request->rules());
@@ -12,7 +14,7 @@ it('validates request', function (array $data) {
         ->passes()->toBeTrue();
 })->with('bulk-sms-opt-out-notification');
 
-it('retrieves request data', function (array $data) {
+it('retrieves request data', function (array $data): void {
     $request = new BulkSmsOptOutRequest(request:$data);
 
     expect($request)

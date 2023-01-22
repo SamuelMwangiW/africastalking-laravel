@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace SamuelMwangiW\Africastalking\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
@@ -13,8 +15,8 @@ use SamuelMwangiW\Africastalking\Http\Requests\Concerns\HasUniqueId;
 class AirtimeStatusRequest extends FormRequest
 {
     use HasPhoneNumber;
-    use HasUniqueId;
     use HasStatus;
+    use HasUniqueId;
 
     public function rules(): array
     {

@@ -1,11 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 use SamuelMwangiW\Africastalking\Contracts\DTOContract;
 use SamuelMwangiW\Africastalking\Enum\Currency;
 use SamuelMwangiW\Africastalking\Factories\AccountFactory;
 use SamuelMwangiW\Africastalking\ValueObjects\Balance;
 
-it('respects the DTOContract ', function () {
+it('respects the DTOContract ', function (): void {
     $account = new Balance(
         amount: 6000,
         currency: Currency::UGANDA,
@@ -15,41 +17,41 @@ it('respects the DTOContract ', function () {
         ->toBeInstanceOf(DTOContract::class);
 });
 
-it('can construct an AccountDTO class', function () {
+it('can construct an AccountDTO class', function (): void {
     $account = new Balance(
         amount: 6000,
         currency: Currency::UGANDA,
     );
 
     expect($account)
-       ->toBeInstanceOf(Balance::class)
-       ->currency->toBe(Currency::UGANDA)
-       ->amount->toBe(6000.00);
+        ->toBeInstanceOf(Balance::class)
+        ->currency->toBe(Currency::UGANDA)
+        ->amount->toBe(6000.00);
 });
 
-it('can construct an Account using AccountFactory', function () {
+it('can construct an Account using AccountFactory', function (): void {
     $account = AccountFactory::make(
         ['UserData' => ['balance' => 'UGX 9876.00']]
     );
 
     expect($account)
-       ->toBeInstanceOf(Balance::class)
-       ->currency->toBe(Currency::UGANDA)
-       ->amount->toBe(9876.00);
+        ->toBeInstanceOf(Balance::class)
+        ->currency->toBe(Currency::UGANDA)
+        ->amount->toBe(9876.00);
 });
 
-test('AccountFactory defaults to USD for unknown currency', function () {
+test('AccountFactory defaults to USD for unknown currency', function (): void {
     $account = AccountFactory::make(
         ['UserData' => ['balance' => 'KPW 9876.00']]
     );
 
     expect($account)
-       ->toBeInstanceOf(Balance::class)
-       ->currency->toBe(Currency::INTERNATIONAL)
-       ->amount->toBe(9876.00);
+        ->toBeInstanceOf(Balance::class)
+        ->currency->toBe(Currency::INTERNATIONAL)
+        ->amount->toBe(9876.00);
 })->markAsRisky();
 
-it('can make an Account statically', function () {
+it('can make an Account statically', function (): void {
     $account = Balance::make(balance: 67890.00, currency: Currency::INTERNATIONAL);
 
     expect($account)
@@ -58,7 +60,7 @@ it('can make an Account statically', function () {
         ->amount->toBe(67890.00);
 });
 
-it('can be cast to string', function () {
+it('can be cast to string', function (): void {
     $account = new Balance(
         amount: 6000,
         currency: Currency::UGANDA,
@@ -68,7 +70,7 @@ it('can be cast to string', function () {
         ->toBe('UGX 6000');
 });
 
-it('can be cast to array', function () {
+it('can be cast to array', function (): void {
     $account = new Balance(
         amount: 345678.5,
         currency: Currency::TANZANIA,

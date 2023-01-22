@@ -1,9 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 use SamuelMwangiW\Africastalking\Contracts\DTOContract;
 use SamuelMwangiW\Africastalking\ValueObjects\PhoneNumber;
 
-it('respects the DTOContract ', function (string $phone) {
+it('respects the DTOContract ', function (string $phone): void {
     $account = new PhoneNumber(
         number: $phone
     );
@@ -12,7 +14,7 @@ it('respects the DTOContract ', function (string $phone) {
         ->toBeInstanceOf(DTOContract::class);
 })->with('phone-numbers');
 
-it('can be constructed', function (string $phone) {
+it('can be constructed', function (string $phone): void {
     $account = new PhoneNumber(
         number: $phone
     );
@@ -22,7 +24,7 @@ it('can be constructed', function (string $phone) {
         ->number->toBe($phone);
 })->with('phone-numbers');
 
-it('can be generated using make', function (string $phone) {
+it('can be generated using make', function (string $phone): void {
     $account = PhoneNumber::make(phone: $phone);
 
     expect($account)
@@ -30,7 +32,7 @@ it('can be generated using make', function (string $phone) {
         ->number->toBe($phone);
 })->with('phone-numbers');
 
-it('can be cast to string', function (string $phone) {
+it('can be cast to string', function (string $phone): void {
     $account = PhoneNumber::make(phone: $phone);
 
     expect((string)$account)
@@ -38,7 +40,7 @@ it('can be cast to string', function (string $phone) {
         ->toBe($phone);
 })->with('phone-numbers');
 
-it('can be cast to array', function (string $phone) {
+it('can be cast to array', function (string $phone): void {
     $account = (array)PhoneNumber::make(phone: $phone);
 
     expect($account)

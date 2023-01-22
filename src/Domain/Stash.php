@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace SamuelMwangiW\Africastalking\Domain;
 
 use SamuelMwangiW\Africastalking\Enum\Currency;
@@ -17,11 +19,11 @@ class Stash
         null|string|Currency $currency = null,
         int|null $amount = null
     ): StashTopupResponse {
-        if (! is_null($currency)) {
+        if (null !== $currency) {
             $this->currency($currency);
         }
 
-        if (! is_null($amount)) {
+        if (null !== $amount) {
             $this->amount($amount);
         }
 

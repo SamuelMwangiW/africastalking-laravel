@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 use SamuelMwangiW\Africastalking\Domain\Application;
 use SamuelMwangiW\Africastalking\Enum\Currency;
 use SamuelMwangiW\Africastalking\Facades\Africastalking;

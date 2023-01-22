@@ -1,17 +1,19 @@
 <?php
 
+declare(strict_types=1);
+
 use Illuminate\Support\Facades\Validator;
 use SamuelMwangiW\Africastalking\Http\Requests\VoiceCallRequest;
 
-it('validates request', function (array $data) {
+it('validates request', function (array $data): void {
     $request = new VoiceCallRequest();
     $validator = Validator::make($data, $request->rules());
 
     expect($validator)
-       ->passes()->toBeTrue();
+        ->passes()->toBeTrue();
 })->with('incoming-voice-call-notification');
 
-it('retrieves request data', function (array $data) {
+it('retrieves request data', function (array $data): void {
     $request = new VoiceCallRequest(request: $data);
 
     expect($request)

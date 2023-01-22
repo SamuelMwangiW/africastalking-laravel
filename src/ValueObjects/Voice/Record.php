@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace SamuelMwangiW\Africastalking\ValueObjects\Voice;
 
 class Record implements Action
@@ -108,7 +110,7 @@ class Record implements Action
             $options .= " trimSilence=\"true\"";
         }
 
-        return strlen($this->say->getMessage())
+        return mb_strlen($this->say->getMessage())
             ? "<Record{$options}>{$this->say->build()}</Record>"
             : '<Record />';
     }
