@@ -3,54 +3,35 @@
 declare(strict_types=1);
 
 
-use Illuminate\Support\Benchmark;
-use SamuelMwangiW\Africastalking\Enum\Service;
+use Saloon\Http\Response;
 use SamuelMwangiW\Africastalking\Saloon\AfricastalkingConnector;
 use SamuelMwangiW\Africastalking\Saloon\Requests\Messaging\BulkSmsRequest;
+use SamuelMwangiW\Africastalking\ValueObjects\SentMessageResponse;
 
 test('benchmark pooling requests', function (string $phone): void {
-    $messages = collect(fake()->sentences(200));
+    $messages = collect(fake()->sentences(100));
 
-    $defaultWithSingleton = Benchmark::measure(
-        benchmarkables: fn () => $messages->each(
-            fn (string $message) => africastalking()->sms($message)->to($phone)->send()
-        )
-    );
+    $responses = collect([]);
 
-    $pool = Benchmark::measure(function () use ($phone, $messages): void {
-        $requests = [];
+    $requests = $messages->map(function (string $message) use ($phone): BulkSmsRequest {
+        $data = [
+            'message' => $message,
+            'to' => $phone,
+            'from' => config(key: 'africastalking.from'),
+        ];
 
-        $messages->each(function (string $message) use ($phone, &$requests): void {
-            $data = [
-                'message' => $message,
-                'to' => $phone,
-                'from' => config(key: 'africastalking.from'),
-            ];
-
-            $requests[] = BulkSmsRequest::make($data);
-        });
-
-        $connector = AfricastalkingConnector::make();
-        $connector->service(Service::BULK_SMS);
-        $pool = $connector->pool($requests, 10);
-
-        $promise = $pool->send();
-        $promise->wait();
+        return BulkSmsRequest::make($data);
     });
 
-    $sameConnector = Benchmark::measure(function () use ($phone, $messages): void {
-        $connector = AfricastalkingConnector::make()->service(Service::BULK_SMS);
+    $connector = AfricastalkingConnector::make()->service($requests->first()->service);
+    $connector->pool(
+        requests: $requests,
+        concurrency: 10,
+        responseHandler: fn(Response $data) => $responses->push($data->dto())
+    )->send()->wait();
 
-        $messages->each(function (string $message) use ($connector, $phone): void {
-            $data = [
-                'message' => $message,
-                'to' => $phone,
-                'from' => config(key: 'africastalking.from'),
-            ];
-
-            $connector->send(BulkSmsRequest::make($data));
-        });
-    });
-
-    dd($pool, $sameConnector, $defaultWithSingleton);
+    expect($responses)
+        ->not->toBeEmpty()
+        ->toHaveCount(100)
+        ->each->toBeInstanceOf(SentMessageResponse::class);
 })->with('phone-numbers')->skip();
