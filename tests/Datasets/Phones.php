@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 dataset('phone-numbers', function () {
     yield '+254700072929';
 //    yield '+256783879001';

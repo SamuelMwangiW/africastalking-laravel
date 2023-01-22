@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace SamuelMwangiW\Africastalking\Http\Requests\Concerns;
 
 use Illuminate\Foundation\Http\FormRequest;

@@ -1,10 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 use Illuminate\Support\Facades\Validator;
 use SamuelMwangiW\Africastalking\Enum\Network;
 use SamuelMwangiW\Africastalking\Http\Requests\IncomingMessageRequest;
 
-it('validates request', function (string $networkCode, array $data) {
+it('validates request', function (int $networkCode, array $data): void {
     $request = new IncomingMessageRequest();
 
     $validator = Validator::make(
@@ -20,7 +22,7 @@ it('validates request', function (string $networkCode, array $data) {
 })->with('network-codes', 'incoming-message-notification');
 
 
-it('retrieves request data', function (string $networkCode, array $data) {
+it('retrieves request data', function (int $networkCode, array $data): void {
     $request = new IncomingMessageRequest(
         request: array_merge(
             $data,

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 use SamuelMwangiW\Africastalking\Enum\CallHangupCauses;
 use SamuelMwangiW\Africastalking\Enum\Currency;
 use SamuelMwangiW\Africastalking\Enum\Direction;
@@ -9,14 +11,14 @@ use SamuelMwangiW\Africastalking\Enum\PaymentProvider;
 use SamuelMwangiW\Africastalking\Enum\Status;
 use SamuelMwangiW\Africastalking\Enum\UpdateType;
 
-it('creates FailureReason::class from string', function (string $value) {
+it('creates FailureReason::class from string', function (string $value): void {
     $enum = FailureReason::tryFrom($value);
 
     expect($enum)
         ->toBeInstanceOf(FailureReason::class);
 })->with('failure-reason-values');
 
-it('creates Network::class from string', function (string $value) {
+it('creates Network::class from string', function (int $value): void {
     $enum = Network::tryFrom($value);
 
     expect($enum)
@@ -25,7 +27,7 @@ it('creates Network::class from string', function (string $value) {
         ->name()->not->toBeNull();
 })->with('network-codes');
 
-it('creates Status::class from string', function (string $value) {
+it('creates Status::class from string', function (string $value): void {
     $enum = Status::tryFrom($value);
 
     expect($enum)
@@ -33,7 +35,7 @@ it('creates Status::class from string', function (string $value) {
         ->not->toBeNull();
 })->with('status-values');
 
-it('creates HangupCause::class from string', function (string $value) {
+it('creates HangupCause::class from string', function (string $value): void {
     $enum = CallHangupCauses::tryFrom($value);
 
     expect($enum)
@@ -41,7 +43,7 @@ it('creates HangupCause::class from string', function (string $value) {
         ->not->toBeNull();
 })->with('hangup-causes');
 
-it('creates CallDirection::class from string', function (string $value) {
+it('creates CallDirection::class from string', function (string $value): void {
     $enum = Direction::tryFrom($value);
 
     expect($enum)
@@ -49,7 +51,7 @@ it('creates CallDirection::class from string', function (string $value) {
         ->not->toBeNull();
 })->with('call-directions');
 
-it('creates Currency::class from string', function (string $value) {
+it('creates Currency::class from string', function (string $value): void {
     $enum = Currency::tryFrom($value);
 
     expect($enum)
@@ -57,7 +59,7 @@ it('creates Currency::class from string', function (string $value) {
         ->not->toBeNull();
 })->with('currencies');
 
-it('creates UpdateType::class from string', function (string $value) {
+it('creates UpdateType::class from string', function (string $value): void {
     $enum = UpdateType::tryFrom($value);
 
     expect($enum)
@@ -65,7 +67,7 @@ it('creates UpdateType::class from string', function (string $value) {
         ->not->toBeNull();
 })->with('update-types');
 
-it('creates PaymentProvider::class from string', function (string $value) {
+it('creates PaymentProvider::class from string', function (string $value): void {
     $enum = PaymentProvider::tryFrom($value);
 
     expect($enum)

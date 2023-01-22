@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace SamuelMwangiW\Africastalking\Saloon\Requests;
 
 use Saloon\Contracts\Body\HasBody;
@@ -10,6 +12,7 @@ use Saloon\Exceptions\PendingRequestException;
 use Saloon\Http\Request;
 use SamuelMwangiW\Africastalking\Enum\Service;
 use SamuelMwangiW\Africastalking\Saloon\AfricastalkingConnector;
+use ReflectionException;
 
 /**
  * @mixin AfricastalkingConnector
@@ -21,7 +24,7 @@ abstract class BaseRequest extends Request implements HasBody
 
     /**
      * @throws InvalidResponseClassException
-     * @throws \ReflectionException
+     * @throws ReflectionException
      * @throws PendingRequestException
      */
     public function send(): Response

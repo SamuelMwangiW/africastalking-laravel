@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace SamuelMwangiW\Africastalking\ValueObjects;
 
 use Illuminate\Support\Collection;
@@ -7,6 +9,8 @@ use SamuelMwangiW\Africastalking\Contracts\DTOContract;
 use SamuelMwangiW\Africastalking\Exceptions\AfricastalkingException;
 use SamuelMwangiW\Africastalking\Saloon\Requests\Messaging\BulkSmsRequest;
 use SamuelMwangiW\Africastalking\Saloon\Requests\Messaging\PremiumSmsRequest;
+use Throwable;
+use ReflectionException;
 
 class Message implements DTOContract
 {
@@ -29,7 +33,7 @@ class Message implements DTOContract
     ) {
     }
 
-    public function enqueue(bool $value = true): static
+    public function enqueue(bool|int $value = true): static
     {
         $this->enqueue = $value ? 1 : 0;
 
@@ -91,7 +95,7 @@ class Message implements DTOContract
 
     public function bulkMode(int $value = 1): static
     {
-        $this->bulkSMSMode = $value === 1 ? 1 : 0;
+        $this->bulkSMSMode = 1 === $value ? 1 : 0;
 
         return $this;
     }
@@ -120,10 +124,10 @@ class Message implements DTOContract
     /**
      * @return Collection<int,RecipientsApiResponse>
      * @throws AfricastalkingException
-     * @throws \ReflectionException
+     * @throws ReflectionException
      * @throws \Saloon\Exceptions\InvalidResponseClassException
      * @throws \Saloon\Exceptions\PendingRequestException
-     * @throws \Throwable
+     * @throws Throwable
      */
     public function send(): Collection
     {
@@ -133,7 +137,7 @@ class Message implements DTOContract
             ->send()
             ->throw();
 
-        if (! $response->json('SMSMessageData.Recipients')) {
+        if ( ! $response->json('SMSMessageData.Recipients')) {
             throw AfricastalkingException::messageSendingFailed(
                 message: $response->json('SMSMessageData.Message')
             );

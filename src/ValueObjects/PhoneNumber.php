@@ -34,6 +34,6 @@ class PhoneNumber implements DTOContract
 
     public function isValid(): bool
     {
-        return preg_match(pattern: '/^[+]{0,1}[0-9]{10,15}$/', subject: $this->number) !== false;
+        return false !== preg_match(pattern: '/^[+]{0,1}[0-9]{10,15}$/', subject: $this->number);
     }
 }

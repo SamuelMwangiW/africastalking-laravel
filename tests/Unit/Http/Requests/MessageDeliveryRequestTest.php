@@ -1,11 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 use Illuminate\Support\Facades\Validator;
 use SamuelMwangiW\Africastalking\Enum\Network;
 use SamuelMwangiW\Africastalking\Enum\Status;
 use SamuelMwangiW\Africastalking\Http\Requests\MessageDeliveryRequest;
 
-it('validates request', function (string $networkCode, string $status, string $reason, array $data) {
+it('validates request', function (int $networkCode, string $status, string $reason, array $data): void {
     $request = new MessageDeliveryRequest();
 
     $data = array_merge(
@@ -19,7 +21,7 @@ it('validates request', function (string $networkCode, string $status, string $r
         ->passes()->toBeTrue();
 })->with('network-codes', 'status-values', 'failure-reason-values', 'sms-delivery-report-notification');
 
-it('retrieves request data', function (string $status, string $reason, string $network, array $data) {
+it('retrieves request data', function (string $status, string $reason, int $network, array $data): void {
     $data = array_merge(
         ['status' => $status, 'failureReason' => $reason, 'networkCode' => $network],
         $data

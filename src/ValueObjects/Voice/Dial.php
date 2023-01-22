@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace SamuelMwangiW\Africastalking\ValueObjects\Voice;
 
 use Illuminate\Support\Collection;

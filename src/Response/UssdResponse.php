@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace SamuelMwangiW\Africastalking\Response;
 
 use Illuminate\Contracts\Support\Responsable;
@@ -52,7 +54,7 @@ class UssdResponse implements Responsable
 
     public function getResponse(): string
     {
-        return $this->getPrefix() . $this->response;
+        return $this->getPrefix().$this->response;
     }
 
     public function getPrefix(): string

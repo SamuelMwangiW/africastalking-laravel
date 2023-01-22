@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace SamuelMwangiW\Africastalking\ValueObjects\Voice;
 
 use SamuelMwangiW\Africastalking\Exceptions\AfricastalkingException;
@@ -21,7 +23,7 @@ class Say implements Action
         if (is_callable($message)) {
             $synthesisedSpeechParts = $message(new SynthesisedSpeech());
 
-            if (! $synthesisedSpeechParts instanceof SynthesisedSpeech) {
+            if ( ! $synthesisedSpeechParts instanceof SynthesisedSpeech) {
                 throw AfricastalkingException::notSynthesisedSpeech();
             }
 
@@ -58,8 +60,8 @@ class Say implements Action
     public function build(): string
     {
         $options = '';
-        if (! is_null($this->voice)) {
-            $options .= " voice=\"$this->voice\"";
+        if (null !== $this->voice) {
+            $options .= " voice=\"{$this->voice}\"";
         }
 
         if ($this->playBeep) {

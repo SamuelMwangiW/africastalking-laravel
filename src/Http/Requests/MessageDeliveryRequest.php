@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace SamuelMwangiW\Africastalking\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
@@ -17,8 +19,8 @@ class MessageDeliveryRequest extends FormRequest
 {
     use HasNetworkCode;
     use HasPhoneNumber;
-    use HasUniqueId;
     use HasStatus;
+    use HasUniqueId;
 
     public function rules(): array
     {
@@ -50,10 +52,17 @@ class MessageDeliveryRequest extends FormRequest
             ],
             'networkCode' => [
                 'required',
-                'string',
+                'integer',
                 new Enum(Network::class),
             ],
         ];
+    }
+
+    protected function prepareForValidation(): void
+    {
+        $this->merge([
+            'networkCode' => $this->integer('networkCode'),
+        ]);
     }
 
     protected function idKey(): string

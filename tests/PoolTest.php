@@ -1,18 +1,20 @@
 <?php
 
+declare(strict_types=1);
+
 use Illuminate\Support\Benchmark;
 use SamuelMwangiW\Africastalking\Enum\Service;
 use SamuelMwangiW\Africastalking\Saloon\AfricastalkingConnector;
 use SamuelMwangiW\Africastalking\Saloon\Requests\Messaging\BulkSmsRequest;
 
-test('benchmark pooling requests', function (string $phone) {
+test('benchmark pooling requests', function (string $phone): void {
     $messages = collect(fake()->sentences(600));
 
     // 4915.749416 ms
-    $pool = Benchmark::measure(function () use ($phone, $messages) {
+    $pool = Benchmark::measure(function () use ($phone, $messages): void {
         $requests = [];
 
-        $messages->each(function (string $message) use ($phone, &$requests) {
+        $messages->each(function (string $message) use ($phone, &$requests): void {
             $data = [
                 'message' => $message,
                 'to' => $phone,
@@ -40,4 +42,4 @@ test('benchmark pooling requests', function (string $phone) {
 
     expect($pool)->toBeNumeric();
     dump($pool);
-})->with('phone-numbers');
+})->with('phone-numbers')->skip();

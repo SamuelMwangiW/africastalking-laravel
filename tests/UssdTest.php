@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 use Illuminate\Contracts\Support\Responsable;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -50,7 +52,7 @@ test('end sets the response prefix to END')
     ->toBeInstanceOf(UssdResponse::class)
     ->getPrefix()->toBe('END ');
 
-it('sets content-type to text/plain in the response', function () {
+it('sets content-type to text/plain in the response', function (): void {
     $request = Request::create(uri: '/');
 
     $response = Africastalking::ussd('Message here')

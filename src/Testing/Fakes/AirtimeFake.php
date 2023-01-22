@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace SamuelMwangiW\Africastalking\Testing\Fakes;
 
 use SamuelMwangiW\Africastalking\Domain\Airtime as Base;

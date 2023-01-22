@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace SamuelMwangiW\Africastalking\Testing\Fakes;
 
 use Illuminate\Support\Collection;
@@ -18,7 +20,7 @@ class MessageFake extends Message
      */
     public function send(): Collection
     {
-        if (is_null($this->messages)) {
+        if (null === $this->messages) {
             $this->messages = collect(
                 [
                     $this->details(),

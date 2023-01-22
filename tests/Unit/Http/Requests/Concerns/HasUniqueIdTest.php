@@ -1,6 +1,8 @@
 <?php
 
-it('overrides the idKey', function () {
+declare(strict_types=1);
+
+it('overrides the idKey', function (): void {
     $classWithoutKeyOverridden = new class () {
         use \SamuelMwangiW\Africastalking\Http\Requests\Concerns\HasUniqueId;
 

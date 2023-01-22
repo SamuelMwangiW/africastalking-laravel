@@ -1,10 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 use Illuminate\Support\Facades\Validator;
 use SamuelMwangiW\Africastalking\Enum\Status;
 use SamuelMwangiW\Africastalking\Http\Requests\AirtimeStatusRequest;
 
-it('validates request', function (array $data, string $status) {
+it('validates request', function (array $data, string $status): void {
     $request = new AirtimeStatusRequest();
 
     $validator = Validator::make(
@@ -16,7 +18,7 @@ it('validates request', function (array $data, string $status) {
         ->passes()->toBeTrue();
 })->with('airtime-status-notification', 'status-values');
 
-it('retrieves request data', function (string $status, array $data) {
+it('retrieves request data', function (string $status, array $data): void {
     $data = array_merge($data, ['status' => $status]);
 
     $deliveryStatusIsFailed = in_array(needle: $status, haystack:['Rejected', 'Failed']);

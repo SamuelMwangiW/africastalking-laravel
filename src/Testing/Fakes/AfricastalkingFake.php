@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace SamuelMwangiW\Africastalking\Testing\Fakes;
 
 use PHPUnit\Framework\Assert as PHPUnit;

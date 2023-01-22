@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace SamuelMwangiW\Africastalking\ValueObjects\Voice;
 
 class GetDigits implements Action
@@ -80,6 +82,6 @@ class GetDigits implements Action
             $options .= " numDigits=\"{$this->numDigits}\"";
         }
 
-        return '<GetDigits' . $options . '>' . $this->say->build() . '</GetDigits>';
+        return '<GetDigits'.$options.'>'.$this->say->build().'</GetDigits>';
     }
 }

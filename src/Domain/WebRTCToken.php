@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace SamuelMwangiW\Africastalking\Domain;
 
 use GuzzleHttp\Exception\GuzzleException;
@@ -8,6 +10,7 @@ use Saloon\Exceptions\SaloonException;
 use SamuelMwangiW\Africastalking\Saloon\Requests\Voice\CapabilityTokenRequest;
 use SamuelMwangiW\Africastalking\ValueObjects\CapabilityToken;
 use SamuelMwangiW\Africastalking\ValueObjects\PhoneNumber;
+use ReflectionException;
 
 class WebRTCToken
 {
@@ -35,7 +38,7 @@ class WebRTCToken
 
     /**
      * @return CapabilityToken
-     * @throws \ReflectionException
+     * @throws ReflectionException
      * @throws \Saloon\Exceptions\InvalidResponseClassException
      * @throws \Saloon\Exceptions\PendingRequestException
      */
@@ -51,7 +54,7 @@ class WebRTCToken
      * @return CapabilityToken
      * @throws GuzzleException
      * @throws SaloonException
-     * @throws \ReflectionException
+     * @throws ReflectionException
      */
     public function token(): CapabilityToken
     {

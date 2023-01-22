@@ -1,16 +1,19 @@
 <?php
 
+declare(strict_types=1);
+
 namespace SamuelMwangiW\Africastalking\Domain;
 
 use Illuminate\Support\Traits\ForwardsCalls;
 use SamuelMwangiW\Africastalking\Response\VoiceResponse;
+use SamuelMwangiW\Africastalking\ValueObjects\PhoneNumber;
 
 /** @mixin VoiceResponse */
 class Voice
 {
     use ForwardsCalls;
 
-    public function call(string|array|null $recipients = null): VoiceCall
+    public function call(PhoneNumber|string|array|null $recipients = null): VoiceCall
     {
         return app(VoiceCall::class)->to($recipients);
     }

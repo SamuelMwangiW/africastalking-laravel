@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 use Illuminate\Support\Collection;
 use SamuelMwangiW\Africastalking\Exceptions\AfricastalkingException;
 use SamuelMwangiW\Africastalking\Notifications\AfricastalkingChannel;
@@ -11,13 +13,13 @@ use SamuelMwangiW\Africastalking\Tests\Fixtures\BasicNotificationReturnsObject;
 use SamuelMwangiW\Africastalking\Tests\Fixtures\BasicNotificationReturnsString;
 use SamuelMwangiW\Africastalking\ValueObjects\RecipientsApiResponse;
 
-it('can resolve', function () {
+it('can resolve', function (): void {
     $channel = app(AfricastalkingChannel::class);
 
     expect($channel)->toBeInstanceOf(AfricastalkingChannel::class);
 });
 
-it('throws an exception when notifiable does not use trait', function () {
+it('throws an exception when notifiable does not use trait', function (): void {
     $channel = app(AfricastalkingChannel::class);
     $notifiable = new BasicNotifiableNoTrait();
     $notification = new BasicNotificationReturnsString();
@@ -25,7 +27,7 @@ it('throws an exception when notifiable does not use trait', function () {
     $channel->send($notifiable, $notification);
 })->throws(AfricastalkingException::class);
 
-it('throws an exception when notifiable has routeNotificationForAfricastalking()', function () {
+it('throws an exception when notifiable has routeNotificationForAfricastalking()', function (): void {
     $channel = app(AfricastalkingChannel::class);
     $notifiable = new BasicNotifiableNoRoute();
     $notification = new BasicNotificationReturnsString();
@@ -33,7 +35,7 @@ it('throws an exception when notifiable has routeNotificationForAfricastalking()
     $channel->send($notifiable, $notification);
 })->throws(AfricastalkingException::class);
 
-it('throws an exception when notification has toAfricastalking()', function () {
+it('throws an exception when notification has toAfricastalking()', function (): void {
     $channel = app(AfricastalkingChannel::class);
     $notifiable = new BasicNotifiable();
     $notification = new BasicNotificationNoToAfricastalking();
@@ -41,7 +43,7 @@ it('throws an exception when notification has toAfricastalking()', function () {
     $channel->send($notifiable, $notification);
 })->throws(AfricastalkingException::class);
 
-it('sends a notification when toAfricastalking() returns string message', function (string $phone) {
+it('sends a notification when toAfricastalking() returns string message', function (string $phone): void {
     $channel = app(AfricastalkingChannel::class);
     $notifiable = new BasicNotifiable(phone: $phone);
     $notification = new BasicNotificationReturnsString();
@@ -54,7 +56,7 @@ it('sends a notification when toAfricastalking() returns string message', functi
         ->first()->toBeInstanceOf(RecipientsApiResponse::class);
 })->with('phone-numbers');
 
-it('sends a notification when toAfricastalking() returns a message object', function (string $phone) {
+it('sends a notification when toAfricastalking() returns a message object', function (string $phone): void {
     $channel = app(AfricastalkingChannel::class);
     $notifiable = new BasicNotifiable(phone: $phone);
     $notification = new BasicNotificationReturnsObject();

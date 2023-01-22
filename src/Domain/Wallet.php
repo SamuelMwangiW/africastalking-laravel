@@ -1,17 +1,21 @@
 <?php
 
+declare(strict_types=1);
+
 namespace SamuelMwangiW\Africastalking\Domain;
 
 use Illuminate\Support\Str;
 use SamuelMwangiW\Africastalking\Enum\Currency;
 use SamuelMwangiW\Africastalking\Saloon\Requests\Payment\WalletBalanceRequest;
 use SamuelMwangiW\Africastalking\ValueObjects\Balance;
+use Exception;
+use ReflectionException;
 
 class Wallet
 {
     /**
      * @return Balance
-     * @throws \ReflectionException
+     * @throws ReflectionException
      * @throws \Saloon\Exceptions\InvalidResponseClassException
      * @throws \Saloon\Exceptions\PendingRequestException
      */
@@ -20,8 +24,8 @@ class Wallet
         $request = new WalletBalanceRequest();
         $response = $request->send()->throw();
 
-        if ($response->json('status') !== 'Success') {
-            throw new \Exception('Failed to fetch wallet balance');
+        if ('Success' !== $response->json('status')) {
+            throw new Exception('Failed to fetch wallet balance');
         }
 
         $balance = Str::of($response->json('balance'))->after(' ')->toString();

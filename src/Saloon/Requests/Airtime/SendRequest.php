@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace SamuelMwangiW\Africastalking\Saloon\Requests\Airtime;
 
 use Saloon\Contracts\Body\HasBody;
