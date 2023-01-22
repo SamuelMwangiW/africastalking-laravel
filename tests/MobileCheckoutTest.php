@@ -57,6 +57,10 @@ it('sends a Mobile Checkout Request', function (string $phone, int $amount): voi
         ->currency(currency: Currency::KENYA)
         ->send();
 
+    if ( ! array_key_exists('providerChannel', $result)) {
+        dd($result);
+    }
+
     expect($result)
         ->toBeArray()
         ->toHaveKeys([
