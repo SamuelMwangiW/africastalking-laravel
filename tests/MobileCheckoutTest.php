@@ -49,6 +49,7 @@ it('sends a Mobile Checkout Request', function (string $phone, int $amount) {
     $result = africastalking()
         ->payment()
         ->mobileCheckout()
+        ->idempotent(fake()->uuid())
         ->to($phone)
         ->amount($amount)
         ->currency(currency: Currency::KENYA)

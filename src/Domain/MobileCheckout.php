@@ -2,12 +2,15 @@
 
 namespace SamuelMwangiW\Africastalking\Domain;
 
+use SamuelMwangiW\Africastalking\Concerns\HasIdempotency;
 use SamuelMwangiW\Africastalking\Enum\Currency;
 use SamuelMwangiW\Africastalking\Saloon\Requests\Payment\MobileCheckoutRequest;
 use SamuelMwangiW\Africastalking\ValueObjects\PhoneNumber;
 
 class MobileCheckout
 {
+    use HasIdempotency;
+
     private PhoneNumber $phone;
     private int $amount;
     private array $metadata = [];
@@ -51,8 +54,13 @@ class MobileCheckout
 
     public function send(): array
     {
-        return MobileCheckoutRequest::make($this->data())
-            ->send()
+        $request = MobileCheckoutRequest::make($this->data());
+
+        if ($this->idempotencyKey()) {
+            $request->headers()->add('Idempotency-Key', $this->idempotencyKey());
+        }
+
+        return $request->send()
             ->throw()
             ->json();
     }
