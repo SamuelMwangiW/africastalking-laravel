@@ -117,7 +117,7 @@ it('sends airtime to multiple recipients', function (int $amount, string $phone)
         ->send();
 
     if (2 !== count($result['responses'])) {
-        dump($result['responses']);
+        dd($result);
     }
 
     expect($result)
