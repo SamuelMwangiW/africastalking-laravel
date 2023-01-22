@@ -3,6 +3,7 @@
 namespace SamuelMwangiW\Africastalking\Domain;
 
 use Illuminate\Support\Collection;
+use SamuelMwangiW\Africastalking\Concerns\HasIdempotency;
 use SamuelMwangiW\Africastalking\Enum\Currency;
 use SamuelMwangiW\Africastalking\Exceptions\AfricastalkingException;
 use SamuelMwangiW\Africastalking\Saloon\Requests\Airtime\SendRequest;
@@ -11,6 +12,8 @@ use SamuelMwangiW\Africastalking\ValueObjects\PhoneNumber;
 
 class Airtime
 {
+    use HasIdempotency;
+
     /**
      * @var Collection<int,AirtimeTransaction> ;
      */
@@ -18,8 +21,7 @@ class Airtime
 
     public function __construct()
     {
-        /** @phpstan-ignore-next-line */
-        $this->recipients = collect();
+        $this->recipients = collect([]);
     }
 
     /**
@@ -81,17 +83,19 @@ class Airtime
 
     /**
      * @return array
-     * @throws \GuzzleHttp\Exception\GuzzleException
      * @throws \ReflectionException
-     * @throws \Sammyjo20\Saloon\Exceptions\SaloonException
-     * @throws \Sammyjo20\Saloon\Exceptions\SaloonRequestException
+     * @throws \Saloon\Exceptions\InvalidResponseClassException
+     * @throws \Saloon\Exceptions\PendingRequestException
      */
     public function send(): array
     {
-        return SendRequest::make($this->recipients())
-            ->send()
-            ->throw()
-            ->json();
+        $request = SendRequest::make($this->recipients());
+
+        if ($this->idempotencyKey()) {
+            $request->headers()->add('Idempotency-Key', $this->idempotencyKey());
+        }
+
+        return $request->send()->throw()->json();
     }
 
     private function recipients(): string

@@ -2,17 +2,16 @@
 
 namespace SamuelMwangiW\Africastalking\Saloon\Requests\Voice;
 
-use Sammyjo20\Saloon\Http\SaloonResponse;
-use Sammyjo20\Saloon\Traits\Plugins\CastsToDto;
-use Sammyjo20\Saloon\Traits\Plugins\HasJsonBody;
+use Saloon\Contracts\Body\HasBody;
+use Saloon\Contracts\Response;
+use Saloon\Traits\Body\HasJsonBody;
 use SamuelMwangiW\Africastalking\Enum\Service;
 use SamuelMwangiW\Africastalking\Saloon\Requests\BaseRequest;
 use SamuelMwangiW\Africastalking\ValueObjects\CapabilityToken;
 
-class CapabilityTokenRequest extends BaseRequest
+class CapabilityTokenRequest extends BaseRequest implements HasBody
 {
     use HasJsonBody;
-    use CastsToDto;
 
     public Service $service = Service::WEBRTC;
 
@@ -20,12 +19,12 @@ class CapabilityTokenRequest extends BaseRequest
     {
     }
 
-    public function defineEndpoint(): string
+    public function resolveEndpoint(): string
     {
         return 'capability-token/request';
     }
 
-    public function defaultData(): array
+    public function defaultBody(): array
     {
         return array_merge(
             ['username' => config('africastalking.username')],
@@ -33,7 +32,7 @@ class CapabilityTokenRequest extends BaseRequest
         );
     }
 
-    protected function castToDto(SaloonResponse $response): CapabilityToken
+    public function createDtoFromResponse(Response $response): CapabilityToken
     {
         return CapabilityToken::fromSaloon($response);
     }

@@ -3,8 +3,8 @@
 use Illuminate\Contracts\Support\Responsable;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Sammyjo20\Saloon\Http\MockResponse;
-use Sammyjo20\SaloonLaravel\Facades\Saloon;
+use Saloon\Http\Faking\MockResponse;
+use Saloon\Laravel\Facades\Saloon;
 use SamuelMwangiW\Africastalking\Domain\Voice;
 use SamuelMwangiW\Africastalking\Domain\WebRTCToken;
 use SamuelMwangiW\Africastalking\Facades\Africastalking;

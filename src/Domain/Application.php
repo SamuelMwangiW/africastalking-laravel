@@ -10,10 +10,9 @@ class Application
 {
     /**
      * @return Balance
-     * @throws \GuzzleHttp\Exception\GuzzleException
      * @throws \ReflectionException
-     * @throws \Sammyjo20\Saloon\Exceptions\SaloonException
-     * @throws \Sammyjo20\Saloon\Exceptions\SaloonRequestException
+     * @throws \Saloon\Exceptions\InvalidResponseClassException
+     * @throws \Saloon\Exceptions\PendingRequestException
      */
     public function balance(): Balance
     {
@@ -31,8 +30,6 @@ class Application
      * @return Balance
      * @throws \GuzzleHttp\Exception\GuzzleException
      * @throws \ReflectionException
-     * @throws \Sammyjo20\Saloon\Exceptions\SaloonException
-     * @throws \Sammyjo20\Saloon\Exceptions\SaloonRequestException
      */
     public function data(): Balance
     {

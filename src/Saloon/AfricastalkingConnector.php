@@ -3,11 +3,11 @@
 namespace SamuelMwangiW\Africastalking\Saloon;
 
 use Illuminate\Support\Str;
-use Sammyjo20\Saloon\Http\SaloonConnector;
-use Sammyjo20\Saloon\Traits\Plugins\AcceptsJson;
+use Saloon\Http\Connector;
+use Saloon\Traits\Plugins\AcceptsJson;
 use SamuelMwangiW\Africastalking\Enum\Service;
 
-class AfricastalkingConnector extends SaloonConnector
+class AfricastalkingConnector extends Connector
 {
     use AcceptsJson;
 
@@ -16,7 +16,7 @@ class AfricastalkingConnector extends SaloonConnector
     /**
      * @throws \Exception
      */
-    public function defineBaseUrl(): string
+    public function resolveBaseUrl(): string
     {
         return $this->isSandboxEnvironment()
             ? $this->service->sandboxBaseUrl()
@@ -30,17 +30,11 @@ class AfricastalkingConnector extends SaloonConnector
         ];
     }
 
-    public function defaultHeaders(): array
-    {
-        return [
-            'apiKey' => config(key: 'africastalking.api-key'),
-            'User-Agent' => 'samuelmwangiw/africastalking-laravel',
-        ];
-    }
-
-    public function service(Service $service): void
+    public function service(Service $service): static
     {
         $this->service = $service;
+
+        return $this;
     }
 
     public function username(): string

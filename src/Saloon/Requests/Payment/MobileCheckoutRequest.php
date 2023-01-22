@@ -2,11 +2,12 @@
 
 namespace SamuelMwangiW\Africastalking\Saloon\Requests\Payment;
 
-use Sammyjo20\Saloon\Traits\Plugins\HasJsonBody;
+use Saloon\Contracts\Body\HasBody;
+use Saloon\Traits\Body\HasJsonBody;
 use SamuelMwangiW\Africastalking\Enum\Service;
 use SamuelMwangiW\Africastalking\Saloon\Requests\BaseRequest;
 
-class MobileCheckoutRequest extends BaseRequest
+class MobileCheckoutRequest extends BaseRequest implements HasBody
 {
     use HasJsonBody;
 
@@ -16,12 +17,12 @@ class MobileCheckoutRequest extends BaseRequest
     {
     }
 
-    public function defineEndpoint(): string
+    public function resolveEndpoint(): string
     {
         return 'mobile/checkout/request';
     }
 
-    public function defaultData(): array
+    public function defaultBody(): array
     {
         return array_merge(
             $this->data,

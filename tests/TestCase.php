@@ -3,7 +3,7 @@
 namespace SamuelMwangiW\Africastalking\Tests;
 
 use Orchestra\Testbench\TestCase as Orchestra;
-use Sammyjo20\SaloonLaravel\SaloonServiceProvider;
+use Saloon\Laravel\SaloonServiceProvider;
 use SamuelMwangiW\Africastalking\AfricastalkingServiceProvider;
 
 class TestCase extends Orchestra

@@ -2,7 +2,7 @@
 
 namespace SamuelMwangiW\Africastalking\ValueObjects;
 
-use Sammyjo20\Saloon\Http\SaloonResponse;
+use Saloon\Contracts\Response;
 use SamuelMwangiW\Africastalking\Contracts\DTOContract;
 
 class CapabilityToken implements DTOContract
@@ -16,7 +16,7 @@ class CapabilityToken implements DTOContract
     ) {
     }
 
-    public static function fromSaloon(SaloonResponse $response): CapabilityToken
+    public static function fromSaloon(Response $response): CapabilityToken
     {
         $data = $response->json();
 

@@ -18,7 +18,7 @@ class Message implements DTOContract
     public int|null $retryDurationInHours = null;
 
     /**
-     * @param string $message
+     * @param string|null $message
      * @param Collection<int,PhoneNumber>|null $to
      * @param string|null $from
      */
@@ -120,18 +120,18 @@ class Message implements DTOContract
     /**
      * @return Collection<int,RecipientsApiResponse>
      * @throws AfricastalkingException
-     * @throws \Sammyjo20\Saloon\Exceptions\SaloonRequestException
+     * @throws \ReflectionException
+     * @throws \Saloon\Exceptions\InvalidResponseClassException
+     * @throws \Saloon\Exceptions\PendingRequestException
+     * @throws \Throwable
      */
     public function send(): Collection
     {
         $request = $this->request();
 
-        $response = $request->send();
-
-        if ($response->failed()) {
-            /** @phpstan-ignore-next-line */
-            throw $response->toException();
-        }
+        $response = $request
+            ->send()
+            ->throw();
 
         if (! $response->json('SMSMessageData.Recipients')) {
             throw AfricastalkingException::messageSendingFailed(
@@ -164,6 +164,9 @@ class Message implements DTOContract
         return strval(json_encode($this));
     }
 
+    /**
+     * @return array<string,mixed>
+     */
     public function __toArray(): array
     {
         return [
