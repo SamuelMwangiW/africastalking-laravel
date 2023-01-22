@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace SamuelMwangiW\Africastalking\ValueObjects;
 
 use Illuminate\Support\Collection;
@@ -23,12 +25,12 @@ class SentMessageResponse implements DTOContract
             message: data_get($data, 'Message'),
             recipients: collect(data_get($data, 'Recipients'))
                 ->map(
-                    fn(array $recipient) => new SentMessageRecipient(
-                        id: data_get($recipient,'messageId'),
-                        statusCode: data_get($recipient,'statusCode'),
-                        number: PhoneNumber::make(data_get($recipient,'number')),
-                        cost: data_get($recipient,'cost'),
-                        status: Status::from(data_get($recipient,'status')),
+                    fn (array $recipient) => new SentMessageRecipient(
+                        id: data_get($recipient, 'messageId'),
+                        statusCode: data_get($recipient, 'statusCode'),
+                        number: PhoneNumber::make(data_get($recipient, 'number')),
+                        cost: data_get($recipient, 'cost'),
+                        status: Status::from(data_get($recipient, 'status')),
                     )
                 ),
         );

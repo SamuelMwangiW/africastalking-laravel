@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace SamuelMwangiW\Africastalking\ValueObjects;
 
 use SamuelMwangiW\Africastalking\Contracts\DTOContract;
@@ -7,7 +9,6 @@ use SamuelMwangiW\Africastalking\Enum\Status;
 
 class SentMessageRecipient implements DTOContract
 {
-
     public function __construct(
         public readonly string $id,
         public readonly int $statusCode,
