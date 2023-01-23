@@ -52,11 +52,11 @@ class AfricastalkingServiceProvider extends PackageServiceProvider
             },
         ]);
 
-//        if ( ! App::runningUnitTests()) {
-//            $this->app->singleton(
-//                abstract: AfricastalkingConnector::class,
-//                concrete: fn () => new AfricastalkingConnector(),
-//            );
-//        }
+        if ( ! App::runningUnitTests()) {
+            $this->app->singleton(
+                abstract: AfricastalkingConnector::class,
+                concrete: fn () => new AfricastalkingConnector(),
+            );
+        }
     }
 }
