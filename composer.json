@@ -17,7 +17,7 @@
     ],
     "require": {
         "php": "^8.1",
-        "illuminate/contracts": "^9.48",
+        "illuminate/contracts": "^9.33",
         "sammyjo20/saloon-laravel": "^2.0",
         "spatie/laravel-package-tools": "^1.9.2"
     },
@@ -25,7 +25,7 @@
         "guzzlehttp/guzzle": "^7.4",
         "nunomaduro/collision": "^6.0",
         "nunomaduro/larastan": "^2.0.1",
-        "orchestra/testbench": "^7.7",
+        "orchestra/testbench": "^7.19",
         "pestphp/pest": "^1.21",
         "pestphp/pest-plugin-faker": "^1.0",
         "pestphp/pest-plugin-laravel": "^1.1",
