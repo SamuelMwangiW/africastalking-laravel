@@ -50,10 +50,5 @@ class AfricastalkingServiceProvider extends PackageServiceProvider
                 }
             },
         ]);
-
-        $this->app->singleton(
-            abstract: AfricastalkingConnector::class,
-            concrete: fn () => new AfricastalkingConnector(),
-        );
     }
 }
