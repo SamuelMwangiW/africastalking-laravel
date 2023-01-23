@@ -10,7 +10,7 @@ use SamuelMwangiW\Africastalking\ValueObjects\CapabilityToken;
 
 it('fakes requests', function (): void {
     Saloon::fake([
-        MockResponse::make([
+        TestRequest::class => MockResponse::make([
             'clientName' => 'John.Doe',
             'incoming' => true,
             'lifeTimeSec' => '86400',
@@ -29,4 +29,4 @@ it('fakes requests', function (): void {
         ->outgoing->toBeTrue()
         ->lifeTimeSec->toBe('86400')
         ->token->toBe('ATCAPtkn_somerandomtexthere');
-});
+})->only();
