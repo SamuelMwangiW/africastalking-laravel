@@ -47,7 +47,9 @@ it('sets metadata', function (string $value): void {
     expect($subject)->getMetadata()->toBe($metadata);
 })->with('strings');
 
-it('sends a Mobile Checkout Request', function (string $phone, int $amount): void {
+it('sends a Mobile Checkout Request', function (string $phone): void {
+    $amount = random_int(10_000, 70_000);
+
     $result = africastalking()
         ->payment()
         ->mobileCheckout()
@@ -57,8 +59,9 @@ it('sends a Mobile Checkout Request', function (string $phone, int $amount): voi
         ->currency(currency: Currency::KENYA)
         ->send();
 
-    if ( ! array_key_exists('providerChannel', $result)) {
-        dd($result);
+    if ( $result['status'] === 'DuplicateRequest') {
+        test()->skip(true,"Amount: {$amount} {$result['description']}");
+        return;
     }
 
     expect($result)
@@ -69,4 +72,4 @@ it('sends a Mobile Checkout Request', function (string $phone, int $amount): voi
             "status",
             "transactionId",
         ]);
-})->with('phone-numbers', 'payment-amount');
+})->with('phone-numbers');

@@ -93,7 +93,7 @@ it('sends airtime to a single recipient', function (AirtimeTransaction $transact
     if (
         'A duplicate request was received within the last 5 minutes' === data_get($result, 'errorMessage')
     ) {
-        test()->doesNotPerformAssertions();
+        test()->skip(true,$result['errorMessage']);
 
         return;
     }
@@ -129,7 +129,7 @@ it('sends airtime to multiple recipients', function (int $amount, string $phone)
     if (
         'A duplicate request was received within the last 5 minutes' === data_get($result, 'errorMessage')
     ) {
-        test()->doesNotPerformAssertions();
+        test()->skip(true,$result['errorMessage']);
 
         return;
     }
