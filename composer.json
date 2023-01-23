@@ -19,7 +19,7 @@
         "php": "^8.1",
         "illuminate/contracts": "^9.42",
         "sammyjo20/saloon-laravel": "^2.0",
-        "spatie/laravel-package-tools": "^1.9.2"
+        "spatie/laravel-package-tools": "^1.14"
     },
     "require-dev": {
         "guzzlehttp/guzzle": "^7.4",
