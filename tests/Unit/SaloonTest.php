@@ -1,12 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 use Saloon\Http\Faking\MockResponse;
 use Saloon\Laravel\Saloon;
 use SamuelMwangiW\Africastalking\Tests\Fixtures\TestConnector;
 use SamuelMwangiW\Africastalking\Tests\Fixtures\TestRequest;
 use SamuelMwangiW\Africastalking\ValueObjects\CapabilityToken;
 
-it('fakes requests',function (){
+it('fakes requests', function (): void {
     Saloon::fake([
         MockResponse::make([
             'clientName' => 'John.Doe',
@@ -14,7 +16,7 @@ it('fakes requests',function (){
             'lifeTimeSec' => '86400',
             'outgoing' => true,
             'token' => 'ATCAPtkn_somerandomtexthere',
-        ],200)
+        ], 200)
     ]);
 
     $connector = new TestConnector();
