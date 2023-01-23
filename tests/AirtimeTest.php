@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use Illuminate\Support\Collection;
+use Illuminate\Support\Str;
 use Pest\Expectation;
 use SamuelMwangiW\Africastalking\Domain\Airtime;
 use SamuelMwangiW\Africastalking\Enum\Currency;
@@ -12,7 +13,7 @@ use SamuelMwangiW\Africastalking\ValueObjects\AirtimeTransaction;
 use SamuelMwangiW\Africastalking\ValueObjects\PhoneNumber;
 
 it('resolves the application class')
-    ->expect(fn () => Africastalking::airtime())
+    ->expect(fn() => Africastalking::airtime())
     ->toBeInstanceOf(Airtime::class);
 
 it('can add a recipient', function (string $phone, string $currency, int $amount): void {
@@ -36,7 +37,7 @@ it('can add a recipient from a transaction object', function (AirtimeTransaction
     expect($service)
         ->recipients->toHaveCount(1)
         ->recipients->each(
-            fn ($recipient) => $recipient
+            fn($recipient) => $recipient
                 ->phoneNumber->toBe($transaction->phoneNumber)
                 ->currencyCode->toBe($transaction->currencyCode)
                 ->amount->toBeInt()
@@ -60,7 +61,7 @@ it('can add multiple recipients', function (string $phone, string $currency, int
         ->recipients->toBeInstanceOf(Collection::class)
         ->toHaveCount(2)
         ->recipients->each(
-            fn ($recipient) => $recipient
+            fn($recipient) => $recipient
                 ->phoneNumber->toBeInstanceOf(PhoneNumber::class)
                 ->currencyCode->toBeInstanceOf(Currency::class)
                 ->amount->toBeInt()
@@ -112,7 +113,7 @@ it('sends airtime to a single recipient', function (AirtimeTransaction $transact
         ->toHaveCount(1)
         ->and($result['responses'])
         ->each(
-            fn (Expectation $response) => $response->toHaveKeys(
+            fn(Expectation $response) => $response->toHaveKeys(
                 ['phoneNumber', 'errorMessage', 'requestId', 'discount']
             )
         )
@@ -120,16 +121,20 @@ it('sends airtime to a single recipient', function (AirtimeTransaction $transact
 })->with('airtime-transactions');
 
 it('sends airtime to multiple recipients', function (int $amount, string $phone): void {
+    $secondPhone = Str::of('+254712345678')
+        ->replace('8', (string)random_int(0, 9))
+        ->value();
+
     $result = Africastalking::airtime()
         ->idempotent(fake()->uuid())
         ->to($phone, 'KES', $amount)
-        ->to(phoneNumber: '+254712345678', amount: $amount)
+        ->to(phoneNumber: $secondPhone, amount: $amount)
         ->send();
 
     if (
         'A duplicate request was received within the last 5 minutes' === data_get($result, 'errorMessage')
     ) {
-        test()->skip(true, $result['errorMessage']);
+        $this->markAsRisky();
 
         return;
     }
@@ -148,7 +153,7 @@ it('sends airtime to multiple recipients', function (int $amount, string $phone)
         ->toHaveCount(2)
         ->and($result['responses'])
         ->each(
-            fn (Expectation $response) => $response->toHaveKeys(
+            fn(Expectation $response) => $response->toHaveKeys(
                 ['phoneNumber', 'errorMessage', 'requestId', 'discount']
             )
         )->and(data_get($result, 'numSent'))->toBe(2);
