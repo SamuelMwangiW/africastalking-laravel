@@ -142,7 +142,7 @@ it('requests a webrtc capability token', function (): void {
         ->outgoing->toBeTrue()
         ->lifeTimeSec->toBe('86400')
         ->token->toBe('ATCAPtkn_somerandomtexthere');
-})->skip();
+});
 
 it('WebRTC token has a token alias for send', function (): void {
     config()->set('africastalking.username', 'not_sandbox');
@@ -168,4 +168,4 @@ it('WebRTC token has a token alias for send', function (): void {
         ->outgoing->toBeTrue()
         ->lifeTimeSec->toBe('86400')
         ->token->toBe('ATCAPtkn_somerandomtexthere');
-})->skip();
+});
