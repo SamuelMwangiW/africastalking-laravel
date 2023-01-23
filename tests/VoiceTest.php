@@ -11,7 +11,6 @@ use SamuelMwangiW\Africastalking\Domain\Voice;
 use SamuelMwangiW\Africastalking\Domain\WebRTCToken;
 use SamuelMwangiW\Africastalking\Facades\Africastalking;
 use SamuelMwangiW\Africastalking\Response\VoiceResponse;
-use SamuelMwangiW\Africastalking\Saloon\Requests\Voice\CapabilityTokenRequest;
 use SamuelMwangiW\Africastalking\ValueObjects\CapabilityToken;
 use SamuelMwangiW\Africastalking\ValueObjects\Voice\SynthesisedSpeech;
 use Symfony\Component\HttpFoundation\ResponseHeaderBag;
