@@ -94,7 +94,7 @@ it('sends airtime to a single recipient', function (AirtimeTransaction $transact
     if (
         'A duplicate request was received within the last 5 minutes' === data_get($result, 'errorMessage')
     ) {
-        test()->skip(true, $result['errorMessage']);
+        $this->markAsRisky();
 
         return;
     }
