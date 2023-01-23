@@ -60,7 +60,7 @@ it('sends a Mobile Checkout Request', function (string $phone): void {
         ->send();
 
     if ('DuplicateRequest' === $result['status']) {
-        test()->skip(true, "Amount: {$amount} {$result['description']}");
+        $this->markAsRisky();
 
         return;
     }

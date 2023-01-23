@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use Illuminate\Support\Collection;
+use Illuminate\Support\Str;
 use Pest\Expectation;
 use SamuelMwangiW\Africastalking\Domain\Airtime;
 use SamuelMwangiW\Africastalking\Enum\Currency;
@@ -93,7 +94,7 @@ it('sends airtime to a single recipient', function (AirtimeTransaction $transact
     if (
         'A duplicate request was received within the last 5 minutes' === data_get($result, 'errorMessage')
     ) {
-        test()->skip(true, $result['errorMessage']);
+        $this->markAsRisky();
 
         return;
     }
@@ -120,16 +121,20 @@ it('sends airtime to a single recipient', function (AirtimeTransaction $transact
 })->with('airtime-transactions');
 
 it('sends airtime to multiple recipients', function (int $amount, string $phone): void {
+    $secondPhone = Str::of('+254712345678')
+        ->replace('8', (string)random_int(0, 9))
+        ->value();
+
     $result = Africastalking::airtime()
         ->idempotent(fake()->uuid())
         ->to($phone, 'KES', $amount)
-        ->to(phoneNumber: '+254712345678', amount: $amount)
+        ->to(phoneNumber: $secondPhone, amount: $amount)
         ->send();
 
     if (
         'A duplicate request was received within the last 5 minutes' === data_get($result, 'errorMessage')
     ) {
-        test()->skip(true, $result['errorMessage']);
+        $this->markAsRisky();
 
         return;
     }
