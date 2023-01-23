@@ -123,7 +123,7 @@ it('requests a webrtc capability token', function (): void {
     config()->set('africastalking.username', 'not_sandbox');
 
     Saloon::fake([
-        CapabilityTokenRequest::class => MockResponse::make([
+        MockResponse::make([
             'clientName' => 'John.Doe',
             'incoming' => true,
             'lifeTimeSec' => '86400',
@@ -148,7 +148,7 @@ it('WebRTC token has a token alias for send', function (): void {
     config()->set('africastalking.username', 'not_sandbox');
 
     Saloon::fake([
-        CapabilityTokenRequest::class => MockResponse::make([
+        MockResponse::make([
             'clientName' => 'John.Doe',
             'incoming' => true,
             'lifeTimeSec' => '86400',
