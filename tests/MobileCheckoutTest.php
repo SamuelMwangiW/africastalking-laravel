@@ -59,8 +59,9 @@ it('sends a Mobile Checkout Request', function (string $phone): void {
         ->currency(currency: Currency::KENYA)
         ->send();
 
-    if ( $result['status'] === 'DuplicateRequest') {
-        test()->skip(true,"Amount: {$amount} {$result['description']}");
+    if ('DuplicateRequest' === $result['status']) {
+        test()->skip(true, "Amount: {$amount} {$result['description']}");
+
         return;
     }
 
