@@ -5,8 +5,6 @@ declare(strict_types=1);
 namespace SamuelMwangiW\Africastalking\Testing\Fakes;
 
 use Illuminate\Support\Collection;
-use Saloon\Contracts\Response;
-use Saloon\Http\Faking\MockResponse;
 use SamuelMwangiW\Africastalking\ValueObjects\Message;
 use SamuelMwangiW\Africastalking\ValueObjects\PhoneNumber;
 use SamuelMwangiW\Africastalking\ValueObjects\SentMessageResponse;

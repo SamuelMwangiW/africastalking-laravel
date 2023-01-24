@@ -7,7 +7,6 @@ namespace SamuelMwangiW\Africastalking\ValueObjects;
 use Illuminate\Support\Collection;
 use Saloon\Contracts\Response;
 use SamuelMwangiW\Africastalking\Contracts\DTOContract;
-use SamuelMwangiW\Africastalking\Enum\Status;
 
 class SentMessageResponse implements DTOContract
 {
