@@ -1,9 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace SamuelMwangiW\Africastalking\ValueObjects;
 
 use SamuelMwangiW\Africastalking\Contracts\DTOContract;
-use SamuelMwangiW\Africastalking\Domain\Airtime;
 use SamuelMwangiW\Africastalking\Enum\Status;
 
 class AirtimeRecipientResponse implements DTOContract
@@ -21,12 +22,12 @@ class AirtimeRecipientResponse implements DTOContract
     public static function make(array $response): AirtimeRecipientResponse
     {
         return new AirtimeRecipientResponse(
-            phoneNumber: PhoneNumber::make(data_get($response,'phoneNumber')),
-            errorMessage: data_get($response,'errorMessage'),
-            amount: data_get($response,'amount'),
-            status: Status::from(data_get($response,'status')),
-            requestId: data_get($response,'requestId'),
-            discount: data_get($response,'discount'),
+            phoneNumber: PhoneNumber::make(data_get($response, 'phoneNumber')),
+            errorMessage: data_get($response, 'errorMessage'),
+            amount: data_get($response, 'amount'),
+            status: Status::from(data_get($response, 'status')),
+            requestId: data_get($response, 'requestId'),
+            discount: data_get($response, 'discount'),
         );
     }
 
