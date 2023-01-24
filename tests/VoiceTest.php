@@ -93,7 +93,8 @@ it('makes a call', function (string $phone): void {
     expect($response)
         ->toBeInstanceOf(VoiceCallResponse::class)
         ->toHaveKeys(['recipients', 'errorMessage'])
-        ->recipients->toBeInstanceOf(Collection::class)->toHaveCount(3)
+        ->recipients->toBeInstanceOf(Collection::class)
+        ->toHaveCount(3)
         ->and($response->errorMessage)->toBeIn(['None', 'Invalid callbackUrl: ', 'Invalid callerId: ']);
 })->with('phone-numbers');
 
