@@ -91,8 +91,9 @@ it('sets content-type to text/plain in the response', function (): void {
 it('makes a call', function (string $phone): void {
     $response = africastalking()->voice()->call([$phone,'+254712345678','+254711123456'])->send();
 
-    if (Str::contains($response->errorMessage,'Invalid')){
+    if (Str::contains($response->errorMessage, 'Invalid')) {
         $this->markAsRisky();
+
         return;
     }
 
