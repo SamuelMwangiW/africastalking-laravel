@@ -9,6 +9,8 @@ use SamuelMwangiW\Africastalking\Domain\Airtime;
 use SamuelMwangiW\Africastalking\Enum\Currency;
 use SamuelMwangiW\Africastalking\Exceptions\AfricastalkingException;
 use SamuelMwangiW\Africastalking\Facades\Africastalking;
+use SamuelMwangiW\Africastalking\ValueObjects\AirtimeRecipientResponse;
+use SamuelMwangiW\Africastalking\ValueObjects\AirtimeResponse;
 use SamuelMwangiW\Africastalking\ValueObjects\AirtimeTransaction;
 use SamuelMwangiW\Africastalking\ValueObjects\PhoneNumber;
 
@@ -91,33 +93,20 @@ it('sends airtime to a single recipient', function (AirtimeTransaction $transact
         ->to($transaction)
         ->send();
 
-    if (
-        'A duplicate request was received within the last 5 minutes' === data_get($result, 'errorMessage')
-    ) {
+    if ($result->hasDuplicate()) {
         $this->markAsRisky();
 
         return;
     }
 
     expect($result)
-        ->toBeArray()
-        ->toHaveKeys([
-            'errorMessage',
-            'numSent',
-            'totalAmount',
-            'totalDiscount',
-            'responses',
-        ])
-        ->and($result['responses'])
-        ->toBeArray()
-        ->toHaveCount(1)
-        ->and($result['responses'])
-        ->each(
-            fn (Expectation $response) => $response->toHaveKeys(
-                ['phoneNumber', 'errorMessage', 'requestId', 'discount']
-            )
-        )
-        ->and(data_get($result, 'numSent'))->toBe(1);
+        ->toBeInstanceOf(AirtimeResponse::class)
+        ->numSent->toBe(1)
+        ->errorMessage->toBe('None')
+        ->and($result->responses)
+        ->toBeInstanceOf(Collection::class)
+        ->count()->toBe(1)
+        ->first()->toBeInstanceOf(AirtimeRecipientResponse::class);
 })->with('airtime-transactions');
 
 it('sends airtime to multiple recipients', function (int $amount, string $phone): void {
@@ -131,30 +120,20 @@ it('sends airtime to multiple recipients', function (int $amount, string $phone)
         ->to(phoneNumber: $secondPhone, amount: $amount)
         ->send();
 
-    if (
-        'A duplicate request was received within the last 5 minutes' === data_get($result, 'errorMessage')
-    ) {
+    if ($result->hasDuplicate()) {
         $this->markAsRisky();
 
         return;
     }
 
     expect($result)
-        ->toBeArray()
-        ->toHaveKeys([
-            'errorMessage',
-            'numSent',
-            'totalAmount',
-            'totalDiscount',
-            'responses',
-        ])
-        ->and($result['responses'])
-        ->toBeArray()
+        ->toBeInstanceOf(AirtimeResponse::class)
+        ->numSent->toBe(2)
+        ->errorMessage->toBe('None')
+        ->and($result->responses)
+        ->toBeInstanceOf(Collection::class)
         ->toHaveCount(2)
-        ->and($result['responses'])
         ->each(
-            fn (Expectation $response) => $response->toHaveKeys(
-                ['phoneNumber', 'errorMessage', 'requestId', 'discount']
-            )
-        )->and(data_get($result, 'numSent'))->toBe(2);
+            fn (Expectation $transaction) => $transaction->toBeInstanceOf(AirtimeRecipientResponse::class)
+        );
 })->with('airtime-amount', 'phone-numbers')->markAsRisky();

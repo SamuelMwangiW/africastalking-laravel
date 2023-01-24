@@ -9,6 +9,7 @@ use SamuelMwangiW\Africastalking\Concerns\HasIdempotency;
 use SamuelMwangiW\Africastalking\Enum\Currency;
 use SamuelMwangiW\Africastalking\Exceptions\AfricastalkingException;
 use SamuelMwangiW\Africastalking\Saloon\Requests\Airtime\SendRequest;
+use SamuelMwangiW\Africastalking\ValueObjects\AirtimeResponse;
 use SamuelMwangiW\Africastalking\ValueObjects\AirtimeTransaction;
 use SamuelMwangiW\Africastalking\ValueObjects\PhoneNumber;
 use ReflectionException;
@@ -90,7 +91,7 @@ class Airtime
      * @throws \Saloon\Exceptions\InvalidResponseClassException
      * @throws \Saloon\Exceptions\PendingRequestException
      */
-    public function send(): array
+    public function send(): AirtimeResponse
     {
         $request = SendRequest::make($this->recipients());
 
@@ -98,7 +99,7 @@ class Airtime
             $request->headers()->add('Idempotency-Key', $this->idempotencyKey());
         }
 
-        return $request->send()->throw()->json();
+        return $request->send()->throw()->dto();
     }
 
     private function recipients(): string
