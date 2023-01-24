@@ -6,6 +6,7 @@ use Illuminate\Contracts\Support\Responsable;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Str;
 use Saloon\Http\Faking\MockResponse;
 use Saloon\Laravel\Saloon;
 use SamuelMwangiW\Africastalking\Domain\Voice;
@@ -90,8 +91,8 @@ it('sets content-type to text/plain in the response', function (): void {
 it('makes a call', function (string $phone): void {
     $response = africastalking()->voice()->call([$phone,'+254712345678','+254711123456'])->send();
 
-    if ($response->errorMessage !== 'None'){
-        dump($response);
+    if (Str::contains($response->errorMessage,'Invalid')){
+        $this->markAsRisky();
         return;
     }
 
