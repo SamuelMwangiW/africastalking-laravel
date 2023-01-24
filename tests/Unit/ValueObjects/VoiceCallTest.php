@@ -6,6 +6,8 @@ use SamuelMwangiW\Africastalking\Domain\VoiceCall;
 use SamuelMwangiW\Africastalking\Facades\Africastalking;
 use SamuelMwangiW\Africastalking\ValueObjects\PhoneNumber;
 
+use SamuelMwangiW\Africastalking\ValueObjects\VoiceCallResponse;
+
 use function Pest\Faker\faker;
 
 it('resolves the Voice class')
@@ -17,7 +19,7 @@ it('sets the recipients', function (): void {
         Africastalking::voice()
             ->call('+254720123123')
             ->done()
-    )->toBeArray()->toHaveKeys(['entries', 'errorMessage']);
+    )->toBeInstanceOf(VoiceCallResponse::class)->toHaveKeys(['recipients', 'errorMessage']);
 });
 
 it('sets the phone number', function (): void {

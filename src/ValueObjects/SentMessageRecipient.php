@@ -18,6 +18,17 @@ class SentMessageRecipient implements DTOContract
     ) {
     }
 
+    public static function make(array $attributes): SentMessageRecipient
+    {
+        return new SentMessageRecipient(
+            id: data_get($attributes, 'messageId'),
+            statusCode: intval(data_get($attributes, 'statusCode')),
+            number: PhoneNumber::make(data_get($attributes, 'number')),
+            cost: data_get($attributes, 'cost'),
+            status: Status::from(data_get($attributes, 'status')),
+        );
+    }
+
     public function __toString(): string
     {
         return json_encode($this) ?: '';

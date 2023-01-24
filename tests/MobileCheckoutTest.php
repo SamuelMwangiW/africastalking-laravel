@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use SamuelMwangiW\Africastalking\Domain\MobileCheckout;
 use SamuelMwangiW\Africastalking\Enum\Currency;
+use SamuelMwangiW\Africastalking\ValueObjects\MobileCheckoutResponse;
 
 it('resolves the class')
     ->expect(fn () => app(MobileCheckout::class))->toBeInstanceOf(MobileCheckout::class);
@@ -59,18 +60,18 @@ it('sends a Mobile Checkout Request', function (string $phone): void {
         ->currency(currency: Currency::KENYA)
         ->send();
 
-    if ('DuplicateRequest' === $result['status']) {
+    if ($result->hasDuplicate()) {
         $this->markAsRisky();
 
         return;
     }
 
     expect($result)
-        ->toBeArray()
+        ->toBeInstanceOf(MobileCheckoutResponse::class)
         ->toHaveKeys([
             "description",
             "providerChannel",
             "status",
-            "transactionId",
+            "id",
         ]);
 })->with('phone-numbers');

@@ -5,10 +5,13 @@ declare(strict_types=1);
 namespace SamuelMwangiW\Africastalking\Domain;
 
 use Illuminate\Support\Collection;
+use Saloon\Exceptions\InvalidResponseClassException;
+use Saloon\Exceptions\PendingRequestException;
 use SamuelMwangiW\Africastalking\Concerns\HasIdempotency;
 use SamuelMwangiW\Africastalking\Enum\Currency;
 use SamuelMwangiW\Africastalking\Exceptions\AfricastalkingException;
 use SamuelMwangiW\Africastalking\Saloon\Requests\Airtime\SendRequest;
+use SamuelMwangiW\Africastalking\ValueObjects\AirtimeResponse;
 use SamuelMwangiW\Africastalking\ValueObjects\AirtimeTransaction;
 use SamuelMwangiW\Africastalking\ValueObjects\PhoneNumber;
 use ReflectionException;
@@ -85,12 +88,12 @@ class Airtime
     }
 
     /**
-     * @return array
+     * @return AirtimeResponse
      * @throws ReflectionException
-     * @throws \Saloon\Exceptions\InvalidResponseClassException
-     * @throws \Saloon\Exceptions\PendingRequestException
+     * @throws InvalidResponseClassException
+     * @throws PendingRequestException
      */
-    public function send(): array
+    public function send(): AirtimeResponse
     {
         $request = SendRequest::make($this->recipients());
 
@@ -98,7 +101,7 @@ class Airtime
             $request->headers()->add('Idempotency-Key', $this->idempotencyKey());
         }
 
-        return $request->send()->throw()->json();
+        return $request->send()->throw()->dto();
     }
 
     private function recipients(): string
