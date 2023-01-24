@@ -8,6 +8,7 @@ use Illuminate\Support\Collection;
 use SamuelMwangiW\Africastalking\Saloon\Requests\Voice\CallRequest;
 use SamuelMwangiW\Africastalking\ValueObjects\PhoneNumber;
 use SamuelMwangiW\Africastalking\ValueObjects\VoiceCallDTO;
+use SamuelMwangiW\Africastalking\ValueObjects\VoiceCallResponse;
 
 class VoiceCall
 {
@@ -58,17 +59,17 @@ class VoiceCall
         return $this;
     }
 
-    public function done(): array
+    public function done(): VoiceCallResponse
     {
         return $this->send();
     }
 
-    public function send(): array
+    public function send(): VoiceCallResponse
     {
         return CallRequest::make($this->data())
             ->send()
             ->throw()
-            ->json();
+            ->dto();
     }
 
     public function data(): array

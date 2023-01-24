@@ -5,6 +5,7 @@ declare(strict_types=1);
 use Illuminate\Contracts\Support\Responsable;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Collection;
 use Saloon\Http\Faking\MockResponse;
 use Saloon\Laravel\Saloon;
 use SamuelMwangiW\Africastalking\Domain\Voice;
@@ -13,6 +14,7 @@ use SamuelMwangiW\Africastalking\Facades\Africastalking;
 use SamuelMwangiW\Africastalking\Response\VoiceResponse;
 use SamuelMwangiW\Africastalking\ValueObjects\CapabilityToken;
 use SamuelMwangiW\Africastalking\ValueObjects\Voice\SynthesisedSpeech;
+use SamuelMwangiW\Africastalking\ValueObjects\VoiceCallResponse;
 use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 
 it('resolves the application class')
@@ -86,12 +88,13 @@ it('sets content-type to text/plain in the response', function (): void {
 });
 
 it('makes a call', function (string $phone): void {
-    $response = africastalking()->voice()->call($phone)->send();
+    $response = africastalking()->voice()->call([$phone,'+254712345678','+254711123456'])->send();
 
     expect($response)
-        ->toBeArray()
-        ->toHaveKeys(['entries', 'errorMessage'])
-        ->and($response['errorMessage'])->toBeIn(['None', 'Invalid callbackUrl: ', 'Invalid callerId: ']);
+        ->toBeInstanceOf(VoiceCallResponse::class)
+        ->toHaveKeys(['recipients', 'errorMessage'])
+        ->recipients->toBeInstanceOf(Collection::class)->toHaveCount(3)
+        ->and($response->errorMessage)->toBeIn(['None', 'Invalid callbackUrl: ', 'Invalid callerId: ']);
 })->with('phone-numbers');
 
 it('initiates a webrtc object')

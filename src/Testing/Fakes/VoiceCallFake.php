@@ -7,6 +7,7 @@ namespace SamuelMwangiW\Africastalking\Testing\Fakes;
 use Illuminate\Support\Collection;
 use SamuelMwangiW\Africastalking\Domain\VoiceCall;
 use SamuelMwangiW\Africastalking\ValueObjects\VoiceCallDTO;
+use SamuelMwangiW\Africastalking\ValueObjects\VoiceCallResponse;
 
 class VoiceCallFake extends VoiceCall
 {
@@ -15,21 +16,15 @@ class VoiceCallFake extends VoiceCall
      */
     private ?Collection $calls = null;
 
-    public function send(): array
+    public function send(): VoiceCallResponse
     {
         if (null === $this->calls) {
-            $this->calls = collect(
-                [
-                    $this->details(),
-                ]
-            );
-
-            return [];
+            $this->calls = collect([]);
         }
 
         $this->calls->push($this->details());
 
-        return [];
+        return new VoiceCallResponse('None', collect([]));
     }
 
     /**
