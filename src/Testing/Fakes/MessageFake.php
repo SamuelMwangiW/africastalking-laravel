@@ -5,8 +5,11 @@ declare(strict_types=1);
 namespace SamuelMwangiW\Africastalking\Testing\Fakes;
 
 use Illuminate\Support\Collection;
+use Saloon\Contracts\Response;
+use Saloon\Http\Faking\MockResponse;
 use SamuelMwangiW\Africastalking\ValueObjects\Message;
 use SamuelMwangiW\Africastalking\ValueObjects\PhoneNumber;
+use SamuelMwangiW\Africastalking\ValueObjects\SentMessageResponse;
 
 class MessageFake extends Message
 {
@@ -15,24 +18,18 @@ class MessageFake extends Message
      */
     private ?Collection $messages = null;
 
-    /**
-     * @return Collection<int,mixed>
-     */
-    public function send(): Collection
+    public function send(): SentMessageResponse
     {
         if (null === $this->messages) {
-            $this->messages = collect(
-                [
-                    $this->details(),
-                ]
-            );
-
-            return collect([[]]);
+            $this->messages = collect([]);
         }
 
         $this->messages->push($this->details());
 
-        return collect([[]]);
+        return new SentMessageResponse(
+            message: 'Sent to 1/1 Total Cost: KES 0.8000',
+            recipients: collect()
+        );
     }
 
     /**

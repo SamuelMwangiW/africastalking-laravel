@@ -30,13 +30,7 @@ class SentMessageResponse implements DTOContract
             /** @phpstan-ignore-next-line  */
             recipients: collect(data_get($data, 'Recipients'))
                 ->map(
-                    fn (array $recipient) => new SentMessageRecipient(
-                        id: data_get($recipient, 'messageId'),
-                        statusCode: data_get($recipient, 'statusCode'),
-                        number: PhoneNumber::make(data_get($recipient, 'number')),
-                        cost: data_get($recipient, 'cost'),
-                        status: Status::from(data_get($recipient, 'status')),
-                    )
+                    fn (array $recipient) => SentMessageRecipient::make($recipient)
                 ),
         );
     }
