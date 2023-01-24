@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace SamuelMwangiW\Africastalking\Domain;
 
 use Illuminate\Support\Collection;
+use Saloon\Exceptions\InvalidResponseClassException;
+use Saloon\Exceptions\PendingRequestException;
 use SamuelMwangiW\Africastalking\Concerns\HasIdempotency;
 use SamuelMwangiW\Africastalking\Enum\Currency;
 use SamuelMwangiW\Africastalking\Exceptions\AfricastalkingException;
@@ -86,10 +88,10 @@ class Airtime
     }
 
     /**
-     * @return array
+     * @return AirtimeResponse
      * @throws ReflectionException
-     * @throws \Saloon\Exceptions\InvalidResponseClassException
-     * @throws \Saloon\Exceptions\PendingRequestException
+     * @throws InvalidResponseClassException
+     * @throws PendingRequestException
      */
     public function send(): AirtimeResponse
     {

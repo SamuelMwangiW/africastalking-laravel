@@ -10,6 +10,13 @@ use SamuelMwangiW\Africastalking\Contracts\DTOContract;
 
 class AirtimeResponse implements DTOContract
 {
+    /**
+     * @param string $errorMessage
+     * @param string $amount
+     * @param string $discount
+     * @param int $numSent
+     * @param Collection<int,AirtimeRecipientResponse> $responses
+     */
     public function __construct(
         public readonly string $errorMessage,
         public readonly string $amount,
