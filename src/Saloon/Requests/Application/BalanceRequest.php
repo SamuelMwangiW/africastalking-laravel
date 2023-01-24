@@ -4,10 +4,13 @@ declare(strict_types=1);
 
 namespace SamuelMwangiW\Africastalking\Saloon\Requests\Application;
 
+use Saloon\Contracts\Response;
 use Saloon\Enums\Method;
 use Saloon\Traits\Body\HasJsonBody;
 use SamuelMwangiW\Africastalking\Enum\Service;
+use SamuelMwangiW\Africastalking\Factories\AccountFactory;
 use SamuelMwangiW\Africastalking\Saloon\Requests\BaseRequest;
+use SamuelMwangiW\Africastalking\ValueObjects\Balance;
 
 class BalanceRequest extends BaseRequest
 {
@@ -26,5 +29,12 @@ class BalanceRequest extends BaseRequest
         return [
             'username' => $this->username(),
         ];
+    }
+
+    public function createDtoFromResponse(Response $response): Balance
+    {
+        return AccountFactory::make(
+            data: $response->json()
+        );
     }
 }

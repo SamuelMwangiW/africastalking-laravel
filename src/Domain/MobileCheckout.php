@@ -7,6 +7,7 @@ namespace SamuelMwangiW\Africastalking\Domain;
 use SamuelMwangiW\Africastalking\Concerns\HasIdempotency;
 use SamuelMwangiW\Africastalking\Enum\Currency;
 use SamuelMwangiW\Africastalking\Saloon\Requests\Payment\MobileCheckoutRequest;
+use SamuelMwangiW\Africastalking\ValueObjects\MobileCheckoutResponse;
 use SamuelMwangiW\Africastalking\ValueObjects\PhoneNumber;
 
 class MobileCheckout
@@ -54,7 +55,7 @@ class MobileCheckout
         return $this;
     }
 
-    public function send(): array
+    public function send(): MobileCheckoutResponse
     {
         $request = MobileCheckoutRequest::make($this->data());
 
@@ -64,7 +65,7 @@ class MobileCheckout
 
         return $request->send()
             ->throw()
-            ->json();
+            ->dto();
     }
 
     private function data(): array

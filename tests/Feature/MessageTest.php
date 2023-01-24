@@ -6,7 +6,8 @@ use Illuminate\Support\Collection;
 use SamuelMwangiW\Africastalking\Exceptions\AfricastalkingException;
 use SamuelMwangiW\Africastalking\Facades\Africastalking;
 use SamuelMwangiW\Africastalking\ValueObjects\PhoneNumber;
-use SamuelMwangiW\Africastalking\ValueObjects\RecipientsApiResponse;
+use SamuelMwangiW\Africastalking\ValueObjects\SentMessageRecipient;
+use SamuelMwangiW\Africastalking\ValueObjects\SentMessageResponse;
 
 it('can send bulk message when from is not set', function (string $phone, string $message): void {
     config()->set('africastalking.from', null);
@@ -16,11 +17,12 @@ it('can send bulk message when from is not set', function (string $phone, string
         ->send();
 
     expect($response)
-        ->toBeInstanceOf(Collection::class)
-        ->toHaveCount(1)
-        ->first()->toBeInstanceOf(RecipientsApiResponse::class)
-        ->first()->number->toBeInstanceOf(PhoneNumber::class)
-        ->first()->number->number->toBe($phone);
+        ->toBeInstanceOf(SentMessageResponse::class)
+        ->recipients->toBeInstanceOf(Collection::class)->toHaveCount(1)
+        ->and($response->recipients->first())
+        ->toBeInstanceOf(SentMessageRecipient::class)
+        ->number->toBeInstanceOf(PhoneNumber::class)
+        ->number->number->toBe($phone);
 })->with('phone-numbers', 'sentence');
 
 it('can send bulk message', function (string $phone, string $message): void {
@@ -29,11 +31,12 @@ it('can send bulk message', function (string $phone, string $message): void {
         ->send();
 
     expect($response)
-        ->toBeInstanceOf(Collection::class)
-        ->toHaveCount(1)
-        ->first()->toBeInstanceOf(RecipientsApiResponse::class)
-        ->first()->number->toBeInstanceOf(PhoneNumber::class)
-        ->first()->number->number->toBe($phone);
+        ->toBeInstanceOf(SentMessageResponse::class)
+        ->recipients->toBeInstanceOf(Collection::class)->toHaveCount(1)
+        ->and($response->recipients->first())
+        ->toBeInstanceOf(SentMessageRecipient::class)
+        ->number->toBeInstanceOf(PhoneNumber::class)
+        ->number->number->toBe($phone);
 })->with('phone-numbers', 'sentence');
 
 it('can enqueue bulk message', function (string $phone, string $message): void {
@@ -43,11 +46,13 @@ it('can enqueue bulk message', function (string $phone, string $message): void {
         ->send();
 
     expect($response)
-        ->toBeInstanceOf(Collection::class)
+        ->toBeInstanceOf(SentMessageResponse::class)
+        ->recipients->toBeInstanceOf(Collection::class)
         ->toHaveCount(1)
-        ->first()->toBeInstanceOf(RecipientsApiResponse::class)
-        ->first()->number->toBeInstanceOf(PhoneNumber::class)
-        ->first()->number->number->toBe($phone);
+        ->and($response->recipients->first())
+        ->toBeInstanceOf(SentMessageRecipient::class)
+        ->number->toBeInstanceOf(PhoneNumber::class)
+        ->number->number->toBe($phone);
 })->with('phone-numbers', 'sentence');
 
 it('can send message without enqueue', function (string $phone, string $message): void {
@@ -58,11 +63,13 @@ it('can send message without enqueue', function (string $phone, string $message)
         ->send();
 
     expect($response)
-        ->toBeInstanceOf(Collection::class)
+        ->toBeInstanceOf(SentMessageResponse::class)
+        ->recipients->toBeInstanceOf(Collection::class)
         ->toHaveCount(1)
-        ->first()->toBeInstanceOf(RecipientsApiResponse::class)
-        ->first()->number->toBeInstanceOf(PhoneNumber::class)
-        ->first()->number->number->toBe($phone);
+        ->and($response->recipients->first())
+        ->toBeInstanceOf(SentMessageRecipient::class)
+        ->number->toBeInstanceOf(PhoneNumber::class)
+        ->number->number->toBe($phone);
 })->with('phone-numbers', 'sentence');
 
 it('can change message senderID', function (string $phone, string $message): void {
@@ -72,11 +79,13 @@ it('can change message senderID', function (string $phone, string $message): voi
         ->send();
 
     expect($response)
-        ->toBeInstanceOf(Collection::class)
+        ->toBeInstanceOf(SentMessageResponse::class)
+        ->recipients->toBeInstanceOf(Collection::class)
         ->toHaveCount(1)
-        ->first()->toBeInstanceOf(RecipientsApiResponse::class)
-        ->first()->number->toBeInstanceOf(PhoneNumber::class)
-        ->first()->number->number->toBe($phone);
+        ->and($response->recipients->first())
+        ->toBeInstanceOf(SentMessageRecipient::class)
+        ->number->toBeInstanceOf(PhoneNumber::class)
+        ->number->number->toBe($phone);
 })->with('phone-numbers', 'sentence');
 
 it('thows an exception for an invalid request', function (): void {
@@ -95,10 +104,14 @@ it('can send premium messages', function (string $phone, string $message): void 
         ->send();
 
     expect($response)
-        ->toBeInstanceOf(Collection::class)
+        ->toBeInstanceOf(SentMessageResponse::class)
+        ->recipients->toBeInstanceOf(Collection::class)
         ->toHaveCount(1)
-        ->first()->toBeInstanceOf(RecipientsApiResponse::class)
-        ->first()->cost->toBe('0');
+        ->and($response->recipients->first())
+        ->toBeInstanceOf(SentMessageRecipient::class)
+        ->cost->toBe('0')
+        ->number->toBeInstanceOf(PhoneNumber::class)
+        ->number->number->toBe($phone);
 })->with('phone-numbers', 'sentence');
 
 it('can send premium messages in bulk mode', function (string $phone, string $message): void {
@@ -110,10 +123,14 @@ it('can send premium messages in bulk mode', function (string $phone, string $me
         ->send();
 
     expect($response)
-        ->toBeInstanceOf(Collection::class)
+        ->toBeInstanceOf(SentMessageResponse::class)
+        ->recipients->toBeInstanceOf(Collection::class)
         ->toHaveCount(1)
-        ->first()->toBeInstanceOf(RecipientsApiResponse::class)
-        ->first()->cost->not->toBe('0');
+        ->and($response->recipients->first())
+        ->toBeInstanceOf(SentMessageRecipient::class)
+        ->cost->not->toBe('0')
+        ->number->toBeInstanceOf(PhoneNumber::class)
+        ->number->number->toBe($phone);
 })->with('phone-numbers', 'sentence');
 
 it('can send premium messages with a keyword', function (string $phone, string $message): void {
@@ -125,10 +142,14 @@ it('can send premium messages with a keyword', function (string $phone, string $
         ->send();
 
     expect($response)
-        ->toBeInstanceOf(Collection::class)
+        ->toBeInstanceOf(SentMessageResponse::class)
+        ->recipients->toBeInstanceOf(Collection::class)
         ->toHaveCount(1)
-        ->first()->toBeInstanceOf(RecipientsApiResponse::class)
-        ->first()->cost->toBe('0');
+        ->and($response->recipients->first())
+        ->toBeInstanceOf(SentMessageRecipient::class)
+        ->cost->toBe('0')
+        ->number->toBeInstanceOf(PhoneNumber::class)
+        ->number->number->toBe($phone);
 })->with('phone-numbers', 'sentence');
 
 it('can send premium messages with a linkid', function (string $phone, string $message): void {
@@ -140,14 +161,18 @@ it('can send premium messages with a linkid', function (string $phone, string $m
         ->send();
 
     expect($response)
-        ->toBeInstanceOf(Collection::class)
+        ->toBeInstanceOf(SentMessageResponse::class)
+        ->recipients->toBeInstanceOf(Collection::class)
         ->toHaveCount(1)
-        ->first()->toBeInstanceOf(RecipientsApiResponse::class)
-        ->first()->cost->toBe('0');
+        ->and($response->recipients->first())
+        ->toBeInstanceOf(SentMessageRecipient::class)
+        ->cost->toBe('0')
+        ->number->toBeInstanceOf(PhoneNumber::class)
+        ->number->number->toBe($phone);
 })->with('phone-numbers', 'sentence');
 
 it('throws an exception for invalid sender id', function (string $phone): void {
-    $response = Africastalking::sms('test message')
+    Africastalking::sms('test message')
         ->to($phone)
         ->as('INVALID_SENDER')
         ->send();

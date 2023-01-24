@@ -7,23 +7,22 @@ namespace SamuelMwangiW\Africastalking\Notifications;
 use Illuminate\Http\Client\RequestException;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Notifications\Notification;
-use Illuminate\Support\Collection;
 use SamuelMwangiW\Africastalking\Contracts\ReceivesSmsMessages;
 use SamuelMwangiW\Africastalking\Exceptions\AfricastalkingException;
 use SamuelMwangiW\Africastalking\Facades\Africastalking;
 use SamuelMwangiW\Africastalking\ValueObjects\Message;
-use SamuelMwangiW\Africastalking\ValueObjects\RecipientsApiResponse;
+use SamuelMwangiW\Africastalking\ValueObjects\SentMessageResponse;
 
 class AfricastalkingChannel
 {
     /**
      * @param object $notifiable
      * @param Notification $notification
-     * @return Collection<int,RecipientsApiResponse>
+     * @return SentMessageResponse
      * @throws AfricastalkingException
      * @throws RequestException
      */
-    public function send(object $notifiable, Notification $notification): Collection
+    public function send(object $notifiable, Notification $notification): SentMessageResponse
     {
         $this->throwIfNotifiableDoesNotUseTrait($notifiable);
         $this->throwIfNotifiableHasNoRoute($notifiable);

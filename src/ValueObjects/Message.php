@@ -122,14 +122,14 @@ class Message implements DTOContract
     }
 
     /**
-     * @return Collection<int,RecipientsApiResponse>
+     * @return SentMessageResponse
      * @throws AfricastalkingException
      * @throws ReflectionException
      * @throws \Saloon\Exceptions\InvalidResponseClassException
      * @throws \Saloon\Exceptions\PendingRequestException
      * @throws Throwable
      */
-    public function send(): Collection
+    public function send(): SentMessageResponse
     {
         $request = $this->request();
 
@@ -143,10 +143,7 @@ class Message implements DTOContract
             );
         }
 
-        /** @phpstan-ignore-next-line */
-        return collect(
-            $response->json('SMSMessageData.Recipients')
-        )->map(fn (array $recipient) => RecipientsApiResponse::make($recipient));
+        return $response->dto();
     }
 
     protected function from(): ?string

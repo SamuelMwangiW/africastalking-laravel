@@ -5,9 +5,11 @@ declare(strict_types=1);
 namespace SamuelMwangiW\Africastalking\Saloon\Requests\Payment;
 
 use Saloon\Contracts\Body\HasBody;
+use Saloon\Contracts\Response;
 use Saloon\Traits\Body\HasJsonBody;
 use SamuelMwangiW\Africastalking\Enum\Service;
 use SamuelMwangiW\Africastalking\Saloon\Requests\BaseRequest;
+use SamuelMwangiW\Africastalking\ValueObjects\StashTopupResponse;
 
 class StashTopupRequest extends BaseRequest implements HasBody
 {
@@ -29,6 +31,13 @@ class StashTopupRequest extends BaseRequest implements HasBody
         return array_merge(
             $this->data,
             ['username' => $this->username()]
+        );
+    }
+
+    public function createDtoFromResponse(Response $response): StashTopupResponse
+    {
+        return StashTopupResponse::make(
+            attributes: $response->json()
         );
     }
 }

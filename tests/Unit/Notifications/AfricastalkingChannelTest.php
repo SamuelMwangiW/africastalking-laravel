@@ -2,7 +2,6 @@
 
 declare(strict_types=1);
 
-use Illuminate\Support\Collection;
 use SamuelMwangiW\Africastalking\Exceptions\AfricastalkingException;
 use SamuelMwangiW\Africastalking\Notifications\AfricastalkingChannel;
 use SamuelMwangiW\Africastalking\Tests\Fixtures\BasicNotifiable;
@@ -11,7 +10,8 @@ use SamuelMwangiW\Africastalking\Tests\Fixtures\BasicNotifiableNoTrait;
 use SamuelMwangiW\Africastalking\Tests\Fixtures\BasicNotificationNoToAfricastalking;
 use SamuelMwangiW\Africastalking\Tests\Fixtures\BasicNotificationReturnsObject;
 use SamuelMwangiW\Africastalking\Tests\Fixtures\BasicNotificationReturnsString;
-use SamuelMwangiW\Africastalking\ValueObjects\RecipientsApiResponse;
+use SamuelMwangiW\Africastalking\ValueObjects\SentMessageRecipient;
+use SamuelMwangiW\Africastalking\ValueObjects\SentMessageResponse;
 
 it('can resolve', function (): void {
     $channel = app(AfricastalkingChannel::class);
@@ -51,9 +51,11 @@ it('sends a notification when toAfricastalking() returns string message', functi
     $results = $channel->send($notifiable, $notification);
 
     expect($results)
-        ->toBeInstanceOf(Collection::class)
-        ->toHaveCount(1)
-        ->first()->toBeInstanceOf(RecipientsApiResponse::class);
+        ->toBeInstanceOf(SentMessageResponse::class)
+        ->recipients->toHaveCount(1)
+        ->and($results->recipients->first())
+        ->toBeInstanceOf(SentMessageRecipient::class)
+        ->number->number->toBe($phone);
 })->with('phone-numbers');
 
 it('sends a notification when toAfricastalking() returns a message object', function (string $phone): void {
@@ -64,7 +66,9 @@ it('sends a notification when toAfricastalking() returns a message object', func
     $results = $channel->send($notifiable, $notification);
 
     expect($results)
-        ->toBeInstanceOf(Collection::class)
-        ->toHaveCount(1)
-        ->first()->toBeInstanceOf(RecipientsApiResponse::class);
+        ->toBeInstanceOf(SentMessageResponse::class)
+        ->recipients->toHaveCount(1)
+        ->and($results->recipients->first())
+        ->toBeInstanceOf(SentMessageRecipient::class)
+        ->number->number->toBe($phone);
 })->with('phone-numbers');
