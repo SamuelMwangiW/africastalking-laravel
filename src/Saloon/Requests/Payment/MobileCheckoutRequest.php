@@ -5,9 +5,11 @@ declare(strict_types=1);
 namespace SamuelMwangiW\Africastalking\Saloon\Requests\Payment;
 
 use Saloon\Contracts\Body\HasBody;
+use Saloon\Contracts\Response;
 use Saloon\Traits\Body\HasJsonBody;
 use SamuelMwangiW\Africastalking\Enum\Service;
 use SamuelMwangiW\Africastalking\Saloon\Requests\BaseRequest;
+use SamuelMwangiW\Africastalking\ValueObjects\MobileCheckoutResponse;
 
 class MobileCheckoutRequest extends BaseRequest implements HasBody
 {
@@ -30,5 +32,10 @@ class MobileCheckoutRequest extends BaseRequest implements HasBody
             $this->data,
             ['username' => $this->username()]
         );
+    }
+
+    public function createDtoFromResponse(Response $response): MobileCheckoutResponse
+    {
+        return MobileCheckoutResponse::make($response->json());
     }
 }
