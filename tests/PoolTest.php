@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 
+use Illuminate\Support\Benchmark;
 use Saloon\Http\Response;
 use SamuelMwangiW\Africastalking\Saloon\AfricastalkingConnector;
 use SamuelMwangiW\Africastalking\Saloon\Requests\Messaging\BulkSmsRequest;
@@ -23,14 +24,19 @@ test('benchmark pooling requests', function (string $phone): void {
     });
 
     $connector = AfricastalkingConnector::make()->service($requests->first()->service);
-    $connector->pool(
-        requests: $requests,
-        concurrency: 10,
-        responseHandler: fn (Response $data) => $responses->push($data->dto())
-    )->send()->wait();
+
+    $timeInMilliseconds = Benchmark::measure(
+        fn() => $connector->pool(
+            requests: $requests,
+            concurrency: 10,
+            responseHandler: fn(Response $data) => $responses->push($data->dto())
+        )->send()->wait()
+    );
 
     expect($responses)
         ->not->toBeEmpty()
         ->toHaveCount($count)
-        ->each->toBeInstanceOf(SentMessageResponse::class);
-})->with('phone-numbers')->skip();
+        ->each->toBeInstanceOf(SentMessageResponse::class)
+        ->and($timeInMilliseconds)
+        ->toBeNumeric()->toBeLessThan(5500); //Less than 5.5 Seconds
+})->with('phone-numbers');
