@@ -26,10 +26,10 @@ test('benchmark pooling requests', function (string $phone): void {
     $connector = AfricastalkingConnector::make()->service($requests->first()->service);
 
     $timeInMilliseconds = Benchmark::measure(
-        fn() => $connector->pool(
+        fn () => $connector->pool(
             requests: $requests,
             concurrency: 10,
-            responseHandler: fn(Response $data) => $responses->push($data->dto())
+            responseHandler: fn (Response $data) => $responses->push($data->dto())
         )->send()->wait()
     );
 
