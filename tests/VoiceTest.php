@@ -89,9 +89,14 @@ it('sets content-type to text/plain in the response', function (): void {
 });
 
 it('makes a call', function (string $phone): void {
-    $response = africastalking()->voice()->call([$phone,'+254712345678','+254711123456'])->send();
+    $response = africastalking()->voice()->call([$phone, '+254712345678', '+254711123456'])->send();
 
     if (Str::contains($response->errorMessage, 'Invalid')) {
+        /**
+         * The call failed due an invalid callback url on the test account.
+         * This is not enough sufficient to mark the call as failed
+         */
+
         $this->markAsRisky();
 
         return;
