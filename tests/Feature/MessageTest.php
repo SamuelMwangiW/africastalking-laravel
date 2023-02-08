@@ -10,7 +10,7 @@ use SamuelMwangiW\Africastalking\ValueObjects\SentMessageRecipient;
 use SamuelMwangiW\Africastalking\ValueObjects\SentMessageResponse;
 
 it('can send bulk message when from is not set', function (string $phone, string $message): void {
-    config()->set('africastalking.from', null);
+    config()->set('africastalking.sms.from', null);
 
     $response = Africastalking::sms($message)
         ->to($phone)
@@ -75,7 +75,7 @@ it('can send message without enqueue', function (string $phone, string $message)
 it('can change message senderID', function (string $phone, string $message): void {
     $response = Africastalking::sms($message)
         ->to($phone)
-        ->as(config('africastalking.from-backup'))
+        ->as(config('africastalking.sms.from-backup'))
         ->send();
 
     expect($response)
