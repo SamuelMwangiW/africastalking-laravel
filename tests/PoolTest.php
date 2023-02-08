@@ -5,12 +5,13 @@ declare(strict_types=1);
 
 use Illuminate\Support\Benchmark;
 use Saloon\Http\Response;
+use SamuelMwangiW\Africastalking\Enum\Service;
 use SamuelMwangiW\Africastalking\Saloon\AfricastalkingConnector;
 use SamuelMwangiW\Africastalking\Saloon\Requests\Messaging\BulkSmsRequest;
 use SamuelMwangiW\Africastalking\ValueObjects\SentMessageResponse;
 
 test('benchmark pooling requests', function (string $phone): void {
-    $count = 100;
+    $count = 1_000;
     $messages = collect(fake()->sentences($count));
 
     $responses = collect([]);
@@ -23,7 +24,7 @@ test('benchmark pooling requests', function (string $phone): void {
         ]);
     });
 
-    $connector = AfricastalkingConnector::make()->service($requests->first()->service);
+    $connector = AfricastalkingConnector::make()->service(service: Service::BULK_SMS);
 
     $timeInMilliseconds = Benchmark::measure(
         fn () => $connector->pool(
@@ -38,5 +39,5 @@ test('benchmark pooling requests', function (string $phone): void {
         ->toHaveCount($count)
         ->each->toBeInstanceOf(SentMessageResponse::class)
         ->and($timeInMilliseconds)
-        ->toBeNumeric()->toBeLessThan(5500); //Less than 5.5 Seconds
+        ->toBeNumeric()->toBeLessThan(25_500); //Less than 25.5 Seconds to send 1000 messages
 })->with('phone-numbers');
