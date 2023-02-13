@@ -100,12 +100,6 @@ it('sends airtime to a single recipient', function (AirtimeTransaction $transact
         ->to($transaction)
         ->send();
 
-    if ($result->hasDuplicate()) {
-        $this->markAsRisky();
-
-        return;
-    }
-
     expect($result)
         ->toBeInstanceOf(AirtimeResponse::class)
         ->numSent->toBe(1)
@@ -121,14 +115,10 @@ it('sends airtime to multiple recipients', function (int $amount, string $phone)
         SendRequest::class => MockResponse::fixture('airtime/send-multiple'),
     ]);
 
-    $secondPhone = Str::of('+254712345678')
-        ->replace('78', (string)random_int(10, 99))
-        ->value();
-
     $result = Africastalking::airtime()
         ->idempotent(fake()->uuid())
         ->to($phone, 'KES', $amount)
-        ->to(phoneNumber: $secondPhone, amount: $amount)
+        ->to(phoneNumber: '+254712345678', amount: $amount)
         ->send();
 
     expect($result)
@@ -141,4 +131,4 @@ it('sends airtime to multiple recipients', function (int $amount, string $phone)
         ->each(
             fn (Expectation $transaction) => $transaction->toBeInstanceOf(AirtimeRecipientResponse::class)
         );
-})->with('airtime-amount', 'phone-numbers')->markAsRisky();
+})->with('airtime-amount', 'phone-numbers');
