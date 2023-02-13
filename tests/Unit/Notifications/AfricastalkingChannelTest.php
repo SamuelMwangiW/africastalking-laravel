@@ -69,7 +69,7 @@ it('sends a notification when toAfricastalking() returns a message object', func
     Saloon::fake([
         BulkSmsRequest::class => MockResponse::fixture('messaging/bulk/notification')
     ]);
-    
+
     $channel = app(AfricastalkingChannel::class);
     $notifiable = new BasicNotifiable(phone: $phone);
     $notification = new BasicNotificationReturnsObject();
