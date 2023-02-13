@@ -91,7 +91,7 @@ it('sets content-type to text/plain in the response', function (): void {
 
 it('makes a call', function (string $phone): void {
     Saloon::fake([
-        CallRequest::class => MockResponse::fixture('voice/call')
+        CallRequest::class => MockResponse::fixture('voice/call-multiple')
     ]);
 
     $response = africastalking()->voice()->call([$phone, '+254712345678', '+254711123456'])->send();
@@ -132,7 +132,7 @@ it('requests a webrtc capability token', function (): void {
     config()->set('africastalking.username', 'not_sandbox');
 
     Saloon::fake([
-        CapabilityTokenRequest::class => MockResponse::fixture('voice/capability-token')
+        CapabilityTokenRequest::class => MockResponse::fixture('mocked/voice/capability-token')
     ]);
 
     $response = africastalking()->voice()
@@ -152,7 +152,7 @@ it('WebRTC token has a token alias for send', function (): void {
     config()->set('africastalking.username', 'not_sandbox');
 
     Saloon::fake([
-        CapabilityTokenRequest::class => MockResponse::fixture('voice/capability-token')
+        CapabilityTokenRequest::class => MockResponse::fixture('mocked/voice/capability-token')
     ]);
 
     $response = africastalking()->voice()
