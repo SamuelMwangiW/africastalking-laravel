@@ -94,7 +94,7 @@ it('makes a call', function (string $phone): void {
         CallRequest::class => MockResponse::fixture('voice/call-multiple')
     ]);
 
-    $response = africastalking()->voice()->call([$phone, '+254712345678', '+254711123456'])->send();
+    $response = africastalking()->voice()->call([$phone, '+254712345678', '+254202227436'])->send();
 
     expect($response)
         ->toBeInstanceOf(VoiceCallResponse::class)
