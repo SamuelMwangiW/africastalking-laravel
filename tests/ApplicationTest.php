@@ -20,14 +20,14 @@ it('resolves the application class via alias')
 
 it('can fetch the application balance  via application()->balance()')
     ->tap(
-        fn()=> Saloon::fake([BalanceRequest::class => MockResponse::fixture('application/balance')])
+        fn () => Saloon::fake([BalanceRequest::class => MockResponse::fixture('application/balance')])
     )->expect(fn () => Africastalking::application()->balance())
     ->toBeInstanceOf(Balance::class)
     ->currency->toBeInstanceOf(Currency::class);
 
 it('can fetch the application balance via application()->data()')
     ->tap(
-        fn()=> Saloon::fake([BalanceRequest::class => MockResponse::fixture('application/balance')])
+        fn () => Saloon::fake([BalanceRequest::class => MockResponse::fixture('application/balance')])
     )->expect(fn () => Africastalking::application()->data())
     ->toBeInstanceOf(Balance::class)
     ->currency->toBeInstanceOf(Currency::class);

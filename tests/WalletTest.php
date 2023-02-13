@@ -20,14 +20,14 @@ it('can be resolved via helper')
 
 it('can fetch balance')
     ->tap(
-     fn() => Saloon::fake([WalletBalanceRequest::class => MockResponse::fixture('payments/wallet')])
+        fn () => Saloon::fake([WalletBalanceRequest::class => MockResponse::fixture('payments/wallet')])
     )->expect(
         fn () => app(Wallet::class)->balance()
     )->toBeInstanceOf(Balance::class);
 
 it('can fetch balance via helper')
     ->tap(
-        fn() => Saloon::fake([WalletBalanceRequest::class => MockResponse::fixture('payments/wallet')])
+        fn () => Saloon::fake([WalletBalanceRequest::class => MockResponse::fixture('payments/wallet')])
     )->expect(
         fn () => africastalking()->wallet()->balance()
     )->toBeInstanceOf(Balance::class);
