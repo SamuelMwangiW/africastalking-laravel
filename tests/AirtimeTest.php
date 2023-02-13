@@ -5,10 +5,13 @@ declare(strict_types=1);
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 use Pest\Expectation;
+use Saloon\Http\Faking\MockResponse;
+use Saloon\Laravel\Facades\Saloon;
 use SamuelMwangiW\Africastalking\Domain\Airtime;
 use SamuelMwangiW\Africastalking\Enum\Currency;
 use SamuelMwangiW\Africastalking\Exceptions\AfricastalkingException;
 use SamuelMwangiW\Africastalking\Facades\Africastalking;
+use SamuelMwangiW\Africastalking\Saloon\Requests\Airtime\SendRequest;
 use SamuelMwangiW\Africastalking\ValueObjects\AirtimeRecipientResponse;
 use SamuelMwangiW\Africastalking\ValueObjects\AirtimeResponse;
 use SamuelMwangiW\Africastalking\ValueObjects\AirtimeTransaction;
@@ -88,6 +91,10 @@ it('throws an exception for amounts less than 5', function (string $phone): void
 })->with('phone-numbers')->throws(AfricastalkingException::class);
 
 it('sends airtime to a single recipient', function (AirtimeTransaction $transaction): void {
+    Saloon::fake([
+        SendRequest::class => MockResponse::fixture('airtime/send'),
+    ]);
+
     $result = Africastalking::airtime()
         ->idempotent(fake()->uuid())
         ->to($transaction)
@@ -110,8 +117,12 @@ it('sends airtime to a single recipient', function (AirtimeTransaction $transact
 })->with('airtime-transactions');
 
 it('sends airtime to multiple recipients', function (int $amount, string $phone): void {
+    Saloon::fake([
+        SendRequest::class => MockResponse::fixture('airtime/send-multiple'),
+    ]);
+
     $secondPhone = Str::of('+254712345678')
-        ->replace('8', (string)random_int(0, 9))
+        ->replace('78', (string)random_int(10, 99))
         ->value();
 
     $result = Africastalking::airtime()
@@ -119,12 +130,6 @@ it('sends airtime to multiple recipients', function (int $amount, string $phone)
         ->to($phone, 'KES', $amount)
         ->to(phoneNumber: $secondPhone, amount: $amount)
         ->send();
-
-    if ($result->hasDuplicate()) {
-        $this->markAsRisky();
-
-        return;
-    }
 
     expect($result)
         ->toBeInstanceOf(AirtimeResponse::class)

@@ -2,13 +2,16 @@
 
 declare(strict_types=1);
 
+use Saloon\Http\Faking\MockResponse;
+use Saloon\Laravel\Facades\Saloon;
 use SamuelMwangiW\Africastalking\Domain\Stash;
 use SamuelMwangiW\Africastalking\Enum\Currency;
 use SamuelMwangiW\Africastalking\Enum\Status;
+use SamuelMwangiW\Africastalking\Saloon\Requests\Payment\StashTopupRequest;
 use SamuelMwangiW\Africastalking\ValueObjects\StashTopupResponse;
 
 beforeEach(function (): void {
-    $this->subject = new Stash();
+    $this->subject = app(Stash::class);
 });
 
 it('can be resolved via base class')
@@ -63,6 +66,10 @@ it('overrides productName values in config', function (): void {
 });
 
 it('can topup stash via send', function (): void {
+    Saloon::fake([
+        StashTopupRequest::class => MockResponse::fixture('payments/stash-topup')
+    ]);
+
     $results = $this->subject->send(currency: 'KES', amount: 100);
 
     expect($results)
@@ -71,6 +78,10 @@ it('can topup stash via send', function (): void {
 });
 
 it('can topup stash', function (): void {
+    Saloon::fake([
+        StashTopupRequest::class => MockResponse::fixture('payments/stash-topup')
+    ]);
+
     $results = $this->subject->topup(currency: 'KES', amount: 100);
 
     expect($results)
