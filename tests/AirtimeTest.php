@@ -3,7 +3,6 @@
 declare(strict_types=1);
 
 use Illuminate\Support\Collection;
-use Illuminate\Support\Str;
 use Pest\Expectation;
 use Saloon\Http\Faking\MockResponse;
 use Saloon\Laravel\Facades\Saloon;
