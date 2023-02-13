@@ -1,0 +1,1 @@
+{"statusCode":201,"headers":{"Server":"akka-http\/10.0.5","Date":"Mon, 13 Feb 2023 20:34:33 GMT","Content-Type":"application\/json","Content-Length":"64"},"data":"{\"SMSMessageData\":{\"Message\":\"InvalidSenderId\",\"Recipients\":[]}}"}

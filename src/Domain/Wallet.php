@@ -19,8 +19,7 @@ class Wallet
      */
     public function balance(): Balance
     {
-        $request = new WalletBalanceRequest();
-        $response = $request->send()->throw();
+        $response = WalletBalanceRequest::make()->send()->throw();
 
         if ('Success' !== $response->json('status')) {
             throw new Exception('Failed to fetch wallet balance');

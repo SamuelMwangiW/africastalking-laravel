@@ -2,8 +2,11 @@
 
 declare(strict_types=1);
 
+use Saloon\Http\Faking\MockResponse;
+use Saloon\Laravel\Facades\Saloon;
 use SamuelMwangiW\Africastalking\Domain\MobileCheckout;
 use SamuelMwangiW\Africastalking\Enum\Currency;
+use SamuelMwangiW\Africastalking\Saloon\Requests\Payment\MobileCheckoutRequest;
 use SamuelMwangiW\Africastalking\ValueObjects\MobileCheckoutResponse;
 
 it('resolves the class')
@@ -49,6 +52,10 @@ it('sets metadata', function (string $value): void {
 })->with('strings');
 
 it('sends a Mobile Checkout Request', function (string $phone): void {
+    Saloon::fake([
+        MobileCheckoutRequest::class => MockResponse::fixture('payments/mobile-checkout')
+    ]);
+
     $amount = random_int(10_000, 70_000);
 
     $result = africastalking()
@@ -59,12 +66,6 @@ it('sends a Mobile Checkout Request', function (string $phone): void {
         ->amount($amount)
         ->currency(currency: Currency::KENYA)
         ->send();
-
-    if ($result->hasDuplicate()) {
-        $this->markAsRisky();
-
-        return;
-    }
 
     expect($result)
         ->toBeInstanceOf(MobileCheckoutResponse::class)

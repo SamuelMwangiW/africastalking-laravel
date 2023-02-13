@@ -6,13 +6,14 @@ use Illuminate\Contracts\Support\Responsable;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Collection;
-use Illuminate\Support\Str;
 use Saloon\Http\Faking\MockResponse;
 use Saloon\Laravel\Saloon;
 use SamuelMwangiW\Africastalking\Domain\Voice;
 use SamuelMwangiW\Africastalking\Domain\WebRTCToken;
 use SamuelMwangiW\Africastalking\Facades\Africastalking;
 use SamuelMwangiW\Africastalking\Response\VoiceResponse;
+use SamuelMwangiW\Africastalking\Saloon\Requests\Voice\CallRequest;
+use SamuelMwangiW\Africastalking\Saloon\Requests\Voice\CapabilityTokenRequest;
 use SamuelMwangiW\Africastalking\ValueObjects\CapabilityToken;
 use SamuelMwangiW\Africastalking\ValueObjects\Voice\SynthesisedSpeech;
 use SamuelMwangiW\Africastalking\ValueObjects\VoiceCallResponse;
@@ -89,18 +90,11 @@ it('sets content-type to text/plain in the response', function (): void {
 });
 
 it('makes a call', function (string $phone): void {
-    $response = africastalking()->voice()->call([$phone, '+254712345678', '+254711123456'])->send();
+    Saloon::fake([
+        CallRequest::class => MockResponse::fixture('voice/call-multiple')
+    ]);
 
-    if (Str::contains($response->errorMessage, 'Invalid')) {
-        /**
-         * The call failed due an invalid callback url on the test account.
-         * This is not enough sufficient to mark the call as failed
-         */
-
-        $this->markAsRisky();
-
-        return;
-    }
+    $response = africastalking()->voice()->call([$phone, '+254712345678', '+254202227436'])->send();
 
     expect($response)
         ->toBeInstanceOf(VoiceCallResponse::class)
@@ -138,17 +132,12 @@ it('requests a webrtc capability token', function (): void {
     config()->set('africastalking.username', 'not_sandbox');
 
     Saloon::fake([
-        MockResponse::make([
-            'clientName' => 'John.Doe',
-            'incoming' => true,
-            'lifeTimeSec' => '86400',
-            'outgoing' => true,
-            'token' => 'ATCAPtkn_somerandomtexthere',
-        ], 200),
+        CapabilityTokenRequest::class => MockResponse::fixture('voice/capability-token')
     ]);
 
     $response = africastalking()->voice()
         ->webrtc()
+        ->for('John.Doe')
         ->send();
 
     expect($response)
@@ -156,25 +145,19 @@ it('requests a webrtc capability token', function (): void {
         ->clientName->toBe('John.Doe')
         ->incoming->toBeTrue()
         ->outgoing->toBeTrue()
-        ->lifeTimeSec->toBe('86400')
-        ->token->toBe('ATCAPtkn_somerandomtexthere');
+        ->lifeTimeSec->toBe('86400');
 });
 
 it('WebRTC token has a token alias for send', function (): void {
     config()->set('africastalking.username', 'not_sandbox');
 
     Saloon::fake([
-        MockResponse::make([
-            'clientName' => 'John.Doe',
-            'incoming' => true,
-            'lifeTimeSec' => '86400',
-            'outgoing' => true,
-            'token' => 'ATCAPtkn_somerandomtexthere',
-        ], 200),
+        CapabilityTokenRequest::class => MockResponse::fixture('voice/capability-token')
     ]);
 
     $response = africastalking()->voice()
         ->webrtc()
+        ->for('John.Doe')
         ->token();
 
     expect($response)
@@ -182,6 +165,5 @@ it('WebRTC token has a token alias for send', function (): void {
         ->clientName->toBe('John.Doe')
         ->incoming->toBeTrue()
         ->outgoing->toBeTrue()
-        ->lifeTimeSec->toBe('86400')
-        ->token->toBe('ATCAPtkn_somerandomtexthere');
+        ->lifeTimeSec->toBe('86400');
 });

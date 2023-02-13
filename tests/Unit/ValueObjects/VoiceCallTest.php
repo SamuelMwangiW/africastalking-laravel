@@ -2,8 +2,11 @@
 
 declare(strict_types=1);
 
+use Saloon\Http\Faking\MockResponse;
+use Saloon\Laravel\Facades\Saloon;
 use SamuelMwangiW\Africastalking\Domain\VoiceCall;
 use SamuelMwangiW\Africastalking\Facades\Africastalking;
+use SamuelMwangiW\Africastalking\Saloon\Requests\Voice\CallRequest;
 use SamuelMwangiW\Africastalking\ValueObjects\PhoneNumber;
 
 use SamuelMwangiW\Africastalking\ValueObjects\VoiceCallResponse;
@@ -15,6 +18,10 @@ it('resolves the Voice class')
     ->toBeInstanceOf(VoiceCall::class);
 
 it('sets the recipients', function (): void {
+    Saloon::fake([
+        CallRequest::class => MockResponse::fixture('voice/call')
+    ]);
+
     expect(
         Africastalking::voice()
             ->call('+254720123123')
