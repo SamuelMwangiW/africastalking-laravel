@@ -53,7 +53,7 @@ it('can add multiple recipients', function (string $phone, string $currency, cal
         ->add(
             phoneNumber: $phone,
             currencyCode: $currency,
-            amount: value($amount,)
+            amount: value($amount)
         )
         ->add(
             phoneNumber: '+256706123456',
