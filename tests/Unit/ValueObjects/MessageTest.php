@@ -7,8 +7,6 @@ use SamuelMwangiW\Africastalking\Contracts\DTOContract;
 use SamuelMwangiW\Africastalking\ValueObjects\Message;
 use SamuelMwangiW\Africastalking\ValueObjects\PhoneNumber;
 
-use function Pest\Faker\faker;
-
 it('resolves the Message::class')
     ->expect(fn () => app(Message::class))->toBeInstanceOf(Message::class);
 
@@ -26,7 +24,7 @@ it('can be constructed', function (string $message): void {
 
 it('can be constructed with parameters', function (string $message, string $phone): void {
     $to = collect(PhoneNumber::make($phone));
-    $from = faker()->word();
+    $from = fake()->word();
 
     $subject = new Message(
         message: $message,
@@ -145,7 +143,7 @@ it('can set linkId', function (string $word): void {
 
 it('can set retry', function (): void {
     $subject = new Message();
-    $retry = faker()->randomNumber();
+    $retry = fake()->randomNumber();
 
     expect($subject->retry($retry))->retryDurationInHours->toBe($retry);
 });

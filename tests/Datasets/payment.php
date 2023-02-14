@@ -2,8 +2,6 @@
 
 declare(strict_types=1);
 
-use function Pest\Faker\faker;
-
 dataset('payment-amount', [
-    fn () => faker()->numberBetween(10_000, 70_000),
+    fn () => fake()->numberBetween(10_000, 70_000),
 ]);

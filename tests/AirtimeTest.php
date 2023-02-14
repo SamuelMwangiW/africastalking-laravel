@@ -20,12 +20,12 @@ it('resolves the application class')
     ->expect(fn () => Africastalking::airtime())
     ->toBeInstanceOf(Airtime::class);
 
-it('can add a recipient', function (string $phone, string $currency, int $amount): void {
+it('can add a recipient', function (string $phone, string $currency, callable $amount): void {
     $service = Africastalking::airtime()
         ->to(
             phoneNumber: $phone,
             currencyCode: $currency,
-            amount: $amount
+            amount: value($amount)
         );
 
     expect($service)
@@ -48,17 +48,17 @@ it('can add a recipient from a transaction object', function (AirtimeTransaction
         );
 })->with('airtime-transactions');
 
-it('can add multiple recipients', function (string $phone, string $currency, int $amount): void {
+it('can add multiple recipients', function (string $phone, string $currency, callable $amount): void {
     $service = Africastalking::airtime()
         ->add(
             phoneNumber: $phone,
             currencyCode: $currency,
-            amount: $amount,
+            amount: value($amount)
         )
         ->add(
             phoneNumber: '+256706123456',
             currencyCode: $currency,
-            amount: $amount
+            amount: value($amount)
         );
 
     expect($service)
@@ -72,12 +72,12 @@ it('can add multiple recipients', function (string $phone, string $currency, int
         );
 })->with('phone-numbers', 'currencies', 'airtime-amount');
 
-it('throws an exception for invalid currency', function (string $phone, int $amount): void {
+it('throws an exception for invalid currency', function (string $phone, callable $amount): void {
     Africastalking::airtime()
         ->to(
             phoneNumber: $phone,
             currencyCode: 'KPW',
-            amount: $amount
+            amount: value($amount)
         );
 })->with('phone-numbers', 'airtime-amount')->throws(AfricastalkingException::class);
 
@@ -109,10 +109,11 @@ it('sends airtime to a single recipient', function (AirtimeTransaction $transact
         ->first()->toBeInstanceOf(AirtimeRecipientResponse::class);
 })->with('airtime-transactions');
 
-it('sends airtime to multiple recipients', function (int $amount, string $phone): void {
+it('sends airtime to multiple recipients', function (callable $amount, string $phone): void {
     Saloon::fake([
         SendRequest::class => MockResponse::fixture('airtime/send-multiple'),
     ]);
+    $amount = value($amount);
 
     $result = Africastalking::airtime()
         ->idempotent(fake()->uuid())
