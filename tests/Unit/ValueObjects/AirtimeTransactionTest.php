@@ -7,22 +7,22 @@ use SamuelMwangiW\Africastalking\Enum\Currency;
 use SamuelMwangiW\Africastalking\ValueObjects\AirtimeTransaction;
 use SamuelMwangiW\Africastalking\ValueObjects\PhoneNumber;
 
-it('respects the DTO Contract', function (string $phone, string $currency, int $amount): void {
+it('respects the DTO Contract', function (string $phone, string $currency, callable $amount): void {
     $transaction = new AirtimeTransaction(
         phoneNumber: PhoneNumber::make($phone),
         currencyCode: Currency::from($currency),
-        amount: $amount
+        amount: value($amount)
     );
 
     expect($transaction)
         ->toBeInstanceOf(DTOContract::class);
 })->with('phone-numbers', 'currencies', 'airtime-amount');
 
-it('can construct an object', function (string $phone, string $currency, int $amount): void {
+it('can construct an object', function (string $phone, string $currency, callable $amount): void {
     $transaction = new AirtimeTransaction(
         phoneNumber: PhoneNumber::make($phone),
         currencyCode: Currency::from($currency),
-        amount: $amount
+        amount: value($amount)
     );
 
     expect($transaction)
@@ -57,11 +57,11 @@ it('can be encoded to string', function (string $phone, string $currency): void 
         ->toBe($transactionString);
 })->with('phone-numbers', 'currencies');
 
-it('can be cast to array', function (string $phone, string $currency, int $amount): void {
+it('can be cast to array', function (string $phone, string $currency, callable $amount): void {
     $transaction = new AirtimeTransaction(
         phoneNumber: PhoneNumber::make($phone),
         currencyCode: Currency::from($currency),
-        amount: $amount
+        amount: value($amount)
     );
 
     expect((array)$transaction)

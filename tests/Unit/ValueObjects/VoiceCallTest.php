@@ -11,8 +11,6 @@ use SamuelMwangiW\Africastalking\ValueObjects\PhoneNumber;
 
 use SamuelMwangiW\Africastalking\ValueObjects\VoiceCallResponse;
 
-use function Pest\Faker\faker;
-
 it('resolves the Voice class')
     ->expect(fn () => Africastalking::voice()->call())
     ->toBeInstanceOf(VoiceCall::class);
@@ -59,10 +57,10 @@ it('sets a call recipient from PhoneNumber object', function (string $phone): vo
 
 it('sets a call recipients from array', function (): void {
     $recipients = [
-        faker()->e164PhoneNumber(),
-        faker()->e164PhoneNumber(),
-        faker()->e164PhoneNumber(),
-        faker()->e164PhoneNumber(),
+        fake()->e164PhoneNumber(),
+        fake()->e164PhoneNumber(),
+        fake()->e164PhoneNumber(),
+        fake()->e164PhoneNumber(),
     ];
     expect(Africastalking::voice()->call($recipients))
         ->data()
