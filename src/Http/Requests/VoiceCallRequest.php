@@ -9,9 +9,11 @@ use Illuminate\Validation\Rules\Enum;
 use SamuelMwangiW\Africastalking\Enum\Direction;
 use SamuelMwangiW\Africastalking\Http\Requests\Concerns\HasPhoneNumber;
 use SamuelMwangiW\Africastalking\Http\Requests\Concerns\HasUniqueId;
+use SamuelMwangiW\Africastalking\Http\Requests\Concerns\HasCallAttributes;
 
 class VoiceCallRequest extends FormRequest
 {
+    use HasCallAttributes;
     use HasPhoneNumber;
     use HasUniqueId;
 

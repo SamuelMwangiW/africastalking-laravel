@@ -9,11 +9,13 @@ use Illuminate\Validation\Rules\Enum;
 use SamuelMwangiW\Africastalking\Enum\CallHangupCauses;
 use SamuelMwangiW\Africastalking\Enum\Currency;
 use SamuelMwangiW\Africastalking\Enum\Direction;
+use SamuelMwangiW\Africastalking\Http\Requests\Concerns\HasCallAttributes;
 use SamuelMwangiW\Africastalking\Http\Requests\Concerns\HasPhoneNumber;
 use SamuelMwangiW\Africastalking\Http\Requests\Concerns\HasUniqueId;
 
 class VoiceEventRequest extends FormRequest
 {
+    use HasCallAttributes;
     use HasPhoneNumber;
     use HasUniqueId;
 
