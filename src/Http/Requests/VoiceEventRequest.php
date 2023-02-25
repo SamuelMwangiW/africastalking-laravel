@@ -60,6 +60,6 @@ class VoiceEventRequest extends FormRequest
             return;
         }
 
-        DownloadCallRecording::dispatch($this->input('recordingUrl'), $disk);
+        DownloadCallRecording::dispatch($this->input('recordingUrl'), $this->id(), $disk);
     }
 }

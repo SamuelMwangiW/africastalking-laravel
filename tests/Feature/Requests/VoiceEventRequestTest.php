@@ -2,11 +2,16 @@
 
 declare(strict_types=1);
 
+use Illuminate\Http\Client\RequestException;
 use Illuminate\Support\Facades\Bus;
+use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
+use SamuelMwangiW\Africastalking\Events\CallRecordingDownloaded;
+use SamuelMwangiW\Africastalking\Events\RecordingDownloadFailed;
 use SamuelMwangiW\Africastalking\Http\Requests\VoiceEventRequest;
+use Symfony\Component\HttpFoundation\Response;
 
 use SamuelMwangiW\Africastalking\Jobs\DownloadCallRecording;
 
@@ -23,17 +28,18 @@ it('Downloading recording dispatches DownloadCallRecording job', function (array
     post('/call', $notification);
     Bus::assertDispatched(
         command: DownloadCallRecording::class,
-        callback: fn (DownloadCallRecording $job) => $job->url === data_get($notification, 'recordingUrl')
+        callback: fn (DownloadCallRecording $job) => $job->url === data_get($notification, 'recordingUrl') &&
+            $job->callSessionId === data_get($notification, 'sessionId')
     );
 })->with('voice-event-notification-with-recording');
 
-it('downloads a file', function (string $url): void {
+it('downloads a recording', function (string $url): void {
     Storage::fake();
     Http::fake();
 
     Storage::deleteDirectory('call-recordings');
 
-    DownloadCallRecording::dispatch($url);
+    DownloadCallRecording::dispatch($url, 'sessionId');
 
     Storage::assertExists('call-recordings')
         ->assertExists('call-recordings/Free_Test_Data_100KB_MP3.mp3');
@@ -41,13 +47,13 @@ it('downloads a file', function (string $url): void {
     'https://example.com/Free_Test_Data_100KB_MP3.mp3',
 ]);
 
-it('downloads a file to disk', function (string $url): void {
+it('downloads a recording to disk', function (string $url): void {
     Storage::fake('s3');
     Http::fake();
 
     Storage::deleteDirectory('call-recordings');
 
-    DownloadCallRecording::dispatch($url, 's3');
+    DownloadCallRecording::dispatch($url, 'sessionId', 's3');
 
     Storage::disk('s3')
         ->assertExists('call-recordings')
@@ -55,3 +61,62 @@ it('downloads a file to disk', function (string $url): void {
 })->with([
     fn () => 'https://example.com/Free_Test_Data_100KB_MP3.mp3',
 ]);
+
+it('can fail to downloads a recording to disk', function (string $url): void {
+    Storage::fake('s3');
+    Http::fake([
+        '*' => Http::response(null, Response::HTTP_REQUEST_TIMEOUT),
+    ]);
+
+    Storage::deleteDirectory('call-recordings');
+
+    DownloadCallRecording::dispatch($url, 's3');
+
+    Storage::disk('s3')->assertMissing('call-recordings');
+})
+    ->throws(RequestException::class)
+    ->with([
+        fn () => 'https://example.com/Free_Test_Data_100KB_MP3.mp3',
+    ]);
+
+it('dispatches an event after downloading a recording', function (string $url): void {
+    Storage::fake();
+    Event::fake([CallRecordingDownloaded::class]);
+    Http::fake();
+
+    Storage::deleteDirectory('call-recordings');
+
+    DownloadCallRecording::dispatch($url, 'sessionId');
+
+    Event::assertDispatched(
+        event: CallRecordingDownloaded::class,
+        callback: fn (
+            CallRecordingDownloaded $event
+        ) => $event->recordingUrl === $url && 'sessionId' === $event->sessionId
+    );
+})->with([
+    'https://example.com/Free_Test_Data_100KB_MP3.mp3',
+]);
+
+it('dispatches an event after download failed', function (string $url): void {
+    Storage::fake();
+    Event::fake();
+    Http::fake([
+        '*' => Http::response(null, Response::HTTP_REQUEST_TIMEOUT),
+    ]);
+
+    Storage::deleteDirectory('call-recordings');
+
+    DownloadCallRecording::dispatch($url, 'sessionId');
+
+    Event::assertDispatched(
+        event: RecordingDownloadFailed::class,
+        callback: fn (
+            RecordingDownloadFailed $event
+        ) => $event->recordingUrl === $url && 'sessionId' === $event->sessionId
+    );
+})
+    ->throws(RequestException::class)
+    ->with([
+        'https://example.com/Free_Test_Data_100KB_MP3.mp3',
+    ]);
