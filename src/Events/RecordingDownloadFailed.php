@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace SamuelMwangiW\Africastalking\Events;
 
 use Illuminate\Broadcasting\InteractsWithSockets;
@@ -9,14 +11,13 @@ use Illuminate\Queue\SerializesModels;
 class RecordingDownloadFailed
 {
     use Dispatchable;
-    use SerializesModels;
     use InteractsWithSockets;
+    use SerializesModels;
 
     public function __construct(
         public readonly string $sessionId,
         public readonly string $recordingUrl,
         public readonly string $disk,
-    )
-    {
+    ) {
     }
 }
