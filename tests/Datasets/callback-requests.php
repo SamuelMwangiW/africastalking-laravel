@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+use SamuelMwangiW\Africastalking\Enum\CallHangupCauses;
+
 dataset('airtime-status-notification', [
     [
         [
@@ -230,6 +232,51 @@ dataset('voice-event-notification', [
             'callSessionState' => 'Completed',
             'callStartTime' => '2022-03-01+16:13:56',
         ],
+        [
+            'isActive' => fake()->randomElement([0, 1, true, false]),
+            'sessionId' => 'ATVId_b2beff43fbe0d2749cc1693b4df4f585',
+            'direction' => \SamuelMwangiW\Africastalking\Enum\Direction::INBOUND->value,
+            'callerNumber' => '+254720123123',
+            'destinationNumber' => '+254709100100',
+            'dtmfDigits' => '123#',
+            'callSessionState' => 'Completed',
+            'callerCarrierName' => 'Safaricom',
+            'callerCountryCode' => 'KE',
+            'callStartTime' => '2022-03-01+16:13:56',
+            'recordingUrl' => 'https://example.com/somerandomtexthere.mp3',
+            'durationInSeconds  ' => '420',
+            'currencyCode' => 'KES',
+            'amount' => '100',
+            'dialDestinationNumber' => '+254711000000',
+            'dialDurationInSeconds' => '69',
+            'dialStartTime' => '2023-02-23 11:52:12',
+            'hangupCause' => CallHangupCauses::NO_USER_RESPONSE->value,
+        ],
+    ],
+]);
+
+dataset('voice-event-notification-with-recording', [
+    [
+        [
+            'isActive' => fake()->randomElement([0, 1, true, false]),
+            'sessionId' => 'ATVId_b2beff43fbe0d2749cc1693b4df4f585',
+            'direction' => \SamuelMwangiW\Africastalking\Enum\Direction::INBOUND->value,
+            'callerNumber' => '+254720123123',
+            'destinationNumber' => '+254709100100',
+            'dtmfDigits' => '123#',
+            'callSessionState' => 'Completed',
+            'callerCarrierName' => 'Safaricom',
+            'callerCountryCode' => 'KE',
+            'callStartTime' => '2022-03-01+16:13:56',
+            'recordingUrl' => 'https://example.com/somerandomtexthere.mp3',
+            'durationInSeconds  ' => '420',
+            'currencyCode' => 'KES',
+            'amount' => '100',
+            'dialDestinationNumber' => '+254711000000',
+            'dialDurationInSeconds' => '69',
+            'dialStartTime' => '2023-02-23+11:52:12',
+            'hangupCause' => CallHangupCauses::NO_USER_RESPONSE->value,
+        ],
     ],
 ]);
 
@@ -274,7 +321,7 @@ dataset('payment-notification', [
             'destination' => 'StashTopup',
             'value' => 'KES 10000.00',
             'description' => 'Topped up user stash. New Stash Balance: KES 9798391.5303',
-            'requestMetadata' => ['id' => 1233,'code' => 'UUID1234'],
+            'requestMetadata' => ['id' => 1233, 'code' => 'UUID1234'],
             'transactionDate' => '2022-04-29 01:44:51',
             'origin' => 'ApiRequest',
             'direction' => 'Inbound',
@@ -289,7 +336,7 @@ dataset('payment-notification', [
             'destination' => 'StashTopup',
             'value' => 'KES 10000.00',
             'description' => 'Topped up user stash. New Stash Balance: KES 9798391.5303',
-            'requestMetadata' => ['id' => 1233,'code' => 'UUID1234'],
+            'requestMetadata' => ['id' => 1233, 'code' => 'UUID1234'],
             'transactionDate' => '2022-04-29 01:44:51',
             'origin' => 'ApiRequest',
             'direction' => 'Outbound',
