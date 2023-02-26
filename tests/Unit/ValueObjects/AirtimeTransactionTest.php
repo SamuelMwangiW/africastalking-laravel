@@ -66,4 +66,5 @@ it('can be cast to array', function (string $phone, string $currency, callable|i
 
     expect((array)$transaction)
         ->toBeArray();
+//        ->toBe(['phoneNumber' => $phone, 'amount' => "{$currency} {$amount}"]);
 })->with('phone-numbers', 'currencies', 'airtime-amount');
