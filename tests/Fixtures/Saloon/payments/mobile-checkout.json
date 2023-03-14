@@ -1,0 +1,1 @@
+{"statusCode":201,"headers":{"Content-Length":"155","Content-Type":"application\/json","Date":"Mon, 13 Feb 2023 20:34:32 GMT","Server":"akka-http\/10.2.1"},"data":"{\"description\":\"Waiting for user input\",\"providerChannel\":\"525900\",\"status\":\"PendingConfirmation\",\"transactionId\":\"ATPid_206ea3268e65d2f4a39643fa523b1cfc\"}"}

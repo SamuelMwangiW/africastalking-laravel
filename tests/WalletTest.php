@@ -2,7 +2,10 @@
 
 declare(strict_types=1);
 
+use Saloon\Http\Faking\MockResponse;
+use Saloon\Laravel\Facades\Saloon;
 use SamuelMwangiW\Africastalking\Domain\Wallet;
+use SamuelMwangiW\Africastalking\Saloon\Requests\Payment\WalletBalanceRequest;
 use SamuelMwangiW\Africastalking\ValueObjects\Balance;
 
 it('can be resolved')
@@ -15,12 +18,23 @@ it('can be resolved via helper')
         fn () => africastalking()->wallet()
     )->toBeInstanceOf(Wallet::class);
 
-it('can fetch balance')
-    ->expect(
-        fn () => app(Wallet::class)->balance()
-    )->toBeInstanceOf(Balance::class);
+it('can fetch balance', function (): void {
+    Saloon::fake([
+        WalletBalanceRequest::class => MockResponse::fixture('payments/wallet')
+    ]);
 
-it('can fetch balance via helper')
-    ->expect(
-        fn () => africastalking()->wallet()->balance()
-    )->toBeInstanceOf(Balance::class);
+    $balance = app(Wallet::class)->balance();
+
+    expect($balance)
+        ->toBeInstanceOf(Balance::class);
+});
+
+it('can fetch balance via helper', function (): void {
+    Saloon::fake([
+        WalletBalanceRequest::class => MockResponse::fixture('payments/wallet')
+    ]);
+
+    $balance = africastalking()->wallet()->balance();
+
+    expect($balance)->toBeInstanceOf(Balance::class);
+});

@@ -2,19 +2,24 @@
 
 declare(strict_types=1);
 
+use Saloon\Http\Faking\MockResponse;
+use Saloon\Laravel\Facades\Saloon;
 use SamuelMwangiW\Africastalking\Domain\VoiceCall;
 use SamuelMwangiW\Africastalking\Facades\Africastalking;
+use SamuelMwangiW\Africastalking\Saloon\Requests\Voice\CallRequest;
 use SamuelMwangiW\Africastalking\ValueObjects\PhoneNumber;
 
 use SamuelMwangiW\Africastalking\ValueObjects\VoiceCallResponse;
-
-use function Pest\Faker\faker;
 
 it('resolves the Voice class')
     ->expect(fn () => Africastalking::voice()->call())
     ->toBeInstanceOf(VoiceCall::class);
 
 it('sets the recipients', function (): void {
+    Saloon::fake([
+        CallRequest::class => MockResponse::fixture('voice/call')
+    ]);
+
     expect(
         Africastalking::voice()
             ->call('+254720123123')
@@ -52,10 +57,10 @@ it('sets a call recipient from PhoneNumber object', function (string $phone): vo
 
 it('sets a call recipients from array', function (): void {
     $recipients = [
-        faker()->e164PhoneNumber(),
-        faker()->e164PhoneNumber(),
-        faker()->e164PhoneNumber(),
-        faker()->e164PhoneNumber(),
+        fake()->e164PhoneNumber(),
+        fake()->e164PhoneNumber(),
+        fake()->e164PhoneNumber(),
+        fake()->e164PhoneNumber(),
     ];
     expect(Africastalking::voice()->call($recipients))
         ->data()

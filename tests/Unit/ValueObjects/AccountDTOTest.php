@@ -49,7 +49,7 @@ test('AccountFactory defaults to USD for unknown currency', function (): void {
         ->toBeInstanceOf(Balance::class)
         ->currency->toBe(Currency::INTERNATIONAL)
         ->amount->toBe(9876.00);
-})->markAsRisky();
+});
 
 it('can make an Account statically', function (): void {
     $account = Balance::make(balance: 67890.00, currency: Currency::INTERNATIONAL);

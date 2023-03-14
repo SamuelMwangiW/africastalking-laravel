@@ -2,8 +2,11 @@
 
 declare(strict_types=1);
 
+use Saloon\Http\Faking\MockResponse;
+use Saloon\Laravel\Facades\Saloon;
 use SamuelMwangiW\Africastalking\Exceptions\AfricastalkingException;
 use SamuelMwangiW\Africastalking\Notifications\AfricastalkingChannel;
+use SamuelMwangiW\Africastalking\Saloon\Requests\Messaging\BulkSmsRequest;
 use SamuelMwangiW\Africastalking\Tests\Fixtures\BasicNotifiable;
 use SamuelMwangiW\Africastalking\Tests\Fixtures\BasicNotifiableNoRoute;
 use SamuelMwangiW\Africastalking\Tests\Fixtures\BasicNotifiableNoTrait;
@@ -44,6 +47,10 @@ it('throws an exception when notification has toAfricastalking()', function (): 
 })->throws(AfricastalkingException::class);
 
 it('sends a notification when toAfricastalking() returns string message', function (string $phone): void {
+    Saloon::fake([
+        BulkSmsRequest::class => MockResponse::fixture('messaging/bulk/notification')
+    ]);
+
     $channel = app(AfricastalkingChannel::class);
     $notifiable = new BasicNotifiable(phone: $phone);
     $notification = new BasicNotificationReturnsString();
@@ -59,6 +66,10 @@ it('sends a notification when toAfricastalking() returns string message', functi
 })->with('phone-numbers');
 
 it('sends a notification when toAfricastalking() returns a message object', function (string $phone): void {
+    Saloon::fake([
+        BulkSmsRequest::class => MockResponse::fixture('messaging/bulk/notification')
+    ]);
+
     $channel = app(AfricastalkingChannel::class);
     $notifiable = new BasicNotifiable(phone: $phone);
     $notification = new BasicNotificationReturnsObject();
