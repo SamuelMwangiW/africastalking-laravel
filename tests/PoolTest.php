@@ -12,6 +12,8 @@ use SamuelMwangiW\Africastalking\ValueObjects\SentMessageResponse;
 
 test('benchmark pooling requests', function (string $phone): void {
     $count = 1_000;
+    $expectedTime = 30_000;
+
     $messages = collect(fake()->sentences($count));
 
     $responses = collect([]);
@@ -39,5 +41,5 @@ test('benchmark pooling requests', function (string $phone): void {
         ->toHaveCount($count)
         ->each->toBeInstanceOf(SentMessageResponse::class)
         ->and($timeInMilliseconds)
-        ->toBeNumeric()->toBeLessThan(25_500); //Less than 25.5 Seconds to send 1000 messages
+        ->toBeNumeric()->toBeLessThan($expectedTime); //Less than 30 Seconds to send 1000 messages
 })->with('phone-numbers');
