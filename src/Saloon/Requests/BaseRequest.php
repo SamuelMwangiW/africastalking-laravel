@@ -29,9 +29,10 @@ abstract class BaseRequest extends Request implements HasBody
      */
     public function send(): Response
     {
-        return app(AfricastalkingConnector::class)
-            ->service($this->service)
-            ->send($this);
+        $connector = app(AfricastalkingConnector::class)
+            ->service($this->service);
+
+        return $connector->send($this);
     }
 
     public function defaultHeaders(): array

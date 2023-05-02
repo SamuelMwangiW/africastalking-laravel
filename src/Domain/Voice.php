@@ -23,6 +23,11 @@ class Voice
         return app(WebRTCToken::class)->for($clientName);
     }
 
+    public function queueStatus(?array $phoneNumbers = null): QueueStatus
+    {
+        return app(QueueStatus::class)->for($phoneNumbers);
+    }
+
     public function __call(string $method, array $arguments): VoiceResponse
     {
         return $this->forwardCallTo(

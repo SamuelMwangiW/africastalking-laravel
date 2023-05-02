@@ -14,6 +14,7 @@ use SamuelMwangiW\Africastalking\Facades\Africastalking;
 use SamuelMwangiW\Africastalking\Response\VoiceResponse;
 use SamuelMwangiW\Africastalking\Saloon\Requests\Voice\CallRequest;
 use SamuelMwangiW\Africastalking\Saloon\Requests\Voice\CapabilityTokenRequest;
+use SamuelMwangiW\Africastalking\Saloon\Requests\Voice\QueueStatusRequest;
 use SamuelMwangiW\Africastalking\ValueObjects\CapabilityToken;
 use SamuelMwangiW\Africastalking\ValueObjects\Voice\SynthesisedSpeech;
 use SamuelMwangiW\Africastalking\ValueObjects\VoiceCallResponse;
@@ -166,4 +167,18 @@ it('WebRTC token has a token alias for send', function (): void {
         ->incoming->toBeTrue()
         ->outgoing->toBeTrue()
         ->lifeTimeSec->toBe('86400');
+});
+
+it('fetches the queue', function (): void {
+    config()->set('africastalking.username', 'not_sandbox');
+
+    Saloon::fake([
+        QueueStatusRequest::class => MockResponse::fixture('voice/queue-status')
+    ]);
+
+    $response = africastalking()->voice()
+        ->queueStatus()
+        ->get();
+
+    expect($response)->toBeArray()->dd();
 });
