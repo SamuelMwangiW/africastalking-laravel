@@ -180,5 +180,5 @@ it('fetches the queue', function (): void {
         ->queueStatus()
         ->get();
 
-    expect($response)->toBeArray()->dd();
+    expect($response)->toBeArray();
 });
