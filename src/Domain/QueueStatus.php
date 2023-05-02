@@ -21,12 +21,12 @@ class QueueStatus
         return $this;
     }
 
-    public function get()
+    public function get(): mixed
     {
         return $this->send();
     }
 
-    public function send()
+    public function send(): mixed
     {
         $request = QueueStatusRequest::make($this->data());
 

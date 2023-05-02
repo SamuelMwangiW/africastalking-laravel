@@ -36,7 +36,7 @@ class Dequeue implements Action
         return "<Dequeue {$options}phoneNumber=\"{$this->phoneNumber()}\" />";
     }
 
-    private function phoneNumber()
+    private function phoneNumber(): string
     {
         return $this->phoneNumber ?? config('africastalking.voice.from');
     }
