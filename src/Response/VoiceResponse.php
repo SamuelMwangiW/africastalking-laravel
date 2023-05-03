@@ -7,7 +7,9 @@ namespace SamuelMwangiW\Africastalking\Response;
 use Illuminate\Contracts\Support\Responsable;
 use Illuminate\Routing\ResponseFactory;
 use SamuelMwangiW\Africastalking\Exceptions\AfricastalkingException;
+use SamuelMwangiW\Africastalking\ValueObjects\Voice\Dequeue;
 use SamuelMwangiW\Africastalking\ValueObjects\Voice\Dial;
+use SamuelMwangiW\Africastalking\ValueObjects\Voice\Enqueue;
 use SamuelMwangiW\Africastalking\ValueObjects\Voice\GetDigits;
 use SamuelMwangiW\Africastalking\ValueObjects\Voice\Play;
 use SamuelMwangiW\Africastalking\ValueObjects\Voice\Record;
@@ -105,6 +107,20 @@ class VoiceResponse implements Responsable
     public function redirect(string $url): static
     {
         $this->response .= Redirect::make(url: $url)->build();
+
+        return $this;
+    }
+
+    public function dequeue(string $name, ?string $phoneNumber = null): static
+    {
+        $this->response .= Dequeue::make(name: $name, phoneNumber: $phoneNumber)->build();
+
+        return $this;
+    }
+
+    public function queue(string $name, ?string $holdMusic = null): static
+    {
+        $this->response .= Enqueue::make(name: $name, holdMusic: $holdMusic)->build();
 
         return $this;
     }

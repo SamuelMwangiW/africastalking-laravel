@@ -14,6 +14,7 @@ use SamuelMwangiW\Africastalking\Facades\Africastalking;
 use SamuelMwangiW\Africastalking\Response\VoiceResponse;
 use SamuelMwangiW\Africastalking\Saloon\Requests\Voice\CallRequest;
 use SamuelMwangiW\Africastalking\Saloon\Requests\Voice\CapabilityTokenRequest;
+use SamuelMwangiW\Africastalking\Saloon\Requests\Voice\QueueStatusRequest;
 use SamuelMwangiW\Africastalking\ValueObjects\CapabilityToken;
 use SamuelMwangiW\Africastalking\ValueObjects\Voice\SynthesisedSpeech;
 use SamuelMwangiW\Africastalking\ValueObjects\VoiceCallResponse;
@@ -71,6 +72,24 @@ it('can reject calls')
             ->getResponse()
     )->toBe(
         '<?xml version="1.0" encoding="UTF-8"?><Response><Play url="We are closed at the moment, kindly call tomorrow"/><Reject/></Response>'
+    );
+
+it('can enqueue calls')
+    ->expect(
+        fn () => Africastalking::voice()
+            ->queue('support')
+            ->getResponse()
+    )->toBe(
+        '<?xml version="1.0" encoding="UTF-8"?><Response><Enqueue name="support" /></Response>'
+    );
+
+it('can dequeue calls')
+    ->expect(
+        fn () => Africastalking::voice()
+            ->dequeue('support', '+254710000000')
+            ->getResponse()
+    )->toBe(
+        '<?xml version="1.0" encoding="UTF-8"?><Response><Dequeue name="support" phoneNumber="+254710000000" /></Response>'
     );
 
 it('sets content-type to text/plain in the response', function (): void {
@@ -167,3 +186,35 @@ it('WebRTC token has a token alias for send', function (): void {
         ->outgoing->toBeTrue()
         ->lifeTimeSec->toBe('86400');
 });
+
+it('fetches the queue', function (): void {
+    config()->set('africastalking.username', 'not_sandbox');
+
+    Saloon::fake([
+        QueueStatusRequest::class => MockResponse::fixture('voice/queue-status')
+    ]);
+
+    $response = africastalking()->voice()
+        ->queueStatus()
+        ->get();
+
+    expect($response)->toBeArray();
+});
+
+it('fetches the queue for a given number', function ($numbers): void {
+    config()->set('africastalking.username', 'not_sandbox');
+
+    Saloon::fake([
+        QueueStatusRequest::class => MockResponse::fixture('voice/queue-status')
+    ]);
+
+    $response = africastalking()->voice()
+        ->queueStatus()
+        ->for($numbers)
+        ->get();
+
+    expect($response)->toBeArray();
+})->with([
+    'string phone' => '+254711082000',
+    'array of numbers' => ['+254711082000', '+254711082111']
+]);
