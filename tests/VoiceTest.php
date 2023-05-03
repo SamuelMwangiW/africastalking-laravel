@@ -86,7 +86,7 @@ it('can enqueue calls')
 it('can dequeue calls')
     ->expect(
         fn () => Africastalking::voice()
-            ->dequeue('support','+254710000000')
+            ->dequeue('support', '+254710000000')
             ->getResponse()
     )->toBe(
         '<?xml version="1.0" encoding="UTF-8"?><Response><Dequeue name="support" phoneNumber="+254710000000" /></Response>'
