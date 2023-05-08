@@ -62,6 +62,21 @@ it('downloads a recording to disk', function (string $url): void {
     fn () => 'https://example.com/Free_Test_Data_100KB_MP3.mp3',
 ]);
 
+it('downloads a recording to a specified path on disk', function (string $url): void {
+    Storage::fake('s3');
+    Http::fake();
+
+    Storage::deleteDirectory('call-recordings');
+
+    DownloadCallRecording::dispatch($url, 'sessionId', 's3', 'path/to/file/example.mp3');
+
+    Storage::disk('s3')
+        ->assertExists('path/to/file')
+        ->assertExists('path/to/file/example.mp3');
+})->with([
+    fn () => 'https://example.com/Free_Test_Data_100KB_MP3.mp3',
+]);
+
 it('can fail to downloads a recording to disk', function (string $url): void {
     Storage::fake('s3');
     Http::fake([

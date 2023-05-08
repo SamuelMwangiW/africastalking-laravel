@@ -26,7 +26,8 @@ class DownloadCallRecording implements ShouldQueue, ShouldBeUnique
     public function __construct(
         public readonly string $url,
         public readonly string $callSessionId,
-        public readonly string|null $disk = null
+        public readonly string|null $disk = null,
+        public readonly string|null $path = null,
     ) {
     }
 
@@ -39,7 +40,7 @@ class DownloadCallRecording implements ShouldQueue, ShouldBeUnique
             ->throw()
             ->body();
 
-        $path = 'call-recordings/'.basename($this->url);
+        $path = $this->path();
 
         Storage::disk(
             $this->disk()
@@ -66,5 +67,10 @@ class DownloadCallRecording implements ShouldQueue, ShouldBeUnique
     public function disk(): string
     {
         return $this->disk ?? strval(config('filesystems.default', 'local'));
+    }
+
+    private function path(): string
+    {
+        return $this->path ?? 'call-recordings/'.basename($this->url);
     }
 }

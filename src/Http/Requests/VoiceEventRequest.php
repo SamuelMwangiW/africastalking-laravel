@@ -54,12 +54,17 @@ class VoiceEventRequest extends FormRequest
         return 'sessionId';
     }
 
-    public function downloadRecording(string|null $disk = null): void
+    public function downloadRecording(string|null $disk = null, string|null $path = null): void
     {
         if ($this->isEmptyString('recordingUrl')) {
             return;
         }
 
-        DownloadCallRecording::dispatch($this->input('recordingUrl'), $this->id(), $disk);
+        DownloadCallRecording::dispatch(
+            $this->input('recordingUrl'),
+            $this->id(),
+            $disk,
+            $path,
+        );
     }
 }
