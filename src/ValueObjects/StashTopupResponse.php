@@ -27,7 +27,7 @@ class StashTopupResponse implements DTOContract
 
     public function __toString(): string
     {
-        return strval($this->__toArray());
+        return (string)json_encode($this->__toArray());
     }
 
     public function __toArray(): array
