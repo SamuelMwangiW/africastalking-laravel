@@ -19,7 +19,7 @@ it('builds to xml')
             callerId: '+256706900900',
         )->build()
     )->toBe(
-        '<Dial phoneNumbers="+254711123123,+254733321321" record="true" sequential="true" maxDuration="24" ringBackTone="http://mymediafile.com/playme.mp3" callerId="+256706900900"/>'
+        '<Dial phoneNumbers="+254711123123,+254733321321" sequential="true" record="true" maxDuration="24" ringBackTone="http://mymediafile.com/playme.mp3" callerId="+256706900900"/>'
     );
 
 it('sets the record option')
@@ -27,53 +27,53 @@ it('sets the record option')
         Dial::make(['+254711123123', '+254733321321'])
             ->record(true)
             ->build()
-    )->toBe('<Dial phoneNumbers="+254711123123,+254733321321" record="true"/>');
+    )->toBe('<Dial phoneNumbers="+254711123123,+254733321321" sequential="false" record="true"/>');
 
 it('overrides the phone numbers passed')
     ->expect(
         Dial::make(['+254711123123', '+254733321321'])
             ->phoneNumbers(['+255790123123','+255710100100'])
             ->build()
-    )->toBe('<Dial phoneNumbers="+255790123123,+255710100100"/>');
+    )->toBe('<Dial phoneNumbers="+255790123123,+255710100100" sequential="false" record="false"/>');
 
-it('skips the record option when false')
+it('shows the record option when false')
     ->expect(
         Dial::make(['+254711123123', '+254733321321'])
             ->record(false)
             ->build()
-    )->toBe('<Dial phoneNumbers="+254711123123,+254733321321"/>');
+    )->toBe('<Dial phoneNumbers="+254711123123,+254733321321" sequential="false" record="false"/>');
 
-it('sets the sequential option')
+it('sets the sequential option with a default of true')
     ->expect(
         Dial::make(['+254711123123', '+254733321321'])
             ->sequential()
             ->build()
-    )->toBe('<Dial phoneNumbers="+254711123123,+254733321321" sequential="true"/>');
+    )->toBe('<Dial phoneNumbers="+254711123123,+254733321321" sequential="true" record="false"/>');
 
-it('skips the sequential option when false')
+it('shows the sequential option when false')
     ->expect(
         Dial::make(['+254711123123', '+254733321321'])
             ->sequential(false)
             ->build()
-    )->toBe('<Dial phoneNumbers="+254711123123,+254733321321"/>');
+    )->toBe('<Dial phoneNumbers="+254711123123,+254733321321" sequential="false" record="false"/>');
 
 it('sets the ringback tone')
     ->expect(
         Dial::make(['+254711123123', '+254733321321'])
-            ->ringBackTone('http://mymediafile.com/playme.mp3')
+            ->ringBackTone('https://mymediafile.com/playme.mp3')
             ->build()
-    )->toBe('<Dial phoneNumbers="+254711123123,+254733321321" ringBackTone="http://mymediafile.com/playme.mp3"/>');
+    )->toBe('<Dial phoneNumbers="+254711123123,+254733321321" sequential="false" record="false" ringBackTone="https://mymediafile.com/playme.mp3"/>');
 
 it('sets maxDuration')
     ->expect(
         Dial::make(['+254711123123', '+254733321321'])
             ->maxDuration(20)
             ->build()
-    )->toBe('<Dial phoneNumbers="+254711123123,+254733321321" maxDuration="20"/>');
+    )->toBe('<Dial phoneNumbers="+254711123123,+254733321321" sequential="false" record="false" maxDuration="20"/>');
 
 it('sets callerId')
     ->expect(
         Dial::make(['+254711123123', '+254733321321'])
             ->callerId('+2347012345679')
             ->build()
-    )->toBe('<Dial phoneNumbers="+254711123123,+254733321321" callerId="+2347012345679"/>');
+    )->toBe('<Dial phoneNumbers="+254711123123,+254733321321" sequential="false" record="false" callerId="+2347012345679"/>');
