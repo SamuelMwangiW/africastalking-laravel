@@ -35,11 +35,16 @@ This is the contents of the published config file:
 
 ```php
 return [
-    'username' => env('AFRICASTALKING_USERNAME','sandbox'),
+    'username' => env('AFRICASTALKING_USERNAME', 'sandbox'),
     'api-key' => env('AFRICASTALKING_API_KEY'),
-    'from' => env('AFRICASTALKING_FROM'),
+    'sms' => [
+        'from' => env('AFRICASTALKING_FROM'),
+    ],
     'payment' => [
         'product-name' => env('AFRICASTALKING_PAYMENT_PRODUCT'),
+    ],
+    'voice' => [
+        'from' => env('AFRICASTALKING_VOICE_PHONE_NUMBER'),
     ]
 ];
 ```
@@ -85,7 +90,7 @@ use SamuelMwangiW\Africastalking\Facades\Africastalking;
 $response = Africastalking::sms('It is quality rather than quantity that matters. - Lucius Annaeus Seneca')
         ->message("We made it!") //overwrites any text previously set
         ->text("Look, am on the internet") //alias to message()
-        ->as('MyBIZ') // optional: When the senderId is different from `config('africastalking.from')`
+        ->as('MyBIZ') // optional: When the senderId is different from `config('africastalking.sms.from')`
         ->to(['+254712345678','+256706123567'])
         ->bulk() // optional: Messages are bulk by default
         ->enqueue() //used for Bulk SMS clients that would like to deliver as many messages to the API before waiting for an acknowledgement from the Telcos
@@ -106,7 +111,7 @@ The response is Collection of `\SamuelMwangiW\Africastalking\ValueObjects\Recipi
 use SamuelMwangiW\Africastalking\Facades\Africastalking;
 
 $response = Africastalking::sms('It is quality rather than quantity that matters. - Lucius Annaeus Seneca')
-        ->as('90012') // optional: When the senderId is different from `config('africastalking.from')`
+        ->as('90012') // optional: When the senderId is different from `config('africastalking.sms.from')`
         ->to(['+254712345678','+256706123567'])
         ->premium() // Required to designate messages as bulk
         ->bulkMode(false) // True to send premium messages in bulkMode and false to send as premium

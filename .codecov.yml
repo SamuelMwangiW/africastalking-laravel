@@ -11,12 +11,13 @@ coverage:
     project:
       default:
         threshold: 1%
-    patch: yes
-    changes: no
+    patch: true
+    changes: false
 
   ignore:
     - "src/Testing/**/*"
     - "src/Testing"
+    - "tests"
 
 parsers:
   gcov:
@@ -29,4 +30,4 @@ parsers:
 comment:
   layout: "header, diff"
   behavior: default
-  require_changes: no
+  require_changes: false

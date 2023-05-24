@@ -1,0 +1,1 @@
+{"statusCode":200,"headers":{"Server":"akka-http\/10.0.4","Date":"Mon, 13 Feb 2023 20:34:35 GMT","Content-Type":"application\/json","Content-Length":"138"},"data":"{\"entries\":[{\"phoneNumber\":\"+254720123123\",\"status\":\"Queued\",\"sessionId\":\"ATVId_b1ad0dc21e85d5afdd33aeb4e8b87b17\"}],\"errorMessage\":\"None\"}"}

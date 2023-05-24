@@ -25,7 +25,7 @@ class AfricastalkingServiceProvider extends PackageServiceProvider
         AboutCommand::add('Africastalking', [
             'SDK Version' => fn () => InstalledVersions::getPrettyVersion('samuelmwangiw/africastalking-laravel'),
             'Username' => config('africastalking.username'),
-            'SenderID' => config('africastalking.from', 'AFRICASTKNG'),
+            'SenderID' => config('africastalking.sms.from', 'AFRICASTKNG'),
             'Voice Phone #' => config('africastalking.voice.from'),
             'Payment Product' => config('africastalking.payment.product-name'),
             'App Balance' => function () {

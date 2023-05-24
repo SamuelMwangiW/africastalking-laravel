@@ -6,6 +6,7 @@ namespace SamuelMwangiW\Africastalking\Enum;
 
 enum Status: string
 {
+    case  INSUFFICIENT_BALANCE = 'InsufficientBalance';
     case  INCOMPLETE = 'Incomplete';
     case  SUBMITTED = 'Submitted';
     case  BUFFERED = 'Buffered';

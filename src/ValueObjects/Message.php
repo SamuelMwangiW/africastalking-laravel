@@ -148,7 +148,7 @@ class Message implements DTOContract
 
     protected function from(): ?string
     {
-        $from = $this->from ?? config('africastalking.from');
+        $from = $this->from ?? config('africastalking.sms.from');
 
         return blank($from) ? null : $from;
     }

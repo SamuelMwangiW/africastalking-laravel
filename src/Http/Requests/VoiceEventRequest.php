@@ -9,11 +9,14 @@ use Illuminate\Validation\Rules\Enum;
 use SamuelMwangiW\Africastalking\Enum\CallHangupCauses;
 use SamuelMwangiW\Africastalking\Enum\Currency;
 use SamuelMwangiW\Africastalking\Enum\Direction;
+use SamuelMwangiW\Africastalking\Http\Requests\Concerns\HasCallAttributes;
 use SamuelMwangiW\Africastalking\Http\Requests\Concerns\HasPhoneNumber;
 use SamuelMwangiW\Africastalking\Http\Requests\Concerns\HasUniqueId;
+use SamuelMwangiW\Africastalking\Jobs\DownloadCallRecording;
 
 class VoiceEventRequest extends FormRequest
 {
+    use HasCallAttributes;
     use HasPhoneNumber;
     use HasUniqueId;
 
@@ -28,16 +31,16 @@ class VoiceEventRequest extends FormRequest
             'dtmfDigits' => ['nullable', 'string'],
             'callSessionState' => ['nullable', 'string'],
             'callerCarrierName' => ['nullable', 'string'],
-            'callerCountryCode' => ['nullable', 'string','max:4'],
+            'callerCountryCode' => ['nullable', 'string', 'max:4'],
             'callStartTime' => ['nullable', 'string'],
-            'recordingUrl ' => ['nullable', 'url'],
-            'durationInSeconds  ' => ['nullable', 'int','min:0'],
-            'currencyCode' => ['nullable', 'string',new Enum(Currency::class)],
+            'recordingUrl' => ['nullable', 'url'],
+            'durationInSeconds  ' => ['nullable', 'int', 'min:0'],
+            'currencyCode' => ['nullable', 'string', new Enum(Currency::class)],
             'amount' => ['nullable', 'numeric'],
             'dialDestinationNumber' => ['nullable', 'string'],
-            'dialDurationInSeconds' => ['nullable', 'integer','min:0'],
-            'dialStartTime' => ['nullable', 'date_format:Y-m-d+H:i:s'],
-            'hangupCause' => ['nullable', 'string',new Enum(CallHangupCauses::class)],
+            'dialDurationInSeconds' => ['nullable', 'integer', 'min:0'],
+            'dialStartTime' => ['nullable', 'date'],
+            'hangupCause' => ['nullable', 'string', new Enum(CallHangupCauses::class)],
         ];
     }
 
@@ -49,5 +52,19 @@ class VoiceEventRequest extends FormRequest
     protected function idKey(): string
     {
         return 'sessionId';
+    }
+
+    public function downloadRecording(string|null $disk = null, string|null $path = null): void
+    {
+        if ($this->isEmptyString('recordingUrl')) {
+            return;
+        }
+
+        DownloadCallRecording::dispatch(
+            $this->input('recordingUrl'),
+            $this->id(),
+            $disk,
+            $path,
+        );
     }
 }
