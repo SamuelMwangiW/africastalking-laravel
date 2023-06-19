@@ -2,7 +2,7 @@
 
 All notable changes to `africastalking-laravel` will be documented in this file.
 
-## v0.5.0 - 2023-06-19
+## v1.0.0 - 2023-06-19
 
 ### What's Changed
 
@@ -27,7 +27,7 @@ All notable changes to `africastalking-laravel` will be documented in this file.
 - Bump dependabot/fetch-metadata from 1.4.0 to 1.5.1 by @dependabot in https://github.com/SamuelMwangiW/africastalking-laravel/pull/72
 - Cast Capabality token lifeTimeSec to int by @SamuelMwangiW in https://github.com/SamuelMwangiW/africastalking-laravel/pull/73
 
-**Full Changelog**: https://github.com/SamuelMwangiW/africastalking-laravel/compare/v0.4.6...v0.5.0
+**Full Changelog**: https://github.com/SamuelMwangiW/africastalking-laravel/compare/v0.4.6...v1.0.0
 
 ## v0.4.6 - 2022-12-13
 
