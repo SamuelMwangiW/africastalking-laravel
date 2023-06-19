@@ -494,6 +494,32 @@ africastalking()->voice()
     ->send();
 ```
 
+### WebRTC
+
+```php
+<?php
+
+namespace App\Http\Controllers\Voice;
+
+class WebRtcTokenController {
+    public function __invoke(){
+        $clientName = auth()->user()?->name ?? 'Browser';
+        
+        $token = africastalking()
+            ->voice()
+            ->webrtc()
+            ->for($clientName)
+            ->token();
+        
+        return [
+            'token' => $token->token,
+            'clientName' => $token->clientName,
+            'expire' => $token->lifeTimeSec,
+        ];
+    }
+}
+```
+
 ## HTTP Requests
 
 The package ships with the following [Laravel Requests](https://laravel.com/docs/9.x/validation#creating-form-requests)
