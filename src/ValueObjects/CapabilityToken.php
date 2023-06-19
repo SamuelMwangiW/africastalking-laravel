@@ -12,7 +12,7 @@ class CapabilityToken implements DTOContract
     public function __construct(
         public readonly string $clientName,
         public readonly bool $incoming,
-        public readonly string $lifeTimeSec,
+        public readonly int $lifeTimeSec,
         public readonly bool $outgoing,
         public readonly string $token
     ) {
@@ -25,7 +25,7 @@ class CapabilityToken implements DTOContract
         return new CapabilityToken(
             clientName: data_get($data, 'clientName'),
             incoming: data_get($data, 'incoming'),
-            lifeTimeSec: data_get($data, 'lifeTimeSec'),
+            lifeTimeSec: (int) data_get($data, 'lifeTimeSec'),
             outgoing: data_get($data, 'outgoing'),
             token: data_get($data, 'token'),
         );
