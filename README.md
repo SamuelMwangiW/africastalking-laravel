@@ -502,7 +502,8 @@ africastalking()->voice()
 namespace App\Http\Controllers\Voice;
 
 class WebRtcTokenController {
-    public function __invoke(){
+    public function __invoke()
+    {
         $clientName = auth()->user()?->name ?? 'Browser';
         
         $token = africastalking()

@@ -164,7 +164,7 @@ it('requests a webrtc capability token', function (): void {
         ->clientName->toBe('John.Doe')
         ->incoming->toBeTrue()
         ->outgoing->toBeTrue()
-        ->lifeTimeSec->toBe('86400');
+        ->lifeTimeSec->toBeInt()->toBe(86400);
 });
 
 it('WebRTC token has a token alias for send', function (): void {
@@ -184,7 +184,7 @@ it('WebRTC token has a token alias for send', function (): void {
         ->clientName->toBe('John.Doe')
         ->incoming->toBeTrue()
         ->outgoing->toBeTrue()
-        ->lifeTimeSec->toBe('86400');
+        ->lifeTimeSec->toBeInt()->toBe(86400);
 });
 
 it('fetches the queue', function (): void {
