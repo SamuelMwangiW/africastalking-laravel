@@ -2,6 +2,14 @@
 
 All notable changes to `africastalking-laravel` will be documented in this file.
 
+## v1.1.1 - 2023-07-02
+
+### What's Changed
+
+- Rename validity variable by @SamuelMwangiW in https://github.com/SamuelMwangiW/africastalking-laravel/pull/75
+
+**Full Changelog**: https://github.com/SamuelMwangiW/africastalking-laravel/compare/v1.1.0...v1.1.1
+
 ## v1.1.0 - 2023-07-02
 
 ### What's Changed
