@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 use Saloon\Http\Faking\MockResponse;
 use Saloon\Laravel\Facades\Saloon;
 use SamuelMwangiW\Africastalking\Domain\WebRTCToken;
@@ -7,10 +9,10 @@ use SamuelMwangiW\Africastalking\Saloon\Requests\Voice\CapabilityTokenRequest;
 use SamuelMwangiW\Africastalking\ValueObjects\CapabilityToken;
 
 it("can be initialized")
-    ->expect(fn() => new WebRTCToken())
+    ->expect(fn () => new WebRTCToken())
     ->toBeInstanceOf(WebRTCToken::class);
 
-test("clientName can be set dynamically", function (string $word) {
+test("clientName can be set dynamically", function (string $word): void {
     $object = (new WebRTCToken())->for($word);
 
     expect($object)
@@ -18,7 +20,7 @@ test("clientName can be set dynamically", function (string $word) {
         ->clientName()->toBe($word);
 })->with('strings');
 
-test("phoneNumber can be set dynamically", function (string $phone) {
+test("phoneNumber can be set dynamically", function (string $phone): void {
     $object = (new WebRTCToken())->from($phone);
 
     expect($object)
@@ -26,7 +28,7 @@ test("phoneNumber can be set dynamically", function (string $phone) {
         ->phone()->toBe($phone);
 })->with('phone-numbers');
 
-test("validity can be set dynamically", function (int $number) {
+test("validity can be set dynamically", function (int $number): void {
     $object = (new WebRTCToken())->validFor($number);
 
     expect($object)
@@ -35,13 +37,13 @@ test("validity can be set dynamically", function (int $number) {
         ->expire()->toBe("{$number}s");
 })->with('webrtc-token-duration');
 
-it("throws an exception for invalid validity", function (int $number) {
+it("throws an exception for invalid validity", function (int $number): void {
     (new WebRTCToken())->validFor($number);
 })
     ->with('invalid-token-duration')
     ->throws(InvalidArgumentException::class);
 
-it("generates data array", function (string $word, string $phone, int $duration) {
+it("generates data array", function (string $word, string $phone, int $duration): void {
     $object = (new WebRTCToken())
         ->for($word)
         ->validFor($duration)
