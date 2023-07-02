@@ -33,7 +33,7 @@ test("validity can be set dynamically", function (int $number): void {
 
     expect($object)
         ->toBeInstanceOf(WebRTCToken::class)
-        ->validity->toBe($number)
+        ->lifeTimeSec->toBe($number)
         ->expire()->toBe("{$number}s");
 })->with('webrtc-token-duration');
 

@@ -17,8 +17,8 @@ class WebRTCToken
 {
     public ?string $username = null;
     public ?string $clientName;
-    private int $maxValidityDurationSeconds = 86400;
-    public int $validity = 86400;
+    private int $maxlifeTimeSec = 86400;
+    public int $lifeTimeSec = 86400;
     public ?PhoneNumber $phone;
 
     public function for(?string $name = null): static
@@ -45,11 +45,11 @@ class WebRTCToken
             throw new InvalidArgumentException("Negative duration values not allowed");
         }
 
-        if ($seconds > $this->maxValidityDurationSeconds) {
+        if ($seconds > $this->maxlifeTimeSec) {
             throw new InvalidArgumentException("The maximum allowed token duration is 24 Hours");
         }
 
-        $this->validity = $seconds;
+        $this->lifeTimeSec = $seconds;
 
         return $this;
     }
@@ -101,7 +101,7 @@ class WebRTCToken
 
     public function expire(): string
     {
-        return "{$this->validity}s";
+        return "{$this->lifeTimeSec}s";
     }
 
     public function data(): array
