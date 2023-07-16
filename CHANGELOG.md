@@ -2,6 +2,14 @@
 
 All notable changes to `africastalking-laravel` will be documented in this file.
 
+## v1.1.2 - 2023-07-16
+
+### What's Changed
+
+- Manually Fail Failed Download by @SamuelMwangiW in https://github.com/SamuelMwangiW/africastalking-laravel/pull/77
+
+**Full Changelog**: https://github.com/SamuelMwangiW/africastalking-laravel/compare/v1.1.1...v1.1.2
+
 ## v1.1.1 - 2023-07-02
 
 ### What's Changed
