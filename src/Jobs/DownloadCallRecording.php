@@ -8,6 +8,7 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldBeUnique;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
+use Illuminate\Http\Client\RequestException;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Http;
@@ -36,9 +37,15 @@ class DownloadCallRecording implements ShouldQueue, ShouldBeUnique
      */
     public function handle(): void
     {
-        $file = Http::get($this->url)
-            ->throw()
-            ->body();
+        try {
+            $file = Http::get($this->url)
+                ->throw()
+                ->body();
+        } catch (RequestException $e) {
+            $this->fail($e);
+
+            return;
+        }
 
         $path = $this->path();
 
