@@ -2,6 +2,14 @@
 
 All notable changes to `africastalking-laravel` will be documented in this file.
 
+## v1.2.0 - 2023-08-03
+
+### What's Changed
+
+- Data Bundles by @SamuelMwangiW in https://github.com/SamuelMwangiW/africastalking-laravel/pull/78
+
+**Full Changelog**: https://github.com/SamuelMwangiW/africastalking-laravel/compare/v1.1.2...v1.2.0
+
 ## v1.1.2 - 2023-07-16
 
 ### What's Changed
