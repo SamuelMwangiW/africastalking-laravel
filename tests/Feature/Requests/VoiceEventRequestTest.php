@@ -32,6 +32,30 @@ it('Downloading recording dispatches DownloadCallRecording job', function (array
     );
 })->with('voice-event-notification-with-recording');
 
+it('does not download recording when call duration is zero', function (array $notification): void {
+    Bus::fake();
+    Route::post('call', function (VoiceEventRequest $request) {
+        $request->downloadRecording();
+
+        return 'OK';
+    });
+
+    post('/call', $notification);
+    Bus::assertNothingDispatched();
+})->with('voice-event-notification-with-0-duration');
+
+it('does not download recording when recordingUrl is empty', function (array $notification): void {
+    Bus::fake();
+    Route::post('call', function (VoiceEventRequest $request) {
+        $request->downloadRecording();
+
+        return 'OK';
+    });
+
+    post('/call', $notification);
+    Bus::assertNothingDispatched();
+})->with('voice-event-notification-with-empty-recordingUrl');
+
 it('downloads a recording', function (string $url): void {
     Storage::fake();
     Http::fake();
