@@ -34,7 +34,7 @@ class VoiceEventRequest extends FormRequest
             'callerCountryCode' => ['nullable', 'string', 'max:4'],
             'callStartTime' => ['nullable', 'string'],
             'recordingUrl' => ['nullable', 'url'],
-            'durationInSeconds  ' => ['nullable', 'int', 'min:0'],
+            'durationInSeconds' => ['nullable', 'int', 'min:0'],
             'currencyCode' => ['nullable', 'string', new Enum(Currency::class)],
             'amount' => ['nullable', 'numeric'],
             'dialDestinationNumber' => ['nullable', 'string'],
@@ -57,6 +57,10 @@ class VoiceEventRequest extends FormRequest
     public function downloadRecording(string|null $disk = null, string|null $path = null): void
     {
         if ($this->isEmptyString('recordingUrl')) {
+            return;
+        }
+
+        if (0 === $this->integer('durationInSeconds')) {
             return;
         }
 
