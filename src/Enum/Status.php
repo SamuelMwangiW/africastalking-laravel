@@ -13,5 +13,6 @@ enum Status: string
     case  REJECTED = 'Rejected';
     case  SUCCESS = 'Success';
     case  FAILED = 'Failed';
+    case  QUEUED = 'Queued';
     case  SENT = 'Sent';
 }
