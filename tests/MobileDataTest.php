@@ -128,3 +128,33 @@ it('sends Data bundles request', function (string $phone): void {
         ->entries->toHaveCount(1)
         ->each->toBeInstanceOf(DataBundlesResponseEntry::class);
 })->with('phone-numbers');
+
+it('sends Data bundles request to multiple users', function (): void {
+    Saloon::fake([
+        SendRequest::class => MockResponse::fixture('mobile-data/send-multiple'),
+    ]);
+
+    $object = app(MobileData::class);
+    $result = $object
+        ->to(
+            phoneNumber: '+254722000000',
+            quantity: 7,
+            validity: BundlesValidity::DAILY
+        )->to(
+            phoneNumber: '+254720000000',
+            quantity: 1,
+            validity: BundlesValidity::WEEKLY,
+            unit: BundlesUnit::GB
+        )->to(
+            phoneNumber: '+254726000000',
+            quantity: 10,
+            validity: BundlesValidity::MONTHLY,
+            unit: BundlesUnit::GB
+        )->idempotent(key: fake()->uuid())
+        ->send();
+
+    expect($result)
+        ->toBeInstanceOf(DataBundlesResponse::class)
+        ->entries->toHaveCount(3)
+        ->each->toBeInstanceOf(DataBundlesResponseEntry::class);
+})->with('phone-numbers');
