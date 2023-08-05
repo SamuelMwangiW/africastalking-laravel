@@ -2,6 +2,12 @@
 
 All notable changes to `africastalking-laravel` will be documented in this file.
 
+## v1.2.1 - 2023-08-05
+
+Papercuts https://github.com/SamuelMwangiW/africastalking-laravel/commit/7a9f351f6c2b3f2ad44efc4e0c68bd2bc28d4546
+
+**Full Changelog**: https://github.com/SamuelMwangiW/africastalking-laravel/compare/v1.2.0...v1.2.1
+
 ## v1.2.0 - 2023-08-03
 
 ### What's Changed
