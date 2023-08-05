@@ -23,10 +23,10 @@ class DataBundlesResponse implements \SamuelMwangiW\Africastalking\Contracts\DTO
             ->map(function (array $entry) {
                 return new DataBundlesResponseEntry(
                     number: PhoneNumber::make(data_get($entry, 'phoneNumber')),
-                    provider: data_get($entry, 'provider','Athena'),
+                    provider: data_get($entry, 'provider', 'Athena'),
                     status: Status::from(data_get($entry, 'status')),
-                    transactionId: data_get($entry, 'transactionId','InvalidRequest'),
-                    value: Money::make(data_get($entry, 'value','USD 0.0')),
+                    transactionId: data_get($entry, 'transactionId', 'InvalidRequest'),
+                    value: Money::make(data_get($entry, 'value', 'USD 0.0')),
                     errorMessage: data_get($entry, 'errorMessage'),
                 );
             });

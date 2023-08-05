@@ -15,20 +15,20 @@ use SamuelMwangiW\Africastalking\ValueObjects\DataBundlesResponseEntry;
 use SamuelMwangiW\Africastalking\ValueObjects\MobileDataTransaction;
 
 it('can be resolved')
-    ->expect(fn() => africastalking()->mobileData())
+    ->expect(fn () => africastalking()->mobileData())
     ->toBeInstanceOf(MobileData::class);
 
 it('can be resolved via the Facade')
-    ->expect(fn() => Africastalking::mobileData())
+    ->expect(fn () => Africastalking::mobileData())
     ->toBeInstanceOf(MobileData::class);
 
 it('can be resolved via bundles alias')
-    ->expect(fn() => africastalking()->bundles())
+    ->expect(fn () => africastalking()->bundles())
     ->toBeInstanceOf(MobileData::class);
 
 it('sends idempotency requests')
     ->expect(
-        fn() => app(MobileData::class)->idempotent('key_123')
+        fn () => app(MobileData::class)->idempotent('key_123')
     )->toBeInstanceOf(MobileData::class)
     ->idempotencyKey()->toBe('key_123');
 
