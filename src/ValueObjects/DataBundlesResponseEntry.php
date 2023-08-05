@@ -14,7 +14,8 @@ class DataBundlesResponseEntry implements DTOContract
         public readonly string $provider,
         public readonly Status $status,
         public readonly string $transactionId,
-        public readonly Money $value
+        public readonly Money $value,
+        public readonly string|null $errorMessage = null
     ) {
     }
 

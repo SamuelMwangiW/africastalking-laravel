@@ -15,20 +15,20 @@ use SamuelMwangiW\Africastalking\ValueObjects\DataBundlesResponseEntry;
 use SamuelMwangiW\Africastalking\ValueObjects\MobileDataTransaction;
 
 it('can be resolved')
-    ->expect(fn () => africastalking()->mobileData())
+    ->expect(fn() => africastalking()->mobileData())
     ->toBeInstanceOf(MobileData::class);
 
 it('can be resolved via the Facade')
-    ->expect(fn () => Africastalking::mobileData())
+    ->expect(fn() => Africastalking::mobileData())
     ->toBeInstanceOf(MobileData::class);
 
 it('can be resolved via bundles alias')
-    ->expect(fn () => africastalking()->bundles())
+    ->expect(fn() => africastalking()->bundles())
     ->toBeInstanceOf(MobileData::class);
 
 it('sends idempotency requests')
     ->expect(
-        fn () => app(MobileData::class)->idempotent('key_123')
+        fn() => app(MobileData::class)->idempotent('key_123')
     )->toBeInstanceOf(MobileData::class)
     ->idempotencyKey()->toBe('key_123');
 
@@ -158,3 +158,26 @@ it('sends Data bundles request to multiple users', function (): void {
         ->entries->toHaveCount(3)
         ->each->toBeInstanceOf(DataBundlesResponseEntry::class);
 })->with('phone-numbers');
+
+it('defaults values for an invalid request', function (): void {
+    Saloon::fake([
+        SendRequest::class => MockResponse::fixture('mobile-data/invalid'),
+    ]);
+
+    $object = app(MobileData::class);
+    $result = $object
+        ->to(
+            phoneNumber: fake()->e164PhoneNumber(),
+            quantity: 7,
+            validity: BundlesValidity::DAILY
+        )->idempotent(key: fake()->uuid())
+        ->send();
+
+    expect($result)
+        ->toBeInstanceOf(DataBundlesResponse::class)
+        ->entries->toHaveCount(1)
+        ->each->toBeInstanceOf(DataBundlesResponseEntry::class)
+        ->and($result->entries->first())
+        ->provider->toBe('Athena')
+        ->transactionId->toBe('InvalidRequest');
+});

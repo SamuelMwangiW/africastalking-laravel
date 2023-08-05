@@ -17,7 +17,7 @@ class WalletBalanceRequest extends BaseRequest
 {
     use HasJsonBody;
 
-    public Service $service = Service::PAYMENT;
+    public Service $service = Service::DATA;
     protected Method $method = Method::GET;
 
     public function resolveEndpoint(): string
