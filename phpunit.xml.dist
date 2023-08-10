@@ -1,30 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/10.3/phpunit.xsd" backupGlobals="false" bootstrap="vendor/autoload.php" colors="true" processIsolation="false" stopOnFailure="false" executionOrder="random" failOnWarning="true" failOnRisky="true" failOnEmptyTestSuite="true" beStrictAboutOutputDuringTests="true" cacheDirectory=".phpunit.cache" backupStaticProperties="false">
-  <testsuites>
-    <testsuite name="SamuelMwangiW Test Suite">
-      <directory>tests</directory>
-    </testsuite>
-  </testsuites>
-  <coverage>
-    <report>
-      <clover outputFile="build/logs/clover.xml"/>
-    </report>
-  </coverage>
-  <logging>
-    <junit outputFile="build/report.junit.xml"/>
-  </logging>
-  <php>
-    <env name="AFRICASTALKING_USERNAME" value="sandbox"/>
-    <env name="AFRICASTALKING_API_KEY" value=""/>
-    <env name="AFRICASTALKING_FROM" value=""/>
-    <env name="AFRICASTALKING_BACKUP_SENDERID" value=""/>
-    <env name="AFRICASTALKING_PAYMENT_PRODUCT" value=""/>
-    <env name="AFRICASTALKING_PREMIUM_SHORTCODE" value=""/>
-    <env name="AFRICASTALKING_VOICE_PHONE_NUMBER" value=""/>
-  </php>
-  <source>
-    <include>
-      <directory suffix=".php">./src</directory>
-    </include>
-  </source>
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/10.0/phpunit.xsd"
+         backupGlobals="false"
+         bootstrap="vendor/autoload.php"
+         colors="true"
+         processIsolation="false"
+         stopOnFailure="false"
+         executionOrder="random"
+         failOnWarning="true"
+         failOnRisky="true"
+         failOnEmptyTestSuite="true"
+         beStrictAboutOutputDuringTests="true"
+         cacheDirectory=".phpunit.cache"
+         backupStaticProperties="false"
+>
+    <testsuites>
+        <testsuite name="SamuelMwangiW Test Suite">
+            <directory>tests</directory>
+        </testsuite>
+    </testsuites>
+    <coverage>
+        <include>
+            <directory suffix=".php">./src</directory>
+        </include>
+        <report>
+            <clover outputFile="build/logs/clover.xml"/>
+        </report>
+    </coverage>
+    <logging>
+        <junit outputFile="build/report.junit.xml"/>
+    </logging>
+    <php>
+        <env name="AFRICASTALKING_USERNAME" value="sandbox"/>
+        <env name="AFRICASTALKING_API_KEY" value=""/>
+        <env name="AFRICASTALKING_FROM" value=""/>
+        <env name="AFRICASTALKING_BACKUP_SENDERID" value=""/>
+        <env name="AFRICASTALKING_PAYMENT_PRODUCT" value=""/>
+        <env name="AFRICASTALKING_PREMIUM_SHORTCODE" value=""/>
+        <env name="AFRICASTALKING_VOICE_PHONE_NUMBER" value=""/>
+    </php>
 </phpunit>
