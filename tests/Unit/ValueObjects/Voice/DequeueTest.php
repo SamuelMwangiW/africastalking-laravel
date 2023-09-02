@@ -32,7 +32,7 @@ it('sets the phone number from config', function (): void {
 
 it('overrides the queue name passed')
     ->expect(
-        fn () =>Dequeue::make(name: 'javascript', phoneNumber: '+1234')
+        fn () => Dequeue::make(name: 'javascript', phoneNumber: '+1234')
             ->queue('php')
             ->build()
     )->toBe('<Dequeue name="php" phoneNumber="+1234" />');

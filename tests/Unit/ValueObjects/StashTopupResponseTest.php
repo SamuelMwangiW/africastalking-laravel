@@ -42,7 +42,7 @@ it('can be cast to array')
         status: Status::SENT,
         description: 'description'
     ))
-    ->__toArray()->toBeArray()->toMatchArray(['id'=>'id','description'=>'description']);
+    ->__toArray()->toBeArray()->toMatchArray(['id' => 'id','description' => 'description']);
 
 it('can be cast to string', function (): void {
     $object = new StashTopupResponse(

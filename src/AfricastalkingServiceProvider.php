@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\App;
 use SamuelMwangiW\Africastalking\Saloon\AfricastalkingConnector;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
+use Exception;
 
 class AfricastalkingServiceProvider extends PackageServiceProvider
 {
@@ -33,7 +34,7 @@ class AfricastalkingServiceProvider extends PackageServiceProvider
                     $balance = africastalking()->app()->balance();
 
                     return $balance->currency->value.' '.number_format($balance->amount);
-                } catch (\Exception) {
+                } catch (Exception) {
                     return '<fg=red>FAILED</>';
                 }
             },
@@ -46,7 +47,7 @@ class AfricastalkingServiceProvider extends PackageServiceProvider
                     $balance = africastalking()->wallet()->balance();
 
                     return $balance->currency->value.' '.number_format($balance->amount);
-                } catch (\Exception) {
+                } catch (Exception) {
                     return '<fg=red>FAILED</>';
                 }
             },
