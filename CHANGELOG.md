@@ -2,6 +2,15 @@
 
 All notable changes to `africastalking-laravel` will be documented in this file.
 
+## v.1.2.2 - 2023-09-02
+
+### What's Changed
+
+- php 8.3 support by @SamuelMwangiW in https://github.com/SamuelMwangiW/africastalking-laravel/pull/58
+- Saloon org by @SamuelMwangiW in https://github.com/SamuelMwangiW/africastalking-laravel/pull/80
+
+**Full Changelog**: https://github.com/SamuelMwangiW/africastalking-laravel/compare/v1.2.1...v.1.2.2
+
 ## v1.2.1 - 2023-08-05
 
 Papercuts https://github.com/SamuelMwangiW/africastalking-laravel/commit/7a9f351f6c2b3f2ad44efc4e0c68bd2bc28d4546
