@@ -14,11 +14,12 @@ class CapabilityToken implements DTOContract
         public readonly bool $incoming,
         public readonly int $lifeTimeSec,
         public readonly bool $outgoing,
-        public readonly string $token
+        public readonly string $token,
+        public readonly ?string $phoneNumber = null,
     ) {
     }
 
-    public static function fromSaloon(Response $response): CapabilityToken
+    public static function fromSaloon(Response $response, ?string $phoneNumber = null): CapabilityToken
     {
         $data = $response->json();
 
@@ -28,6 +29,7 @@ class CapabilityToken implements DTOContract
             lifeTimeSec: (int) data_get($data, 'lifeTimeSec'),
             outgoing: data_get($data, 'outgoing'),
             token: data_get($data, 'token'),
+            phoneNumber: $phoneNumber,
         );
     }
 
@@ -44,6 +46,7 @@ class CapabilityToken implements DTOContract
             "lifeTimeSec" => $this->lifeTimeSec,
             "outgoing" => $this->outgoing,
             "token" => $this->token,
+            "phoneNumber" => $this->phoneNumber,
         ];
     }
 }
