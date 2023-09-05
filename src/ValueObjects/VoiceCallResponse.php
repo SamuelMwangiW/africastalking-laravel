@@ -17,6 +17,7 @@ class VoiceCallResponse implements DTOContract
     public function __construct(
         public readonly string $errorMessage,
         public readonly Collection $recipients,
+        public readonly ?int $queueSize = 0,
     ) {
     }
 
@@ -24,7 +25,8 @@ class VoiceCallResponse implements DTOContract
     {
         return new VoiceCallResponse(
             errorMessage: $response->json('errorMessage'),
-            recipients: $response->collect('entries')
+            recipients: $response->collect('entries'),
+            queueSize: intval($response->header('X-Current-Queue-Size')),
         );
     }
 

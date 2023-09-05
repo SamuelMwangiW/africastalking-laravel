@@ -36,6 +36,6 @@ class CapabilityTokenRequest extends BaseRequest implements HasBody
 
     public function createDtoFromResponse(Response $response): CapabilityToken
     {
-        return CapabilityToken::fromSaloon($response);
+        return CapabilityToken::fromSaloon($response, data_get($this->data, 'phoneNumber'));
     }
 }
