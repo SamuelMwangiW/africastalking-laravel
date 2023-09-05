@@ -2,6 +2,14 @@
 
 All notable changes to `africastalking-laravel` will be documented in this file.
 
+## v1.3.0 - 2023-09-05
+
+### What's Changed
+
+- PhoneNumber to capability Token and the queue size by @SamuelMwangiW in https://github.com/SamuelMwangiW/africastalking-laravel/pull/82
+
+**Full Changelog**: https://github.com/SamuelMwangiW/africastalking-laravel/compare/v1.2.2...v1.3.0
+
 ## v.1.2.2 - 2023-09-02
 
 ### What's Changed
