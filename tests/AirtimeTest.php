@@ -20,12 +20,12 @@ it('resolves the application class')
     ->expect(fn () => Africastalking::airtime())
     ->toBeInstanceOf(Airtime::class);
 
-it('can add a recipient', function (string $phone, string $currency, callable $amount): void {
+it('can add a recipient', function (string $phone, string $currency, int $amount): void {
     $service = Africastalking::airtime()
         ->to(
             phoneNumber: $phone,
             currencyCode: $currency,
-            amount: value($amount)
+            amount: $amount
         );
 
     expect($service)
@@ -33,7 +33,20 @@ it('can add a recipient', function (string $phone, string $currency, callable $a
         ->toHaveCount(1)
         ->recipients->first()->phoneNumber->toBeInstanceOf(PhoneNumber::class)
         ->recipients->first()->currencyCode->toBeInstanceOf(Currency::class);
-})->with('phone-numbers', 'currencies', 'airtime-amount');
+})->with([
+    'KES' => ['+254700123123', 'KES', fake()->numberBetween(10, 100)],
+    'UGX' => ['+256700123123', 'UGX', fake()->numberBetween(50, 100)],
+    'TZS' => ['+255700123123', 'TZS', fake()->numberBetween(500, 1_000)],
+    'NGN' => ['+2347001923123', 'NGN', fake()->numberBetween(50, 100)],
+    'MWK' => ['+254700123123', 'MWK', fake()->numberBetween(300, 500)],
+    'ZMK' => ['+254700123123', 'ZMK', fake()->numberBetween(10, 100)],
+    'ZAR' => ['+254700123123', 'ZAR', fake()->numberBetween(10, 100)],
+    'XOF' => ['+254700123123', 'XOF', fake()->numberBetween(100, 500)],
+    'GHS' => ['+254700123123', 'GHS', fake()->numberBetween(10, 100)],
+    'RWF' => ['+254700123123', 'RWF', fake()->numberBetween(100, 500)],
+    'ETB' => ['+254700123123', 'ETB', fake()->numberBetween(10, 100)],
+    'USD' => ['+254700123123', 'USD', fake()->numberBetween(1, 50)],
+]);
 
 it('can add a recipient from a transaction object', function (AirtimeTransaction $transaction): void {
     $service = Africastalking::airtime()->to($transaction);
