@@ -81,13 +81,27 @@ it('throws an exception for invalid currency', function (string $phone, callable
         );
 })->with('phone-numbers', 'airtime-amount')->throws(AfricastalkingException::class);
 
-it('throws an exception for amounts less than 5', function (string $phone): void {
+it('throws an exception for amounts less than supported', function (string $currencyCode, int $amount): void {
     Africastalking::airtime()
         ->to(
-            phoneNumber: $phone,
-            amount: 1
+            phoneNumber: fake()->e164PhoneNumber(),
+            currencyCode: $currencyCode,
+            amount: $amount,
         );
-})->with('phone-numbers')->throws(AfricastalkingException::class);
+})->with([
+    'KES' => ['KES', 4],
+    'UGX' => ['UGX', 49],
+    'TZS' => ['TZS', 499],
+    'NGN' => ['NGN', 49],
+    'MWK' => ['MWK', 299],
+    'ZMK' => ['ZMK', 4],
+    'ZAR' => ['ZAR', 4],
+    'XOF' => ['XOF', 99],
+    'GHS' => ['GHS', 0],
+    'RWF' => ['RWF', 99],
+    'ETB' => ['ETB', 4],
+    'USD' => ['USD', 0],
+])->throws(AfricastalkingException::class);
 
 it('sends airtime to a single recipient', function (AirtimeTransaction $transaction): void {
     Saloon::fake([

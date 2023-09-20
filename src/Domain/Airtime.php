@@ -60,14 +60,17 @@ class Airtime
         if (is_string($phoneNumber) && ! $this->currencyIsValid($currencyCode)) {
             throw AfricastalkingException::invalidCurrencyCode($currencyCode);
         }
-        if (is_string($phoneNumber) && ! $this->minimumAmount($amount)) {
+
+        $currency = Currency::from($currencyCode);
+
+        if (is_string($phoneNumber) && ! $this->minimumAmount($currency, $amount)) {
             throw AfricastalkingException::minimumAmount($amount);
         }
 
         if ( ! $phoneNumber instanceof AirtimeTransaction) {
             $phoneNumber = new AirtimeTransaction(
                 phoneNumber: PhoneNumber::make($phoneNumber),
-                currencyCode: Currency::from($currencyCode),
+                currencyCode: $currency,
                 amount: $amount,
             );
         }
@@ -82,9 +85,9 @@ class Airtime
         return null !== Currency::tryFrom($currencyCode);
     }
 
-    private function minimumAmount(int $amount): bool
+    private function minimumAmount(Currency $currency, int $amount): bool
     {
-        return $amount >= 5;
+        return $amount >= $currency->minimumAirtimeAmount();
     }
 
     /**
