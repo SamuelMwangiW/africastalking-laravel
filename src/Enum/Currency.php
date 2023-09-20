@@ -18,4 +18,22 @@ enum Currency: string
     case RWANDA = 'RWF';
     case ETHIOPIA = 'ETB';
     case INTERNATIONAL = 'USD';
+
+    public function minimumAirtimeAmount(): int
+    {
+        return match ($this) {
+            Currency::KENYA,
+            Currency::ZAMBIA,
+            Currency::SOUTH_AFRICA,
+            Currency::ETHIOPIA => 5,
+            Currency::UGANDA,
+            Currency::NIGERIA => 50,
+            Currency::TANZANIA => 500,
+            Currency::MALAWI => 300,
+            Currency::WEST_AFRICA,
+            Currency::RWANDA => 100,
+            Currency::GHANA,
+            Currency::INTERNATIONAL => 1,
+        };
+    }
 }

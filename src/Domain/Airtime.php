@@ -57,34 +57,41 @@ class Airtime
         string $currencyCode = 'KES',
         int $amount = 0,
     ): Airtime {
-        if (is_string($phoneNumber) && ! $this->currencyIsValid($currencyCode)) {
-            throw AfricastalkingException::invalidCurrencyCode($currencyCode);
+        if ($phoneNumber instanceof AirtimeTransaction) {
+            $this->recipients->push($phoneNumber);
+
+            return $this;
         }
-        if (is_string($phoneNumber) && ! $this->minimumAmount($amount)) {
+
+        if ($this->currencyIsInvalid($currencyCode)) {
             throw AfricastalkingException::invalidCurrencyCode($currencyCode);
         }
 
-        if ( ! $phoneNumber instanceof AirtimeTransaction) {
-            $phoneNumber = new AirtimeTransaction(
-                phoneNumber: PhoneNumber::make($phoneNumber),
-                currencyCode: Currency::from($currencyCode),
-                amount: $amount,
-            );
+        $currency = Currency::from($currencyCode);
+
+        if ($this->lessThanMinimumAmount($currency, $amount)) {
+            throw AfricastalkingException::minimumAmount($amount);
         }
+
+        $phoneNumber = new AirtimeTransaction(
+            phoneNumber: PhoneNumber::make($phoneNumber),
+            currencyCode: $currency,
+            amount: $amount,
+        );
 
         $this->recipients->push($phoneNumber);
 
         return $this;
     }
 
-    private function currencyIsValid(string $currencyCode): bool
+    private function currencyIsInvalid(string $currencyCode): bool
     {
-        return null !== Currency::tryFrom($currencyCode);
+        return null === Currency::tryFrom($currencyCode);
     }
 
-    private function minimumAmount(int $amount): bool
+    private function lessThanMinimumAmount(Currency $currency, int $amount): bool
     {
-        return $amount >= 5;
+        return $amount < $currency->minimumAirtimeAmount();
     }
 
     /**
