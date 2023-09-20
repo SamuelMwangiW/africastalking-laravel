@@ -61,7 +61,7 @@ class Airtime
             throw AfricastalkingException::invalidCurrencyCode($currencyCode);
         }
         if (is_string($phoneNumber) && ! $this->minimumAmount($amount)) {
-            throw AfricastalkingException::invalidCurrencyCode($currencyCode);
+            throw AfricastalkingException::minimumAmount($amount);
         }
 
         if ( ! $phoneNumber instanceof AirtimeTransaction) {
