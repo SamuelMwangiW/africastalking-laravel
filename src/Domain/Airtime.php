@@ -32,30 +32,30 @@ class Airtime
 
     /**
      * @param AirtimeTransaction|string $phoneNumber
-     * @param string $currencyCode
+     * @param string|Currency $currencyCode
      * @param int $amount
      * @return $this|Airtime
      * @throws AfricastalkingException
      */
     public function to(
         AirtimeTransaction|string $phoneNumber,
-        string $currencyCode = 'KES',
-        int $amount = 0,
+        string|Currency           $currencyCode = 'KES',
+        int                       $amount = 0,
     ): Airtime {
         return $this->add($phoneNumber, $currencyCode, $amount);
     }
 
     /**
      * @param AirtimeTransaction|string $phoneNumber
-     * @param string $currencyCode
+     * @param string|Currency $currencyCode
      * @param int $amount
      * @return $this
      * @throws AfricastalkingException
      */
     public function add(
         AirtimeTransaction|string $phoneNumber,
-        string $currencyCode = 'KES',
-        int $amount = 0,
+        string|Currency           $currencyCode = 'KES',
+        int                       $amount = 0,
     ): Airtime {
         if ($phoneNumber instanceof AirtimeTransaction) {
             $this->recipients->push($phoneNumber);
@@ -63,30 +63,23 @@ class Airtime
             return $this;
         }
 
-        if ($this->currencyIsInvalid($currencyCode)) {
-            throw AfricastalkingException::invalidCurrencyCode($currencyCode);
+        if (is_string($currencyCode)) {
+            $currencyCode = Currency::tryFrom($currencyCode) ?? throw AfricastalkingException::invalidCurrencyCode($currencyCode);
         }
 
-        $currency = Currency::from($currencyCode);
-
-        if ($this->lessThanMinimumAmount($currency, $amount)) {
+        if ($this->lessThanMinimumAmount($currencyCode, $amount)) {
             throw AfricastalkingException::minimumAmount($amount);
         }
 
         $phoneNumber = new AirtimeTransaction(
             phoneNumber: PhoneNumber::make($phoneNumber),
-            currencyCode: $currency,
+            currencyCode: $currencyCode,
             amount: $amount,
         );
 
         $this->recipients->push($phoneNumber);
 
         return $this;
-    }
-
-    private function currencyIsInvalid(string $currencyCode): bool
-    {
-        return null === Currency::tryFrom($currencyCode);
     }
 
     private function lessThanMinimumAmount(Currency $currency, int $amount): bool

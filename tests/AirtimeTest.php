@@ -61,6 +61,25 @@ it('can add a recipient from a transaction object', function (AirtimeTransaction
         );
 })->with('airtime-transactions');
 
+it('can add a recipient using currency Enum', function (string $currencyCode): void {
+
+    $service = Africastalking::airtime()
+        ->to(
+            phoneNumber: $phoneNumber = fake()->e164PhoneNumber(),
+            currencyCode: Currency::from($currencyCode),
+            amount: $amount = fake()->numberBetween(500, 1000)
+        );
+
+    expect($service)
+        ->recipients->toHaveCount(1)
+        ->recipients->each(
+            fn ($recipient) => $recipient
+                ->phoneNumber->number->toBe($phoneNumber)
+                ->currencyCode->value->toBe($currencyCode)
+                ->amount->toBeInt()->toBe($amount)
+        );
+})->with('currencies');
+
 it('can add multiple recipients', function (string $phone, string $currency, callable $amount): void {
     $service = Africastalking::airtime()
         ->add(
