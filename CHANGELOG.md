@@ -2,6 +2,16 @@
 
 All notable changes to `africastalking-laravel` will be documented in this file.
 
+## v1.4.0 - 2023-09-21
+
+### What's Changed
+
+- Bump crazy-max/ghaction-import-gpg from 5 to 6 by @dependabot in https://github.com/SamuelMwangiW/africastalking-laravel/pull/83
+- airtime improvements by @SamuelMwangiW in https://github.com/SamuelMwangiW/africastalking-laravel/pull/84
+- Airtime currency can be Enum by @SamuelMwangiW in https://github.com/SamuelMwangiW/africastalking-laravel/pull/85
+
+**Full Changelog**: https://github.com/SamuelMwangiW/africastalking-laravel/compare/v1.3.0...v1.4.0
+
 ## v1.3.0 - 2023-09-05
 
 ### What's Changed
