@@ -2,6 +2,15 @@
 
 All notable changes to `africastalking-laravel` will be documented in this file.
 
+## v1.4.1 - 2023-10-03
+
+### What's Changed
+
+- Bump actions/checkout from 3 to 4 by @dependabot in https://github.com/SamuelMwangiW/africastalking-laravel/pull/81
+- saloon v3 by @SamuelMwangiW in https://github.com/SamuelMwangiW/africastalking-laravel/pull/86
+
+**Full Changelog**: https://github.com/SamuelMwangiW/africastalking-laravel/compare/v1.4.0...v1.4.1
+
 ## v1.4.0 - 2023-09-21
 
 ### What's Changed
