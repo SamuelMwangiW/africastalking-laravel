@@ -11,6 +11,7 @@
 /docs               export-ignore
 /tests              export-ignore
 /.editorconfig      export-ignore
+/.codecov.yml       export-ignore
 /.php_cs.dist.php   export-ignore
 /psalm.xml          export-ignore
 /pint.json          export-ignore
