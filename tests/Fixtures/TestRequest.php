@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace SamuelMwangiW\Africastalking\Tests\Fixtures;
 
 use Saloon\Contracts\Body\HasBody;
-use Saloon\Contracts\Response;
+use Saloon\Http\Response;
 use Saloon\Http\Request;
 use Saloon\Enums\Method;
 use Saloon\Traits\Body\HasJsonBody;
