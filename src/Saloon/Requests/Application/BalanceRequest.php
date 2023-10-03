@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace SamuelMwangiW\Africastalking\Saloon\Requests\Application;
 
-use Saloon\Contracts\Response;
+use Saloon\Http\Response;
 use Saloon\Enums\Method;
 use Saloon\Traits\Body\HasJsonBody;
 use SamuelMwangiW\Africastalking\Enum\Service;

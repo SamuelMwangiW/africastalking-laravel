@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace SamuelMwangiW\Africastalking\ValueObjects;
 
-use Saloon\Contracts\Response;
+use Saloon\Http\Response;
 use SamuelMwangiW\Africastalking\Contracts\DTOContract;
 
 class CapabilityToken implements DTOContract
