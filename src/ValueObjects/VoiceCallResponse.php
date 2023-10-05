@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace SamuelMwangiW\Africastalking\ValueObjects;
 
 use Illuminate\Support\Collection;
-use Saloon\Contracts\Response;
+use Saloon\Http\Response;
 use SamuelMwangiW\Africastalking\Contracts\DTOContract;
 
 class VoiceCallResponse implements DTOContract
@@ -17,6 +17,7 @@ class VoiceCallResponse implements DTOContract
     public function __construct(
         public readonly string $errorMessage,
         public readonly Collection $recipients,
+        public readonly ?int $queueSize = 0,
     ) {
     }
 
@@ -24,7 +25,8 @@ class VoiceCallResponse implements DTOContract
     {
         return new VoiceCallResponse(
             errorMessage: $response->json('errorMessage'),
-            recipients: $response->collect('entries')
+            recipients: $response->collect('entries'),
+            queueSize: intval($response->header('X-Current-Queue-Size')),
         );
     }
 

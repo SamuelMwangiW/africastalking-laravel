@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace SamuelMwangiW\Africastalking\ValueObjects;
 
-use Saloon\Contracts\Response;
+use Saloon\Http\Response;
 use SamuelMwangiW\Africastalking\Contracts\DTOContract;
 
 class CapabilityToken implements DTOContract
@@ -12,22 +12,24 @@ class CapabilityToken implements DTOContract
     public function __construct(
         public readonly string $clientName,
         public readonly bool $incoming,
-        public readonly string $lifeTimeSec,
+        public readonly int $lifeTimeSec,
         public readonly bool $outgoing,
-        public readonly string $token
+        public readonly string $token,
+        public readonly ?string $phoneNumber = null,
     ) {
     }
 
-    public static function fromSaloon(Response $response): CapabilityToken
+    public static function fromSaloon(Response $response, ?string $phoneNumber = null): CapabilityToken
     {
         $data = $response->json();
 
         return new CapabilityToken(
             clientName: data_get($data, 'clientName'),
             incoming: data_get($data, 'incoming'),
-            lifeTimeSec: data_get($data, 'lifeTimeSec'),
+            lifeTimeSec: (int) data_get($data, 'lifeTimeSec'),
             outgoing: data_get($data, 'outgoing'),
             token: data_get($data, 'token'),
+            phoneNumber: $phoneNumber,
         );
     }
 
@@ -44,6 +46,7 @@ class CapabilityToken implements DTOContract
             "lifeTimeSec" => $this->lifeTimeSec,
             "outgoing" => $this->outgoing,
             "token" => $this->token,
+            "phoneNumber" => $this->phoneNumber,
         ];
     }
 }

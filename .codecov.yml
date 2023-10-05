@@ -12,7 +12,7 @@ coverage:
       default:
         threshold: 1%
     patch: true
-    changes: false
+    changes: true
 
   ignore:
     - "src/Testing/**/*"
@@ -30,4 +30,4 @@ parsers:
 comment:
   layout: "header, diff"
   behavior: default
-  require_changes: false
+  require_changes: true

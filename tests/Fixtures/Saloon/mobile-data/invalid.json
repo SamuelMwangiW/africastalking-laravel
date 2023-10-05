@@ -1,0 +1,1 @@
+{"statusCode":201,"headers":{"Date":"Thu, 03 Aug 2023 06:47:26 GMT","Content-Type":"application\/json","Content-Length":"111","Connection":"keep-alive","Strict-Transport-Security":"max-age=15724800; includeSubDomains"},"data":"{\"entries\":[{\"errorMessage\":\"Destination not supported\",\"phoneNumber\":\"+17076423054\",\"status\":\"NotSupported\"}]}"}

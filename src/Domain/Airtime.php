@@ -32,59 +32,59 @@ class Airtime
 
     /**
      * @param AirtimeTransaction|string $phoneNumber
-     * @param string $currencyCode
+     * @param string|Currency $currencyCode
      * @param int $amount
      * @return $this|Airtime
      * @throws AfricastalkingException
      */
     public function to(
         AirtimeTransaction|string $phoneNumber,
-        string $currencyCode = 'KES',
-        int $amount = 0,
+        string|Currency           $currencyCode = 'KES',
+        int                       $amount = 0,
     ): Airtime {
         return $this->add($phoneNumber, $currencyCode, $amount);
     }
 
     /**
      * @param AirtimeTransaction|string $phoneNumber
-     * @param string $currencyCode
+     * @param string|Currency $currencyCode
      * @param int $amount
      * @return $this
      * @throws AfricastalkingException
      */
     public function add(
         AirtimeTransaction|string $phoneNumber,
-        string $currencyCode = 'KES',
-        int $amount = 0,
+        string|Currency           $currencyCode = 'KES',
+        int                       $amount = 0,
     ): Airtime {
-        if (is_string($phoneNumber) && ! $this->currencyIsValid($currencyCode)) {
-            throw AfricastalkingException::invalidCurrencyCode($currencyCode);
-        }
-        if (is_string($phoneNumber) && ! $this->minimumAmount($amount)) {
-            throw AfricastalkingException::invalidCurrencyCode($currencyCode);
+        if ($phoneNumber instanceof AirtimeTransaction) {
+            $this->recipients->push($phoneNumber);
+
+            return $this;
         }
 
-        if ( ! $phoneNumber instanceof AirtimeTransaction) {
-            $phoneNumber = new AirtimeTransaction(
-                phoneNumber: PhoneNumber::make($phoneNumber),
-                currencyCode: Currency::from($currencyCode),
-                amount: $amount,
-            );
+        if (is_string($currencyCode)) {
+            $currencyCode = Currency::tryFrom($currencyCode) ?? throw AfricastalkingException::invalidCurrencyCode($currencyCode);
         }
+
+        if ($this->lessThanMinimumAmount($currencyCode, $amount)) {
+            throw AfricastalkingException::minimumAmount($amount);
+        }
+
+        $phoneNumber = new AirtimeTransaction(
+            phoneNumber: PhoneNumber::make($phoneNumber),
+            currencyCode: $currencyCode,
+            amount: $amount,
+        );
 
         $this->recipients->push($phoneNumber);
 
         return $this;
     }
 
-    private function currencyIsValid(string $currencyCode): bool
+    private function lessThanMinimumAmount(Currency $currency, int $amount): bool
     {
-        return null !== Currency::tryFrom($currencyCode);
-    }
-
-    private function minimumAmount(int $amount): bool
-    {
-        return $amount >= 5;
+        return $amount < $currency->minimumAirtimeAmount();
     }
 
     /**

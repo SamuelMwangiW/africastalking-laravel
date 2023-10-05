@@ -38,14 +38,8 @@ class Dial implements Action
     public function build(): string
     {
         $options = " phoneNumbers=\"{$this->recipients->implode(',')}\"";
-
-        if ($this->record) {
-            $options .= " record=\"true\"";
-        }
-
-        if ($this->sequential) {
-            $options .= " sequential=\"true\"";
-        }
+        $options .= " sequential=\"{$this->booleanString($this->sequential)}\"";
+        $options .= " record=\"{$this->booleanString($this->record)}\"";
 
         if ($this->maxDuration) {
             $options .= " maxDuration=\"{$this->maxDuration}\"";
@@ -102,5 +96,10 @@ class Dial implements Action
         $this->callerId = $callerId;
 
         return $this;
+    }
+
+    private function booleanString(bool $value): string
+    {
+        return $value ? "true" : "false";
     }
 }

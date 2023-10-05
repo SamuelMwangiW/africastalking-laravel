@@ -8,6 +8,7 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldBeUnique;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
+use Illuminate\Http\Client\RequestException;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Http;
@@ -26,7 +27,8 @@ class DownloadCallRecording implements ShouldQueue, ShouldBeUnique
     public function __construct(
         public readonly string $url,
         public readonly string $callSessionId,
-        public readonly string|null $disk = null
+        public readonly string|null $disk = null,
+        public readonly string|null $path = null,
     ) {
     }
 
@@ -35,11 +37,17 @@ class DownloadCallRecording implements ShouldQueue, ShouldBeUnique
      */
     public function handle(): void
     {
-        $file = Http::get($this->url)
-            ->throw()
-            ->body();
+        try {
+            $file = Http::get($this->url)
+                ->throw()
+                ->body();
+        } catch (RequestException $e) {
+            $this->fail($e);
 
-        $path = 'call-recordings/'.basename($this->url);
+            return;
+        }
+
+        $path = $this->path();
 
         Storage::disk(
             $this->disk()
@@ -66,5 +74,10 @@ class DownloadCallRecording implements ShouldQueue, ShouldBeUnique
     public function disk(): string
     {
         return $this->disk ?? strval(config('filesystems.default', 'local'));
+    }
+
+    private function path(): string
+    {
+        return $this->path ?? 'call-recordings/'.basename($this->url);
     }
 }

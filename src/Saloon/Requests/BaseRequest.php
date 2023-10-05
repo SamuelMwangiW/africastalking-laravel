@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace SamuelMwangiW\Africastalking\Saloon\Requests;
 
 use Saloon\Contracts\Body\HasBody;
-use Saloon\Contracts\Response;
+use Saloon\Http\Response;
 use Saloon\Enums\Method;
 use Saloon\Exceptions\InvalidResponseClassException;
 use Saloon\Exceptions\PendingRequestException;

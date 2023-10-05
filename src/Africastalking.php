@@ -6,6 +6,7 @@ namespace SamuelMwangiW\Africastalking;
 
 use SamuelMwangiW\Africastalking\Domain\Airtime;
 use SamuelMwangiW\Africastalking\Domain\Application;
+use SamuelMwangiW\Africastalking\Domain\MobileData;
 use SamuelMwangiW\Africastalking\Domain\Payment;
 use SamuelMwangiW\Africastalking\Domain\Stash;
 use SamuelMwangiW\Africastalking\Domain\Voice;
@@ -33,6 +34,16 @@ class Africastalking
     public function payment(): Payment
     {
         return app(Payment::class);
+    }
+
+    public function bundles(): MobileData
+    {
+        return $this->mobileData();
+    }
+
+    public function mobileData(): MobileData
+    {
+        return app(MobileData::class);
     }
 
     public function sms(?string $message = null): Message

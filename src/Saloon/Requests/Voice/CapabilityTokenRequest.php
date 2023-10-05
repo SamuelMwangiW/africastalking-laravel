@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace SamuelMwangiW\Africastalking\Saloon\Requests\Voice;
 
 use Saloon\Contracts\Body\HasBody;
-use Saloon\Contracts\Response;
+use Saloon\Http\Response;
 use Saloon\Traits\Body\HasJsonBody;
 use SamuelMwangiW\Africastalking\Enum\Service;
 use SamuelMwangiW\Africastalking\Saloon\Requests\BaseRequest;
@@ -36,6 +36,6 @@ class CapabilityTokenRequest extends BaseRequest implements HasBody
 
     public function createDtoFromResponse(Response $response): CapabilityToken
     {
-        return CapabilityToken::fromSaloon($response);
+        return CapabilityToken::fromSaloon($response, data_get($this->data, 'phoneNumber'));
     }
 }

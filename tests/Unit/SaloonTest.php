@@ -27,6 +27,6 @@ it('fakes requests', function (): void {
         ->clientName->toBe('John.Doe')
         ->incoming->toBeTrue()
         ->outgoing->toBeTrue()
-        ->lifeTimeSec->toBe('86400')
+        ->lifeTimeSec->toBeInt()->toBe(86400)
         ->token->toBe('ATCAPtkn_somerandomtexthere');
 });

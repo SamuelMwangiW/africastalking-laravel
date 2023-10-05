@@ -2,6 +2,107 @@
 
 All notable changes to `africastalking-laravel` will be documented in this file.
 
+## v1.4.1 - 2023-10-03
+
+### What's Changed
+
+- Bump actions/checkout from 3 to 4 by @dependabot in https://github.com/SamuelMwangiW/africastalking-laravel/pull/81
+- saloon v3 by @SamuelMwangiW in https://github.com/SamuelMwangiW/africastalking-laravel/pull/86
+
+**Full Changelog**: https://github.com/SamuelMwangiW/africastalking-laravel/compare/v1.4.0...v1.4.1
+
+## v1.4.0 - 2023-09-21
+
+### What's Changed
+
+- Bump crazy-max/ghaction-import-gpg from 5 to 6 by @dependabot in https://github.com/SamuelMwangiW/africastalking-laravel/pull/83
+- airtime improvements by @SamuelMwangiW in https://github.com/SamuelMwangiW/africastalking-laravel/pull/84
+- Airtime currency can be Enum by @SamuelMwangiW in https://github.com/SamuelMwangiW/africastalking-laravel/pull/85
+
+**Full Changelog**: https://github.com/SamuelMwangiW/africastalking-laravel/compare/v1.3.0...v1.4.0
+
+## v1.3.0 - 2023-09-05
+
+### What's Changed
+
+- PhoneNumber to capability Token and the queue size by @SamuelMwangiW in https://github.com/SamuelMwangiW/africastalking-laravel/pull/82
+
+**Full Changelog**: https://github.com/SamuelMwangiW/africastalking-laravel/compare/v1.2.2...v1.3.0
+
+## v.1.2.2 - 2023-09-02
+
+### What's Changed
+
+- php 8.3 support by @SamuelMwangiW in https://github.com/SamuelMwangiW/africastalking-laravel/pull/58
+- Saloon org by @SamuelMwangiW in https://github.com/SamuelMwangiW/africastalking-laravel/pull/80
+
+**Full Changelog**: https://github.com/SamuelMwangiW/africastalking-laravel/compare/v1.2.1...v.1.2.2
+
+## v1.2.1 - 2023-08-05
+
+Papercuts https://github.com/SamuelMwangiW/africastalking-laravel/commit/7a9f351f6c2b3f2ad44efc4e0c68bd2bc28d4546
+
+**Full Changelog**: https://github.com/SamuelMwangiW/africastalking-laravel/compare/v1.2.0...v1.2.1
+
+## v1.2.0 - 2023-08-03
+
+### What's Changed
+
+- Data Bundles by @SamuelMwangiW in https://github.com/SamuelMwangiW/africastalking-laravel/pull/78
+
+**Full Changelog**: https://github.com/SamuelMwangiW/africastalking-laravel/compare/v1.1.2...v1.2.0
+
+## v1.1.2 - 2023-07-16
+
+### What's Changed
+
+- Manually Fail Failed Download by @SamuelMwangiW in https://github.com/SamuelMwangiW/africastalking-laravel/pull/77
+
+**Full Changelog**: https://github.com/SamuelMwangiW/africastalking-laravel/compare/v1.1.1...v1.1.2
+
+## v1.1.1 - 2023-07-02
+
+### What's Changed
+
+- Rename validity variable by @SamuelMwangiW in https://github.com/SamuelMwangiW/africastalking-laravel/pull/75
+
+**Full Changelog**: https://github.com/SamuelMwangiW/africastalking-laravel/compare/v1.1.0...v1.1.1
+
+## v1.1.0 - 2023-07-02
+
+### What's Changed
+
+- webrtc token validity by @SamuelMwangiW in https://github.com/SamuelMwangiW/africastalking-laravel/pull/74
+
+**Full Changelog**: https://github.com/SamuelMwangiW/africastalking-laravel/compare/v1.0.0...v1.1.0
+
+## v1.0.0 - 2023-06-19
+
+### What's Changed
+
+- Bump aglipanci/laravel-pint-action from 1.0.0 to 2.1.0 by @dependabot in https://github.com/SamuelMwangiW/africastalking-laravel/pull/49
+- Update AfricastalkingServiceProvider.php by @SamuelMwangiW in https://github.com/SamuelMwangiW/africastalking-laravel/pull/50
+- Saloon v2 by @SamuelMwangiW in https://github.com/SamuelMwangiW/africastalking-laravel/pull/52
+- Added Strict types by @SamuelMwangiW in https://github.com/SamuelMwangiW/africastalking-laravel/pull/53
+- Add Request DTO by @SamuelMwangiW in https://github.com/SamuelMwangiW/africastalking-laravel/pull/56
+- Bump dependabot/fetch-metadata from 1.3.5 to 1.3.6 by @dependabot in https://github.com/SamuelMwangiW/africastalking-laravel/pull/57
+- Move from config to an sms group by @SamuelMwangiW in https://github.com/SamuelMwangiW/africastalking-laravel/pull/59
+- Api Request Recording  by @SamuelMwangiW in https://github.com/SamuelMwangiW/africastalking-laravel/pull/60
+- Laravel 10 by @SamuelMwangiW in https://github.com/SamuelMwangiW/africastalking-laravel/pull/61
+- Adds Download recording on the request by @SamuelMwangiW in https://github.com/SamuelMwangiW/africastalking-laravel/pull/62
+- Dispatch events when recording was downloaded or failed by @SamuelMwangiW in https://github.com/SamuelMwangiW/africastalking-laravel/pull/63
+- Bump aglipanci/laravel-pint-action from 2.1.0 to 2.2.0 by @dependabot in https://github.com/SamuelMwangiW/africastalking-laravel/pull/65
+- Bump dependabot/fetch-metadata from 1.3.6 to 1.4.0 by @dependabot in https://github.com/SamuelMwangiW/africastalking-laravel/pull/66
+- Add call queue and dequeue by @SamuelMwangiW in https://github.com/SamuelMwangiW/africastalking-laravel/pull/67
+- Queue dequeue by @SamuelMwangiW in https://github.com/SamuelMwangiW/africastalking-laravel/pull/68
+- Allow specifying download directory by @SamuelMwangiW in https://github.com/SamuelMwangiW/africastalking-laravel/pull/69
+- Fix failing Tests by @SamuelMwangiW in https://github.com/SamuelMwangiW/africastalking-laravel/pull/70
+- Bump aglipanci/laravel-pint-action from 2.2.0 to 2.3.0 by @dependabot in https://github.com/SamuelMwangiW/africastalking-laravel/pull/71
+- Bump dependabot/fetch-metadata from 1.4.0 to 1.5.1 by @dependabot in https://github.com/SamuelMwangiW/africastalking-laravel/pull/72
+- Cast Capabality token lifeTimeSec to int by @SamuelMwangiW in https://github.com/SamuelMwangiW/africastalking-laravel/pull/73
+
+**Full Changelog**: https://github.com/SamuelMwangiW/africastalking-laravel/compare/v0.4.6...v1.0.0
+
 ## v0.4.6 - 2022-12-13
 
 ### What's Changed

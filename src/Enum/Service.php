@@ -24,7 +24,7 @@ enum Service
             self::APPLICATION,
             self::BULK_SMS => 'https://api.africastalking.com/version1/',
             self::CONTENT => 'https://content.africastalking.com/version1/',
-            self::DATA,
+            self::DATA => 'https://bundles.africastalking.com/',
             self::PAYMENT => 'https://payments.africastalking.com/',
             self::VOICE => 'https://voice.africastalking.com/',
             self::WEBRTC => 'https://webrtc.africastalking.com',
@@ -43,7 +43,7 @@ enum Service
             self::CONTENT => 'https://api.sandbox.africastalking.com/version1/',
             self::PAYMENT => 'https://payments.sandbox.africastalking.com/',
             self::VOICE => 'https://voice.sandbox.africastalking.com/',
-            self::DATA => throw new Exception('Mobile data is not supported on Sandbox'),
+            self::DATA => 'https://bundles.sandbox.africastalking.com/',
             self::WEBRTC => throw new Exception('WebRTC not supported on Sandbox environment'),
         };
     }

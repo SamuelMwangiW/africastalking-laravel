@@ -15,6 +15,16 @@ class Money implements DTOContract
     ) {
     }
 
+    public static function make(string $value): Money
+    {
+        $parts = explode(' ', $value);
+
+        return new Money(
+            amount: floatval($parts[1]),
+            currency: Currency::from($parts[0])
+        );
+    }
+
     public function __toString(): string
     {
         return "{$this->currency->value} {$this->amount}";

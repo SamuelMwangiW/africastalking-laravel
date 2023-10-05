@@ -12,8 +12,8 @@ dataset('strings', function () {
 
 dataset('sentence', function () {
     yield fake()->bs();
-//    yield fake()->catchPhrase();
-//    yield fake()->catchPhrase();
-//    yield fake()->catchPhrase();
-//    yield fake()->catchPhrase();
+    //    yield fake()->catchPhrase();
+    //    yield fake()->catchPhrase();
+    //    yield fake()->catchPhrase();
+    //    yield fake()->catchPhrase();
 });

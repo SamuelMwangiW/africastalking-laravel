@@ -33,5 +33,5 @@ dataset('airtime-transactions', [
 ]);
 
 dataset('airtime-amount', [
-    'number between 10 and 500' => fn () => fake()->numberBetween(10, 500),
+    'number between 500 and 700' => fn () => fake()->numberBetween(500, 700),
 ]);

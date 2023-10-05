@@ -66,6 +66,17 @@ class AfricastalkingException extends Exception
         );
     }
 
+    /**
+     * @param int|float $amount
+     * @return AfricastalkingException
+     */
+    public static function minimumAmount(int|float $amount): AfricastalkingException
+    {
+        return new AfricastalkingException(
+            message: "The amount entered {$amount} is below the minimum supported"
+        );
+    }
+
     public static function notSynthesisedSpeech(): AfricastalkingException
     {
         return new AfricastalkingException(

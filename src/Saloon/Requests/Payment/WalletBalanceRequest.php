@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace SamuelMwangiW\Africastalking\Saloon\Requests\Payment;
 
 use Illuminate\Support\Str;
-use Saloon\Contracts\Response;
+use Saloon\Http\Response;
 use Saloon\Enums\Method;
 use Saloon\Traits\Body\HasJsonBody;
 use SamuelMwangiW\Africastalking\Enum\Currency;
@@ -17,7 +17,7 @@ class WalletBalanceRequest extends BaseRequest
 {
     use HasJsonBody;
 
-    public Service $service = Service::PAYMENT;
+    public Service $service = Service::DATA;
     protected Method $method = Method::GET;
 
     public function resolveEndpoint(): string
