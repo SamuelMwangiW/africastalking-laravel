@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace SamuelMwangiW\Africastalking\ValueObjects;
 
 use Illuminate\Support\Collection;
-use Saloon\Http\Response;
+use Saloon\Contracts\Response;
 use SamuelMwangiW\Africastalking\Contracts\DTOContract;
 
 class SentMessageResponse implements DTOContract
