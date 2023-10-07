@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace SamuelMwangiW\Africastalking\ValueObjects;
 
 use Illuminate\Support\Collection;
-use Saloon\Contracts\Response;
+use Saloon\Http\Response;
 use SamuelMwangiW\Africastalking\Enum\Status;
 
 class DataBundlesResponse implements \SamuelMwangiW\Africastalking\Contracts\DTOContract

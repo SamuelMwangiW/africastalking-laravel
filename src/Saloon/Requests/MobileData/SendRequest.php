@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace SamuelMwangiW\Africastalking\Saloon\Requests\MobileData;
 
 use Saloon\Contracts\Body\HasBody;
-use Saloon\Contracts\Response;
+use Saloon\Http\Response;
 use Saloon\Traits\Body\HasJsonBody;
 use SamuelMwangiW\Africastalking\Enum\Service;
 use SamuelMwangiW\Africastalking\Saloon\Requests\BaseRequest;

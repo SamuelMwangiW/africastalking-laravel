@@ -1,1 +1,1 @@
-{"statusCode":401,"headers":{"WWW-Authenticate":"Basic realm=\"api\",charset=UTF-8","Server":"akka-http\/10.0.5","Date":"Mon, 13 Feb 2023 20:34:40 GMT","Content-Type":"text\/plain; charset=UTF-8","Content-Length":"38"},"data":"The supplied authentication is invalid"}
+{"statusCode":401,"headers":{"Date":"Tue, 03 Oct 2023 13:12:10 GMT","Content-Type":"text\/plain; charset=UTF-8","Content-Length":"38","Connection":"keep-alive","WWW-Authenticate":"Basic realm=\"api\",charset=UTF-8","Server":"akka-http\/10.2.10"},"data":"The supplied authentication is invalid"}
