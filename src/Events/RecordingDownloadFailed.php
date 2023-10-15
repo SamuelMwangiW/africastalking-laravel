@@ -19,7 +19,7 @@ class RecordingDownloadFailed
         public readonly string $sessionId,
         public readonly string $recordingUrl,
         public readonly string $disk,
-        public readonly Throwable $throwable,
+        public readonly Throwable $exception,
     ) {
     }
 }
