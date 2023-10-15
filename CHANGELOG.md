@@ -2,6 +2,15 @@
 
 All notable changes to `africastalking-laravel` will be documented in this file.
 
+## v1.4.2 - 2023-10-15
+
+### What's Changed
+
+- Catch the Exception thrown while downloading recording and include it in the `RecordingDownloadFailed` event
+- Bump stefanzweifel/git-auto-commit-action from 4 to 5 by @dependabot in https://github.com/SamuelMwangiW/africastalking-laravel/pull/87
+
+**Full Changelog**: https://github.com/SamuelMwangiW/africastalking-laravel/compare/v1.4.1...v1.4.2
+
 ## v1.4.1 - 2023-10-03
 
 ### What's Changed
