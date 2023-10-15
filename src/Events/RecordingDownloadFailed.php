@@ -7,6 +7,7 @@ namespace SamuelMwangiW\Africastalking\Events;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
+use Throwable;
 
 class RecordingDownloadFailed
 {
@@ -18,6 +19,7 @@ class RecordingDownloadFailed
         public readonly string $sessionId,
         public readonly string $recordingUrl,
         public readonly string $disk,
+        public readonly Throwable $throwable,
     ) {
     }
 }

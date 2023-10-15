@@ -8,7 +8,6 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldBeUnique;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
-use Illuminate\Http\Client\RequestException;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Http;
@@ -16,6 +15,7 @@ use Illuminate\Support\Facades\Storage;
 use SamuelMwangiW\Africastalking\Events\CallRecordingDownloaded;
 use SamuelMwangiW\Africastalking\Events\RecordingDownloadFailed;
 use Throwable;
+use Exception;
 
 class DownloadCallRecording implements ShouldQueue, ShouldBeUnique
 {
@@ -25,11 +25,12 @@ class DownloadCallRecording implements ShouldQueue, ShouldBeUnique
     use SerializesModels;
 
     public function __construct(
-        public readonly string $url,
-        public readonly string $callSessionId,
+        public readonly string      $url,
+        public readonly string      $callSessionId,
         public readonly string|null $disk = null,
         public readonly string|null $path = null,
-    ) {
+    )
+    {
     }
 
     /**
@@ -41,7 +42,7 @@ class DownloadCallRecording implements ShouldQueue, ShouldBeUnique
             $file = Http::get($this->url)
                 ->throw()
                 ->body();
-        } catch (RequestException $e) {
+        } catch (Exception $e) {
             $this->fail($e);
 
             return;
@@ -68,7 +69,12 @@ class DownloadCallRecording implements ShouldQueue, ShouldBeUnique
 
     public function failed(Throwable $exception): void
     {
-        RecordingDownloadFailed::dispatch($this->callSessionId, $this->url, $this->disk());
+        RecordingDownloadFailed::dispatch(
+            $this->callSessionId,
+            $this->url,
+            $this->disk(),
+            $exception,
+        );
     }
 
     public function disk(): string
@@ -78,6 +84,6 @@ class DownloadCallRecording implements ShouldQueue, ShouldBeUnique
 
     private function path(): string
     {
-        return $this->path ?? 'call-recordings/'.basename($this->url);
+        return $this->path ?? 'call-recordings/' . basename($this->url);
     }
 }
