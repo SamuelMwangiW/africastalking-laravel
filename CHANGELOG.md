@@ -2,6 +2,10 @@
 
 All notable changes to `africastalking-laravel` will be documented in this file.
 
+## v1.4.3 - 2023-10-15
+
+wip
+
 ## v1.4.2 - 2023-10-15
 
 ### What's Changed
