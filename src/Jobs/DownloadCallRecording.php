@@ -29,8 +29,7 @@ class DownloadCallRecording implements ShouldQueue, ShouldBeUnique
         public readonly string      $callSessionId,
         public readonly string|null $disk = null,
         public readonly string|null $path = null,
-    )
-    {
+    ) {
     }
 
     /**
@@ -84,6 +83,6 @@ class DownloadCallRecording implements ShouldQueue, ShouldBeUnique
 
     private function path(): string
     {
-        return $this->path ?? 'call-recordings/' . basename($this->url);
+        return $this->path ?? 'call-recordings/'.basename($this->url);
     }
 }
