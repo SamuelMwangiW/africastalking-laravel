@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace SamuelMwangiW\Africastalking\Saloon;
 
+use Exception;
 use Illuminate\Support\Str;
 use Saloon\Http\Connector;
 use Saloon\Traits\Plugins\AcceptsJson;
 use SamuelMwangiW\Africastalking\Enum\Service;
-use Exception;
 
 class AfricastalkingConnector extends Connector
 {

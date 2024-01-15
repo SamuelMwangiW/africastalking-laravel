@@ -8,11 +8,11 @@ use SamuelMwangiW\Africastalking\Domain\WebRTCToken;
 use SamuelMwangiW\Africastalking\Saloon\Requests\Voice\CapabilityTokenRequest;
 use SamuelMwangiW\Africastalking\ValueObjects\CapabilityToken;
 
-it("can be initialized")
-    ->expect(fn () => new WebRTCToken())
+it('can be initialized')
+    ->expect(fn() => new WebRTCToken())
     ->toBeInstanceOf(WebRTCToken::class);
 
-test("clientName can be set dynamically", function (string $word): void {
+test('clientName can be set dynamically', function (string $word): void {
     $object = (new WebRTCToken())->for($word);
 
     expect($object)
@@ -20,7 +20,7 @@ test("clientName can be set dynamically", function (string $word): void {
         ->clientName()->toBe($word);
 })->with('strings');
 
-test("phoneNumber can be set dynamically", function (string $phone): void {
+test('phoneNumber can be set dynamically', function (string $phone): void {
     $object = (new WebRTCToken())->from($phone);
 
     expect($object)
@@ -28,7 +28,7 @@ test("phoneNumber can be set dynamically", function (string $phone): void {
         ->phone()->toBe($phone);
 })->with('phone-numbers');
 
-test("validity can be set dynamically", function (int $number): void {
+test('validity can be set dynamically', function (int $number): void {
     $object = (new WebRTCToken())->validFor($number);
 
     expect($object)
@@ -37,13 +37,13 @@ test("validity can be set dynamically", function (int $number): void {
         ->expire()->toBe("{$number}s");
 })->with('webrtc-token-duration');
 
-it("throws an exception for invalid validity", function (int $number): void {
+it('throws an exception for invalid validity', function (int $number): void {
     (new WebRTCToken())->validFor($number);
 })
     ->with('invalid-token-duration')
     ->throws(InvalidArgumentException::class);
 
-it("generates data array", function (string $word, string $phone, int $duration): void {
+it('generates data array', function (string $word, string $phone, int $duration): void {
     $object = (new WebRTCToken())
         ->for($word)
         ->validFor($duration)
@@ -53,11 +53,11 @@ it("generates data array", function (string $word, string $phone, int $duration)
         ->toBeInstanceOf(WebRTCToken::class)
         ->data()->toBeArray()
         ->toBe([
-            "phoneNumber" => $phone,
-            "clientName" => $word,
-            "incoming" => "true",
-            "outgoing" => "true",
-            "expire" => "{$duration}s",
+            'phoneNumber' => $phone,
+            'clientName' => $word,
+            'incoming' => 'true',
+            'outgoing' => 'true',
+            'expire' => "{$duration}s",
         ]);
 })->with('strings', 'phone-numbers', 'webrtc-token-duration');
 

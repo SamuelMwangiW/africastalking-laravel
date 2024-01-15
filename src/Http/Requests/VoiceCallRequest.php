@@ -7,9 +7,9 @@ namespace SamuelMwangiW\Africastalking\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rules\Enum;
 use SamuelMwangiW\Africastalking\Enum\Direction;
+use SamuelMwangiW\Africastalking\Http\Requests\Concerns\HasCallAttributes;
 use SamuelMwangiW\Africastalking\Http\Requests\Concerns\HasPhoneNumber;
 use SamuelMwangiW\Africastalking\Http\Requests\Concerns\HasUniqueId;
-use SamuelMwangiW\Africastalking\Http\Requests\Concerns\HasCallAttributes;
 
 class VoiceCallRequest extends FormRequest
 {

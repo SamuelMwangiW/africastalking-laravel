@@ -12,8 +12,7 @@ class Money implements DTOContract
     public function __construct(
         public readonly float $amount,
         public readonly Currency $currency,
-    ) {
-    }
+    ) {}
 
     public static function make(string $value): Money
     {

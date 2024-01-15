@@ -13,8 +13,7 @@ class MobileCheckoutResponse implements DTOContract
         public readonly string $description,
         public readonly string $providerChannel,
         public readonly string $status,
-    ) {
-    }
+    ) {}
 
     public static function make(mixed $details): MobileCheckoutResponse
     {
@@ -33,16 +32,16 @@ class MobileCheckoutResponse implements DTOContract
 
     public function __toString(): string
     {
-        return (string)json_encode($this);
+        return (string) json_encode($this);
     }
 
     public function __toArray(): array
     {
         return [
-            "description" => $this->description,
-            "providerChannel" => $this->providerChannel,
-            "status" => $this->status,
-            "transactionId" => $this->id,
+            'description' => $this->description,
+            'providerChannel' => $this->providerChannel,
+            'status' => $this->status,
+            'transactionId' => $this->id,
         ];
     }
 }

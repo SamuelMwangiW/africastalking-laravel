@@ -4,15 +4,15 @@ declare(strict_types=1);
 
 namespace SamuelMwangiW\Africastalking\Saloon\Requests;
 
+use ReflectionException;
 use Saloon\Contracts\Body\HasBody;
-use Saloon\Http\Response;
 use Saloon\Enums\Method;
 use Saloon\Exceptions\InvalidResponseClassException;
 use Saloon\Exceptions\PendingRequestException;
 use Saloon\Http\Request;
+use Saloon\Http\Response;
 use SamuelMwangiW\Africastalking\Enum\Service;
 use SamuelMwangiW\Africastalking\Saloon\AfricastalkingConnector;
-use ReflectionException;
 
 /**
  * @mixin AfricastalkingConnector

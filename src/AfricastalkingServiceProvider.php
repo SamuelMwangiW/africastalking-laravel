@@ -5,12 +5,12 @@ declare(strict_types=1);
 namespace SamuelMwangiW\Africastalking;
 
 use Composer\InstalledVersions;
+use Exception;
 use Illuminate\Foundation\Console\AboutCommand;
 use Illuminate\Support\Facades\App;
 use SamuelMwangiW\Africastalking\Saloon\AfricastalkingConnector;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
-use Exception;
 
 class AfricastalkingServiceProvider extends PackageServiceProvider
 {
@@ -24,7 +24,7 @@ class AfricastalkingServiceProvider extends PackageServiceProvider
     public function packageRegistered(): void
     {
         AboutCommand::add('Africastalking', [
-            'SDK Version' => fn () => InstalledVersions::getPrettyVersion('samuelmwangiw/africastalking-laravel'),
+            'SDK Version' => fn() => InstalledVersions::getPrettyVersion('samuelmwangiw/africastalking-laravel'),
             'Username' => config('africastalking.username'),
             'SenderID' => config('africastalking.sms.from', 'AFRICASTKNG'),
             'Voice Phone #' => config('africastalking.voice.from'),
@@ -56,7 +56,7 @@ class AfricastalkingServiceProvider extends PackageServiceProvider
         if ( ! App::runningUnitTests()) {
             $this->app->singleton(
                 abstract: AfricastalkingConnector::class,
-                concrete: fn () => new AfricastalkingConnector(),
+                concrete: fn() => new AfricastalkingConnector(),
             );
         }
     }

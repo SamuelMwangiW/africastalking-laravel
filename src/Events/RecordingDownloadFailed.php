@@ -20,6 +20,5 @@ class RecordingDownloadFailed
         public readonly string $recordingUrl,
         public readonly string $disk,
         public readonly Throwable $exception,
-    ) {
-    }
+    ) {}
 }

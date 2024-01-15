@@ -17,8 +17,7 @@ class SentMessageResponse implements DTOContract
     public function __construct(
         public readonly string $message,
         public readonly Collection $recipients
-    ) {
-    }
+    ) {}
 
     public static function fromSaloon(Response $response): SentMessageResponse
     {
@@ -29,7 +28,7 @@ class SentMessageResponse implements DTOContract
             /** @phpstan-ignore-next-line  */
             recipients: collect(data_get($data, 'Recipients'))
                 ->map(
-                    fn (array $recipient) => SentMessageRecipient::make($recipient)
+                    fn(array $recipient) => SentMessageRecipient::make($recipient)
                 ),
         );
     }

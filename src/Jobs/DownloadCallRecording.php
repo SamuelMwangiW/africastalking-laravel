@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace SamuelMwangiW\Africastalking\Jobs;
 
+use Exception;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldBeUnique;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -15,9 +16,8 @@ use Illuminate\Support\Facades\Storage;
 use SamuelMwangiW\Africastalking\Events\CallRecordingDownloaded;
 use SamuelMwangiW\Africastalking\Events\RecordingDownloadFailed;
 use Throwable;
-use Exception;
 
-class DownloadCallRecording implements ShouldQueue, ShouldBeUnique
+class DownloadCallRecording implements ShouldBeUnique, ShouldQueue
 {
     use Dispatchable;
     use InteractsWithQueue;
@@ -29,8 +29,7 @@ class DownloadCallRecording implements ShouldQueue, ShouldBeUnique
         public readonly string      $callSessionId,
         public readonly string|null $disk = null,
         public readonly string|null $path = null,
-    ) {
-    }
+    ) {}
 
     /**
      * @return void

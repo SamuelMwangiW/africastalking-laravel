@@ -17,9 +17,7 @@ class BulkSmsRequest extends BaseRequest implements HasBody
 
     public Service $service = Service::BULK_SMS;
 
-    public function __construct(private readonly array $data)
-    {
-    }
+    public function __construct(private readonly array $data) {}
 
     public function resolveEndpoint(): string
     {

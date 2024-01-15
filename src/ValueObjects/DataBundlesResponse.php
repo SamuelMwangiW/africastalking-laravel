@@ -13,8 +13,7 @@ class DataBundlesResponse implements \SamuelMwangiW\Africastalking\Contracts\DTO
     public function __construct(
         /** @var Collection<int,DataBundlesResponseEntry> $entries */
         public readonly Collection $entries
-    ) {
-    }
+    ) {}
 
     public static function fromResponse(Response $response): DataBundlesResponse
     {

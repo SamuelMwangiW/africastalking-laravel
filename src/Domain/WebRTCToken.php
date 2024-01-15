@@ -6,12 +6,12 @@ namespace SamuelMwangiW\Africastalking\Domain;
 
 use GuzzleHttp\Exception\GuzzleException;
 use Illuminate\Support\Str;
+use InvalidArgumentException;
+use ReflectionException;
 use Saloon\Exceptions\SaloonException;
 use SamuelMwangiW\Africastalking\Saloon\Requests\Voice\CapabilityTokenRequest;
 use SamuelMwangiW\Africastalking\ValueObjects\CapabilityToken;
 use SamuelMwangiW\Africastalking\ValueObjects\PhoneNumber;
-use ReflectionException;
-use InvalidArgumentException;
 
 class WebRTCToken
 {
@@ -42,11 +42,11 @@ class WebRTCToken
     public function validFor(int $seconds): static
     {
         if ($seconds <= 0) {
-            throw new InvalidArgumentException("Negative duration values not allowed");
+            throw new InvalidArgumentException('Negative duration values not allowed');
         }
 
         if ($seconds > $this->maxlifeTimeSec) {
-            throw new InvalidArgumentException("The maximum allowed token duration is 24 Hours");
+            throw new InvalidArgumentException('The maximum allowed token duration is 24 Hours');
         }
 
         $this->lifeTimeSec = $seconds;

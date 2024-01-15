@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace SamuelMwangiW\Africastalking\Domain;
 
 use Illuminate\Support\Collection;
+use ReflectionException;
 use Saloon\Exceptions\InvalidResponseClassException;
 use Saloon\Exceptions\PendingRequestException;
 use SamuelMwangiW\Africastalking\Concerns\HasIdempotency;
@@ -14,7 +15,6 @@ use SamuelMwangiW\Africastalking\Saloon\Requests\Airtime\SendRequest;
 use SamuelMwangiW\Africastalking\ValueObjects\AirtimeResponse;
 use SamuelMwangiW\Africastalking\ValueObjects\AirtimeTransaction;
 use SamuelMwangiW\Africastalking\ValueObjects\PhoneNumber;
-use ReflectionException;
 
 class Airtime
 {
@@ -106,8 +106,8 @@ class Airtime
 
     private function recipients(): string
     {
-        return (string)json_encode(
-            $this->recipients->map(fn (AirtimeTransaction $recipient) => $recipient->toArray())->toArray()
+        return (string) json_encode(
+            $this->recipients->map(fn(AirtimeTransaction $recipient) => $recipient->toArray())->toArray()
         );
     }
 

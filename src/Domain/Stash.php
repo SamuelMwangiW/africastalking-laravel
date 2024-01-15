@@ -87,10 +87,10 @@ class Stash
     private function getData(): array
     {
         return [
-            "productName" => $this->getProductName(),
-            "currencyCode" => $this->getCurrency()->value,
-            "amount" => $this->getAmount(),
-            "metadata" => (object)$this->getMetadata(),
+            'productName' => $this->getProductName(),
+            'currencyCode' => $this->getCurrency()->value,
+            'amount' => $this->getAmount(),
+            'metadata' => (object) $this->getMetadata(),
         ];
     }
 }

@@ -16,8 +16,7 @@ class CapabilityToken implements DTOContract
         public readonly bool $outgoing,
         public readonly string $token,
         public readonly ?string $phoneNumber = null,
-    ) {
-    }
+    ) {}
 
     public static function fromSaloon(Response $response, ?string $phoneNumber = null): CapabilityToken
     {
@@ -41,12 +40,12 @@ class CapabilityToken implements DTOContract
     public function __toArray(): array
     {
         return [
-            "clientName" => $this->clientName,
-            "incoming" => $this->incoming,
-            "lifeTimeSec" => $this->lifeTimeSec,
-            "outgoing" => $this->outgoing,
-            "token" => $this->token,
-            "phoneNumber" => $this->phoneNumber,
+            'clientName' => $this->clientName,
+            'incoming' => $this->incoming,
+            'lifeTimeSec' => $this->lifeTimeSec,
+            'outgoing' => $this->outgoing,
+            'token' => $this->token,
+            'phoneNumber' => $this->phoneNumber,
         ];
     }
 }

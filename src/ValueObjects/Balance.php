@@ -12,8 +12,7 @@ class Balance implements DTOContract
     public function __construct(
         public float    $amount,
         public Currency $currency,
-    ) {
-    }
+    ) {}
 
     public static function make(float $balance, Currency $currency): Balance
     {

@@ -6,7 +6,7 @@ use SamuelMwangiW\Africastalking\ValueObjects\Voice\Action;
 use SamuelMwangiW\Africastalking\ValueObjects\Voice\Dequeue;
 
 it('implements the say action')
-    ->expect(fn () => app(Dequeue::class))
+    ->expect(fn() => app(Dequeue::class))
     ->toBeInstanceOf(Action::class)
     ->name->toBeNull()
     ->holdMusic->toBeNull();
@@ -32,7 +32,7 @@ it('sets the phone number from config', function (): void {
 
 it('overrides the queue name passed')
     ->expect(
-        fn () => Dequeue::make(name: 'javascript', phoneNumber: '+1234')
+        fn() => Dequeue::make(name: 'javascript', phoneNumber: '+1234')
             ->queue('php')
             ->build()
     )->toBe('<Dequeue name="php" phoneNumber="+1234" />');

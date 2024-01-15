@@ -17,7 +17,7 @@ use SamuelMwangiW\Africastalking\ValueObjects\AirtimeTransaction;
 use SamuelMwangiW\Africastalking\ValueObjects\PhoneNumber;
 
 it('resolves the application class')
-    ->expect(fn () => Africastalking::airtime())
+    ->expect(fn() => Africastalking::airtime())
     ->toBeInstanceOf(Airtime::class);
 
 it('can add a recipient', function (string $phone, string $currency, int $amount): void {
@@ -54,7 +54,7 @@ it('can add a recipient from a transaction object', function (AirtimeTransaction
     expect($service)
         ->recipients->toHaveCount(1)
         ->recipients->each(
-            fn ($recipient) => $recipient
+            fn($recipient) => $recipient
                 ->phoneNumber->toBe($transaction->phoneNumber)
                 ->currencyCode->toBe($transaction->currencyCode)
                 ->amount->toBeInt()
@@ -73,7 +73,7 @@ it('can add a recipient using currency Enum', function (string $currencyCode): v
     expect($service)
         ->recipients->toHaveCount(1)
         ->recipients->each(
-            fn ($recipient) => $recipient
+            fn($recipient) => $recipient
                 ->phoneNumber->number->toBe($phoneNumber)
                 ->currencyCode->value->toBe($currencyCode)
                 ->amount->toBeInt()->toBe($amount)
@@ -97,7 +97,7 @@ it('can add multiple recipients', function (string $phone, string $currency, cal
         ->recipients->toBeInstanceOf(Collection::class)
         ->toHaveCount(2)
         ->recipients->each(
-            fn ($recipient) => $recipient
+            fn($recipient) => $recipient
                 ->phoneNumber->toBeInstanceOf(PhoneNumber::class)
                 ->currencyCode->toBeInstanceOf(Currency::class)
                 ->amount->toBeInt()
@@ -175,6 +175,6 @@ it('sends airtime to multiple recipients', function (callable $amount, string $p
         ->toBeInstanceOf(Collection::class)
         ->toHaveCount(2)
         ->each(
-            fn (Expectation $transaction) => $transaction->toBeInstanceOf(AirtimeRecipientResponse::class)
+            fn(Expectation $transaction) => $transaction->toBeInstanceOf(AirtimeRecipientResponse::class)
         );
 })->with('airtime-amount', 'phone-numbers');

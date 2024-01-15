@@ -1,5 +1,5 @@
 {
-    "preset": "psr12",
+    "preset": "per",
     "rules": {
         "align_multiline_comment": true,
         "not_operator_with_successor_space": true,
@@ -37,10 +37,14 @@
         "modernize_strpos": true,
         "new_with_braces": true,
         "no_empty_comment": true,
+        "no_useless_return": true,
         "not_operator_with_space": true,
+        "ordered_imports": {"sort_algorithm": "alpha", "imports_order": ["const", "class", "function"]},
+        "ordered_interfaces": true,
         "ordered_traits": true,
         "protected_to_private": true,
         "simplified_if_return": true,
+        "single_quote": true,
         "strict_comparison": true,
         "ternary_to_null_coalescing": true,
         "trim_array_spaces": true,

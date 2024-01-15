@@ -153,7 +153,7 @@ dataset('incoming-message-notification', [
             'id' => 'ATUid_5d3b4c2bc589f4811820a7184eed4df5',
             'linkId' => 'ATUid_5d3b4c2bc589f4811820a7184eed4df5',
             'text' => fake()->sentences(asText: true),
-            'to' => (string)fake()->numberBetween(1000, 99999),
+            'to' => (string) fake()->numberBetween(1000, 99999),
             'networkCode' => '99999',
         ],
         [
@@ -162,7 +162,7 @@ dataset('incoming-message-notification', [
             'id' => 'ATUid_5d3b4c2bc589f4811820a7184eed4df5',
             'linkId' => '',
             'text' => fake()->sentences(asText: true),
-            'to' => (string)fake()->numberBetween(1000, 99999),
+            'to' => (string) fake()->numberBetween(1000, 99999),
             'networkCode' => '99999',
         ],
         [
@@ -170,7 +170,7 @@ dataset('incoming-message-notification', [
             'from' => '+254720123123',
             'id' => 'ATUid_5d3b4c2bc589f4811820a7184eed4df5',
             'text' => fake()->sentences(asText: true),
-            'to' => (string)fake()->numberBetween(1000, 99999),
+            'to' => (string) fake()->numberBetween(1000, 99999),
             'networkCode' => '99999',
         ],
     ],
@@ -235,7 +235,7 @@ dataset('voice-event-notification', [
         [
             'isActive' => fake()->randomElement([0, 1, true, false]),
             'sessionId' => 'ATVId_b2beff43fbe0d2749cc1693b4df4f585',
-            'direction' => \SamuelMwangiW\Africastalking\Enum\Direction::INBOUND->value,
+            'direction' => SamuelMwangiW\Africastalking\Enum\Direction::INBOUND->value,
             'callerNumber' => '+254720123123',
             'destinationNumber' => '+254709100100',
             'dtmfDigits' => '123#',
@@ -260,7 +260,7 @@ dataset('voice-event-notification-with-recording', [
         [
             'isActive' => fake()->randomElement([0, 1, true, false]),
             'sessionId' => 'ATVId_b2beff43fbe0d2749cc1693b4df4f585',
-            'direction' => \SamuelMwangiW\Africastalking\Enum\Direction::INBOUND->value,
+            'direction' => SamuelMwangiW\Africastalking\Enum\Direction::INBOUND->value,
             'callerNumber' => '+254720123123',
             'destinationNumber' => '+254709100100',
             'dtmfDigits' => '123#',
@@ -285,7 +285,7 @@ dataset('voice-event-notification-with-0-duration', [
         [
             'isActive' => fake()->randomElement([0, 1, true, false]),
             'sessionId' => 'ATVId_b2beff43fbe0d2749cc1693b4df4f585',
-            'direction' => \SamuelMwangiW\Africastalking\Enum\Direction::INBOUND->value,
+            'direction' => SamuelMwangiW\Africastalking\Enum\Direction::INBOUND->value,
             'callerNumber' => '+254720123123',
             'destinationNumber' => '+254709100100',
             'dtmfDigits' => '123#',
@@ -310,7 +310,7 @@ dataset('voice-event-notification-with-empty-recordingUrl', [
         [
             'isActive' => fake()->randomElement([0, 1, true, false]),
             'sessionId' => 'ATVId_b2beff43fbe0d2749cc1693b4df4f585',
-            'direction' => \SamuelMwangiW\Africastalking\Enum\Direction::INBOUND->value,
+            'direction' => SamuelMwangiW\Africastalking\Enum\Direction::INBOUND->value,
             'callerNumber' => '+254720123123',
             'destinationNumber' => '+254709100100',
             'dtmfDigits' => '123#',

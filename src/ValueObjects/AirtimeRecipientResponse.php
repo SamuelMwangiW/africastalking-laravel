@@ -16,8 +16,7 @@ class AirtimeRecipientResponse implements DTOContract
         public readonly Status $status,
         public readonly string $requestId,
         public readonly string $discount,
-    ) {
-    }
+    ) {}
 
     public static function make(array $response): AirtimeRecipientResponse
     {
@@ -33,7 +32,7 @@ class AirtimeRecipientResponse implements DTOContract
 
     public function __toString(): string
     {
-        return (string)json_encode($this);
+        return (string) json_encode($this);
     }
 
     public function __toArray(): array

@@ -15,9 +15,9 @@ beforeEach(function (): void {
 });
 
 it('can be resolved via base class')
-    ->expect(fn () => africastalking()->stash())->toBeInstanceOf(Stash::class);
+    ->expect(fn() => africastalking()->stash())->toBeInstanceOf(Stash::class);
 
-it('can be constructed')->expect(fn () => $this->subject)->toBeInstanceOf(Stash::class);
+it('can be constructed')->expect(fn() => $this->subject)->toBeInstanceOf(Stash::class);
 
 it('can set amount fluently', function (): void {
     expect(

@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace SamuelMwangiW\Africastalking\Tests\Fixtures;
 
 use Saloon\Contracts\Body\HasBody;
-use Saloon\Http\Response;
-use Saloon\Http\Request;
 use Saloon\Enums\Method;
+use Saloon\Http\Request;
+use Saloon\Http\Response;
 use Saloon\Traits\Body\HasJsonBody;
 use SamuelMwangiW\Africastalking\ValueObjects\CapabilityToken;
 

@@ -15,8 +15,7 @@ class SentMessageRecipient implements DTOContract
         public readonly PhoneNumber $number,
         public readonly string $cost,
         public readonly Status $status,
-    ) {
-    }
+    ) {}
 
     public static function make(array $attributes): SentMessageRecipient
     {
@@ -37,11 +36,11 @@ class SentMessageRecipient implements DTOContract
     public function __toArray(): array
     {
         return [
-            "statusCode" => $this->statusCode,
-            "number" => $this->number->number,
-            "cost" => $this->cost,
-            "status" => $this->status->value,
-            "messageId" => $this->id,
+            'statusCode' => $this->statusCode,
+            'number' => $this->number->number,
+            'cost' => $this->cost,
+            'status' => $this->status->value,
+            'messageId' => $this->id,
         ];
     }
 }

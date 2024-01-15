@@ -11,11 +11,11 @@ use SamuelMwangiW\Africastalking\Saloon\Requests\Application\BalanceRequest;
 use SamuelMwangiW\Africastalking\ValueObjects\Balance;
 
 it('resolves the application class')
-    ->expect(fn () => Africastalking::application())
+    ->expect(fn() => Africastalking::application())
     ->toBeInstanceOf(Application::class);
 
 it('resolves the application class via alias')
-    ->expect(fn () => Africastalking::app())
+    ->expect(fn() => Africastalking::app())
     ->toBeInstanceOf(Application::class);
 
 it('can fetch the application balance  via application()->balance()', function (): void {

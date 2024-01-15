@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace SamuelMwangiW\Africastalking\Saloon\Requests\Payment;
 
 use Illuminate\Support\Str;
-use Saloon\Http\Response;
 use Saloon\Enums\Method;
+use Saloon\Http\Response;
 use Saloon\Traits\Body\HasJsonBody;
 use SamuelMwangiW\Africastalking\Enum\Currency;
 use SamuelMwangiW\Africastalking\Enum\Service;

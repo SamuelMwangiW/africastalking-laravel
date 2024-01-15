@@ -71,11 +71,11 @@ class MobileCheckout
     private function data(): array
     {
         return [
-            "productName" => $this->getProductName(),
-            "phoneNumber" => $this->phone->number,
-            "currencyCode" => $this->currency->value,
-            "amount" => $this->amount,
-            "metadata" => (object)$this->getMetadata(),
+            'productName' => $this->getProductName(),
+            'phoneNumber' => $this->phone->number,
+            'currencyCode' => $this->currency->value,
+            'amount' => $this->amount,
+            'metadata' => (object) $this->getMetadata(),
         ];
     }
 

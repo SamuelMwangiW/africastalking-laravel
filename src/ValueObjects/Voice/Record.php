@@ -103,11 +103,11 @@ class Record implements Action
         }
 
         if ($this->playBeep) {
-            $options .= " playBeep=\"true\"";
+            $options .= ' playBeep="true"';
         }
 
         if ($this->trimSilence) {
-            $options .= " trimSilence=\"true\"";
+            $options .= ' trimSilence="true"';
         }
 
         return mb_strlen($this->say->getMessage())

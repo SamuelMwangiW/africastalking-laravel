@@ -75,11 +75,11 @@ class VoiceCall
     public function data(): array
     {
         return [
-            "from" => $this->from()->number,
-            "clientRequestId" => $this->clientRequestId,
-            "to" => $this->recipients
-                ->filter(fn (PhoneNumber $number) => $number->isValid())
-                ->map(fn (PhoneNumber $number) => $number->number)
+            'from' => $this->from()->number,
+            'clientRequestId' => $this->clientRequestId,
+            'to' => $this->recipients
+                ->filter(fn(PhoneNumber $number) => $number->isValid())
+                ->map(fn(PhoneNumber $number) => $number->number)
                 ->implode(','),
         ];
     }

@@ -66,7 +66,7 @@ it('can be cast to string', function (): void {
         currency: Currency::UGANDA,
     );
 
-    expect((string)$account)
+    expect((string) $account)
         ->toBe('UGX 6000');
 });
 

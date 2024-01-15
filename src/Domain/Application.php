@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace SamuelMwangiW\Africastalking\Domain;
 
+use ReflectionException;
 use SamuelMwangiW\Africastalking\Saloon\Requests\Application\BalanceRequest;
 use SamuelMwangiW\Africastalking\ValueObjects\Balance;
-use ReflectionException;
 
 class Application
 {

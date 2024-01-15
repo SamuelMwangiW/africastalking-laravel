@@ -100,6 +100,6 @@ class Dial implements Action
 
     private function booleanString(bool $value): string
     {
-        return $value ? "true" : "false";
+        return $value ? 'true' : 'false';
     }
 }

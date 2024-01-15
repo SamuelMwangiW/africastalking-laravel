@@ -20,8 +20,7 @@ class SendRequest extends BaseRequest implements HasBody
     public function __construct(
         private readonly string $productName,
         private readonly array $recipients,
-    ) {
-    }
+    ) {}
 
     public function resolveEndpoint(): string
     {

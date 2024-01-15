@@ -10,10 +10,10 @@ use SamuelMwangiW\Africastalking\Saloon\Requests\Payment\MobileCheckoutRequest;
 use SamuelMwangiW\Africastalking\ValueObjects\MobileCheckoutResponse;
 
 it('resolves the class')
-    ->expect(fn () => app(MobileCheckout::class))->toBeInstanceOf(MobileCheckout::class);
+    ->expect(fn() => app(MobileCheckout::class))->toBeInstanceOf(MobileCheckout::class);
 
 it('resolves the class via the helper')
-    ->expect(fn () => africastalking()->payment()->mobileCheckout())->toBeInstanceOf(MobileCheckout::class);
+    ->expect(fn() => africastalking()->payment()->mobileCheckout())->toBeInstanceOf(MobileCheckout::class);
 
 it('uses the product set in the config', function (): void {
     $configuredProductName = config('africastalking.payment.product-name');
@@ -70,9 +70,9 @@ it('sends a Mobile Checkout Request', function (string $phone): void {
     expect($result)
         ->toBeInstanceOf(MobileCheckoutResponse::class)
         ->toHaveKeys([
-            "description",
-            "providerChannel",
-            "status",
-            "id",
+            'description',
+            'providerChannel',
+            'status',
+            'id',
         ]);
 })->with('phone-numbers');

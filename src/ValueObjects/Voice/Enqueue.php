@@ -9,8 +9,7 @@ class Enqueue implements Action
     public function __construct(
         public ?string $name = null,
         public ?string $holdMusic = null
-    ) {
-    }
+    ) {}
 
     public static function make(
         ?string $name = null,
@@ -30,7 +29,7 @@ class Enqueue implements Action
     }
     public function build(): string
     {
-        $options = "";
+        $options = '';
 
         if ($this->name) {
             $options .= "name=\"{$this->name}\"";

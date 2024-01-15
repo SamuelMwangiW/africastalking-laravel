@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace SamuelMwangiW\Africastalking\Domain;
 
-use SamuelMwangiW\Africastalking\Saloon\Requests\Payment\WalletBalanceRequest;
-use SamuelMwangiW\Africastalking\ValueObjects\Balance;
 use Exception;
 use ReflectionException;
+use SamuelMwangiW\Africastalking\Saloon\Requests\Payment\WalletBalanceRequest;
+use SamuelMwangiW\Africastalking\ValueObjects\Balance;
 
 class Wallet
 {

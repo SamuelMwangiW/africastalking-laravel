@@ -7,7 +7,7 @@ use SamuelMwangiW\Africastalking\Enum\Status;
 use SamuelMwangiW\Africastalking\ValueObjects\StashTopupResponse;
 
 it('can be constructed')
-    ->expect(fn () => new StashTopupResponse(
+    ->expect(fn() => new StashTopupResponse(
         id: 'id',
         status: Status::SENT,
         description: 'description'
@@ -17,7 +17,7 @@ it('can be constructed')
     ->description->toBe('description');
 
 it('can be constructed statically')
-    ->expect(fn () => StashTopupResponse::make(
+    ->expect(fn() => StashTopupResponse::make(
         [
             'transactionId' => 'id',
             'status' => Status::SENT->value,
@@ -29,7 +29,7 @@ it('can be constructed statically')
     ->description->toBe('description');
 
 it('implements DTO contract')
-    ->expect(fn () => new StashTopupResponse(
+    ->expect(fn() => new StashTopupResponse(
         id: 'id',
         status: Status::SENT,
         description: 'description'
@@ -37,7 +37,7 @@ it('implements DTO contract')
     ->toBeInstanceOf(DTOContract::class);
 
 it('can be cast to array')
-    ->expect(fn () => new StashTopupResponse(
+    ->expect(fn() => new StashTopupResponse(
         id: 'id',
         status: Status::SENT,
         description: 'description'
@@ -51,7 +51,7 @@ it('can be cast to string', function (): void {
         description: 'description'
     );
 
-    expect((string)$object)
+    expect((string) $object)
         ->toBeString()
         ->toBe($object->__toString())
         ->toBe('{"id":"id","status":"Sent","description":"description"}');

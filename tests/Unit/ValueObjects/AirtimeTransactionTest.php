@@ -53,7 +53,7 @@ it('can be encoded to string', function (string $phone, string $currency): void 
 
     $transactionString = '{"phoneNumber":"'.$phone.'","amount":"'.$currency.' 1000"}';
 
-    expect((string)$transaction)
+    expect((string) $transaction)
         ->toBe($transactionString);
 })->with('phone-numbers', 'currencies');
 
@@ -64,7 +64,7 @@ it('can be cast to array', function (string $phone, string $currency, callable $
         amount: value($amount)
     );
 
-    expect((array)$transaction)
+    expect((array) $transaction)
         ->toBeArray();
     //        ->toBe(['phoneNumber' => $phone, 'amount' => "{$currency} {$amount}"]);
 })->with('phone-numbers', 'currencies', 'airtime-amount');

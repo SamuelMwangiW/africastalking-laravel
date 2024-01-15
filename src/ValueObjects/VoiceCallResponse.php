@@ -18,8 +18,7 @@ class VoiceCallResponse implements DTOContract
         public readonly string $errorMessage,
         public readonly Collection $recipients,
         public readonly ?int $queueSize = 0,
-    ) {
-    }
+    ) {}
 
     public static function fromSaloon(Response $response): VoiceCallResponse
     {
@@ -32,7 +31,7 @@ class VoiceCallResponse implements DTOContract
 
     public function __toString(): string
     {
-        return (string)json_encode($this);
+        return (string) json_encode($this);
     }
 
     public function __toArray(): array

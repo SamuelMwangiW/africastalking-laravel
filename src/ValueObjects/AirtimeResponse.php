@@ -23,8 +23,7 @@ class AirtimeResponse implements DTOContract
         public readonly string $discount,
         public readonly int $numSent,
         public readonly Collection $responses,
-    ) {
-    }
+    ) {}
 
     public static function fromSaloon(Response $response): AirtimeResponse
     {
@@ -35,14 +34,14 @@ class AirtimeResponse implements DTOContract
             numSent: $response->json('numSent'),
             responses: $response->collect('responses')
                 ->map(
-                    fn (array $response) => AirtimeRecipientResponse::make($response)
+                    fn(array $response) => AirtimeRecipientResponse::make($response)
                 ),
         );
     }
 
     public function __toString(): string
     {
-        return (string)json_encode($this);
+        return (string) json_encode($this);
     }
 
     public function hasDuplicate(): bool

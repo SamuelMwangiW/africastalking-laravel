@@ -16,9 +16,7 @@ class QueueStatusRequest extends BaseRequest implements HasBody
 
     public Service $service = Service::VOICE;
 
-    public function __construct(private readonly array $data)
-    {
-    }
+    public function __construct(private readonly array $data) {}
     public function defaultBody(): array
     {
         return array_merge(

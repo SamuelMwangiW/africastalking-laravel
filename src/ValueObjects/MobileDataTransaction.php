@@ -16,8 +16,7 @@ class MobileDataTransaction
         public readonly BundlesUnit     $unit = BundlesUnit::MB,
         public readonly bool            $isPromoBundle = false,
         public readonly array           $meta = [],
-    ) {
-    }
+    ) {}
 
     public static function make(
         PhoneNumber     $phoneNumber,

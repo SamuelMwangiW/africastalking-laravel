@@ -16,8 +16,7 @@ class VoiceCallDTO implements DTOContract
          */
         public readonly Collection $to,
         public readonly string|null $clientRequestId,
-    ) {
-    }
+    ) {}
 
     public function __toString(): string
     {
@@ -30,8 +29,8 @@ class VoiceCallDTO implements DTOContract
             'from' => $this->from->number,
             'requestId' => $this->clientRequestId,
             'to' => $this->to
-                ->filter(fn (PhoneNumber $number) => $number->isValid())
-                ->map(fn (PhoneNumber $number) => $number->number),
+                ->filter(fn(PhoneNumber $number) => $number->isValid())
+                ->map(fn(PhoneNumber $number) => $number->number),
         ];
     }
 }

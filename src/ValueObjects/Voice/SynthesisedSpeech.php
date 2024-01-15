@@ -41,14 +41,14 @@ class SynthesisedSpeech implements Action
         return $this;
     }
 
-    public function sayAsDate(string $value, string $format = "yyyymmdd", int $detail = 1): static
+    public function sayAsDate(string $value, string $format = 'yyyymmdd', int $detail = 1): static
     {
         $this->message .= '<say-as interpret-as="date" format="'.$format.'" detail="'.$detail.'">'.$value.'</say-as>';
 
         return $this;
     }
 
-    public function sayAsTime(string $value, string $format = "hms12"): static
+    public function sayAsTime(string $value, string $format = 'hms12'): static
     {
         $this->message .= '<say-as interpret-as="time" format="'.$format.'">'.$value.'}</say-as>';
 

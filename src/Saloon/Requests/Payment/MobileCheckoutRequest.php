@@ -17,9 +17,7 @@ class MobileCheckoutRequest extends BaseRequest implements HasBody
 
     public Service $service = Service::PAYMENT;
 
-    public function __construct(private readonly array $data)
-    {
-    }
+    public function __construct(private readonly array $data) {}
 
     public function resolveEndpoint(): string
     {

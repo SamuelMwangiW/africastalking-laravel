@@ -13,8 +13,7 @@ class StashTopupResponse implements DTOContract
         public string $id,
         public Status $status,
         public string $description,
-    ) {
-    }
+    ) {}
 
     public static function make(array $attributes): StashTopupResponse
     {
@@ -27,7 +26,7 @@ class StashTopupResponse implements DTOContract
 
     public function __toString(): string
     {
-        return (string)json_encode($this->__toArray());
+        return (string) json_encode($this->__toArray());
     }
 
     public function __toArray(): array

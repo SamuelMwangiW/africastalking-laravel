@@ -8,10 +8,10 @@ use SamuelMwangiW\Africastalking\ValueObjects\Message;
 use SamuelMwangiW\Africastalking\ValueObjects\PhoneNumber;
 
 it('resolves the Message::class')
-    ->expect(fn () => app(Message::class))->toBeInstanceOf(Message::class);
+    ->expect(fn() => app(Message::class))->toBeInstanceOf(Message::class);
 
 it('implements the DTO Contract')
-    ->expect(fn () => app(Message::class))->toBeInstanceOf(DTOContract::class);
+    ->expect(fn() => app(Message::class))->toBeInstanceOf(DTOContract::class);
 
 it('can be constructed', function (string $message): void {
     $subject = new Message();

@@ -11,14 +11,13 @@ use SamuelMwangiW\Africastalking\Enum\Currency;
 /**
  * @implements Arrayable<string, string>
  */
-class AirtimeTransaction implements DTOContract, Arrayable
+class AirtimeTransaction implements Arrayable, DTOContract
 {
     public function __construct(
         public PhoneNumber $phoneNumber,
         public Currency    $currencyCode,
         public int         $amount,
-    ) {
-    }
+    ) {}
 
     public static function make(string $phoneNumber, Currency $currency, int $amount): AirtimeTransaction
     {
@@ -39,8 +38,8 @@ class AirtimeTransaction implements DTOContract, Arrayable
     public function toArray(): array
     {
         return [
-            "phoneNumber" => $this->phoneNumber->number,
-            "amount" => "{$this->currencyCode->value} {$this->amount}",
+            'phoneNumber' => $this->phoneNumber->number,
+            'amount' => "{$this->currencyCode->value} {$this->amount}",
         ];
     }
 

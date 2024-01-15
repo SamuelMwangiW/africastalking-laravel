@@ -10,12 +10,12 @@ use SamuelMwangiW\Africastalking\ValueObjects\Balance;
 
 it('can be resolved')
     ->expect(
-        fn () => app(Wallet::class)
+        fn() => app(Wallet::class)
     )->toBeInstanceOf(Wallet::class);
 
 it('can be resolved via helper')
     ->expect(
-        fn () => africastalking()->wallet()
+        fn() => africastalking()->wallet()
     )->toBeInstanceOf(Wallet::class);
 
 it('can fetch balance', function (): void {

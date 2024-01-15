@@ -5,12 +5,12 @@ declare(strict_types=1);
 namespace SamuelMwangiW\Africastalking\ValueObjects;
 
 use Illuminate\Support\Collection;
+use ReflectionException;
 use SamuelMwangiW\Africastalking\Contracts\DTOContract;
 use SamuelMwangiW\Africastalking\Exceptions\AfricastalkingException;
 use SamuelMwangiW\Africastalking\Saloon\Requests\Messaging\BulkSmsRequest;
 use SamuelMwangiW\Africastalking\Saloon\Requests\Messaging\PremiumSmsRequest;
 use Throwable;
-use ReflectionException;
 
 class Message implements DTOContract
 {
@@ -30,8 +30,7 @@ class Message implements DTOContract
         public string|null $message = null,
         public Collection|null $to = null,
         public string|null $from = null,
-    ) {
-    }
+    ) {}
 
     public function enqueue(bool|int $value = true): static
     {
@@ -70,7 +69,7 @@ class Message implements DTOContract
         }
 
         if (is_array($recipients)) {
-            $recipients = collect($recipients)->map(fn ($phone) => PhoneNumber::make($phone));
+            $recipients = collect($recipients)->map(fn($phone) => PhoneNumber::make($phone));
         }
 
         $this->to = $recipients;
@@ -201,8 +200,8 @@ class Message implements DTOContract
             'retryDurationInHours' => $this->retryDurationInHours,
             'message' => $this->message,
             'to' => $this->to
-                ?->filter(fn (PhoneNumber $number) => $number->isValid())
-                ->map(fn (PhoneNumber $number) => $number->number)
+                ?->filter(fn(PhoneNumber $number) => $number->isValid())
+                ->map(fn(PhoneNumber $number) => $number->number)
                 ->implode(','),
         ];
 

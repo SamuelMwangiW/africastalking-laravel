@@ -12,7 +12,7 @@ use SamuelMwangiW\Africastalking\ValueObjects\PhoneNumber;
 use SamuelMwangiW\Africastalking\ValueObjects\VoiceCallResponse;
 
 it('resolves the Voice class')
-    ->expect(fn () => Africastalking::voice()->call())
+    ->expect(fn() => Africastalking::voice()->call())
     ->toBeInstanceOf(VoiceCall::class);
 
 it('sets the recipients', function (): void {

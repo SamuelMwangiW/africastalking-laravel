@@ -9,8 +9,7 @@ class Dequeue implements Action
     public function __construct(
         public ?string $name = null,
         public ?string $phoneNumber = null
-    ) {
-    }
+    ) {}
 
     public static function make(
         ?string $name = null,
