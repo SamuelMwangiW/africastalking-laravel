@@ -58,8 +58,6 @@ class AfricastalkingServiceProvider extends PackageServiceProvider
                 abstract: AfricastalkingConnector::class,
                 concrete: fn() => new AfricastalkingConnector(),
             );
-
-            config()->set('saloon.integrations_path', 'vendor/samuelmwangiw/africastalking-laravel/src/Saloon');
         }
     }
 }
