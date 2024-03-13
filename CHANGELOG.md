@@ -2,6 +2,16 @@
 
 All notable changes to `africastalking-laravel` will be documented in this file.
 
+## v1.5.0 - 2024-03-13
+
+### What's Changed
+
+* Bump aglipanci/laravel-pint-action from 2.3.0 to 2.3.1 by @dependabot in https://github.com/SamuelMwangiW/africastalking-laravel/pull/88
+* Bump ramsey/composer-install from 2 to 3 by @dependabot in https://github.com/SamuelMwangiW/africastalking-laravel/pull/90
+* Laravel 11 by @SamuelMwangiW in https://github.com/SamuelMwangiW/africastalking-laravel/pull/89
+
+**Full Changelog**: https://github.com/SamuelMwangiW/africastalking-laravel/compare/v1.4.3...v1.5.0
+
 ## v1.4.3 - 2023-10-15
 
 wip
