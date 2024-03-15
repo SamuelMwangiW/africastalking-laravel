@@ -26,6 +26,7 @@ export default defineConfig({
     ],
     editLink: {
       pattern: 'https://github.com/SamuelMwangiW/africastalking-laravel/edit/add-docs/docs/:path'
-    }
+    },
+    lastUpdated: {}
   }
 })
