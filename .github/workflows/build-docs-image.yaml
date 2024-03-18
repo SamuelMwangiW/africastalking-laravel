@@ -24,11 +24,7 @@ jobs:
           username: ${{ github.repository_owner }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Build and push
-        uses: docker/build-push-action@v5
-        with:
-          context: .
-          platforms: linux/amd64,linux/arm64
-          push: true
-          tags: |
-            ghcr.io/samuelmwangiw/at-laravel-docs:latest
+      - name: 'Build Inventory Image'
+        run: |
+          docker build . --tag ghcr.io/samuelmwangiw/at-laravel-docs:latest
+          docker push ghcr.io/samuelmwangiw/at-laravel-docs:latest
