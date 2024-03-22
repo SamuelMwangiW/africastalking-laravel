@@ -1,0 +1,32 @@
+name: Build Docs Image & Deploy to GHCR
+
+on:
+  push:
+    branches:
+      - main
+      - add-docs
+  workflow_dispatch:
+
+jobs:
+  push-store-image:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: './docs'
+    steps:
+      - name: 'Checkout GitHub Action'
+        uses: actions/checkout@main
+
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: 'Build Inventory Image'
+        run: |
+          docker build . --tag ghcr.io/samuelmwangiw/at-laravel-docs:latest
+          docker build . --tag ghcr.io/samuelmwangiw/at-laravel-docs:${{ github.ref_name }}
+          docker push ghcr.io/samuelmwangiw/at-laravel-docs:latest
+          docker push ghcr.io/samuelmwangiw/at-laravel-docs:${{ github.ref_name }}
