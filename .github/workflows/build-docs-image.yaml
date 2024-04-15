@@ -26,7 +26,5 @@ jobs:
 
       - name: 'Build Inventory Image'
         run: |
-          docker build . --tag ghcr.io/samuelmwangiw/at-laravel-docs:latest
-          docker build . --tag ghcr.io/samuelmwangiw/at-laravel-docs:${{ github.ref_name }}
-          docker push ghcr.io/samuelmwangiw/at-laravel-docs:latest
-          docker push ghcr.io/samuelmwangiw/at-laravel-docs:${{ github.ref_name }}
+          docker build . --tag ghcr.io/samuelmwangiw/at-laravel-docs:latest --push
+          docker build . --tag ghcr.io/samuelmwangiw/at-laravel-docs:${{ github.ref_name }} --push
