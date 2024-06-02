@@ -28,7 +28,7 @@ it('Downloading recording dispatches DownloadCallRecording job', function (array
     Bus::assertDispatched(
         command: DownloadCallRecording::class,
         callback: fn(DownloadCallRecording $job) => $job->url === data_get($notification, 'recordingUrl') &&
-            $job->callSessionId === data_get($notification, 'sessionId')
+            $job->callSessionId === data_get($notification, 'sessionId'),
     );
 })->with('voice-event-notification-with-recording');
 
@@ -127,8 +127,8 @@ it('dispatches an event after downloading a recording', function (string $url): 
     Event::assertDispatched(
         event: CallRecordingDownloaded::class,
         callback: fn(
-            CallRecordingDownloaded $event
-        ) => $event->recordingUrl === $url && 'sessionId' === $event->sessionId
+            CallRecordingDownloaded $event,
+        ) => $event->recordingUrl === $url && 'sessionId' === $event->sessionId,
     );
 })->with([
     'https://example.com/Free_Test_Data_100KB_MP3.mp3',
@@ -148,8 +148,8 @@ it('dispatches an event after download failed', function (string $url): void {
     Event::assertDispatched(
         event: RecordingDownloadFailed::class,
         callback: fn(
-            RecordingDownloadFailed $event
-        ) => $event->recordingUrl === $url && 'sessionId' === $event->sessionId
+            RecordingDownloadFailed $event,
+        ) => $event->recordingUrl === $url && 'sessionId' === $event->sessionId,
     );
 })->with([
     'https://example.com/Free_Test_Data_100KB_MP3.mp3',

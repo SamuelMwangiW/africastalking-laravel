@@ -138,7 +138,7 @@ class Message implements DTOContract
 
         if ( ! $response->json('SMSMessageData.Recipients')) {
             throw AfricastalkingException::messageSendingFailed(
-                message: $response->json('SMSMessageData.Message')
+                message: $response->json('SMSMessageData.Message'),
             );
         }
 
@@ -207,7 +207,7 @@ class Message implements DTOContract
 
         return array_merge(
             array_filter($data),
-            ['from' => $this->from(), 'bulkSMSMode' => $this->bulkSMSMode]
+            ['from' => $this->from(), 'bulkSMSMode' => $this->bulkSMSMode],
         );
     }
 }

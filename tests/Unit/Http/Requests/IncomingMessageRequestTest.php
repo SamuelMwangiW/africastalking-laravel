@@ -12,9 +12,9 @@ it('validates request', function (int $networkCode, array $data): void {
     $validator = Validator::make(
         array_merge(
             $data,
-            ['networkCode' => $networkCode]
+            ['networkCode' => $networkCode],
         ),
-        $request->rules()
+        $request->rules(),
     );
 
     expect($validator)
@@ -26,8 +26,8 @@ it('retrieves request data', function (int $networkCode, array $data): void {
     $request = new IncomingMessageRequest(
         request: array_merge(
             $data,
-            ['networkCode' => $networkCode]
-        )
+            ['networkCode' => $networkCode],
+        ),
     );
 
     expect($request)

@@ -38,14 +38,14 @@ it('can chain actions fluently')
             ->say('Hey and welcome to Unicorn bank.')
             ->getDigits(
                 say: 'Enter your account followed by the hash key',
-                finishOnKey: '#'
+                finishOnKey: '#',
             )->dial(['+2547123000', 'test@sip.ke.africastalking.com'])
             ->play('https://example.com/playback.wav')
             ->record('Please be nice, you are being recorded')
             ->redirect('https://example.com/redirect.jsp')
-            ->getResponse()
+            ->getResponse(),
     )->toBe(
-        '<?xml version="1.0" encoding="UTF-8"?><Response><Say>Hey and welcome to Unicorn bank.</Say><GetDigits finishOnKey="#"><Say>Enter your account followed by the hash key</Say></GetDigits><Dial phoneNumbers="+2547123000,test@sip.ke.africastalking.com" sequential="false" record="false"/><Play url="https://example.com/playback.wav"/><Record><Say>Please be nice, you are being recorded</Say></Record><Redirect>https://example.com/redirect.jsp</Redirect></Response>'
+        '<?xml version="1.0" encoding="UTF-8"?><Response><Say>Hey and welcome to Unicorn bank.</Say><GetDigits finishOnKey="#"><Say>Enter your account followed by the hash key</Say></GetDigits><Dial phoneNumbers="+2547123000,test@sip.ke.africastalking.com" sequential="false" record="false"/><Play url="https://example.com/playback.wav"/><Record><Say>Please be nice, you are being recorded</Say></Record><Redirect>https://example.com/redirect.jsp</Redirect></Response>',
     );
 
 it('can chain synthesized speech actions fluently')
@@ -57,11 +57,11 @@ it('can chain synthesized speech actions fluently')
                     ->emphasis(' where we treat you ')
                     ->bleep('very nicely')
                     ->sayAsOrdinal('SAP')
-                    ->sayAsCurrency('$100', 'en-US')
+                    ->sayAsCurrency('$100', 'en-US'),
             )->play('https://example.com/playback.wav')
-            ->getResponse()
+            ->getResponse(),
     )->toBe(
-        '<?xml version="1.0" encoding="UTF-8"?><Response><Say><speak>Hey and welcome to Unicorn bank.<emphasis level="strong"> where we treat you </emphasis><say-as interpret-as="bleep">very nicely</say-as><say-as interpret-as="ordinal">SAP</say-as><say-as interpret-as="currency" language="en-US">$100</say-as></speak></Say><Play url="https://example.com/playback.wav"/></Response>'
+        '<?xml version="1.0" encoding="UTF-8"?><Response><Say><speak>Hey and welcome to Unicorn bank.<emphasis level="strong"> where we treat you </emphasis><say-as interpret-as="bleep">very nicely</say-as><say-as interpret-as="ordinal">SAP</say-as><say-as interpret-as="currency" language="en-US">$100</say-as></speak></Say><Play url="https://example.com/playback.wav"/></Response>',
     );
 
 it('can reject calls')
@@ -69,27 +69,27 @@ it('can reject calls')
         fn() => Africastalking::voice()
             ->play('We are closed at the moment, kindly call tomorrow')
             ->reject()
-            ->getResponse()
+            ->getResponse(),
     )->toBe(
-        '<?xml version="1.0" encoding="UTF-8"?><Response><Play url="We are closed at the moment, kindly call tomorrow"/><Reject/></Response>'
+        '<?xml version="1.0" encoding="UTF-8"?><Response><Play url="We are closed at the moment, kindly call tomorrow"/><Reject/></Response>',
     );
 
 it('can enqueue calls')
     ->expect(
         fn() => Africastalking::voice()
             ->queue('support')
-            ->getResponse()
+            ->getResponse(),
     )->toBe(
-        '<?xml version="1.0" encoding="UTF-8"?><Response><Enqueue name="support" /></Response>'
+        '<?xml version="1.0" encoding="UTF-8"?><Response><Enqueue name="support" /></Response>',
     );
 
 it('can dequeue calls')
     ->expect(
         fn() => Africastalking::voice()
             ->dequeue('support', '+254710000000')
-            ->getResponse()
+            ->getResponse(),
     )->toBe(
-        '<?xml version="1.0" encoding="UTF-8"?><Response><Dequeue name="support" phoneNumber="+254710000000" /></Response>'
+        '<?xml version="1.0" encoding="UTF-8"?><Response><Dequeue name="support" phoneNumber="+254710000000" /></Response>',
     );
 
 it('sets content-type to text/plain in the response', function (): void {
@@ -102,7 +102,7 @@ it('sets content-type to text/plain in the response', function (): void {
     expect($response)
         ->toBeInstanceOf(Response::class)
         ->content()->toBe(
-            '<?xml version="1.0" encoding="UTF-8"?><Response><GetDigits><Say>Please enter your account number</Say></GetDigits></Response>'
+            '<?xml version="1.0" encoding="UTF-8"?><Response><GetDigits><Say>Please enter your account number</Say></GetDigits></Response>',
         )
         ->headers->toBeInstanceOf(ResponseHeaderBag::class)
         ->headers->get('content-type')->toBe('application/xml');
@@ -110,7 +110,7 @@ it('sets content-type to text/plain in the response', function (): void {
 
 it('makes a call', function (string $phone): void {
     Saloon::fake([
-        CallRequest::class => MockResponse::fixture('voice/call-multiple')
+        CallRequest::class => MockResponse::fixture('voice/call-multiple'),
     ]);
 
     $response = africastalking()->voice()->call([$phone, '+254712345678', '+254202227436'])->send();
@@ -125,18 +125,18 @@ it('makes a call', function (string $phone): void {
 
 it('initiates a webrtc object')
     ->expect(
-        fn() => africastalking()->voice()->webrtc()
+        fn() => africastalking()->voice()->webrtc(),
     )->toBeInstanceOf(WebRTCToken::class);
 
 it('sets the client while initiating a webrtc object')
     ->expect(
-        fn() => africastalking()->voice()->webrtc('John.Doe')
+        fn() => africastalking()->voice()->webrtc('John.Doe'),
     )->toBeInstanceOf(WebRTCToken::class)
     ->clientName->toBe('John.Doe');
 
 it('sets the client for a webrtc object')
     ->expect(
-        fn() => africastalking()->voice()->webrtc()->for('John.Doe')
+        fn() => africastalking()->voice()->webrtc()->for('John.Doe'),
     )->toBeInstanceOf(WebRTCToken::class)
     ->clientName->toBe('John.Doe');
 
@@ -144,14 +144,14 @@ it('webrtc capability token not supported on sandbox')
     ->tap(fn() => config()->set('africastalking.username', 'sandbox'))
     ->throws(exception: Exception::class, exceptionMessage: 'WebRTC not supported on Sandbox environment')
     ->expect(
-        fn() => africastalking()->voice()->webrtc()->send()
+        fn() => africastalking()->voice()->webrtc()->send(),
     );
 
 it('requests a webrtc capability token', function (): void {
     config()->set('africastalking.username', 'not_sandbox');
 
     Saloon::fake([
-        CapabilityTokenRequest::class => MockResponse::fixture('voice/capability-token')
+        CapabilityTokenRequest::class => MockResponse::fixture('voice/capability-token'),
     ]);
 
     $response = africastalking()->voice()
@@ -171,7 +171,7 @@ it('WebRTC token has a token alias for send', function (): void {
     config()->set('africastalking.username', 'not_sandbox');
 
     Saloon::fake([
-        CapabilityTokenRequest::class => MockResponse::fixture('voice/capability-token')
+        CapabilityTokenRequest::class => MockResponse::fixture('voice/capability-token'),
     ]);
 
     $response = africastalking()->voice()
@@ -191,7 +191,7 @@ it('fetches the queue', function (): void {
     config()->set('africastalking.username', 'not_sandbox');
 
     Saloon::fake([
-        QueueStatusRequest::class => MockResponse::fixture('voice/queue-status')
+        QueueStatusRequest::class => MockResponse::fixture('voice/queue-status'),
     ]);
 
     $response = africastalking()->voice()
@@ -205,7 +205,7 @@ it('fetches the queue for a given number', function ($numbers): void {
     config()->set('africastalking.username', 'not_sandbox');
 
     Saloon::fake([
-        QueueStatusRequest::class => MockResponse::fixture('voice/queue-status')
+        QueueStatusRequest::class => MockResponse::fixture('voice/queue-status'),
     ]);
 
     $response = africastalking()->voice()
@@ -216,5 +216,5 @@ it('fetches the queue for a given number', function ($numbers): void {
     expect($response)->toBeArray();
 })->with([
     'string phone' => '+254711082000',
-    'array of numbers' => ['+254711082000', '+254711082111']
+    'array of numbers' => ['+254711082000', '+254711082111'],
 ]);

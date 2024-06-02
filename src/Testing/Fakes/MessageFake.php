@@ -26,7 +26,7 @@ class MessageFake extends Message
 
         return new SentMessageResponse(
             message: 'Sent to 1/1 Total Cost: KES 0.8000',
-            recipients: collect()
+            recipients: collect(),
         );
     }
 

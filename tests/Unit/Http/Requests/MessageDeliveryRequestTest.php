@@ -12,7 +12,7 @@ it('validates request', function (int $networkCode, string $status, string $reas
 
     $data = array_merge(
         ['status' => $status, 'failureReason' => $reason, 'networkCode' => $networkCode],
-        $data
+        $data,
     );
 
     $validator = Validator::make($data, $request->rules());
@@ -24,7 +24,7 @@ it('validates request', function (int $networkCode, string $status, string $reas
 it('retrieves request data', function (string $status, string $reason, int $network, array $data): void {
     $data = array_merge(
         ['status' => $status, 'failureReason' => $reason, 'networkCode' => $network],
-        $data
+        $data,
     );
 
     $request = new MessageDeliveryRequest(request: $data);

@@ -31,7 +31,7 @@ it('can construct an AccountDTO class', function (): void {
 
 it('can construct an Account using AccountFactory', function (): void {
     $account = AccountFactory::make(
-        ['UserData' => ['balance' => 'UGX 9876.00']]
+        ['UserData' => ['balance' => 'UGX 9876.00']],
     );
 
     expect($account)
@@ -42,7 +42,7 @@ it('can construct an Account using AccountFactory', function (): void {
 
 test('AccountFactory defaults to USD for unknown currency', function (): void {
     $account = AccountFactory::make(
-        ['UserData' => ['balance' => 'KPW 9876.00']]
+        ['UserData' => ['balance' => 'KPW 9876.00']],
     );
 
     expect($account)

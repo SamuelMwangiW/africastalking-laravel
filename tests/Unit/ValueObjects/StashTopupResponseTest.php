@@ -10,7 +10,7 @@ it('can be constructed')
     ->expect(fn() => new StashTopupResponse(
         id: 'id',
         status: Status::SENT,
-        description: 'description'
+        description: 'description',
     ))
     ->toBeInstanceOf(StashTopupResponse::class)
     ->id->toBe('id')
@@ -22,7 +22,7 @@ it('can be constructed statically')
             'transactionId' => 'id',
             'status' => Status::SENT->value,
             'description' => 'description',
-        ]
+        ],
     ))
     ->toBeInstanceOf(StashTopupResponse::class)
     ->id->toBe('id')
@@ -32,7 +32,7 @@ it('implements DTO contract')
     ->expect(fn() => new StashTopupResponse(
         id: 'id',
         status: Status::SENT,
-        description: 'description'
+        description: 'description',
     ))
     ->toBeInstanceOf(DTOContract::class);
 
@@ -40,7 +40,7 @@ it('can be cast to array')
     ->expect(fn() => new StashTopupResponse(
         id: 'id',
         status: Status::SENT,
-        description: 'description'
+        description: 'description',
     ))
     ->__toArray()->toBeArray()->toMatchArray(['id' => 'id','description' => 'description']);
 
@@ -48,7 +48,7 @@ it('can be cast to string', function (): void {
     $object = new StashTopupResponse(
         id: 'id',
         status: Status::SENT,
-        description: 'description'
+        description: 'description',
     );
 
     expect((string) $object)

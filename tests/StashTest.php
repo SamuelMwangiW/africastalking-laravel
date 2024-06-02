@@ -21,33 +21,33 @@ it('can be constructed')->expect(fn() => $this->subject)->toBeInstanceOf(Stash::
 
 it('can set amount fluently', function (): void {
     expect(
-        $this->subject->amount(1000)
+        $this->subject->amount(1000),
     )->getAmount()->toBeInt()->toBe(1000);
 });
 
 it('can set string currency fluently', function (string $currency): void {
     expect(
-        $this->subject->currency($currency)
+        $this->subject->currency($currency),
     )->getCurrency()->toBeInstanceOf(Currency::class)
         ->getCurrency()->value->toBe($currency);
 })->with('currencies');
 
 it('can set object currency fluently', function (string $currency): void {
     expect(
-        $this->subject->currency(Currency::from($currency))
+        $this->subject->currency(Currency::from($currency)),
     )->getCurrency()->toBeInstanceOf(Currency::class)
         ->getCurrency()->value->toBe($currency);
 })->with('currencies');
 
 it('can set metadata fluently', function (): void {
     expect(
-        $this->subject->metadata(['foo' => 'bar'])
+        $this->subject->metadata(['foo' => 'bar']),
     )->getMetadata()->toBe(['foo' => 'bar']);
 });
 
 it('can set the productName fluently', function (): void {
     expect(
-        $this->subject->product('fooBarProduct')
+        $this->subject->product('fooBarProduct'),
     )->getProductName()->toBe('fooBarProduct');
 });
 
@@ -67,7 +67,7 @@ it('overrides productName values in config', function (): void {
 
 it('can topup stash via send', function (): void {
     Saloon::fake([
-        StashTopupRequest::class => MockResponse::fixture('payments/stash-topup')
+        StashTopupRequest::class => MockResponse::fixture('payments/stash-topup'),
     ]);
 
     $results = $this->subject->send(currency: 'KES', amount: 100);
@@ -79,7 +79,7 @@ it('can topup stash via send', function (): void {
 
 it('can topup stash', function (): void {
     Saloon::fake([
-        StashTopupRequest::class => MockResponse::fixture('payments/stash-topup')
+        StashTopupRequest::class => MockResponse::fixture('payments/stash-topup'),
     ]);
 
     $results = $this->subject->topup(currency: 'KES', amount: 100);

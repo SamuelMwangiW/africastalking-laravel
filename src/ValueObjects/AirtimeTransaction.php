@@ -31,7 +31,7 @@ class AirtimeTransaction implements Arrayable, DTOContract
     public function __toString(): string
     {
         return strval(
-            json_encode($this->__toArray())
+            json_encode($this->__toArray()),
         );
     }
 

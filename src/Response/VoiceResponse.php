@@ -56,7 +56,7 @@ class VoiceResponse implements Responsable
             finishOnKey: $finishOnKey,
             timeout: $timeout,
             numDigits: $numDigits,
-            callbackUrl: $callbackUrl
+            callbackUrl: $callbackUrl,
         )->build();
 
         return $this;
@@ -78,7 +78,7 @@ class VoiceResponse implements Responsable
             maxLength: $maxLength,
             playBeep: $playBeep,
             trimSilence: $trimSilence,
-            callbackUrl: $callbackUrl
+            callbackUrl: $callbackUrl,
         )->build();
 
         return $this;

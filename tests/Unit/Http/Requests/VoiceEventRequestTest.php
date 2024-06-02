@@ -9,7 +9,7 @@ it('validates request', function (string $direction, array $data): void {
     $request = new VoiceEventRequest();
     $validator = Validator::make(
         array_merge(['direction' => $direction], $data),
-        $request->rules()
+        $request->rules(),
     );
 
     expect($validator)

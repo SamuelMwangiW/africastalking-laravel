@@ -12,9 +12,9 @@ it('validates request', function (int $networkCode, string $status, array $data)
     $validator = Validator::make(
         array_merge(
             $data,
-            ['networkCode' => $networkCode, 'status' => $status]
+            ['networkCode' => $networkCode, 'status' => $status],
         ),
-        $request->rules()
+        $request->rules(),
     );
 
     expect($validator)
@@ -25,8 +25,8 @@ it('retrieves request data', function (int $networkCode, string $status, array $
     $request = new UssdEventRequest(
         request: array_merge(
             $data,
-            ['networkCode' => $networkCode, 'status' => $status]
-        )
+            ['networkCode' => $networkCode, 'status' => $status],
+        ),
     );
 
     expect($request)

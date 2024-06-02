@@ -9,7 +9,7 @@ it('validates request', function (string $provider, array $data): void {
     $request = new MobileC2BValidationRequest();
     $validator = Validator::make(
         array_merge(['provider' => $provider], $data),
-        $request->rules()
+        $request->rules(),
     );
 
     expect($validator)

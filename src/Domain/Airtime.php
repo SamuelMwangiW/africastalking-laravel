@@ -107,7 +107,7 @@ class Airtime
     private function recipients(): string
     {
         return (string) json_encode(
-            $this->recipients->map(fn(AirtimeTransaction $recipient) => $recipient->toArray())->toArray()
+            $this->recipients->map(fn(AirtimeTransaction $recipient) => $recipient->toArray())->toArray(),
         );
     }
 

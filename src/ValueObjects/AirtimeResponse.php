@@ -34,7 +34,7 @@ class AirtimeResponse implements DTOContract
             numSent: $response->json('numSent'),
             responses: $response->collect('responses')
                 ->map(
-                    fn(array $response) => AirtimeRecipientResponse::make($response)
+                    fn(array $response) => AirtimeRecipientResponse::make($response),
                 ),
         );
     }

@@ -10,17 +10,17 @@ use SamuelMwangiW\Africastalking\ValueObjects\Balance;
 
 it('can be resolved')
     ->expect(
-        fn() => app(Wallet::class)
+        fn() => app(Wallet::class),
     )->toBeInstanceOf(Wallet::class);
 
 it('can be resolved via helper')
     ->expect(
-        fn() => africastalking()->wallet()
+        fn() => africastalking()->wallet(),
     )->toBeInstanceOf(Wallet::class);
 
 it('can fetch balance', function (): void {
     Saloon::fake([
-        WalletBalanceRequest::class => MockResponse::fixture('payments/wallet')
+        WalletBalanceRequest::class => MockResponse::fixture('payments/wallet'),
     ]);
 
     $balance = app(Wallet::class)->balance();
@@ -31,7 +31,7 @@ it('can fetch balance', function (): void {
 
 it('can fetch balance via helper', function (): void {
     Saloon::fake([
-        WalletBalanceRequest::class => MockResponse::fixture('payments/wallet')
+        WalletBalanceRequest::class => MockResponse::fixture('payments/wallet'),
     ]);
 
     $balance = africastalking()->wallet()->balance();

@@ -11,7 +11,7 @@ it('respects the DTO Contract', function (string $phone, string $currency, calla
     $transaction = new AirtimeTransaction(
         phoneNumber: PhoneNumber::make($phone),
         currencyCode: Currency::from($currency),
-        amount: value($amount)
+        amount: value($amount),
     );
 
     expect($transaction)
@@ -22,7 +22,7 @@ it('can construct an object', function (string $phone, string $currency, callabl
     $transaction = new AirtimeTransaction(
         phoneNumber: PhoneNumber::make($phone),
         currencyCode: Currency::from($currency),
-        amount: value($amount)
+        amount: value($amount),
     );
 
     expect($transaction)
@@ -35,7 +35,7 @@ it('can be cast to string', function (string $phone, string $currency): void {
     $transaction = new AirtimeTransaction(
         phoneNumber: PhoneNumber::make($phone),
         currencyCode: Currency::from($currency),
-        amount: 1000
+        amount: 1000,
     );
 
     $transactionString = '{"phoneNumber":"'.$phone.'","amount":"'.$currency.' 1000"}';
@@ -48,7 +48,7 @@ it('can be encoded to string', function (string $phone, string $currency): void 
     $transaction = new AirtimeTransaction(
         PhoneNumber::make($phone),
         Currency::from($currency),
-        1000
+        1000,
     );
 
     $transactionString = '{"phoneNumber":"'.$phone.'","amount":"'.$currency.' 1000"}';
@@ -61,7 +61,7 @@ it('can be cast to array', function (string $phone, string $currency, callable $
     $transaction = new AirtimeTransaction(
         phoneNumber: PhoneNumber::make($phone),
         currencyCode: Currency::from($currency),
-        amount: value($amount)
+        amount: value($amount),
     );
 
     expect((array) $transaction)

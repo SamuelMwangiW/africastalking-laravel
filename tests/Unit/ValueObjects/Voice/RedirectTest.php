@@ -10,12 +10,12 @@ it('implements the say action')
 
 it('builds to xml')
     ->expect(
-        Redirect::make('http://example.com/callback')->build()
+        Redirect::make('http://example.com/callback')->build(),
     )->toBe('<Redirect>http://example.com/callback</Redirect>');
 
 it('updates the url')
     ->expect(
         Redirect::make('should-be-updated')
             ->url('http://example.com/updated')
-            ->build()
+            ->build(),
     )->toBe('<Redirect>http://example.com/updated</Redirect>');

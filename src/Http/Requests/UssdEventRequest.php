@@ -47,7 +47,7 @@ class UssdEventRequest extends FormRequest
     protected function prepareForValidation(): void
     {
         $this->merge([
-            'networkCode' => $this->integer('networkCode')
+            'networkCode' => $this->integer('networkCode'),
         ]);
     }
 
@@ -74,7 +74,7 @@ class UssdEventRequest extends FormRequest
     public function duration(): CarbonInterval
     {
         return CarbonInterval::microseconds(
-            $this->get('durationInMillis', 0)
+            $this->get('durationInMillis', 0),
         );
     }
 }

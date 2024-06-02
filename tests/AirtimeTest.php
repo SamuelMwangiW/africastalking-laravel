@@ -25,7 +25,7 @@ it('can add a recipient', function (string $phone, string $currency, int $amount
         ->to(
             phoneNumber: $phone,
             currencyCode: $currency,
-            amount: $amount
+            amount: $amount,
         );
 
     expect($service)
@@ -57,7 +57,7 @@ it('can add a recipient from a transaction object', function (AirtimeTransaction
             fn($recipient) => $recipient
                 ->phoneNumber->toBe($transaction->phoneNumber)
                 ->currencyCode->toBe($transaction->currencyCode)
-                ->amount->toBeInt()
+                ->amount->toBeInt(),
         );
 })->with('airtime-transactions');
 
@@ -67,7 +67,7 @@ it('can add a recipient using currency Enum', function (string $currencyCode): v
         ->to(
             phoneNumber: $phoneNumber = fake()->e164PhoneNumber(),
             currencyCode: Currency::from($currencyCode),
-            amount: $amount = fake()->numberBetween(500, 1000)
+            amount: $amount = fake()->numberBetween(500, 1000),
         );
 
     expect($service)
@@ -76,7 +76,7 @@ it('can add a recipient using currency Enum', function (string $currencyCode): v
             fn($recipient) => $recipient
                 ->phoneNumber->number->toBe($phoneNumber)
                 ->currencyCode->value->toBe($currencyCode)
-                ->amount->toBeInt()->toBe($amount)
+                ->amount->toBeInt()->toBe($amount),
         );
 })->with('currencies');
 
@@ -85,12 +85,12 @@ it('can add multiple recipients', function (string $phone, string $currency, cal
         ->add(
             phoneNumber: $phone,
             currencyCode: $currency,
-            amount: value($amount)
+            amount: value($amount),
         )
         ->add(
             phoneNumber: '+256706123456',
             currencyCode: $currency,
-            amount: value($amount)
+            amount: value($amount),
         );
 
     expect($service)
@@ -100,7 +100,7 @@ it('can add multiple recipients', function (string $phone, string $currency, cal
             fn($recipient) => $recipient
                 ->phoneNumber->toBeInstanceOf(PhoneNumber::class)
                 ->currencyCode->toBeInstanceOf(Currency::class)
-                ->amount->toBeInt()
+                ->amount->toBeInt(),
         );
 })->with('phone-numbers', 'currencies', 'airtime-amount');
 
@@ -109,7 +109,7 @@ it('throws an exception for invalid currency', function (string $phone, callable
         ->to(
             phoneNumber: $phone,
             currencyCode: 'KPW',
-            amount: value($amount)
+            amount: value($amount),
         );
 })->with('phone-numbers', 'airtime-amount')->throws(AfricastalkingException::class);
 
@@ -175,6 +175,6 @@ it('sends airtime to multiple recipients', function (callable $amount, string $p
         ->toBeInstanceOf(Collection::class)
         ->toHaveCount(2)
         ->each(
-            fn(Expectation $transaction) => $transaction->toBeInstanceOf(AirtimeRecipientResponse::class)
+            fn(Expectation $transaction) => $transaction->toBeInstanceOf(AirtimeRecipientResponse::class),
         );
 })->with('airtime-amount', 'phone-numbers');

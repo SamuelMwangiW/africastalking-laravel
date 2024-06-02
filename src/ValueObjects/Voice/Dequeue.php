@@ -8,12 +8,12 @@ class Dequeue implements Action
 {
     public function __construct(
         public ?string $name = null,
-        public ?string $phoneNumber = null
+        public ?string $phoneNumber = null,
     ) {}
 
     public static function make(
         ?string $name = null,
-        ?string $phoneNumber = null
+        ?string $phoneNumber = null,
     ): Dequeue {
         return new Dequeue(
             name: $name,

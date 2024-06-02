@@ -28,14 +28,14 @@ class StashTopupRequest extends BaseRequest implements HasBody
     {
         return array_merge(
             $this->data,
-            ['username' => $this->username()]
+            ['username' => $this->username()],
         );
     }
 
     public function createDtoFromResponse(Response $response): StashTopupResponse
     {
         return StashTopupResponse::make(
-            attributes: $response->json()
+            attributes: $response->json(),
         );
     }
 }

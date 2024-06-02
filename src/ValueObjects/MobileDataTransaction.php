@@ -32,7 +32,7 @@ class MobileDataTransaction
             validity: $validity,
             unit: $unit,
             isPromoBundle: $isPromoBundle,
-            meta: $meta
+            meta: $meta,
         );
     }
 

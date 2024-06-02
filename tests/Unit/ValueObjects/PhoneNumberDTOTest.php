@@ -7,7 +7,7 @@ use SamuelMwangiW\Africastalking\ValueObjects\PhoneNumber;
 
 it('respects the DTOContract ', function (string $phone): void {
     $account = new PhoneNumber(
-        number: $phone
+        number: $phone,
     );
 
     expect($account)
@@ -16,7 +16,7 @@ it('respects the DTOContract ', function (string $phone): void {
 
 it('can be constructed', function (string $phone): void {
     $account = new PhoneNumber(
-        number: $phone
+        number: $phone,
     );
 
     expect($account)

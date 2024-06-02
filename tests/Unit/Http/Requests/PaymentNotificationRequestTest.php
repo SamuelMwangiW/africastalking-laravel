@@ -14,7 +14,7 @@ it('validates request', function (string $provider, string $category, string $so
     $request = new PaymentNotificationRequest();
     $data = array_merge(
         ['provider' => $provider, 'category' => $category, 'sourceType' => $source, 'destinationType' => $source, 'status' => $status],
-        $data
+        $data,
     );
 
     $validator = Validator::make($data, $request->rules());
@@ -27,8 +27,8 @@ it('retrieves request data', function (string $provider, string $category, strin
     $request = new PaymentNotificationRequest(
         request: array_merge(
             ['provider' => $provider, 'category' => $category, 'sourceType' => $source, 'destinationType' => $source, 'status' => $status],
-            $data
-        )
+            $data,
+        ),
     );
 
     expect($request)
