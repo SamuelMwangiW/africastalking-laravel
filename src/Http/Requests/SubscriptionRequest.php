@@ -26,7 +26,7 @@ class SubscriptionRequest extends FormRequest
     public function type(): UpdateType
     {
         return UpdateType::from(
-            $this->get('updateType')
+            $this->get('updateType'),
         );
     }
 }

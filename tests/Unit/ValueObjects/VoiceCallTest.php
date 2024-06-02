@@ -17,13 +17,13 @@ it('resolves the Voice class')
 
 it('sets the recipients', function (): void {
     Saloon::fake([
-        CallRequest::class => MockResponse::fixture('voice/call')
+        CallRequest::class => MockResponse::fixture('voice/call'),
     ]);
 
     expect(
         Africastalking::voice()
             ->call('+254720123123')
-            ->done()
+            ->done(),
     )->toBeInstanceOf(VoiceCallResponse::class)->toHaveKeys(['recipients', 'errorMessage']);
 });
 

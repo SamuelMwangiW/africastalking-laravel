@@ -25,7 +25,7 @@ enum Fakable: string
     {
         app()->singleton(
             abstract: $this->value,
-            concrete: $this->implementation()
+            concrete: $this->implementation(),
         );
     }
 

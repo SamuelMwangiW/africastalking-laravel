@@ -34,7 +34,7 @@ class BalanceRequest extends BaseRequest
     public function createDtoFromResponse(Response $response): Balance
     {
         return AccountFactory::make(
-            data: $response->json()
+            data: $response->json(),
         );
     }
 }

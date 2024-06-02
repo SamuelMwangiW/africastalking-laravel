@@ -11,7 +11,7 @@ it('validates request', function (array $data, string $status): void {
 
     $validator = Validator::make(
         array_merge($data, ['status' => $status]),
-        $request->rules()
+        $request->rules(),
     );
 
     expect($validator)

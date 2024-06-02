@@ -16,9 +16,9 @@ it('builds to xml')
         Enqueue::make(
             name: 'pest',
             holdMusic: 'http://mymediafile.com/playme.mp3',
-        )->build()
+        )->build(),
     )->toBe(
-        '<Enqueue name="pest" holdMusic="http://mymediafile.com/playme.mp3" />'
+        '<Enqueue name="pest" holdMusic="http://mymediafile.com/playme.mp3" />',
     );
 
 
@@ -26,12 +26,12 @@ it('sets the queue name')
     ->expect(
         Enqueue::make()
             ->queue('laravel')
-            ->build()
+            ->build(),
     )->toBe('<Enqueue name="laravel" />');
 
 it('overrides the queue name passed')
     ->expect(
         Enqueue::make(name: 'javascript')
             ->queue('php')
-            ->build()
+            ->build(),
     )->toBe('<Enqueue name="php" />');

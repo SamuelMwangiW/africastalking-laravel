@@ -16,35 +16,35 @@ it('builds to xml')
             timeout: 5,
             numDigits: 10,
             callbackUrl: 'https://example.com/callback',
-        )->build()
+        )->build(),
     )->toBe(
-        '<GetDigits timeout="5" finishOnKey="#" callbackUrl="https://example.com/callback" numDigits="10"><Say>Here be dragons</Say></GetDigits>'
+        '<GetDigits timeout="5" finishOnKey="#" callbackUrl="https://example.com/callback" numDigits="10"><Say>Here be dragons</Say></GetDigits>',
     );
 
 it('can get digits with only the say action message')
     ->expect(
-        GetDigits::make('Test message here')->build()
+        GetDigits::make('Test message here')->build(),
     )->toBe('<GetDigits><Say>Test message here</Say></GetDigits>');
 
 it('sets the finishOnKey fluently')
     ->expect(
         GetDigits::make('Test message here')
             ->finishOnKey('*')
-            ->build()
+            ->build(),
     )->toBe('<GetDigits finishOnKey="*"><Say>Test message here</Say></GetDigits>');
 
 it('sets the numDigits fluently')
     ->expect(
         GetDigits::make('Test message here')
             ->numDigits(12)
-            ->build()
+            ->build(),
     )->toBe('<GetDigits numDigits="12"><Say>Test message here</Say></GetDigits>');
 
 it('sets the timeout fluently')
     ->expect(
         GetDigits::make('Test message here')
             ->timeout(100)
-            ->build()
+            ->build(),
     )->toBe('<GetDigits timeout="100"><Say>Test message here</Say></GetDigits>');
 
 
@@ -52,5 +52,5 @@ it('sets the callbackUrl fluently')
     ->expect(
         GetDigits::make('Some Test message here')
             ->callbackUrl('https://test.example.com/callback')
-            ->build()
+            ->build(),
     )->toBe('<GetDigits callbackUrl="https://test.example.com/callback"><Say>Some Test message here</Say></GetDigits>');

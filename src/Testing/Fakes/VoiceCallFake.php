@@ -40,7 +40,7 @@ class VoiceCallFake extends VoiceCall
         return new VoiceCallDTO(
             from: $this->from(),
             to: $this->recipients,
-            clientRequestId: $this->clientRequestId
+            clientRequestId: $this->clientRequestId,
         );
     }
 }

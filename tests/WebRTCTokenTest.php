@@ -65,7 +65,7 @@ it('requests a webrtc capability token', function (): void {
     config()->set('africastalking.username', 'not_sandbox');
 
     Saloon::fake([
-        CapabilityTokenRequest::class => MockResponse::fixture('voice/capability-token')
+        CapabilityTokenRequest::class => MockResponse::fixture('voice/capability-token'),
     ]);
 
     $response = africastalking()->voice()

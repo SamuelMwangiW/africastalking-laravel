@@ -16,9 +16,9 @@ it('builds to xml')
         Dequeue::make(
             name: 'pest',
             phoneNumber: '+254722000000',
-        )->build()
+        )->build(),
     )->toBe(
-        '<Dequeue name="pest" phoneNumber="+254722000000" />'
+        '<Dequeue name="pest" phoneNumber="+254722000000" />',
     );
 
 
@@ -26,7 +26,7 @@ it('sets the phone number from config', function (): void {
     config()->set('africastalking.voice.from', '+254733000000');
 
     expect(
-        Dequeue::make()->build()
+        Dequeue::make()->build(),
     )->toBe('<Dequeue phoneNumber="+254733000000" />');
 });
 
@@ -34,5 +34,5 @@ it('overrides the queue name passed')
     ->expect(
         fn() => Dequeue::make(name: 'javascript', phoneNumber: '+1234')
             ->queue('php')
-            ->build()
+            ->build(),
     )->toBe('<Dequeue name="php" phoneNumber="+1234" />');

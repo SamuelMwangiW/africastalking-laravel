@@ -16,7 +16,7 @@ it('fakes requests', function (): void {
             'lifeTimeSec' => '86400',
             'outgoing' => true,
             'token' => 'ATCAPtkn_somerandomtexthere',
-        ], 200)
+        ], 200),
     ]);
 
     $connector = new TestConnector();

@@ -49,7 +49,7 @@ class DownloadCallRecording implements ShouldBeUnique, ShouldQueue
         $path = $this->path();
 
         Storage::disk(
-            $this->disk()
+            $this->disk(),
         )->put($path, $file);
 
         CallRecordingDownloaded::dispatch($this->callSessionId, $this->url, $path, $this->disk());

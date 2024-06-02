@@ -28,7 +28,7 @@ it('can be resolved via bundles alias')
 
 it('sends idempotency requests')
     ->expect(
-        fn() => app(MobileData::class)->idempotent('key_123')
+        fn() => app(MobileData::class)->idempotent('key_123'),
     )->toBeInstanceOf(MobileData::class)
     ->idempotencyKey()->toBe('key_123');
 
@@ -73,7 +73,7 @@ it('sets the recipients fluently', function (string $phone): void {
     $object->to(
         phoneNumber: $phone,
         quantity: 7,
-        validity: BundlesValidity::DAILY
+        validity: BundlesValidity::DAILY,
     );
 
     expect($object)
@@ -89,17 +89,17 @@ it('sets multiple recipients', function (): void {
         ->to(
             phoneNumber: fake()->e164PhoneNumber(),
             quantity: 7,
-            validity: BundlesValidity::DAILY
+            validity: BundlesValidity::DAILY,
         )->to(
             phoneNumber: fake()->e164PhoneNumber(),
             quantity: 1,
             validity: BundlesValidity::WEEKLY,
-            unit: BundlesUnit::GB
+            unit: BundlesUnit::GB,
         )->to(
             phoneNumber: fake()->e164PhoneNumber(),
             quantity: 5,
             validity: BundlesValidity::MONTHLY,
-            unit: BundlesUnit::GB
+            unit: BundlesUnit::GB,
         );
 
     expect($object)
@@ -118,7 +118,7 @@ it('sends Data bundles request', function (string $phone): void {
         ->to(
             phoneNumber: $phone,
             quantity: 7,
-            validity: BundlesValidity::DAILY
+            validity: BundlesValidity::DAILY,
         )
         ->idempotent(key: fake()->uuid())
         ->send();
@@ -139,17 +139,17 @@ it('sends Data bundles request to multiple users', function (): void {
         ->to(
             phoneNumber: '+254722000000',
             quantity: 7,
-            validity: BundlesValidity::DAILY
+            validity: BundlesValidity::DAILY,
         )->to(
             phoneNumber: '+254720000000',
             quantity: 1,
             validity: BundlesValidity::WEEKLY,
-            unit: BundlesUnit::GB
+            unit: BundlesUnit::GB,
         )->to(
             phoneNumber: '+254726000000',
             quantity: 10,
             validity: BundlesValidity::MONTHLY,
-            unit: BundlesUnit::GB
+            unit: BundlesUnit::GB,
         )->idempotent(key: fake()->uuid())
         ->send();
 
@@ -169,7 +169,7 @@ it('defaults values for an invalid request', function (): void {
         ->to(
             phoneNumber: fake()->e164PhoneNumber(),
             quantity: 7,
-            validity: BundlesValidity::DAILY
+            validity: BundlesValidity::DAILY,
         )->idempotent(key: fake()->uuid())
         ->send();
 

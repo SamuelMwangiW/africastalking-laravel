@@ -8,12 +8,12 @@ class Enqueue implements Action
 {
     public function __construct(
         public ?string $name = null,
-        public ?string $holdMusic = null
+        public ?string $holdMusic = null,
     ) {}
 
     public static function make(
         ?string $name = null,
-        ?string $holdMusic = null
+        ?string $holdMusic = null,
     ): Enqueue {
         return new Enqueue(
             name: $name,

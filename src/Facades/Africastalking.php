@@ -19,7 +19,7 @@ class Africastalking extends Facade
     public static function fake(): void
     {
         collect(
-            Fakable::cases()
+            Fakable::cases(),
         )->each(fn(Fakable $fakable) => $fakable->fake());
 
         static::swap(new AfricastalkingFake());

@@ -67,7 +67,7 @@ class MobileData
             productName: $this->productName,
             recipients: $this->recipients
                 ->map(
-                    fn(MobileDataTransaction $transaction) => $transaction->toArray()
+                    fn(MobileDataTransaction $transaction) => $transaction->toArray(),
                 )->toArray(),
         );
 

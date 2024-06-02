@@ -20,7 +20,7 @@ class Money implements DTOContract
 
         return new Money(
             amount: floatval($parts[1]),
-            currency: Currency::from($parts[0])
+            currency: Currency::from($parts[0]),
         );
     }
 

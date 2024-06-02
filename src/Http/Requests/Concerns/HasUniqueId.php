@@ -12,7 +12,7 @@ trait HasUniqueId
     public function id(): string
     {
         return $this->get(
-            $this->idKey()
+            $this->idKey(),
         );
     }
 

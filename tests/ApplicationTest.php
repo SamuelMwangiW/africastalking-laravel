@@ -20,7 +20,7 @@ it('resolves the application class via alias')
 
 it('can fetch the application balance  via application()->balance()', function (): void {
     Saloon::fake([
-        BalanceRequest::class => MockResponse::fixture('application/balance')
+        BalanceRequest::class => MockResponse::fixture('application/balance'),
     ]);
 
     $balance = Africastalking::application()->balance();
@@ -32,7 +32,7 @@ it('can fetch the application balance  via application()->balance()', function (
 
 it('can fetch the application balance via application()->data()', function (): void {
     Saloon::fake([
-        BalanceRequest::class => MockResponse::fixture('application/balance')
+        BalanceRequest::class => MockResponse::fixture('application/balance'),
     ]);
 
     $balance = Africastalking::application()->data();

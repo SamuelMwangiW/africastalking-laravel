@@ -59,7 +59,7 @@ class IncomingMessageRequest extends FormRequest
     protected function prepareForValidation(): void
     {
         $this->merge([
-            'networkCode' => $this->integer('networkCode')
+            'networkCode' => $this->integer('networkCode'),
         ]);
     }
 

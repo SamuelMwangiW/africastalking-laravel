@@ -23,7 +23,7 @@ class AirtimeFake extends Base
             amount: 'KES 420',
             discount: 'KES 16.80',
             numSent: 1,
-            responses: collect([])
+            responses: collect([]),
         );
     }
 

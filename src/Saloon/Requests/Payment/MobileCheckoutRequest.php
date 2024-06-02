@@ -28,7 +28,7 @@ class MobileCheckoutRequest extends BaseRequest implements HasBody
     {
         return array_merge(
             $this->data,
-            ['username' => $this->username()]
+            ['username' => $this->username()],
         );
     }
 

@@ -48,7 +48,7 @@ it('throws an exception when notification has toAfricastalking()', function (): 
 
 it('sends a notification when toAfricastalking() returns string message', function (string $phone): void {
     Saloon::fake([
-        BulkSmsRequest::class => MockResponse::fixture('messaging/bulk/notification')
+        BulkSmsRequest::class => MockResponse::fixture('messaging/bulk/notification'),
     ]);
 
     $channel = app(AfricastalkingChannel::class);
@@ -67,7 +67,7 @@ it('sends a notification when toAfricastalking() returns string message', functi
 
 it('sends a notification when toAfricastalking() returns a message object', function (string $phone): void {
     Saloon::fake([
-        BulkSmsRequest::class => MockResponse::fixture('messaging/bulk/notification')
+        BulkSmsRequest::class => MockResponse::fixture('messaging/bulk/notification'),
     ]);
 
     $channel = app(AfricastalkingChannel::class);

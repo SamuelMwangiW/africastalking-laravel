@@ -33,7 +33,7 @@ class Voice
         return $this->forwardCallTo(
             object: app(VoiceResponse::class),
             method: $method,
-            parameters: $arguments
+            parameters: $arguments,
         );
     }
 }

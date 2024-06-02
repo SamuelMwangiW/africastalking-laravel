@@ -53,7 +53,7 @@ it('sets metadata', function (string $value): void {
 
 it('sends a Mobile Checkout Request', function (string $phone): void {
     Saloon::fake([
-        MobileCheckoutRequest::class => MockResponse::fixture('payments/mobile-checkout')
+        MobileCheckoutRequest::class => MockResponse::fixture('payments/mobile-checkout'),
     ]);
 
     $amount = random_int(10_000, 70_000);

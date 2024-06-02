@@ -18,7 +18,7 @@ class Say implements Action
     public static function make(
         string|callable      $message,
         bool        $playBeep = false,
-        string|null $voice = null
+        string|null $voice = null,
     ): Say {
         if (is_callable($message)) {
             $synthesisedSpeechParts = $message(new SynthesisedSpeech());

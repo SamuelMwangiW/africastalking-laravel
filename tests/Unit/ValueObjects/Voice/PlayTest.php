@@ -10,12 +10,12 @@ it('implements the say action')
 
 it('builds to xml')
     ->expect(
-        Play::make('http://example.com/callback')->build()
+        Play::make('http://example.com/callback')->build(),
     )->toBe('<Play url="http://example.com/callback"/>');
 
 it('updates the url')
     ->expect(
         Play::make('should-be-updated')
             ->url('http://example.com/updated')
-            ->build()
+            ->build(),
     )->toBe('<Play url="http://example.com/updated"/>');

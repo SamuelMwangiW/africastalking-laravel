@@ -18,7 +18,7 @@ class SendRequest extends BaseRequest implements HasBody
     public Service $service = Service::AIRTIME;
 
     public function __construct(
-        private readonly string $recipients
+        private readonly string $recipients,
     ) {}
 
     public function resolveEndpoint(): string

@@ -17,7 +17,7 @@ it('can send bulk message when from is not set', function (string $phone, string
     config()->set('africastalking.sms.from', null);
 
     Saloon::fake([
-        BulkSmsRequest::class => MockResponse::fixture('messaging/bulk/default-sender')
+        BulkSmsRequest::class => MockResponse::fixture('messaging/bulk/default-sender'),
     ]);
 
     $response = Africastalking::sms($message)
@@ -35,7 +35,7 @@ it('can send bulk message when from is not set', function (string $phone, string
 
 it('can send bulk message', function (string $phone, string $message): void {
     Saloon::fake([
-        BulkSmsRequest::class => MockResponse::fixture('messaging/bulk/with-sender')
+        BulkSmsRequest::class => MockResponse::fixture('messaging/bulk/with-sender'),
     ]);
 
     $response = Africastalking::sms($message)
@@ -53,7 +53,7 @@ it('can send bulk message', function (string $phone, string $message): void {
 
 it('can enqueue bulk message', function (string $phone, string $message): void {
     Saloon::fake([
-        BulkSmsRequest::class => MockResponse::fixture('messaging/bulk/with-enqueue')
+        BulkSmsRequest::class => MockResponse::fixture('messaging/bulk/with-enqueue'),
     ]);
 
     $response = Africastalking::sms($message)
@@ -73,7 +73,7 @@ it('can enqueue bulk message', function (string $phone, string $message): void {
 
 it('can send message without enqueue', function (string $phone, string $message): void {
     Saloon::fake([
-        BulkSmsRequest::class => MockResponse::fixture('messaging/bulk/without-enqueue')
+        BulkSmsRequest::class => MockResponse::fixture('messaging/bulk/without-enqueue'),
     ]);
 
     $response = Africastalking::sms($message)
@@ -94,7 +94,7 @@ it('can send message without enqueue', function (string $phone, string $message)
 
 it('can change message senderID', function (string $phone, string $message): void {
     Saloon::fake([
-        BulkSmsRequest::class => MockResponse::fixture('messaging/bulk/changed-sender')
+        BulkSmsRequest::class => MockResponse::fixture('messaging/bulk/changed-sender'),
     ]);
 
     $response = Africastalking::sms($message)
@@ -114,7 +114,7 @@ it('can change message senderID', function (string $phone, string $message): voi
 
 it('thows an exception for an invalid request', function (): void {
     Saloon::fake([
-        BulkSmsRequest::class => MockResponse::fixture('messaging/bulk/invalid-key')
+        BulkSmsRequest::class => MockResponse::fixture('messaging/bulk/invalid-key'),
     ]);
 
     config()->set('africastalking.api-key', 'invalid-key-here');
@@ -126,7 +126,7 @@ it('thows an exception for an invalid request', function (): void {
 
 it('can send premium messages', function (string $phone, string $message): void {
     Saloon::fake([
-        PremiumSmsRequest::class => MockResponse::fixture('messaging/premium/send')
+        PremiumSmsRequest::class => MockResponse::fixture('messaging/premium/send'),
     ]);
 
     $response = Africastalking::sms($message)
@@ -148,7 +148,7 @@ it('can send premium messages', function (string $phone, string $message): void 
 
 it('can send premium messages in bulk mode', function (string $phone, string $message): void {
     Saloon::fake([
-        PremiumSmsRequest::class => MockResponse::fixture('messaging/premium/bulk-mode')
+        PremiumSmsRequest::class => MockResponse::fixture('messaging/premium/bulk-mode'),
     ]);
 
     $response = Africastalking::sms($message)
@@ -171,7 +171,7 @@ it('can send premium messages in bulk mode', function (string $phone, string $me
 
 it('can send premium messages with a keyword', function (string $phone, string $message): void {
     Saloon::fake([
-        PremiumSmsRequest::class => MockResponse::fixture('messaging/premium/with-keyword')
+        PremiumSmsRequest::class => MockResponse::fixture('messaging/premium/with-keyword'),
     ]);
 
     $response = Africastalking::sms($message)
@@ -194,7 +194,7 @@ it('can send premium messages with a keyword', function (string $phone, string $
 
 it('can send premium messages with a linkid', function (string $phone, string $message): void {
     Saloon::fake([
-        PremiumSmsRequest::class => MockResponse::fixture('messaging/premium/with-linkid')
+        PremiumSmsRequest::class => MockResponse::fixture('messaging/premium/with-linkid'),
     ]);
 
     $response = Africastalking::sms($message)
@@ -217,7 +217,7 @@ it('can send premium messages with a linkid', function (string $phone, string $m
 
 it('throws an exception for invalid sender id', function (string $phone): void {
     Saloon::fake([
-        BulkSmsRequest::class => MockResponse::fixture('messaging/bulk/invalid-sender-id')
+        BulkSmsRequest::class => MockResponse::fixture('messaging/bulk/invalid-sender-id'),
     ]);
 
     Africastalking::sms('test message')

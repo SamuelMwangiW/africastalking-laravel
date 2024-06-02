@@ -48,7 +48,7 @@ class PaymentNotificationRequest extends FormRequest
     public function amount(): int
     {
         return intval(
-            str($this->get('value'))->after(' ')->value()
+            str($this->get('value'))->after(' ')->value(),
         );
     }
 
