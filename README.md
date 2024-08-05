@@ -593,13 +593,13 @@ namespace App\Notifications;
 
 use Illuminate\Notifications\Notification;
 use SamuelMwangiW\Africastalking\Facades\Africastalking;
-use SamuelMwangiW\Africastalking\Notifications\AfricastalkingChannel;
+use SamuelMwangiW\Africastalking\Notifications\AfricastalkingSmsChannel;
 
 class WelcomeNotification extends Notification
 {
     public function via($notifiable)
     {
-        return [AfricastalkingChannel::class];
+        return [AfricastalkingSmsChannel::class];
     }
 
     public function toAfricastalking($notifiable)

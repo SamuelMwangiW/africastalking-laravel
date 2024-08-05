@@ -5,7 +5,7 @@ declare(strict_types=1);
 use Saloon\Http\Faking\MockResponse;
 use Saloon\Laravel\Facades\Saloon;
 use SamuelMwangiW\Africastalking\Exceptions\AfricastalkingException;
-use SamuelMwangiW\Africastalking\Notifications\AfricastalkingChannel;
+use SamuelMwangiW\Africastalking\Notifications\AfricastalkingSmsChannel;
 use SamuelMwangiW\Africastalking\Saloon\Requests\Messaging\BulkSmsRequest;
 use SamuelMwangiW\Africastalking\Tests\Fixtures\BasicNotifiable;
 use SamuelMwangiW\Africastalking\Tests\Fixtures\BasicNotifiableNoRoute;
@@ -17,13 +17,13 @@ use SamuelMwangiW\Africastalking\ValueObjects\SentMessageRecipient;
 use SamuelMwangiW\Africastalking\ValueObjects\SentMessageResponse;
 
 it('can resolve', function (): void {
-    $channel = app(AfricastalkingChannel::class);
+    $channel = app(AfricastalkingSmsChannel::class);
 
-    expect($channel)->toBeInstanceOf(AfricastalkingChannel::class);
+    expect($channel)->toBeInstanceOf(AfricastalkingSmsChannel::class);
 });
 
 it('throws an exception when notifiable does not use trait', function (): void {
-    $channel = app(AfricastalkingChannel::class);
+    $channel = app(AfricastalkingSmsChannel::class);
     $notifiable = new BasicNotifiableNoTrait();
     $notification = new BasicNotificationReturnsString();
 
@@ -31,7 +31,7 @@ it('throws an exception when notifiable does not use trait', function (): void {
 })->throws(AfricastalkingException::class);
 
 it('throws an exception when notifiable has routeNotificationForAfricastalking()', function (): void {
-    $channel = app(AfricastalkingChannel::class);
+    $channel = app(AfricastalkingSmsChannel::class);
     $notifiable = new BasicNotifiableNoRoute();
     $notification = new BasicNotificationReturnsString();
 
@@ -39,7 +39,7 @@ it('throws an exception when notifiable has routeNotificationForAfricastalking()
 })->throws(AfricastalkingException::class);
 
 it('throws an exception when notification has toAfricastalking()', function (): void {
-    $channel = app(AfricastalkingChannel::class);
+    $channel = app(AfricastalkingSmsChannel::class);
     $notifiable = new BasicNotifiable();
     $notification = new BasicNotificationNoToAfricastalking();
 
@@ -51,7 +51,7 @@ it('sends a notification when toAfricastalking() returns string message', functi
         BulkSmsRequest::class => MockResponse::fixture('messaging/bulk/notification'),
     ]);
 
-    $channel = app(AfricastalkingChannel::class);
+    $channel = app(AfricastalkingSmsChannel::class);
     $notifiable = new BasicNotifiable(phone: $phone);
     $notification = new BasicNotificationReturnsString();
 
@@ -70,7 +70,7 @@ it('sends a notification when toAfricastalking() returns a message object', func
         BulkSmsRequest::class => MockResponse::fixture('messaging/bulk/notification'),
     ]);
 
-    $channel = app(AfricastalkingChannel::class);
+    $channel = app(AfricastalkingSmsChannel::class);
     $notifiable = new BasicNotifiable(phone: $phone);
     $notification = new BasicNotificationReturnsObject();
 
