@@ -8,7 +8,6 @@ use SamuelMwangiW\Africastalking\Domain\VoiceCall;
 use SamuelMwangiW\Africastalking\Facades\Africastalking;
 use SamuelMwangiW\Africastalking\Saloon\Requests\Voice\CallRequest;
 use SamuelMwangiW\Africastalking\ValueObjects\PhoneNumber;
-
 use SamuelMwangiW\Africastalking\ValueObjects\VoiceCallResponse;
 
 it('resolves the Voice class')
