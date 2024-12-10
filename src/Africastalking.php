@@ -42,6 +42,11 @@ class Africastalking
         return $this->mobileData();
     }
 
+    public function insights(): SimSwap
+    {
+        return $this->simSwap();
+    }
+
     public function simSwap(): SimSwap
     {
         return app(SimSwap::class);

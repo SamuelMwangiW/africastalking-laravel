@@ -15,8 +15,12 @@ use SamuelMwangiW\Africastalking\ValueObjects\PhoneNumber;
 use SamuelMwangiW\Africastalking\ValueObjects\Responses\InsightsResponse;
 use SamuelMwangiW\Africastalking\ValueObjects\Responses\InsightsResponseItem;
 
-it('resolves the application class')
+it('resolves the application class using simSwap')
     ->expect(fn() => Africastalking::simSwap())
+    ->toBeInstanceOf(SimSwap::class);
+
+it('resolves the application class using insights()')
+    ->expect(fn() => Africastalking::insights())
     ->toBeInstanceOf(SimSwap::class);
 
 it('can add a recipient using for', function (string $phone): void {
