@@ -1,0 +1,10 @@
+{
+    "statusCode": 200,
+    "headers": {
+        "Content-Length": "389",
+        "Content-Type": "application\/json",
+        "Date": "Tue, 10 Dec 2024 15:59:18 GMT",
+        "Server": "akka-http\/10.2.10"
+    },
+    "data": "{\"responses\":[{\"cost\":{\"amount\":5,\"currencyCode\":\"KES\"},\"phoneNumber\":{\"carrierName\":\"Safaricom\",\"countryCode\":254,\"networkCode\":\"Safaricom\",\"number\":\"+254700123123\",\"numberType\":\"Mobile\"},\"requestId\":\"ATXSwid_279949bd9a22d5a1907a9d9dd1cab790\",\"status\":\"Queued\"}],\"status\":\"Processed\",\"totalCost\":{\"amount\":0.05,\"currencyCode\":\"USD\"},\"transactionId\":\"c9ff6053-b237-4d16-a4fe-0c88e45457a2\"}"
+}

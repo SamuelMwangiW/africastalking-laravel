@@ -8,10 +8,13 @@ use SamuelMwangiW\Africastalking\Contracts\DTOContract;
 
 class PhoneNumber implements DTOContract
 {
-    public string $number;
-
-    public function __construct(string $number)
-    {
+    public function __construct(
+        public string $number,
+        public readonly ?string $carrier = null,
+        public readonly ?int $countryCode = null,
+        public readonly ?string $networkCode = null,
+        public readonly ?string $numberType = null,
+    ) {
         $this->number = str_replace(search: [' ', '-', '.'], replace: '', subject: $number);
     }
 
@@ -29,6 +32,10 @@ class PhoneNumber implements DTOContract
     {
         return [
             'number' => $this->number,
+            'carrier' => $this->carrier,
+            'countryCode' => $this->countryCode,
+            'networkCode' => $this->networkCode,
+            'numberType' => $this->numberType,
         ];
     }
 

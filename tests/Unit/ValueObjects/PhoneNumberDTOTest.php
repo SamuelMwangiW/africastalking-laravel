@@ -17,11 +17,33 @@ it('respects the DTOContract ', function (string $phone): void {
 it('can be constructed', function (string $phone): void {
     $account = new PhoneNumber(
         number: $phone,
+        carrier: 'Safaricom',
+        countryCode: 254,
+        networkCode: 'Safaricom',
+        numberType: 'Mobile',
     );
 
     expect($account)
         ->toBeInstanceOf(PhoneNumber::class)
-        ->number->toBe($phone);
+        ->number->toBe($phone)
+        ->carrier->toBe('Safaricom')
+        ->networkCode->toBe('Safaricom')
+        ->numberType->toBe('Mobile')
+        ->countryCode->toBe(254);
+})->with('phone-numbers');
+
+it('can be constructed with only the phoneNumber', function (string $phone): void {
+    $account = new PhoneNumber(
+        number: $phone,
+    );
+
+    expect($account)
+        ->toBeInstanceOf(PhoneNumber::class)
+        ->number->toBe($phone)
+        ->carrier->toBeNull()
+        ->networkCode->toBeNull()
+        ->numberType->toBeNull()
+        ->countryCode->toBeNull();
 })->with('phone-numbers');
 
 it('can be generated using make', function (string $phone): void {
@@ -41,9 +63,21 @@ it('can be cast to string', function (string $phone): void {
 })->with('phone-numbers');
 
 it('can be cast to array', function (string $phone): void {
-    $account = (array) PhoneNumber::make(phone: $phone);
+    $account = (array) new PhoneNumber(
+        number: $phone,
+        carrier: 'Safaricom',
+        countryCode: 254,
+        networkCode: 'Safaricom',
+        numberType: 'Mobile',
+    );
 
     expect($account)
         ->toBeArray()
-        ->toBe(['number' => $phone]);
+        ->toBe([
+            'number' => $phone,
+            'carrier' => 'Safaricom',
+            'countryCode' => 254,
+            'networkCode' => 'Safaricom',
+            'numberType' => 'Mobile',
+        ]);
 })->with('phone-numbers');
