@@ -8,6 +8,7 @@ use Illuminate\Support\Collection;
 use SamuelMwangiW\Africastalking\Concerns\HasIdempotency;
 use SamuelMwangiW\Africastalking\Saloon\Requests\SimSwap\SendRequest;
 use SamuelMwangiW\Africastalking\ValueObjects\PhoneNumber;
+use SamuelMwangiW\Africastalking\ValueObjects\Responses\InsightsResponse;
 
 class SimSwap
 {
@@ -38,7 +39,7 @@ class SimSwap
         return $this;
     }
 
-    public function send()
+    public function send(): InsightsResponse
     {
         $request = SendRequest::make($this->recipients());
 
