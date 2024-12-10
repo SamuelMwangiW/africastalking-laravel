@@ -15,7 +15,7 @@ it('validates request', function (array $data): void {
 })->with('airtime-validation-notification');
 
 it('retrieves request data', function (array $data): void {
-    $request = new AirtimeValidationRequest(request:$data);
+    $request = new AirtimeValidationRequest(request: $data);
 
     expect($request)
         ->id()->not->toBeNull()->toBe(data_get($data, 'transactionId'))

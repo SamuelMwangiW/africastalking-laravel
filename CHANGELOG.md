@@ -2,6 +2,23 @@
 
 All notable changes to `africastalking-laravel` will be documented in this file.
 
+## v1.5.1 - 2024-06-07
+
+### What's Changed
+
+* Bump aglipanci/laravel-pint-action from 2.3.1 to 2.4 by @dependabot in https://github.com/SamuelMwangiW/africastalking-laravel/pull/94
+* Bump dependabot/fetch-metadata from 1.6.0 to 2.0.0 by @dependabot in https://github.com/SamuelMwangiW/africastalking-laravel/pull/93
+* Add Vitepress by @SamuelMwangiW in https://github.com/SamuelMwangiW/africastalking-laravel/pull/91
+* Bump vitepress from 1.0.0-rc.45 to 1.1.0 in /docs by @dependabot in https://github.com/SamuelMwangiW/africastalking-laravel/pull/95
+* Combine build and push steps by @SamuelMwangiW in https://github.com/SamuelMwangiW/africastalking-laravel/pull/96
+* Bump vitepress from 1.1.0 to 1.1.3 in /docs by @dependabot in https://github.com/SamuelMwangiW/africastalking-laravel/pull/97
+* Bump vitepress from 1.1.3 to 1.1.4 in /docs by @dependabot in https://github.com/SamuelMwangiW/africastalking-laravel/pull/98
+* Bump dependabot/fetch-metadata from 2.0.0 to 2.1.0 by @dependabot in https://github.com/SamuelMwangiW/africastalking-laravel/pull/99
+* Bump vitepress from 1.1.4 to 1.2.0 in /docs by @dependabot in https://github.com/SamuelMwangiW/africastalking-laravel/pull/100
+* Bump vitepress from 1.2.0 to 1.2.2 in /docs by @dependabot in https://github.com/SamuelMwangiW/africastalking-laravel/pull/101
+
+**Full Changelog**: https://github.com/SamuelMwangiW/africastalking-laravel/compare/v1.5.0...v1.5.1
+
 ## v1.5.0 - 2024-03-13
 
 ### What's Changed

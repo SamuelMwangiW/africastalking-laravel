@@ -74,7 +74,7 @@ class MessageDeliveryRequest extends FormRequest
     {
         return in_array(
             needle: $this->get(key: 'status'),
-            haystack:['Rejected', 'Failed'],
+            haystack: ['Rejected', 'Failed'],
         );
     }
 }

@@ -46,7 +46,7 @@ class Dial implements Action
         }
 
         if ($this->ringBackTone) {
-            $options .= " ringBackTone=\"{$this->ringBackTone}\"";
+            $options .= " ringbackTone=\"{$this->ringBackTone}\"";
         }
 
         if ($this->callerId) {

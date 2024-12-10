@@ -8,7 +8,6 @@ use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rules\Enum;
 use SamuelMwangiW\Africastalking\Enum\Status;
 use SamuelMwangiW\Africastalking\Http\Requests\Concerns\HasPhoneNumber;
-
 use SamuelMwangiW\Africastalking\Http\Requests\Concerns\HasStatus;
 use SamuelMwangiW\Africastalking\Http\Requests\Concerns\HasUniqueId;
 
@@ -72,7 +71,7 @@ class AirtimeStatusRequest extends FormRequest
     {
         return in_array(
             needle: $this->get(key: 'status'),
-            haystack:['Rejected', 'Failed'],
+            haystack: ['Rejected', 'Failed'],
         );
     }
 }

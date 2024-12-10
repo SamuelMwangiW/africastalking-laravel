@@ -19,7 +19,7 @@ it('builds to xml')
             callerId: '+256706900900',
         )->build(),
     )->toBe(
-        '<Dial phoneNumbers="+254711123123,+254733321321" sequential="true" record="true" maxDuration="24" ringBackTone="http://mymediafile.com/playme.mp3" callerId="+256706900900"/>',
+        '<Dial phoneNumbers="+254711123123,+254733321321" sequential="true" record="true" maxDuration="24" ringbackTone="http://mymediafile.com/playme.mp3" callerId="+256706900900"/>',
     );
 
 it('sets the record option')
@@ -62,7 +62,7 @@ it('sets the ringback tone')
         Dial::make(['+254711123123', '+254733321321'])
             ->ringBackTone('https://mymediafile.com/playme.mp3')
             ->build(),
-    )->toBe('<Dial phoneNumbers="+254711123123,+254733321321" sequential="false" record="false" ringBackTone="https://mymediafile.com/playme.mp3"/>');
+    )->toBe('<Dial phoneNumbers="+254711123123,+254733321321" sequential="false" record="false" ringbackTone="https://mymediafile.com/playme.mp3"/>');
 
 it('sets maxDuration')
     ->expect(

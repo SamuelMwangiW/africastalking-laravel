@@ -21,7 +21,7 @@ it('validates request', function (array $data, string $status): void {
 it('retrieves request data', function (string $status, array $data): void {
     $data = array_merge($data, ['status' => $status]);
 
-    $deliveryStatusIsFailed = in_array(needle: $status, haystack:['Rejected', 'Failed']);
+    $deliveryStatusIsFailed = in_array(needle: $status, haystack: ['Rejected', 'Failed']);
 
     $request = new AirtimeStatusRequest(request: $data);
 
