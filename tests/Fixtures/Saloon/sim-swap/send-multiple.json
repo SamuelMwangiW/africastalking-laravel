@@ -1,0 +1,10 @@
+{
+  "statusCode": 200,
+  "headers": {
+    "Content-Length": "634",
+    "Content-Type": "application\/json",
+    "Date": "Tue, 10 Dec 2024 16:59:06 GMT",
+    "Server": "akka-http\/10.2.10"
+  },
+  "data": "{\"responses\":[{\"cost\":{\"amount\":350,\"currencyCode\":\"UGX\"},\"phoneNumber\":{\"carrierName\":\"MTN\",\"countryCode\":256,\"networkCode\":\"MTNUganda\",\"number\":\"+256780123123\",\"numberType\":\"Mobile\"},\"requestId\":\"ATXSwid_d037901575d6fa0ae5893b7953184dde\",\"status\":\"Queued\"},{\"cost\":{\"amount\":5,\"currencyCode\":\"KES\"},\"phoneNumber\":{\"carrierName\":\"Safaricom\",\"countryCode\":254,\"networkCode\":\"Safaricom\",\"number\":\"+254712345678\",\"numberType\":\"Mobile\"},\"requestId\":\"ATXSwid_fca2245cceb50601286cdc84c77a704b\",\"status\":\"Queued\"}],\"status\":\"Processed\",\"totalCost\":{\"amount\":0.15,\"currencyCode\":\"USD\"},\"transactionId\":\"2114b5bf-b0e9-403f-930e-9650a283d7ba\"}"
+}

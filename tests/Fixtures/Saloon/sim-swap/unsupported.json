@@ -1,0 +1,10 @@
+{
+    "statusCode": 200,
+    "headers": {
+        "Content-Length": "282",
+        "Content-Type": "application\/json",
+        "Date": "Tue, 10 Dec 2024 17:18:16 GMT",
+        "Server": "akka-http\/10.2.10"
+    },
+    "data": "{\"responses\":[{\"phoneNumber\":{\"carrierName\":\"\",\"countryCode\":1,\"number\":\"+18206821075\",\"numberType\":\"FixedLineOrMobile\"},\"status\":\"UnsupportedPhoneNumber\"}],\"status\":\"Processed\",\"totalCost\":{\"amount\":0.00,\"currencyCode\":\"USD\"},\"transactionId\":\"02ff190c-14e6-44c2-9acb-8e3f25f1db8d\"}"
+}

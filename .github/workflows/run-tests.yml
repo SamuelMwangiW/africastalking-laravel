@@ -58,13 +58,9 @@ jobs:
           composer update --${{ matrix.stability }} --prefer-dist --no-interaction
 
       - name: Execute tests
-        run: vendor/bin/pest --color=always
+        run: vendor/bin/pest --coverage-clover coverage.xml --color=always
 
-#      - name: Upload coverage reports to Codecov
-#        uses: codecov/codecov-action@v3
-#        with:
-#          token: ${{ secrets.CODECOV_TOKEN }}
-#          file: ./build/logs/clover.xml
-#          flags: unittests
-#          name: codecov-umbrella
-#          fail_ci_if_error: true
+      - name: Upload coverage reports to Codecov
+        uses: codecov/codecov-action@v5
+        env:
+          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}

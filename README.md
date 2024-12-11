@@ -234,6 +234,33 @@ class UssdController extends Controller
 }
 ```
 
+### Insights a.k.a Sim Swap
+
+```php
+// Simple Example
+$result = Africastalking::insights()
+        ->for('+254722000000')
+        ->send();
+
+// Alternative
+$result = Africastalking::simSwap()
+        ->for('+254722000000')
+        ->send();
+
+// With Multiple numbers
+$result = Africastalking::insights()
+        ->for('+254711000000')
+        ->add('+254722000000')
+        ->add('+256786000000')
+        ->send();
+
+// With Idempotency Key
+$result = Africastalking::insights()
+        ->for('+254722000000')
+        ->idempotent('b457c437-72cd-46b1-b450-d3a12c400810')
+        ->send();
+```
+
 ### Payments (wip)
 
 #### Mobile Checkout

@@ -13,6 +13,7 @@ enum Service
     case BULK_SMS;
     case CONTENT;
     case DATA;
+    case INSIGHTS;
     case PAYMENT;
     case VOICE;
     case WEBRTC;
@@ -25,6 +26,7 @@ enum Service
             self::BULK_SMS => 'https://api.africastalking.com/version1/',
             self::CONTENT => 'https://content.africastalking.com/version1/',
             self::DATA => 'https://bundles.africastalking.com/',
+            self::INSIGHTS => 'https://insights.africastalking.com/v1',
             self::PAYMENT => 'https://payments.africastalking.com/',
             self::VOICE => 'https://voice.africastalking.com/',
             self::WEBRTC => 'https://webrtc.africastalking.com',
@@ -44,6 +46,7 @@ enum Service
             self::PAYMENT => 'https://payments.sandbox.africastalking.com/',
             self::VOICE => 'https://voice.sandbox.africastalking.com/',
             self::DATA => 'https://bundles.sandbox.africastalking.com/',
+            self::INSIGHTS => 'https://insights.sandbox.africastalking.com/v1',
             self::WEBRTC => throw new Exception('WebRTC not supported on Sandbox environment'),
         };
     }

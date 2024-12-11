@@ -34,7 +34,7 @@ it('can be constructed with parameters', function (string $message, string $phon
 
     expect($subject)
         ->message->toBe($message)
-        ->to->toHaveCount(1)
+        ->to->toHaveCount(5)
         ->to->toBe($to)
         ->from->toBe($from);
 })->with('strings', 'phone-numbers');

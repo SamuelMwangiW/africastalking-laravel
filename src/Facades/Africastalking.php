@@ -25,7 +25,7 @@ class Africastalking extends Facade
         static::swap(new AfricastalkingFake());
     }
 
-    protected static function getFacadeAccessor()
+    protected static function getFacadeAccessor(): string
     {
         return BaseClass::class;
     }
