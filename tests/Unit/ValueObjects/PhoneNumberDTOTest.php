@@ -81,3 +81,40 @@ it('can be cast to array', function (string $phone): void {
             'numberType' => 'Mobile',
         ]);
 })->with('phone-numbers');
+
+it('has the expected array shape', function (array $data): void {
+    $account = new PhoneNumber(
+        number: $phone = data_get($data, 'number'),
+        carrier: $carrier = data_get($data, 'carrier'),
+        countryCode: $countryCode = data_get($data, 'countryCode'),
+        networkCode: $networkCode = data_get($data, 'networkCode'),
+        numberType: $numberType = data_get($data, 'numberType'),
+    );
+
+    expect($account->__toArray())
+        ->toBeArray()
+        ->toBe([
+            'number' => $phone,
+            'carrier' => $carrier,
+            'countryCode' => $countryCode,
+            'networkCode' => $networkCode,
+            'numberType' => $numberType,
+        ]);
+})->with([
+    'full' => fn() => [
+        'number' => fake()->e164PhoneNumber(),
+        'carrier' => 'Safaricom',
+        'countryCode' => 254,
+        'networkCode' => 'Safaricom',
+        'numberType' => 'Mobile',
+    ],
+    'only phoneNumber' => fn() => [
+        'number' => fake()->e164PhoneNumber(),
+    ],'full with fakes' => fn() => [
+        'number' => fake()->e164PhoneNumber(),
+        'carrier' => fake()->company(),
+        'countryCode' => fake()->numberBetween(1, 500),
+        'networkCode' => fake()->word(),
+        'numberType' => fake()->word(),
+    ],
+]);

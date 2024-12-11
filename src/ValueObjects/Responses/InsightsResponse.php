@@ -68,7 +68,7 @@ class InsightsResponse implements DTOContract
 
     public function __toString(): string
     {
-        return 'Insights';
+        return json_encode($this->__toArray()).PHP_EOL;
     }
 
     public function __toArray(): array
@@ -77,6 +77,7 @@ class InsightsResponse implements DTOContract
             'transactionId' => $this->id,
             'responses' => $this->items,
             'status' => $this->status->value,
+            'items' => $this->items->toArray(),
             'cost' => "{$this->cost->currency->value} {$this->cost->amount}",
         ];
     }
