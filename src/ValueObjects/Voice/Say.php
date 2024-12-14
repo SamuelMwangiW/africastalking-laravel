@@ -19,12 +19,11 @@ class Say implements Action, CallActionItem
         string|callable $message,
         bool            $playBeep = false,
         string|null     $voice = null,
-    ): Say
-    {
+    ): Say {
         if (is_callable($message)) {
             $synthesisedSpeechParts = $message(new SynthesisedSpeech());
 
-            if (!$synthesisedSpeechParts instanceof SynthesisedSpeech) {
+            if ( ! $synthesisedSpeechParts instanceof SynthesisedSpeech) {
                 throw AfricastalkingException::notSynthesisedSpeech();
             }
 
@@ -75,10 +74,10 @@ class Say implements Action, CallActionItem
     public function buildJson(): array
     {
         return [
-            "actionType" => "Say",
-            "text" => $this->getMessage(),
-            "voice" => $this->voice ?? "en-GB-Standard-B",
-            "playBeep" => $this->playBeep,
+            'actionType' => 'Say',
+            'text' => $this->getMessage(),
+            'voice' => $this->voice ?? 'en-GB-Standard-B',
+            'playBeep' => $this->playBeep,
         ];
     }
 

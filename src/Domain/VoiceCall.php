@@ -81,7 +81,7 @@ class VoiceCall
         $this->actions[] = Say::make(
             message: $message,
             playBeep: $playBeep,
-            voice: $voice
+            voice: $voice,
         );
 
         return $this;

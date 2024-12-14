@@ -8,8 +8,7 @@ class Play implements Action, CallActionItem
 {
     public function __construct(
         private ?string $url = null,
-    ){
-    }
+    ) {}
 
     public static function make(string $url = ''): Play
     {
@@ -31,8 +30,8 @@ class Play implements Action, CallActionItem
     public function buildJson(): array
     {
         return [
-            "actionType"=> "Play",
-            "url" => $this->url,
+            'actionType' => 'Play',
+            'url' => $this->url,
         ];
     }
 }

@@ -45,4 +45,4 @@ it('throws when failed to fetch balance', function (): void {
     ]);
 
     africastalking()->wallet()->balance();
-})->throws(\Exception::class, 'Failed to fetch wallet balance');
+})->throws(Exception::class, 'Failed to fetch wallet balance');

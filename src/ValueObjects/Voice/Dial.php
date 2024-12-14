@@ -59,10 +59,10 @@ class Dial implements Action, CallActionItem
     public function buildJson(): array
     {
         return [
-            "actionType"=> "Dial",
-            "phoneNumbers" => $this->recipients->toArray(),
-            "record" => $this->record,
-            "sequential" => $this->sequential,
+            'actionType' => 'Dial',
+            'phoneNumbers' => $this->recipients->toArray(),
+            'record' => $this->record,
+            'sequential' => $this->sequential,
         ];
     }
 

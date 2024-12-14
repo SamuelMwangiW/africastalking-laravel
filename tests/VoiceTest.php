@@ -124,7 +124,7 @@ it('sets voiceActions fluently', function (string $phone): void {
         ->toBe([
             'from' => '+254711000000',
             'clientRequestId' => $id,
-            'to' => [$phone, "+254712345678"],
+            'to' => [$phone, '+254712345678'],
             'callActions' => [
                 [
                     'actionType' => 'Say',
@@ -142,7 +142,7 @@ it('sets voiceActions fluently', function (string $phone): void {
                     'record' => false,
                     'sequential' => true,
                 ],
-            ]
+            ],
         ]);
 })->with('phone-numbers');
 
@@ -274,7 +274,7 @@ it('fetches the queue for a given number', function ($numbers): void {
     'array of numbers' => ['+254711082000', '+254711082111'],
 ]);
 
-test('calls returns null while not faking', function () {
+test('calls returns null while not faking', function (): void {
     $payload = africastalking()->voice()
         ->call()
         ->to(['+254712345678'])
