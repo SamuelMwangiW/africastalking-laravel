@@ -38,3 +38,11 @@ it('can fetch balance via helper', function (): void {
 
     expect($balance)->toBeInstanceOf(Balance::class);
 });
+
+it('throws when failed to fetch balance', function (): void {
+    Saloon::fake([
+        WalletBalanceRequest::class => MockResponse::fixture('payments/wallet-failed'),
+    ]);
+
+    africastalking()->wallet()->balance();
+})->throws(\Exception::class, 'Failed to fetch wallet balance');
