@@ -124,7 +124,7 @@ it('sets voiceActions fluently', function (string $phone): void {
         ->toBe([
             'from' => '+254711000000',
             'clientRequestId' => $id,
-            'to' => "{$phone},+254712345678",
+            'to' => [$phone, "+254712345678"],
             'callActions' => [
                 [
                     'actionType' => 'Say',
@@ -159,6 +159,23 @@ it('makes a call', function (string $phone): void {
         ->recipients->toBeInstanceOf(Collection::class)
         ->toHaveCount(3)
         ->and($response->errorMessage)->toBeIn(['None', 'Invalid callbackUrl: ', 'Invalid callerId: ']);
+})->with('phone-numbers');
+
+it('makes a call with call actions', function (string $phone): void {
+    Saloon::fake([
+        CallRequest::class => MockResponse::fixture('voice/call-with-callactions'),
+    ]);
+
+    $response = africastalking()->voice()
+        ->call(['+254720404119'])
+        ->say('Hey there. Your code is 1 2 3 4')
+        ->dial(['+254711082000'])
+        ->send();
+
+    expect($response)
+        ->toBeInstanceOf(VoiceCallResponse::class)
+        ->toHaveKeys(['recipients', 'errorMessage'])
+        ->recipients->toBeInstanceOf(Collection::class);
 })->with('phone-numbers');
 
 it('initiates a webrtc object')

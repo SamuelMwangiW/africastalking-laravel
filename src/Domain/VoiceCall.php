@@ -115,7 +115,7 @@ class VoiceCall
             'to' => $this->recipients
                 ->filter(fn(PhoneNumber $number) => $number->isValid())
                 ->map(fn(PhoneNumber $number) => $number->number)
-                ->implode(','),
+                ->toArray(),
         ];
 
         foreach ($this->actions as $action) {

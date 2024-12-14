@@ -42,7 +42,7 @@ it('sets a call recipient', function (string $phone): void {
         ->data()
         ->toBeArray()
         ->toHaveKey('to')
-        ->toMatchArray(['to' => $phone]);
+        ->toMatchArray(['to' => [$phone]]);
 })->with('phone-numbers');
 
 it('sets a call recipient from PhoneNumber object', function (string $phone): void {
@@ -50,7 +50,7 @@ it('sets a call recipient from PhoneNumber object', function (string $phone): vo
         ->data()
         ->toBeArray()
         ->toHaveKey('to')
-        ->toMatchArray(['to' => $phone]);
+        ->toMatchArray(['to' => [$phone]]);
 })->with('phone-numbers')
 ;
 
@@ -65,7 +65,7 @@ it('sets a call recipients from array', function (): void {
         ->data()
         ->toBeArray()
         ->toHaveKey('to')
-        ->toMatchArray(['to' => implode(',', $recipients)]);
+        ->toMatchArray(['to' => $recipients]);
 });
 
 it('sets a call clientRequestId', function (string $id): void {
