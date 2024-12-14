@@ -6,7 +6,7 @@ namespace SamuelMwangiW\Africastalking\ValueObjects\Voice;
 
 use SamuelMwangiW\Africastalking\Exceptions\AfricastalkingException;
 
-class Say implements Action
+class Say implements Action, CallActionItem
 {
     private string $message;
     private bool $playBeep = false;
@@ -16,14 +16,15 @@ class Say implements Action
      * @throws AfricastalkingException
      */
     public static function make(
-        string|callable      $message,
-        bool        $playBeep = false,
-        string|null $voice = null,
-    ): Say {
+        string|callable $message,
+        bool            $playBeep = false,
+        string|null     $voice = null,
+    ): Say
+    {
         if (is_callable($message)) {
             $synthesisedSpeechParts = $message(new SynthesisedSpeech());
 
-            if ( ! $synthesisedSpeechParts instanceof SynthesisedSpeech) {
+            if (!$synthesisedSpeechParts instanceof SynthesisedSpeech) {
                 throw AfricastalkingException::notSynthesisedSpeech();
             }
 
@@ -68,7 +69,17 @@ class Say implements Action
             $options .= ' playBeep="true"';
         }
 
-        return "<Say{$options}>{$this->message}</Say>";
+        return "<Say{$options}>{$this->getMessage()}</Say>";
+    }
+
+    public function buildJson(): array
+    {
+        return [
+            "actionType" => "Say",
+            "text" => $this->getMessage(),
+            "voice" => $this->voice ?? "en-GB-Standard-B",
+            "playBeep" => $this->playBeep,
+        ];
     }
 
     public function getMessage(): string

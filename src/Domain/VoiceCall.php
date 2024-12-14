@@ -7,6 +7,10 @@ namespace SamuelMwangiW\Africastalking\Domain;
 use Illuminate\Support\Collection;
 use SamuelMwangiW\Africastalking\Saloon\Requests\Voice\CallRequest;
 use SamuelMwangiW\Africastalking\ValueObjects\PhoneNumber;
+use SamuelMwangiW\Africastalking\ValueObjects\Voice\CallActionItem;
+use SamuelMwangiW\Africastalking\ValueObjects\Voice\Dial;
+use SamuelMwangiW\Africastalking\ValueObjects\Voice\Play;
+use SamuelMwangiW\Africastalking\ValueObjects\Voice\Say;
 use SamuelMwangiW\Africastalking\ValueObjects\VoiceCallDTO;
 use SamuelMwangiW\Africastalking\ValueObjects\VoiceCallResponse;
 
@@ -16,6 +20,8 @@ class VoiceCall
     protected Collection $recipients;
     private PhoneNumber $from;
     protected ?string $clientRequestId = null;
+
+    protected array $actions = [];
 
     public function to(PhoneNumber|string|array|null $recipients): static
     {
@@ -59,6 +65,35 @@ class VoiceCall
         return $this;
     }
 
+    public function dial(array $phoneNumbers, bool $record = false, bool $sequential = true): static
+    {
+        $this->actions[] = Dial::make(
+            phoneNumbers: $phoneNumbers,
+            record: $record,
+            sequential: $sequential,
+        );
+
+        return $this;
+    }
+
+    public function say(string $message, ?string $voice = null, bool $playBeep = false): static
+    {
+        $this->actions[] = Say::make(
+            message: $message,
+            playBeep: $playBeep,
+            voice: $voice
+        );
+
+        return $this;
+    }
+
+    public function play(string $url): static
+    {
+        $this->actions[] = Play::make(url: $url);
+
+        return $this;
+    }
+
     public function done(): VoiceCallResponse
     {
         return $this->send();
@@ -74,7 +109,7 @@ class VoiceCall
 
     public function data(): array
     {
-        return [
+        $payload = [
             'from' => $this->from()->number,
             'clientRequestId' => $this->clientRequestId,
             'to' => $this->recipients
@@ -82,6 +117,13 @@ class VoiceCall
                 ->map(fn(PhoneNumber $number) => $number->number)
                 ->implode(','),
         ];
+
+        foreach ($this->actions as $action) {
+            /** @var CallActionItem $action */
+            $payload['callActions'][] = $action->buildJson();
+        }
+
+        return $payload;
     }
 
     public function from(): PhoneNumber

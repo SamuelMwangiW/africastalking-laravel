@@ -6,7 +6,7 @@ namespace SamuelMwangiW\Africastalking\ValueObjects\Voice;
 
 use Illuminate\Support\Collection;
 
-class Dial implements Action
+class Dial implements Action, CallActionItem
 {
     /**
      * @var Collection<int,string>
@@ -54,6 +54,16 @@ class Dial implements Action
         }
 
         return "<Dial{$options}/>";
+    }
+
+    public function buildJson(): array
+    {
+        return [
+            "actionType"=> "Dial",
+            "phoneNumbers" => $this->recipients->toArray(),
+            "record" => $this->record,
+            "sequential" => $this->sequential,
+        ];
     }
 
     public function phoneNumbers(array $phoneNumbers): static

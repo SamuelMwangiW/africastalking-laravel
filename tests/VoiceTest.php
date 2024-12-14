@@ -108,6 +108,44 @@ it('sets content-type to text/plain in the response', function (): void {
         ->headers->get('content-type')->toBe('application/xml');
 });
 
+it('sets voiceActions fluently', function (string $phone): void {
+    $payload = africastalking()->voice()
+        ->call()
+        ->to([$phone, '+254712345678'])
+        ->as('+254711000000')
+        ->requestId($id = fake()->uuid())
+        ->say('Hey there. Your code is 1 2 3 4')
+        ->play('https://example.com/play.wav')
+        ->dial(['+254202227436'])
+        ->data();
+
+    expect($payload)
+        ->toBeArray()
+        ->toBe([
+            'from' => '+254711000000',
+            'clientRequestId' => $id,
+            'to' => "{$phone},+254712345678",
+            'callActions' => [
+                [
+                    'actionType' => 'Say',
+                    'text' => 'Hey there. Your code is 1 2 3 4',
+                    'voice' => 'en-GB-Standard-B',
+                    'playBeep' => false,
+                ],
+                [
+                    'actionType' => 'Play',
+                    'url' => 'https://example.com/play.wav',
+                ],
+                [
+                    'actionType' => 'Dial',
+                    'phoneNumbers' => ['+254202227436'],
+                    'record' => false,
+                    'sequential' => true,
+                ],
+            ]
+        ]);
+})->with('phone-numbers');
+
 it('makes a call', function (string $phone): void {
     Saloon::fake([
         CallRequest::class => MockResponse::fixture('voice/call-multiple'),
@@ -218,3 +256,17 @@ it('fetches the queue for a given number', function ($numbers): void {
     'string phone' => '+254711082000',
     'array of numbers' => ['+254711082000', '+254711082111'],
 ]);
+
+test('calls returns null while not faking', function () {
+    $payload = africastalking()->voice()
+        ->call()
+        ->to(['+254712345678'])
+        ->as('+254711000000')
+        ->requestId($id = fake()->uuid())
+        ->say('Hey there. Your code is 1 2 3 4')
+        ->play('https://example.com/play.wav')
+        ->dial(['+254202227436'])
+        ->calls();
+
+    expect($payload)->toBeNull();
+});
