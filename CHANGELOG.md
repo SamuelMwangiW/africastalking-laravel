@@ -2,6 +2,16 @@
 
 All notable changes to `africastalking-laravel` will be documented in this file.
 
+## v1.6.0 - 2024-12-11
+
+### What's Changed
+
+* Support PHP 8.4 in https://github.com/SamuelMwangiW/africastalking-laravel/pull/92
+* Added Insights API in https://github.com/SamuelMwangiW/africastalking-laravel/pull/115
+* Drop support for Laravel 10 in 71788a27c43cd67eaa8ef567352cf10e3231691c
+
+**Full Changelog**: https://github.com/SamuelMwangiW/africastalking-laravel/compare/v1.5.1...v1.6.0
+
 ## v1.5.1 - 2024-06-07
 
 ### What's Changed
