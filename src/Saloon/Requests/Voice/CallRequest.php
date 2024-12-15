@@ -6,14 +6,14 @@ namespace SamuelMwangiW\Africastalking\Saloon\Requests\Voice;
 
 use Saloon\Contracts\Body\HasBody;
 use Saloon\Http\Response;
-use Saloon\Traits\Body\HasFormBody;
+use Saloon\Traits\Body\HasJsonBody;
 use SamuelMwangiW\Africastalking\Enum\Service;
 use SamuelMwangiW\Africastalking\Saloon\Requests\BaseRequest;
 use SamuelMwangiW\Africastalking\ValueObjects\VoiceCallResponse;
 
 class CallRequest extends BaseRequest implements HasBody
 {
-    use HasFormBody;
+    use HasJsonBody;
 
     public Service $service = Service::VOICE;
 

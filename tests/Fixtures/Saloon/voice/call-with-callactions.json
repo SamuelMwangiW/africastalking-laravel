@@ -1,0 +1,12 @@
+{
+    "statusCode": 200,
+    "headers": {
+        "Date": "Sat, 14 Dec 2024 19:28:48 GMT",
+        "Content-Type": "application\/json",
+        "Content-Length": "138",
+        "Connection": "keep-alive",
+        "Server": "akka-http\/10.2.10",
+        "X-Current-Queue-Size": "1"
+    },
+    "data": "{\"entries\":[{\"phoneNumber\":\"+254722000000\",\"sessionId\":\"ATVId_96cd00fb425200566d5bc8012cd93f96\",\"status\":\"Queued\"}],\"errorMessage\":\"None\"}"
+}
