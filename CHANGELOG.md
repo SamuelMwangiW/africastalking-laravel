@@ -2,6 +2,12 @@
 
 All notable changes to `africastalking-laravel` will be documented in this file.
 
+## v1.7.0 - 2024-12-15
+
+* Added Voice Actions in #2
+
+**Full Changelog**: https://github.com/SamuelMwangiW/africastalking-laravel/compare/v1.6.0...v1.7.0
+
 ## v1.7.1 - 2024-12-15
 
 ### What's Changed
