@@ -2,6 +2,18 @@
 
 All notable changes to `africastalking-laravel` will be documented in this file.
 
+## v1.7.1 - 2024-12-15
+
+### What's Changed
+
+* call actions by @SamuelMwangiW in https://github.com/SamuelMwangiW/africastalking-laravel/pull/2
+
+### New Contributors
+
+* @SamuelMwangiW made their first contribution in https://github.com/SamuelMwangiW/africastalking-laravel/pull/2
+
+**Full Changelog**: https://github.com/SamuelMwangiW/africastalking-laravel/compare/v1.7.0...v1.7.1
+
 ## v1.6.0 - 2024-12-11
 
 ### What's Changed
