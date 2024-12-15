@@ -2,6 +2,12 @@
 
 All notable changes to `africastalking-laravel` will be documented in this file.
 
+## v1.7.2 - 2024-12-15
+
+* Added USER_IN_BLACKLIST status in a1a7436
+
+**Full Changelog**: https://github.com/SamuelMwangiW/africastalking-laravel/compare/v1.7.1...v1.7.2
+
 ## v1.7.0 - 2024-12-15
 
 * Added Voice Actions in #2
