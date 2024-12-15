@@ -8,6 +8,7 @@ enum Status: string
 {
     case UNSUPPORTED_PHONE_NUMBER = 'UnsupportedPhoneNumber';
     case INSUFFICIENT_BALANCE = 'InsufficientBalance';
+    case USER_IN_BLACKLIST = 'UserInBlacklist';
     case PRODUCT_NOT_FOUND = 'ProductNotFound';
     case INVALID_REQUEST = 'InvalidRequest';
     case INTERNAL_ERROR = 'InternalError';
