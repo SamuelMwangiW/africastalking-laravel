@@ -2,6 +2,12 @@
 
 All notable changes to `africastalking-laravel` will be documented in this file.
 
+## v1.7.3 - 2024-12-19
+
+* Update Zambia currency code 2db65ece6888510839f2881a4abdb4b9564043b3
+
+**Full Changelog**: https://github.com/SamuelMwangiW/africastalking-laravel/compare/v1.7.2...v1.7.3
+
 ## v1.7.2 - 2024-12-15
 
 * Added USER_IN_BLACKLIST status in a1a7436
