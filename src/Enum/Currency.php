@@ -11,7 +11,7 @@ enum Currency: string
     case TANZANIA = 'TZS';
     case NIGERIA = 'NGN';
     case MALAWI = 'MWK';
-    case ZAMBIA = 'ZMK';
+    case ZAMBIA = 'ZMW';
     case SOUTH_AFRICA = 'ZAR';
     case WEST_AFRICA = 'XOF';
     case GHANA = 'GHS';
