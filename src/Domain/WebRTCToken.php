@@ -86,7 +86,7 @@ class WebRTCToken
 
     public function phone(): string
     {
-        return $this->phone?->number ?? config('africastalking.voice.from');
+        return $this->phone->number ?? config('africastalking.voice.from');
     }
 
     public function incoming(): string
