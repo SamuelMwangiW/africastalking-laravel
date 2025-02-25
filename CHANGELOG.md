@@ -2,6 +2,14 @@
 
 All notable changes to `africastalking-laravel` will be documented in this file.
 
+## v1.8.0 - 2025-02-25
+
+### What's Changed
+
+* laravel 12 by @SamuelMwangiW in https://github.com/SamuelMwangiW/africastalking-laravel/pull/9
+
+**Full Changelog**: https://github.com/SamuelMwangiW/africastalking-laravel/compare/v1.7.3...v1.8.0
+
 ## v1.7.3 - 2024-12-19
 
 * Update Zambia currency code 2db65ece6888510839f2881a4abdb4b9564043b3
