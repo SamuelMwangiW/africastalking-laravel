@@ -18,7 +18,7 @@
     "require": {
         "php": "^8.2",
         "illuminate/contracts": "^11.0|^12.0",
-        "saloonphp/laravel-plugin": "dev-l12-compatibility",
+        "saloonphp/laravel-plugin": "^3.5",
         "spatie/laravel-package-tools": "^1.14"
     },
     "require-dev": {
@@ -45,12 +45,6 @@
             "SamuelMwangiW\\Africastalking\\Tests\\": "tests"
         }
     },
-    "repositories": [
-        {
-            "type": "vcs",
-            "url": "https://github.com/laravel-shift/laravel-plugin.git"
-        }
-    ],
     "scripts": {
         "analyse": "vendor/bin/phpstan analyse",
         "test": "vendor/bin/pest",
