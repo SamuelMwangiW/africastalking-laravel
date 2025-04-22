@@ -3,16 +3,13 @@
 layout: home
 
 hero:
-  name: "Africa's Talking PHP SDK Docs"
-  text: "Africa's Talking PHP SDK Docs"
+  name: "Africa's Talking Laravel"
+  text: "This is an unofficial Laravel SDK for interacting with Africa's Talking APIs"
   tagline: My great project tagline
   actions:
     - theme: brand
-      text: Markdown Examples
-      link: /markdown-examples
-    - theme: alt
-      text: API Examples
-      link: /api-examples
+      text: Installation
+      link: /instllation
 
 features:
   - title: Feature A
