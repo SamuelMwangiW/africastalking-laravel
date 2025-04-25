@@ -5,6 +5,7 @@ declare(strict_types=1);
 use Illuminate\Support\Facades\Notification;
 use Saloon\Http\Faking\MockResponse;
 use Saloon\Laravel\Facades\Saloon;
+use SamuelMwangiW\Africastalking\Enum\Status;
 use SamuelMwangiW\Africastalking\Exceptions\AfricastalkingException;
 use SamuelMwangiW\Africastalking\Notifications\AfricastalkingChannel;
 use SamuelMwangiW\Africastalking\Saloon\Requests\Messaging\BulkSmsRequest;
@@ -15,6 +16,7 @@ use SamuelMwangiW\Africastalking\Tests\Fixtures\BasicNotification;
 use SamuelMwangiW\Africastalking\Tests\Fixtures\BasicNotificationNoToAfricastalking;
 use SamuelMwangiW\Africastalking\Tests\Fixtures\BasicNotificationReturnsObject;
 use SamuelMwangiW\Africastalking\Tests\Fixtures\BasicNotificationReturnsString;
+use SamuelMwangiW\Africastalking\Tests\Fixtures\FakeChannel;
 use SamuelMwangiW\Africastalking\ValueObjects\SentMessageRecipient;
 use SamuelMwangiW\Africastalking\ValueObjects\SentMessageResponse;
 
@@ -91,6 +93,17 @@ it('supports AnonymousNotifiable', function (string $phone): void {
         BulkSmsRequest::class => MockResponse::fixture('messaging/bulk/on-demand'),
     ]);
 
+    $this->swap(AfricastalkingChannel::class, $fake = new FakeChannel());
+
     Notification::route(AfricastalkingChannel::class, $phone)
         ->notify(new BasicNotification(message: 'Sample SMS'));
-})->with('phone-numbers')->throwsNoExceptions()->issue(13);
+
+    expect($fake->results)
+        ->toBeInstanceOf(SentMessageResponse::class)
+        ->recipients->toHaveCount(1)
+        ->and($fake->results->recipients->first())
+        ->toBeInstanceOf(SentMessageRecipient::class)
+        ->statusCode->toBe(102)
+        ->status->toBe(Status::SUCCESS)
+        ->number->number->toBe($phone);
+})->with('phone-numbers')->issue(13);
