@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use Illuminate\Support\Facades\Notification;
 use Saloon\Http\Faking\MockResponse;
 use Saloon\Laravel\Facades\Saloon;
 use SamuelMwangiW\Africastalking\Exceptions\AfricastalkingException;
@@ -10,6 +11,7 @@ use SamuelMwangiW\Africastalking\Saloon\Requests\Messaging\BulkSmsRequest;
 use SamuelMwangiW\Africastalking\Tests\Fixtures\BasicNotifiable;
 use SamuelMwangiW\Africastalking\Tests\Fixtures\BasicNotifiableNoRoute;
 use SamuelMwangiW\Africastalking\Tests\Fixtures\BasicNotifiableNoTrait;
+use SamuelMwangiW\Africastalking\Tests\Fixtures\BasicNotification;
 use SamuelMwangiW\Africastalking\Tests\Fixtures\BasicNotificationNoToAfricastalking;
 use SamuelMwangiW\Africastalking\Tests\Fixtures\BasicNotificationReturnsObject;
 use SamuelMwangiW\Africastalking\Tests\Fixtures\BasicNotificationReturnsString;
@@ -83,3 +85,12 @@ it('sends a notification when toAfricastalking() returns a message object', func
         ->toBeInstanceOf(SentMessageRecipient::class)
         ->number->number->toBe($phone);
 })->with('phone-numbers');
+
+it('supports AnonymousNotifiable', function (string $phone): void {
+    Saloon::fake([
+        BulkSmsRequest::class => MockResponse::fixture('messaging/bulk/on-demand'),
+    ]);
+
+    Notification::route(AfricastalkingChannel::class, $phone)
+        ->notify(new BasicNotification(message: 'Sample SMS'));
+})->with('phone-numbers')->throwsNoExceptions()->issue(13);

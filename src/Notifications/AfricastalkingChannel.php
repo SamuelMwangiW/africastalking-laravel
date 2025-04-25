@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace SamuelMwangiW\Africastalking\Notifications;
 
 use Illuminate\Http\Client\RequestException;
+use Illuminate\Notifications\AnonymousNotifiable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Notifications\Notification;
 use SamuelMwangiW\Africastalking\Contracts\ReceivesSmsMessages;
@@ -25,7 +26,6 @@ class AfricastalkingChannel
     public function send(object $notifiable, Notification $notification): SentMessageResponse
     {
         $this->throwIfNotifiableDoesNotUseTrait($notifiable);
-        $this->throwIfNotifiableHasNoRoute($notifiable);
         $this->throwIfNotificationHasNoToAfricastalking($notification);
 
         /** @phpstan-ignore-next-line */
@@ -36,8 +36,7 @@ class AfricastalkingChannel
         }
 
         return Africastalking::sms($message)
-            /** @phpstan-ignore-next-line */
-            ->to($notifiable->routeNotificationForAfricastalking($notification))
+            ->to($this->recipient($notifiable, $notification))
             ->send();
     }
 
@@ -46,20 +45,14 @@ class AfricastalkingChannel
      */
     private function throwIfNotifiableDoesNotUseTrait(object $notifiable): void
     {
+        if ($notifiable instanceof AnonymousNotifiable) {
+            return;
+        }
+
         $traits = collect(class_uses_recursive($notifiable::class));
 
         if ($traits->doesntContain(Notifiable::class)) {
             throw AfricastalkingException::objectNotNotifiable($notifiable::class);
-        }
-    }
-
-    /**
-     * @throws AfricastalkingException
-     */
-    private function throwIfNotifiableHasNoRoute(object $notifiable): void
-    {
-        if ( ! $notifiable instanceof ReceivesSmsMessages) {
-            throw AfricastalkingException::NotifiableDoesNotImplementReceivesSmsMessages($notifiable::class);
         }
     }
 
@@ -71,5 +64,21 @@ class AfricastalkingChannel
         if ( ! method_exists($notification, 'toAfricastalking')) {
             throw AfricastalkingException::NotificationHasNoToAfricastalking($notification::class);
         }
+    }
+
+    /**
+     * @throws AfricastalkingException
+     */
+    private function recipient(object $notifiable, Notification $notification): string
+    {
+        if ($notifiable instanceof ReceivesSmsMessages) {
+            return $notifiable->routeNotificationForAfricastalking($notification);
+        }
+
+        if ($notifiable instanceof AnonymousNotifiable) {
+            return $notifiable->routeNotificationFor(AfricastalkingChannel::class);
+        }
+
+        throw AfricastalkingException::NotifiableDoesNotImplementReceivesSmsMessages($notifiable::class);
     }
 }
