@@ -53,7 +53,7 @@ it('sends a notification to a Notifiable', function (string $phone): void {
     $this->swap(AfricastalkingChannel::class, $fake = new FakeChannel());
 
     (new BasicNotifiable($phone))->notify(
-        instance: new BasicNotification('Test')
+        instance: new BasicNotification('Test'),
     );
 
     expect($fake->results)

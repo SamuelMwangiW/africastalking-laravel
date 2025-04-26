@@ -40,17 +40,10 @@ class AfricastalkingChannel
             return $message->send();
         }
 
-        return Africastalking::sms($message)
-            ->to($this->recipient($notifiable, $notification))
-            ->send();
-    }
+        $to = $notifiable instanceof ReceivesSmsMessages
+            ? $notifiable->routeNotificationForAfricastalking($notification)
+            : $notifiable->routeNotificationFor(AfricastalkingChannel::class);
 
-    private function recipient(ReceivesSmsMessages|AnonymousNotifiable $notifiable, Notification $notification): string
-    {
-        if ($notifiable instanceof ReceivesSmsMessages) {
-            return $notifiable->routeNotificationForAfricastalking($notification);
-        }
-
-        return $notifiable->routeNotificationFor(AfricastalkingChannel::class);
+        return Africastalking::sms($message)->to($to)->send();
     }
 }
