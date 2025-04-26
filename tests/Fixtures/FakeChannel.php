@@ -13,8 +13,6 @@ class FakeChannel extends AfricastalkingChannel
     public ?SentMessageResponse $results = null;
     public function send(object $notifiable, Notification $notification): SentMessageResponse
     {
-        $this->results = parent::send($notifiable, $notification);
-
-        return $this->results;
+        return $this->results = parent::send($notifiable, $notification);
     }
 }
