@@ -26,6 +26,10 @@ it('can resolve', function (): void {
 });
 
 it('does not throw an exception when notifiable does not use trait but implements ReceivesSmsMessages', function (): void {
+    Saloon::fake([
+        BulkSmsRequest::class => MockResponse::fixture('messaging/bulk/notification'),
+    ]);
+
     $channel = app(AfricastalkingChannel::class);
     $notifiable = new BasicNotifiableNoTrait();
     $notification = new BasicNotificationReturnsString();
