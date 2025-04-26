@@ -37,13 +37,32 @@ it('does not throw an exception when notifiable does not use trait but implement
     $channel->send($notifiable, $notification);
 })->throwsNoExceptions();
 
-it('throws an exception when notification has toAfricastalking()', function (): void {
+it('throws an exception when notification is missing toAfricastalking()', function (): void {
     $channel = app(AfricastalkingChannel::class);
     $notifiable = new BasicNotifiable();
     $notification = new BasicNotificationNoToAfricastalking();
 
     $channel->send($notifiable, $notification);
 })->throws(AfricastalkingException::class);
+
+it('sends a notification to a Notifiable', function (string $phone): void {
+    Saloon::fake([
+        BulkSmsRequest::class => MockResponse::fixture('messaging/bulk/notification'),
+    ]);
+
+    $this->swap(AfricastalkingChannel::class, $fake = new FakeChannel());
+
+    (new BasicNotifiable($phone))->notify(
+        instance: new BasicNotification('Test')
+    );
+
+    expect($fake->results)
+        ->toBeInstanceOf(SentMessageResponse::class)
+        ->recipients->toHaveCount(1)
+        ->and($fake->results->recipients->first())
+        ->toBeInstanceOf(SentMessageRecipient::class)
+        ->number->number->toBe($phone);
+})->with('phone-numbers');
 
 it('sends a notification when toAfricastalking() returns string message', function (string $phone): void {
     Saloon::fake([
