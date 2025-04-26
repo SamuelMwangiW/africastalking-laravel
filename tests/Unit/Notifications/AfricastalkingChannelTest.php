@@ -10,7 +10,6 @@ use SamuelMwangiW\Africastalking\Exceptions\AfricastalkingException;
 use SamuelMwangiW\Africastalking\Notifications\AfricastalkingChannel;
 use SamuelMwangiW\Africastalking\Saloon\Requests\Messaging\BulkSmsRequest;
 use SamuelMwangiW\Africastalking\Tests\Fixtures\BasicNotifiable;
-use SamuelMwangiW\Africastalking\Tests\Fixtures\BasicNotifiableNoRoute;
 use SamuelMwangiW\Africastalking\Tests\Fixtures\BasicNotifiableNoTrait;
 use SamuelMwangiW\Africastalking\Tests\Fixtures\BasicNotification;
 use SamuelMwangiW\Africastalking\Tests\Fixtures\BasicNotificationNoToAfricastalking;
@@ -26,21 +25,13 @@ it('can resolve', function (): void {
     expect($channel)->toBeInstanceOf(AfricastalkingChannel::class);
 });
 
-it('throws an exception when notifiable does not use trait', function (): void {
+it('does not throw an exception when notifiable does not use trait but implements ReceivesSmsMessages', function (): void {
     $channel = app(AfricastalkingChannel::class);
     $notifiable = new BasicNotifiableNoTrait();
     $notification = new BasicNotificationReturnsString();
 
     $channel->send($notifiable, $notification);
-})->throws(AfricastalkingException::class);
-
-it('throws an exception when notifiable has routeNotificationForAfricastalking()', function (): void {
-    $channel = app(AfricastalkingChannel::class);
-    $notifiable = new BasicNotifiableNoRoute();
-    $notification = new BasicNotificationReturnsString();
-
-    $channel->send($notifiable, $notification);
-})->throws(AfricastalkingException::class);
+})->throwsNoExceptions();
 
 it('throws an exception when notification has toAfricastalking()', function (): void {
     $channel = app(AfricastalkingChannel::class);
