@@ -53,7 +53,7 @@ You should configure the package by setting the `env` variables in your `.env` f
 
 ## Documentations
 
-The full documentation can be found at [Main Documentation](https://at-laravel.https://mwangi.co.ke/) site.
+The full documentation can be found at [Main Documentation](https://at-laravel-docs.pages.dev/) site.
 
 ## Testing
 
