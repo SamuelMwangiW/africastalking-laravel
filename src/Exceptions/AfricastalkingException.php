@@ -5,12 +5,10 @@ declare(strict_types=1);
 namespace SamuelMwangiW\Africastalking\Exceptions;
 
 use Exception;
-use SamuelMwangiW\Africastalking\Contracts\ReceivesSmsMessages;
 use SamuelMwangiW\Africastalking\ValueObjects\Voice\SynthesisedSpeech;
 
 class AfricastalkingException extends Exception
 {
-
     /**
      * @param class-string $class
      * @return AfricastalkingException
