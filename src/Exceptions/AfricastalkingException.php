@@ -10,16 +10,6 @@ use SamuelMwangiW\Africastalking\ValueObjects\Voice\SynthesisedSpeech;
 
 class AfricastalkingException extends Exception
 {
-    /**
-     * @param class-string $class
-     * @return AfricastalkingException
-     */
-    public static function NotifiableDoesNotImplementReceivesSmsMessages(string $class): AfricastalkingException
-    {
-        return new AfricastalkingException(
-            message: "Notifiable class {$class} does not implement ".ReceivesSmsMessages::class.' contract',
-        );
-    }
 
     /**
      * @param class-string $class
