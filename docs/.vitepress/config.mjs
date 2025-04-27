@@ -32,6 +32,7 @@ export default defineConfig({
         items: [
           { text: 'Sending Bulk Messages', link: '/sms/sending' },
           { text: 'Sending Premium Messages', link: '/sms/premium' },
+          { text: 'Sending OnDemand', link: '/sms/ondemand' },
         ]
       },
       {
