@@ -1,0 +1,10 @@
+{
+    "statusCode": 201,
+    "headers": {
+        "Content-Length": "235",
+        "Content-Type": "application\/json",
+        "Date": "Fri, 25 Apr 2025 21:39:41 GMT",
+        "Server": "akka-http\/10.2.10"
+    },
+    "data": "{\"SMSMessageData\":{\"Message\":\"Sent to 1\/1 Total Cost: USD 0.0079 Message parts: 1\",\"Recipients\":[{\"cost\":\"KES 0.8000\",\"messageId\":\"ATXid_cd235387109fe9719d0e4b738ebe1522\",\"number\":\"+254700072929\",\"status\":\"Success\",\"statusCode\":102}]}}"
+}

@@ -4,72 +4,46 @@ declare(strict_types=1);
 
 namespace SamuelMwangiW\Africastalking\Notifications;
 
-use Illuminate\Http\Client\RequestException;
-use Illuminate\Notifications\Notifiable;
+use Illuminate\Notifications\AnonymousNotifiable;
 use Illuminate\Notifications\Notification;
+use ReflectionException;
+use Saloon\Exceptions\InvalidResponseClassException;
+use Saloon\Exceptions\PendingRequestException;
 use SamuelMwangiW\Africastalking\Contracts\ReceivesSmsMessages;
 use SamuelMwangiW\Africastalking\Exceptions\AfricastalkingException;
 use SamuelMwangiW\Africastalking\Facades\Africastalking;
 use SamuelMwangiW\Africastalking\ValueObjects\Message;
 use SamuelMwangiW\Africastalking\ValueObjects\SentMessageResponse;
+use Throwable;
 
 class AfricastalkingChannel
 {
     /**
-     * @param object $notifiable
+     * @param ReceivesSmsMessages|AnonymousNotifiable $notifiable
      * @param Notification $notification
      * @return SentMessageResponse
      * @throws AfricastalkingException
-     * @throws RequestException
+     * @throws ReflectionException
+     * @throws InvalidResponseClassException
+     * @throws PendingRequestException
+     * @throws Throwable
      */
-    public function send(object $notifiable, Notification $notification): SentMessageResponse
+    public function send(ReceivesSmsMessages|AnonymousNotifiable $notifiable, Notification $notification): SentMessageResponse
     {
-        $this->throwIfNotifiableDoesNotUseTrait($notifiable);
-        $this->throwIfNotifiableHasNoRoute($notifiable);
-        $this->throwIfNotificationHasNoToAfricastalking($notification);
+        if ( ! method_exists($notification, 'toAfricastalking')) {
+            throw AfricastalkingException::NotificationHasNoToAfricastalking($notification::class);
+        }
 
-        /** @phpstan-ignore-next-line */
         $message = $notification->toAfricastalking($notifiable);
 
         if ($message instanceof Message) {
             return $message->send();
         }
 
-        return Africastalking::sms($message)
-            /** @phpstan-ignore-next-line */
-            ->to($notifiable->routeNotificationForAfricastalking($notification))
-            ->send();
-    }
+        $to = $notifiable instanceof ReceivesSmsMessages
+            ? $notifiable->routeNotificationForAfricastalking($notification)
+            : $notifiable->routeNotificationFor(AfricastalkingChannel::class);
 
-    /**
-     * @throws AfricastalkingException
-     */
-    private function throwIfNotifiableDoesNotUseTrait(object $notifiable): void
-    {
-        $traits = collect(class_uses_recursive($notifiable::class));
-
-        if ($traits->doesntContain(Notifiable::class)) {
-            throw AfricastalkingException::objectNotNotifiable($notifiable::class);
-        }
-    }
-
-    /**
-     * @throws AfricastalkingException
-     */
-    private function throwIfNotifiableHasNoRoute(object $notifiable): void
-    {
-        if ( ! $notifiable instanceof ReceivesSmsMessages) {
-            throw AfricastalkingException::NotifiableDoesNotImplementReceivesSmsMessages($notifiable::class);
-        }
-    }
-
-    /**
-     * @throws AfricastalkingException
-     */
-    private function throwIfNotificationHasNoToAfricastalking(Notification $notification): void
-    {
-        if ( ! method_exists($notification, 'toAfricastalking')) {
-            throw AfricastalkingException::NotificationHasNoToAfricastalking($notification::class);
-        }
+        return Africastalking::sms($message)->to($to)->send();
     }
 }

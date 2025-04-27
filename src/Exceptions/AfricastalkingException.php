@@ -5,23 +5,11 @@ declare(strict_types=1);
 namespace SamuelMwangiW\Africastalking\Exceptions;
 
 use Exception;
-use Illuminate\Notifications\Notifiable;
 use SamuelMwangiW\Africastalking\Contracts\ReceivesSmsMessages;
 use SamuelMwangiW\Africastalking\ValueObjects\Voice\SynthesisedSpeech;
 
 class AfricastalkingException extends Exception
 {
-    /**
-     * @param class-string $class
-     * @return AfricastalkingException
-     */
-    public static function objectNotNotifiable(string $class): AfricastalkingException
-    {
-        return new AfricastalkingException(
-            message: "The class {$class} should use ".Notifiable::class.' trait',
-        );
-    }
-
     /**
      * @param class-string $class
      * @return AfricastalkingException
