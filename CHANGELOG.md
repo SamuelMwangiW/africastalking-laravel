@@ -2,6 +2,19 @@
 
 All notable changes to `africastalking-laravel` will be documented in this file.
 
+## v1.9.0 - 2025-04-27
+
+### What's Changed
+
+* feat: add bug template by @njoguamos in https://github.com/SamuelMwangiW/africastalking-laravel/pull/12
+* Add support for On-Demand Notifications by @SamuelMwangiW in https://github.com/SamuelMwangiW/africastalking-laravel/pull/14
+
+### New Contributors
+
+* @njoguamos made their first contribution in https://github.com/SamuelMwangiW/africastalking-laravel/pull/12
+
+**Full Changelog**: https://github.com/SamuelMwangiW/africastalking-laravel/compare/v1.8.0...v1.9.0
+
 ## v1.8.0 - 2025-02-25
 
 ### What's Changed
