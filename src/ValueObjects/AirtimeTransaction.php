@@ -19,6 +19,18 @@ class AirtimeTransaction implements Arrayable, DTOContract
         public int         $amount,
     ) {}
 
+    public function __toString(): string
+    {
+        return strval(
+            json_encode($this->__toArray()),
+        );
+    }
+
+    public function __toArray(): array
+    {
+        return $this->toArray();
+    }
+
     public static function make(string $phoneNumber, Currency $currency, int $amount): AirtimeTransaction
     {
         return new AirtimeTransaction(
@@ -28,23 +40,11 @@ class AirtimeTransaction implements Arrayable, DTOContract
         );
     }
 
-    public function __toString(): string
-    {
-        return strval(
-            json_encode($this->__toArray()),
-        );
-    }
-
     public function toArray(): array
     {
         return [
             'phoneNumber' => $this->phoneNumber->number,
             'amount' => "{$this->currencyCode->value} {$this->amount}",
         ];
-    }
-
-    public function __toArray(): array
-    {
-        return $this->toArray();
     }
 }

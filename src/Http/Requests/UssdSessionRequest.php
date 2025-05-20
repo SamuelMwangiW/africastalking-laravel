@@ -28,16 +28,16 @@ class UssdSessionRequest extends FormRequest
         ];
     }
 
+    public function userInput(): ?string
+    {
+        return $this->get('text');
+    }
+
     protected function prepareForValidation(): void
     {
         $this->merge([
             'networkCode' => $this->integer('networkCode'),
         ]);
-    }
-
-    public function userInput(): ?string
-    {
-        return $this->get('text');
     }
 
     protected function idKey(): string

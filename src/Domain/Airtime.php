@@ -82,11 +82,6 @@ class Airtime
         return $this;
     }
 
-    private function lessThanMinimumAmount(Currency $currency, int $amount): bool
-    {
-        return $amount < $currency->minimumAirtimeAmount();
-    }
-
     /**
      * @return AirtimeResponse
      * @throws ReflectionException
@@ -104,16 +99,21 @@ class Airtime
         return $request->send()->throw()->dto();
     }
 
+    /** @internal */
+    public function transactions(): array
+    {
+        return [];
+    }
+
+    private function lessThanMinimumAmount(Currency $currency, int $amount): bool
+    {
+        return $amount < $currency->minimumAirtimeAmount();
+    }
+
     private function recipients(): string
     {
         return (string) json_encode(
             $this->recipients->map(fn(AirtimeTransaction $recipient) => $recipient->toArray())->toArray(),
         );
-    }
-
-    /** @internal */
-    public function transactions(): array
-    {
-        return [];
     }
 }

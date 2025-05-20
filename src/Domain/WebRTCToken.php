@@ -17,9 +17,9 @@ class WebRTCToken
 {
     public ?string $username = null;
     public ?string $clientName;
-    private int $maxlifeTimeSec = 86400;
     public int $lifeTimeSec = 86400;
     public ?PhoneNumber $phone;
+    private int $maxlifeTimeSec = 86400;
 
     public function for(?string $name = null): static
     {

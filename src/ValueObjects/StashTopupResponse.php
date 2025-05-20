@@ -15,15 +15,6 @@ class StashTopupResponse implements DTOContract
         public string $description,
     ) {}
 
-    public static function make(array $attributes): StashTopupResponse
-    {
-        return new StashTopupResponse(
-            id: data_get($attributes, 'transactionId', 'Failed'),
-            status: Status::from(data_get($attributes, 'status')),
-            description: data_get($attributes, 'description'),
-        );
-    }
-
     public function __toString(): string
     {
         return (string) json_encode($this->__toArray());
@@ -36,5 +27,14 @@ class StashTopupResponse implements DTOContract
             'status' => $this->status,
             'description' => $this->description,
         ];
+    }
+
+    public static function make(array $attributes): StashTopupResponse
+    {
+        return new StashTopupResponse(
+            id: data_get($attributes, 'transactionId', 'Failed'),
+            status: Status::from(data_get($attributes, 'status')),
+            description: data_get($attributes, 'description'),
+        );
     }
 }

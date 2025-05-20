@@ -14,14 +14,6 @@ class Balance implements DTOContract
         public Currency $currency,
     ) {}
 
-    public static function make(float $balance, Currency $currency): Balance
-    {
-        return new Balance(
-            amount: $balance,
-            currency: $currency,
-        );
-    }
-
     public function __toString(): string
     {
         return "{$this->currency->value} {$this->amount}";
@@ -34,5 +26,13 @@ class Balance implements DTOContract
             'currency' => $this->currency->value,
             'balance' => "{$this->currency->value} {$this->amount}",
         ];
+    }
+
+    public static function make(float $balance, Currency $currency): Balance
+    {
+        return new Balance(
+            amount: $balance,
+            currency: $currency,
+        );
     }
 }

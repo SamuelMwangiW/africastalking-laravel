@@ -18,20 +18,6 @@ class CapabilityToken implements DTOContract
         public readonly ?string $phoneNumber = null,
     ) {}
 
-    public static function fromSaloon(Response $response, ?string $phoneNumber = null): CapabilityToken
-    {
-        $data = $response->json();
-
-        return new CapabilityToken(
-            clientName: data_get($data, 'clientName'),
-            incoming: data_get($data, 'incoming'),
-            lifeTimeSec: (int) data_get($data, 'lifeTimeSec'),
-            outgoing: data_get($data, 'outgoing'),
-            token: data_get($data, 'token'),
-            phoneNumber: $phoneNumber,
-        );
-    }
-
     public function __toString(): string
     {
         return $this->token;
@@ -47,5 +33,19 @@ class CapabilityToken implements DTOContract
             'token' => $this->token,
             'phoneNumber' => $this->phoneNumber,
         ];
+    }
+
+    public static function fromSaloon(Response $response, ?string $phoneNumber = null): CapabilityToken
+    {
+        $data = $response->json();
+
+        return new CapabilityToken(
+            clientName: data_get($data, 'clientName'),
+            incoming: data_get($data, 'incoming'),
+            lifeTimeSec: (int) data_get($data, 'lifeTimeSec'),
+            outgoing: data_get($data, 'outgoing'),
+            token: data_get($data, 'token'),
+            phoneNumber: $phoneNumber,
+        );
     }
 }

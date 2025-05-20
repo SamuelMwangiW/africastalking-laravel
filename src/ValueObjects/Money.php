@@ -14,16 +14,6 @@ class Money implements DTOContract
         public readonly Currency $currency,
     ) {}
 
-    public static function make(string $value): Money
-    {
-        $parts = explode(' ', $value);
-
-        return new Money(
-            amount: floatval($parts[1]),
-            currency: Currency::from($parts[0]),
-        );
-    }
-
     public function __toString(): string
     {
         return "{$this->currency->value} {$this->amount}";
@@ -35,5 +25,15 @@ class Money implements DTOContract
             'amount' => $this->amount,
             'currency' => $this->currency,
         ];
+    }
+
+    public static function make(string $value): Money
+    {
+        $parts = explode(' ', $value);
+
+        return new Money(
+            amount: floatval($parts[1]),
+            currency: Currency::from($parts[0]),
+        );
     }
 }

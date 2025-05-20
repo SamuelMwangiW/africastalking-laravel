@@ -43,11 +43,6 @@ class AirtimeValidationRequest extends FormRequest
         ];
     }
 
-    protected function idKey(): string
-    {
-        return 'transactionId';
-    }
-
     public function sourceIp(): string
     {
         return $this->get(key: 'sourceIpAddress');
@@ -61,5 +56,10 @@ class AirtimeValidationRequest extends FormRequest
     public function currencyCode(): string
     {
         return $this->get(key: 'currencyCode');
+    }
+
+    protected function idKey(): string
+    {
+        return 'transactionId';
     }
 }

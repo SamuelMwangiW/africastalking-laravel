@@ -25,6 +25,20 @@ class AirtimeResponse implements DTOContract
         public readonly Collection $responses,
     ) {}
 
+    public function __toString(): string
+    {
+        return (string) json_encode($this);
+    }
+
+    public function __toArray(): array
+    {
+        return [
+            'error' => $this->errorMessage,
+            'total' => $this->amount,
+            'discount' => $this->discount,
+        ];
+    }
+
     public static function fromSaloon(Response $response): AirtimeResponse
     {
         return new AirtimeResponse(
@@ -39,22 +53,8 @@ class AirtimeResponse implements DTOContract
         );
     }
 
-    public function __toString(): string
-    {
-        return (string) json_encode($this);
-    }
-
     public function hasDuplicate(): bool
     {
         return 'A duplicate request was received within the last 5 minutes' === $this->errorMessage;
-    }
-
-    public function __toArray(): array
-    {
-        return [
-            'error' => $this->errorMessage,
-            'total' => $this->amount,
-            'discount' => $this->discount,
-        ];
     }
 }

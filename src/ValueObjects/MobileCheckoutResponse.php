@@ -15,21 +15,6 @@ class MobileCheckoutResponse implements DTOContract
         public readonly string $status,
     ) {}
 
-    public static function make(mixed $details): MobileCheckoutResponse
-    {
-        return new MobileCheckoutResponse(
-            id: data_get($details, 'transactionId'),
-            description: data_get($details, 'description'),
-            providerChannel: data_get($details, 'providerChannel'),
-            status: data_get($details, 'status'),
-        );
-    }
-
-    public function hasDuplicate(): bool
-    {
-        return 'DuplicateRequest' === $this->status;
-    }
-
     public function __toString(): string
     {
         return (string) json_encode($this);
@@ -43,5 +28,20 @@ class MobileCheckoutResponse implements DTOContract
             'status' => $this->status,
             'transactionId' => $this->id,
         ];
+    }
+
+    public static function make(mixed $details): MobileCheckoutResponse
+    {
+        return new MobileCheckoutResponse(
+            id: data_get($details, 'transactionId'),
+            description: data_get($details, 'description'),
+            providerChannel: data_get($details, 'providerChannel'),
+            status: data_get($details, 'status'),
+        );
+    }
+
+    public function hasDuplicate(): bool
+    {
+        return 'DuplicateRequest' === $this->status;
     }
 }

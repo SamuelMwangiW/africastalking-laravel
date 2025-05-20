@@ -44,16 +44,6 @@ class VoiceEventRequest extends FormRequest
         ];
     }
 
-    protected function phoneNumberKey(): string
-    {
-        return 'callerNumber';
-    }
-
-    protected function idKey(): string
-    {
-        return 'sessionId';
-    }
-
     public function downloadRecording(string|null $disk = null, string|null $path = null): void
     {
         if ($this->isEmptyString('recordingUrl')) {
@@ -70,5 +60,15 @@ class VoiceEventRequest extends FormRequest
             $disk,
             $path,
         );
+    }
+
+    protected function phoneNumberKey(): string
+    {
+        return 'callerNumber';
+    }
+
+    protected function idKey(): string
+    {
+        return 'sessionId';
     }
 }

@@ -68,6 +68,16 @@ class MobileCheckout
             ->dto();
     }
 
+    public function getMetadata(): array
+    {
+        return $this->metadata;
+    }
+
+    public function getProductName(): string
+    {
+        return $this->productName ?? config('africastalking.payment.product-name');
+    }
+
     private function data(): array
     {
         return [
@@ -77,15 +87,5 @@ class MobileCheckout
             'amount' => $this->amount,
             'metadata' => (object) $this->getMetadata(),
         ];
-    }
-
-    public function getMetadata(): array
-    {
-        return $this->metadata;
-    }
-
-    public function getProductName(): string
-    {
-        return $this->productName ?? config('africastalking.payment.product-name');
     }
 }

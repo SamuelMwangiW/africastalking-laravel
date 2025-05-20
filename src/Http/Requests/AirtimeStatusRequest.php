@@ -52,11 +52,6 @@ class AirtimeStatusRequest extends FormRequest
         ];
     }
 
-    protected function idKey(): string
-    {
-        return 'requestId';
-    }
-
     public function value(): string
     {
         return $this->get(key: 'value');
@@ -73,5 +68,10 @@ class AirtimeStatusRequest extends FormRequest
             needle: $this->get(key: 'status'),
             haystack: ['Rejected', 'Failed'],
         );
+    }
+
+    protected function idKey(): string
+    {
+        return 'requestId';
     }
 }

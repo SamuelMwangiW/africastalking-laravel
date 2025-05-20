@@ -19,6 +19,19 @@ class SentMessageResponse implements DTOContract
         public readonly Collection $recipients,
     ) {}
 
+    public function __toString(): string
+    {
+        return $this->message;
+    }
+
+    public function __toArray(): array
+    {
+        return [
+            'message' => $this->message,
+            'recipients' => $this->recipients->toArray(),
+        ];
+    }
+
     public static function fromSaloon(Response $response): SentMessageResponse
     {
         $data = $response->json('SMSMessageData');
@@ -31,18 +44,5 @@ class SentMessageResponse implements DTOContract
                     fn(array $recipient) => SentMessageRecipient::make($recipient),
                 ),
         );
-    }
-
-    public function __toString(): string
-    {
-        return $this->message;
-    }
-
-    public function __toArray(): array
-    {
-        return [
-            'message' => $this->message,
-            'recipients' => $this->recipients->toArray(),
-        ];
     }
 }

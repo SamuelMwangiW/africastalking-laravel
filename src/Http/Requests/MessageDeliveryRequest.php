@@ -58,6 +58,14 @@ class MessageDeliveryRequest extends FormRequest
         ];
     }
 
+    public function deliveryFailed(): bool
+    {
+        return in_array(
+            needle: $this->get(key: 'status'),
+            haystack: ['Rejected', 'Failed'],
+        );
+    }
+
     protected function prepareForValidation(): void
     {
         $this->merge([
@@ -68,13 +76,5 @@ class MessageDeliveryRequest extends FormRequest
     protected function idKey(): string
     {
         return 'id';
-    }
-
-    public function deliveryFailed(): bool
-    {
-        return in_array(
-            needle: $this->get(key: 'status'),
-            haystack: ['Rejected', 'Failed'],
-        );
     }
 }

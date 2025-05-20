@@ -20,15 +20,6 @@ class VoiceCallResponse implements DTOContract
         public readonly ?int $queueSize = 0,
     ) {}
 
-    public static function fromSaloon(Response $response): VoiceCallResponse
-    {
-        return new VoiceCallResponse(
-            errorMessage: $response->json('errorMessage'),
-            recipients: $response->collect('entries'),
-            queueSize: intval($response->header('X-Current-Queue-Size')),
-        );
-    }
-
     public function __toString(): string
     {
         return (string) json_encode($this);
@@ -37,5 +28,14 @@ class VoiceCallResponse implements DTOContract
     public function __toArray(): array
     {
         return [];
+    }
+
+    public static function fromSaloon(Response $response): VoiceCallResponse
+    {
+        return new VoiceCallResponse(
+            errorMessage: $response->json('errorMessage'),
+            recipients: $response->collect('entries'),
+            queueSize: intval($response->header('X-Current-Queue-Size')),
+        );
     }
 }
