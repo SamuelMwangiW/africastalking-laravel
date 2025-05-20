@@ -56,6 +56,16 @@ class IncomingMessageRequest extends FormRequest
         ];
     }
 
+    public function linkId(): ?string
+    {
+        return $this->get(key: 'linkId');
+    }
+
+    public function recipient(): string
+    {
+        return $this->get(key: 'to');
+    }
+
     protected function prepareForValidation(): void
     {
         $this->merge([
@@ -66,16 +76,6 @@ class IncomingMessageRequest extends FormRequest
     protected function idKey(): string
     {
         return 'id';
-    }
-
-    public function linkId(): ?string
-    {
-        return $this->get(key: 'linkId');
-    }
-
-    public function recipient(): string
-    {
-        return $this->get(key: 'to');
     }
 
     protected function phoneNumberKey(): string

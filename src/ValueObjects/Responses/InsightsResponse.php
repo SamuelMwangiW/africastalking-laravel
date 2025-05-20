@@ -27,6 +27,22 @@ class InsightsResponse implements DTOContract
         public readonly string     $id,
     ) {}
 
+    public function __toString(): string
+    {
+        return json_encode($this->__toArray()).PHP_EOL;
+    }
+
+    public function __toArray(): array
+    {
+        return [
+            'transactionId' => $this->id,
+            'responses' => $this->items,
+            'status' => $this->status->value,
+            'items' => $this->items->toArray(),
+            'cost' => "{$this->cost->currency->value} {$this->cost->amount}",
+        ];
+    }
+
     public static function fromSaloon(Response $response): InsightsResponse
     {
         $items = $response
@@ -64,21 +80,5 @@ class InsightsResponse implements DTOContract
             ),
             id: $response->json('transactionId'),
         );
-    }
-
-    public function __toString(): string
-    {
-        return json_encode($this->__toArray()).PHP_EOL;
-    }
-
-    public function __toArray(): array
-    {
-        return [
-            'transactionId' => $this->id,
-            'responses' => $this->items,
-            'status' => $this->status->value,
-            'items' => $this->items->toArray(),
-            'cost' => "{$this->cost->currency->value} {$this->cost->amount}",
-        ];
     }
 }

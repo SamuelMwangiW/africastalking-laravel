@@ -44,18 +44,6 @@ class UssdEventRequest extends FormRequest
         ];
     }
 
-    protected function prepareForValidation(): void
-    {
-        $this->merge([
-            'networkCode' => $this->integer('networkCode'),
-        ]);
-    }
-
-    protected function idKey(): string
-    {
-        return 'sessionId';
-    }
-
     public function userInput(): ?string
     {
         return $this->get('input');
@@ -76,5 +64,17 @@ class UssdEventRequest extends FormRequest
         return CarbonInterval::microseconds(
             $this->get('durationInMillis', 0),
         );
+    }
+
+    protected function prepareForValidation(): void
+    {
+        $this->merge([
+            'networkCode' => $this->integer('networkCode'),
+        ]);
+    }
+
+    protected function idKey(): string
+    {
+        return 'sessionId';
     }
 }

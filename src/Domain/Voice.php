@@ -13,6 +13,15 @@ class Voice
 {
     use ForwardsCalls;
 
+    public function __call(string $method, array $arguments): VoiceResponse
+    {
+        return $this->forwardCallTo(
+            object: app(VoiceResponse::class),
+            method: $method,
+            parameters: $arguments,
+        );
+    }
+
     public function call(PhoneNumber|string|array|null $recipients = null): VoiceCall
     {
         return app(VoiceCall::class)->to($recipients);
@@ -26,14 +35,5 @@ class Voice
     public function queueStatus(?array $phoneNumbers = null): QueueStatus
     {
         return app(QueueStatus::class)->for($phoneNumbers);
-    }
-
-    public function __call(string $method, array $arguments): VoiceResponse
-    {
-        return $this->forwardCallTo(
-            object: app(VoiceResponse::class),
-            method: $method,
-            parameters: $arguments,
-        );
     }
 }

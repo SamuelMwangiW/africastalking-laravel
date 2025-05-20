@@ -15,6 +15,16 @@ class DataBundlesResponse implements \SamuelMwangiW\Africastalking\Contracts\DTO
         public readonly Collection $entries,
     ) {}
 
+    public function __toString(): string
+    {
+        return (string) json_encode($this);
+    }
+
+    public function __toArray(): array
+    {
+        return [];
+    }
+
     public static function fromResponse(Response $response): DataBundlesResponse
     {
         $entries = $response
@@ -29,15 +39,5 @@ class DataBundlesResponse implements \SamuelMwangiW\Africastalking\Contracts\DTO
             ));
 
         return new DataBundlesResponse(entries: $entries);
-    }
-
-    public function __toString(): string
-    {
-        return (string) json_encode($this);
-    }
-
-    public function __toArray(): array
-    {
-        return [];
     }
 }

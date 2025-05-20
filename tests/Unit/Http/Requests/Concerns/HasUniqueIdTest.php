@@ -15,14 +15,14 @@ it('overrides the idKey', function (): void {
     $classWithKeyOverridden = new class () {
         use SamuelMwangiW\Africastalking\Http\Requests\Concerns\HasUniqueId;
 
-        protected function idKey(): string
-        {
-            return 'overridden';
-        }
-
         public function getKey(): string
         {
             return $this->idKey();
+        }
+
+        protected function idKey(): string
+        {
+            return 'overridden';
         }
     };
 

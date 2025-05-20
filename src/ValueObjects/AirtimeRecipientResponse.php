@@ -18,6 +18,16 @@ class AirtimeRecipientResponse implements DTOContract
         public readonly string $discount,
     ) {}
 
+    public function __toString(): string
+    {
+        return (string) json_encode($this);
+    }
+
+    public function __toArray(): array
+    {
+        return [];
+    }
+
     public static function make(array $response): AirtimeRecipientResponse
     {
         return new AirtimeRecipientResponse(
@@ -28,15 +38,5 @@ class AirtimeRecipientResponse implements DTOContract
             requestId: data_get($response, 'requestId'),
             discount: data_get($response, 'discount'),
         );
-    }
-
-    public function __toString(): string
-    {
-        return (string) json_encode($this);
-    }
-
-    public function __toArray(): array
-    {
-        return [];
     }
 }

@@ -18,11 +18,6 @@ class PhoneNumber implements DTOContract
         $this->number = str_replace(search: [' ', '-', '.'], replace: '', subject: $number);
     }
 
-    public static function make(string $phone): PhoneNumber
-    {
-        return new PhoneNumber($phone);
-    }
-
     public function __toString(): string
     {
         return $this->number;
@@ -37,6 +32,11 @@ class PhoneNumber implements DTOContract
             'networkCode' => $this->networkCode,
             'numberType' => $this->numberType,
         ];
+    }
+
+    public static function make(string $phone): PhoneNumber
+    {
+        return new PhoneNumber($phone);
     }
 
     public function isValid(): bool

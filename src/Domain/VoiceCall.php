@@ -18,10 +18,10 @@ class VoiceCall
 {
     /** @var Collection<int,PhoneNumber> */
     protected Collection $recipients;
-    private PhoneNumber $from;
     protected ?string $clientRequestId = null;
 
     protected array $actions = [];
+    private PhoneNumber $from;
 
     public function to(PhoneNumber|string|array|null $recipients): static
     {

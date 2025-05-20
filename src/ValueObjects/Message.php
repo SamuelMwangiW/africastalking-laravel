@@ -32,6 +32,30 @@ class Message implements DTOContract
         public string|null $from = null,
     ) {}
 
+    public function __toString(): string
+    {
+        return strval(json_encode($this));
+    }
+
+    /**
+     * @return array<string,mixed>
+     */
+    public function __toArray(): array
+    {
+        return [
+            'bulkSMSMode' => $this->bulkSMSMode,
+            'enqueue' => $this->enqueue,
+            'keyword' => $this->keyword,
+            'linkId' => $this->linkId,
+            'retryDurationInHours' => $this->retryDurationInHours,
+            'message' => $this->message,
+            'to' => $this->to?->toArray(),
+            'from' => $this->from(),
+            'isBulk' => $this->isBulk,
+            'isPremium' => ! $this->isBulk,
+        ];
+    }
+
     public function enqueue(bool|int $value = true): static
     {
         $this->enqueue = $value ? 1 : 0;
@@ -145,50 +169,19 @@ class Message implements DTOContract
         return $response->dto();
     }
 
-    protected function from(): ?string
-    {
-        $from = $this->from ?? config('africastalking.sms.from');
-
-        return blank($from) ? null : $from;
-    }
-
-    private function request(): BulkSmsRequest|PremiumSmsRequest
-    {
-        return $this->isBulk
-            ? new BulkSmsRequest($this->data())
-            : new PremiumSmsRequest($this->data());
-    }
-
-    public function __toString(): string
-    {
-        return strval(json_encode($this));
-    }
-
-    /**
-     * @return array<string,mixed>
-     */
-    public function __toArray(): array
-    {
-        return [
-            'bulkSMSMode' => $this->bulkSMSMode,
-            'enqueue' => $this->enqueue,
-            'keyword' => $this->keyword,
-            'linkId' => $this->linkId,
-            'retryDurationInHours' => $this->retryDurationInHours,
-            'message' => $this->message,
-            'to' => $this->to?->toArray(),
-            'from' => $this->from(),
-            'isBulk' => $this->isBulk,
-            'isPremium' => ! $this->isBulk,
-        ];
-    }
-
     /**
      * @return Collection<int,Collection<int,mixed>>|null
      */
     public function messages(): ?Collection
     {
         return null;
+    }
+
+    protected function from(): ?string
+    {
+        $from = $this->from ?? config('africastalking.sms.from');
+
+        return blank($from) ? null : $from;
     }
 
     protected function data(): array
@@ -209,5 +202,12 @@ class Message implements DTOContract
             array_filter($data),
             ['from' => $this->from(), 'bulkSMSMode' => $this->bulkSMSMode],
         );
+    }
+
+    private function request(): BulkSmsRequest|PremiumSmsRequest
+    {
+        return $this->isBulk
+            ? new BulkSmsRequest($this->data())
+            : new PremiumSmsRequest($this->data());
     }
 }
