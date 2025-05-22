@@ -1,1 +1,10 @@
-{"statusCode":201,"headers":{"Date":"Tue, 21 Nov 2023 00:32:16 GMT","Content-Type":"application\/json","Content-Length":"277","Connection":"keep-alive","Server":"akka-http\/10.2.10"},"data":"{\"errorMessage\":\"None\",\"numSent\":1,\"responses\":[{\"amount\":\"KES 277.0000\",\"discount\":\"KES 11.0800\",\"errorMessage\":\"None\",\"phoneNumber\":\"+254700072928\",\"requestId\":\"ATQid_cbc257adb9c4d2d5e94cf4a5749e637b\",\"status\":\"Sent\"}],\"totalAmount\":\"USD 2.7384\",\"totalDiscount\":\"USD 0.1095\"}"}
+{
+    "statusCode": 201,
+    "headers": {
+        "Content-Length": "275",
+        "Content-Type": "application\/json",
+        "Date": "Thu, 22 May 2025 19:44:38 GMT",
+        "Server": "akka-http\/10.2.10"
+    },
+    "data": "{\"errorMessage\":\"None\",\"numSent\":1,\"responses\":[{\"amount\":\"KES 44.0000\",\"discount\":\"KES 1.7600\",\"errorMessage\":\"None\",\"phoneNumber\":\"+254700072929\",\"requestId\":\"ATQid_b48953ea1f0b795c2cec8d0e2a4500ad\",\"status\":\"Sent\"}],\"totalAmount\":\"USD 0.4350\",\"totalDiscount\":\"USD 0.0174\"}"
+}

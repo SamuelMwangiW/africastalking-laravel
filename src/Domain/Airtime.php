@@ -110,10 +110,10 @@ class Airtime
         return $amount < $currency->minimumAirtimeAmount();
     }
 
-    private function recipients(): string
+    private function recipients(): array
     {
-        return (string) json_encode(
-            $this->recipients->map(fn(AirtimeTransaction $recipient) => $recipient->toArray())->toArray(),
-        );
+        return $this->recipients->map(
+            fn(AirtimeTransaction $recipient) => $recipient->toArray(),
+        )->toArray();
     }
 }

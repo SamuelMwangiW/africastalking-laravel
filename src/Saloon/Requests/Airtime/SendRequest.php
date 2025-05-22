@@ -6,19 +6,19 @@ namespace SamuelMwangiW\Africastalking\Saloon\Requests\Airtime;
 
 use Saloon\Contracts\Body\HasBody;
 use Saloon\Http\Response;
-use Saloon\Traits\Body\HasFormBody;
+use Saloon\Traits\Body\HasJsonBody;
 use SamuelMwangiW\Africastalking\Enum\Service;
 use SamuelMwangiW\Africastalking\Saloon\Requests\BaseRequest;
 use SamuelMwangiW\Africastalking\ValueObjects\AirtimeResponse;
 
 class SendRequest extends BaseRequest implements HasBody
 {
-    use HasFormBody;
+    use HasJsonBody;
 
     public Service $service = Service::AIRTIME;
 
     public function __construct(
-        private readonly string $recipients,
+        private readonly array $recipients,
     ) {}
 
     public function resolveEndpoint(): string
