@@ -8,6 +8,7 @@ use Composer\InstalledVersions;
 use Exception;
 use Illuminate\Foundation\Console\AboutCommand;
 use Illuminate\Support\Facades\App;
+use Saloon\Http\Senders\GuzzleSender;
 use SamuelMwangiW\Africastalking\Saloon\AfricastalkingConnector;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
@@ -59,7 +60,7 @@ class AfricastalkingServiceProvider extends PackageServiceProvider
                 concrete: fn() => new AfricastalkingConnector(),
             );
 
-            config()->set('saloon.integrations_path', 'vendor/samuelmwangiw/africastalking-laravel/src/Saloon');
+            $this->app->singletonIf(GuzzleSender::class, fn() => new GuzzleSender());
         }
     }
 }
