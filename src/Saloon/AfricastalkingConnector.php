@@ -6,7 +6,9 @@ namespace SamuelMwangiW\Africastalking\Saloon;
 
 use Exception;
 use Illuminate\Support\Str;
+use Saloon\Contracts\Sender;
 use Saloon\Http\Connector;
+use Saloon\Http\Senders\GuzzleSender;
 use Saloon\Traits\Plugins\AcceptsJson;
 use SamuelMwangiW\Africastalking\Enum\Service;
 
@@ -43,6 +45,11 @@ class AfricastalkingConnector extends Connector
     public function username(): string
     {
         return config(key: 'africastalking.username');
+    }
+
+    protected function defaultSender(): Sender
+    {
+        return resolve(GuzzleSender::class);
     }
 
     private function isSandboxEnvironment(): bool
