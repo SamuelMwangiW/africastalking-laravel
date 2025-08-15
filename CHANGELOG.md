@@ -2,6 +2,16 @@
 
 All notable changes to `africastalking-laravel` will be documented in this file.
 
+## v1.9.1 - 2025-08-15
+
+### What's Changed
+
+* feat: update vitepress documentation by @njoguamos in https://github.com/SamuelMwangiW/africastalking-laravel/pull/11
+* chore: Update pint rules by @SamuelMwangiW in https://github.com/SamuelMwangiW/africastalking-laravel/pull/16
+* Scope the guzzle sender by @SamuelMwangiW in https://github.com/SamuelMwangiW/africastalking-laravel/pull/25
+
+**Full Changelog**: https://github.com/SamuelMwangiW/africastalking-laravel/compare/v1.9.0...v1.9.1
+
 ## v1.9.0 - 2025-04-27
 
 ### What's Changed
