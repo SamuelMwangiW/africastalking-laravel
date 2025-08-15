@@ -59,8 +59,8 @@ class AfricastalkingServiceProvider extends PackageServiceProvider
                 abstract: AfricastalkingConnector::class,
                 concrete: fn() => new AfricastalkingConnector(),
             );
-
-            $this->app->singletonIf(GuzzleSender::class, fn() => new GuzzleSender());
         }
+
+        $this->app->singletonIf(GuzzleSender::class, fn() => new GuzzleSender());
     }
 }
