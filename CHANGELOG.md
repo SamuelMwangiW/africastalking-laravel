@@ -2,6 +2,15 @@
 
 All notable changes to `africastalking-laravel` will be documented in this file.
 
+## v1.10.0 - 2025-10-14
+
+### What's Changed
+
+* pest v4 by @SamuelMwangiW in https://github.com/SamuelMwangiW/africastalking-laravel/pull/29
+* Drop support for PHP 8.2 in [f34c9d5](https://github.com/SamuelMwangiW/africastalking-laravel/pull/29/commits/f34c9d5fd51f5599e48db672f3f0af7bf6ceec44)
+
+**Full Changelog**: https://github.com/SamuelMwangiW/africastalking-laravel/compare/v1.9.1...v1.10.0
+
 ## v1.9.1 - 2025-08-15
 
 ### What's Changed
