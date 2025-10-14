@@ -24,6 +24,7 @@ jobs:
         os: [ubuntu-latest]
         php: [8.2, 8.3, 8.4]
         laravel: ["^12.0", "^11.0"]
+        shard: [1, 2, 3, 4]
         stability: [prefer-lowest, prefer-stable]
         include:
           - laravel: "^11.0"
@@ -31,7 +32,7 @@ jobs:
           - laravel: "^12.0"
             testbench: 10.*
 
-    name: P${{ matrix.php }} - L${{ matrix.laravel }} - ${{ matrix.stability }} - ${{ matrix.os }}
+    name: Tests P${{ matrix.php }} - L${{ matrix.laravel }} - ${{ matrix.stability }} - ${{ matrix.os }} (Shard ${{ matrix.shard }}/4)
 
     steps:
       - name: Checkout code
@@ -60,7 +61,7 @@ jobs:
           composer update --${{ matrix.stability }} --prefer-dist --no-interaction
 
       - name: Execute tests
-        run: vendor/bin/pest --coverage-clover coverage.xml --color=always
+        run: vendor/bin/pest --coverage-clover coverage.xml --color=always --shard ${{ matrix.shard }}/4
 
       - name: Upload coverage reports to Codecov
         uses: codecov/codecov-action@v5
