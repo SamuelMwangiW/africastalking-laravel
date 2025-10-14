@@ -2,6 +2,10 @@
 
 All notable changes to `africastalking-laravel` will be documented in this file.
 
+## v2.0.0 - 2025-10-14
+
+* Drop support for php 8.2
+
 ## v1.10.0 - 2025-10-14
 
 ### What's Changed
