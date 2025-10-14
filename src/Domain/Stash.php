@@ -15,7 +15,7 @@ class Stash
     private array $metadata = [];
     private ?string $product = null;
 
-    public function send(null|string|Currency $currency = null, int|null $amount = null): StashTopupResponse
+    public function send(string|Currency|null $currency = null, ?int $amount = null): StashTopupResponse
     {
         if (null !== $currency) {
             $this->currency($currency);
@@ -31,7 +31,7 @@ class Stash
             ->dto();
     }
 
-    public function topup(null|string|Currency $currency = null, int|null $amount = null): StashTopupResponse
+    public function topup(string|Currency|null $currency = null, ?int $amount = null): StashTopupResponse
     {
         return $this->send($currency, $amount);
     }

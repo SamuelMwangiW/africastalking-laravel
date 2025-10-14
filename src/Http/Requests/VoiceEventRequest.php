@@ -44,7 +44,7 @@ class VoiceEventRequest extends FormRequest
         ];
     }
 
-    public function downloadRecording(string|null $disk = null, string|null $path = null): void
+    public function downloadRecording(?string $disk = null, ?string $path = null): void
     {
         if ($this->isEmptyString('recordingUrl')) {
             return;

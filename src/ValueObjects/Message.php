@@ -17,9 +17,9 @@ class Message implements DTOContract
     public int $bulkSMSMode = 1;
     public bool $isBulk = true;
     public int $enqueue = 1;
-    public string|null $keyword = null;
-    public string|null $linkId = null;
-    public int|null $retryDurationInHours = null;
+    public ?string $keyword = null;
+    public ?string $linkId = null;
+    public ?int $retryDurationInHours = null;
 
     /**
      * @param string|null $message
@@ -27,9 +27,9 @@ class Message implements DTOContract
      * @param string|null $from
      */
     public function __construct(
-        public string|null $message = null,
-        public Collection|null $to = null,
-        public string|null $from = null,
+        public ?string $message = null,
+        public ?Collection $to = null,
+        public ?string $from = null,
     ) {}
 
     public function __toString(): string
@@ -63,21 +63,21 @@ class Message implements DTOContract
         return $this;
     }
 
-    public function as(string|null $from): static
+    public function as(?string $from): static
     {
         $this->from = $from;
 
         return $this;
     }
 
-    public function text(string|null $message): static
+    public function text(?string $message): static
     {
         $this->message = $message;
 
         return $this;
     }
 
-    public function message(string|null $message): static
+    public function message(?string $message): static
     {
         return $this->text($message);
     }
@@ -123,14 +123,14 @@ class Message implements DTOContract
         return $this;
     }
 
-    public function keyword(string|null $value): static
+    public function keyword(?string $value): static
     {
         $this->keyword = $value;
 
         return $this;
     }
 
-    public function linkId(string|null $value): static
+    public function linkId(?string $value): static
     {
         $this->linkId = $value;
 

@@ -10,7 +10,7 @@ class QueueStatus
 {
     public ?array $phoneNumbers;
 
-    public function for(null|string|array $phoneNumbers): static
+    public function for(string|array|null $phoneNumbers): static
     {
         if (is_string($phoneNumbers)) {
             $phoneNumbers = [$phoneNumbers];

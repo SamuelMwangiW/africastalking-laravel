@@ -27,8 +27,8 @@ class DownloadCallRecording implements ShouldBeUnique, ShouldQueue
     public function __construct(
         public readonly string      $url,
         public readonly string      $callSessionId,
-        public readonly string|null $disk = null,
-        public readonly string|null $path = null,
+        public readonly ?string $disk = null,
+        public readonly ?string $path = null,
     ) {}
 
     /**

@@ -30,7 +30,7 @@ class VoiceResponse implements Responsable
     /**
      * @throws AfricastalkingException
      */
-    public function say(string|callable $message, bool $playBeep = false, string|null $voice = null): static
+    public function say(string|callable $message, bool $playBeep = false, ?string $voice = null): static
     {
         $this->response .= Say::make($message, $playBeep, $voice)->build();
 
@@ -46,10 +46,10 @@ class VoiceResponse implements Responsable
 
     public function getDigits(
         string      $say,
-        string|null $finishOnKey = null,
-        int|null    $timeout = null,
-        int|null    $numDigits = null,
-        string|null $callbackUrl = null,
+        ?string $finishOnKey = null,
+        ?int    $timeout = null,
+        ?int    $numDigits = null,
+        ?string $callbackUrl = null,
     ): static {
         $this->response .= GetDigits::make(
             say: $say,
@@ -64,12 +64,12 @@ class VoiceResponse implements Responsable
 
     public function record(
         string      $say,
-        string|null $finishOnKey = null,
-        int|null    $timeout = null,
-        int|null    $maxLength = null,
+        ?string $finishOnKey = null,
+        ?int    $timeout = null,
+        ?int    $maxLength = null,
         bool        $playBeep = false,
         bool        $trimSilence = false,
-        string|null $callbackUrl = null,
+        ?string $callbackUrl = null,
     ): static {
         $this->response .= Record::make(
             say: $say,
@@ -87,10 +87,10 @@ class VoiceResponse implements Responsable
     public function dial(
         array       $phoneNumbers,
         bool        $record = false,
-        string|null $ringBackTone = null,
+        ?string $ringBackTone = null,
         int         $maxDuration = 0,
         bool        $sequential = false,
-        string|null $callerId = null,
+        ?string $callerId = null,
     ): static {
         $this->response .= Dial::make(
             phoneNumbers: $phoneNumbers,

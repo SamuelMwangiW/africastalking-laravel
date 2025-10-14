@@ -15,7 +15,7 @@ class VoiceCallDTO implements DTOContract
          * @var Collection<int,PhoneNumber>
          */
         public readonly Collection $to,
-        public readonly string|null $clientRequestId,
+        public readonly ?string $clientRequestId,
     ) {}
 
     public function __toString(): string

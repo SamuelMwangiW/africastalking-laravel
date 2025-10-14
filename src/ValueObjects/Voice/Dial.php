@@ -21,10 +21,10 @@ class Dial implements Action, CallActionItem
     public static function make(
         array       $phoneNumbers,
         bool        $record = false,
-        string|null $ringBackTone = null,
+        ?string $ringBackTone = null,
         int         $maxDuration = 0,
         bool        $sequential = false,
-        string|null $callerId = null,
+        ?string $callerId = null,
     ): Dial {
         return (new Dial())
             ->phoneNumbers($phoneNumbers)
@@ -80,7 +80,7 @@ class Dial implements Action, CallActionItem
         return $this;
     }
 
-    public function ringBackTone(string|null $ringBackTone): static
+    public function ringBackTone(?string $ringBackTone): static
     {
         $this->ringBackTone = $ringBackTone;
 

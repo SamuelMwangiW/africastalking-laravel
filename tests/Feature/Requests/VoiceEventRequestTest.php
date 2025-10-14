@@ -26,8 +26,8 @@ it('Downloading recording dispatches DownloadCallRecording job', function (array
     post('/call', $notification);
     Bus::assertDispatched(
         command: DownloadCallRecording::class,
-        callback: fn(DownloadCallRecording $job) => $job->url === data_get($notification, 'recordingUrl') &&
-            $job->callSessionId === data_get($notification, 'sessionId'),
+        callback: fn(DownloadCallRecording $job) => $job->url === data_get($notification, 'recordingUrl')
+            && $job->callSessionId === data_get($notification, 'sessionId'),
     );
 })->with('voice-event-notification-with-recording');
 
