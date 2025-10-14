@@ -22,16 +22,16 @@ jobs:
       fail-fast: true
       matrix:
         os: [ubuntu-latest]
-        php: [8.2, 8.3, 8.4]
+        php: [8.3, 8.4]
         laravel: ["^12.0", "^11.0"]
         stability: [prefer-lowest, prefer-stable]
         include:
           - laravel: "^11.0"
-            testbench: 9.*
+            testbench: 9.15
           - laravel: "^12.0"
-            testbench: 10.*
+            testbench: 10.5
 
-    name: P${{ matrix.php }} - L${{ matrix.laravel }} - ${{ matrix.stability }} - ${{ matrix.os }}
+    name: Tests P${{ matrix.php }} - L${{ matrix.laravel }} - ${{ matrix.stability }} - ${{ matrix.os }}
 
     steps:
       - name: Checkout code
