@@ -14,10 +14,10 @@ class GetDigits implements Action
 
     public static function make(
         string      $say,
-        string|null $finishOnKey = null,
-        int|null    $timeout = null,
-        int|null    $numDigits = null,
-        string|null $callbackUrl = null,
+        ?string $finishOnKey = null,
+        ?int    $timeout = null,
+        ?int    $numDigits = null,
+        ?string $callbackUrl = null,
     ): GetDigits {
         return (new GetDigits())
             ->say($say)

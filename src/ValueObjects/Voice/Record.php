@@ -16,12 +16,12 @@ class Record implements Action
 
     public static function make(
         string      $say = '',
-        string|null $finishOnKey = null,
-        int|null    $timeout = null,
-        int|null    $maxLength = null,
+        ?string $finishOnKey = null,
+        ?int    $timeout = null,
+        ?int    $maxLength = null,
         bool        $playBeep = false,
         bool        $trimSilence = false,
-        string|null $callbackUrl = null,
+        ?string $callbackUrl = null,
     ): Record {
         return (new Record())
             ->say($say)

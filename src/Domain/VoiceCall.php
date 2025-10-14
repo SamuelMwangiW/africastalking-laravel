@@ -30,8 +30,8 @@ class VoiceCall
         }
 
         if (
-            is_string($recipients) ||
-            $recipients instanceof PhoneNumber
+            is_string($recipients)
+            || $recipients instanceof PhoneNumber
         ) {
             $recipients = [$recipients];
         }

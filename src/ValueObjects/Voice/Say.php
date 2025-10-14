@@ -10,7 +10,7 @@ class Say implements Action, CallActionItem
 {
     private string $message;
     private bool $playBeep = false;
-    private string|null $voice = null;
+    private ?string $voice = null;
 
     /**
      * @throws AfricastalkingException
@@ -18,7 +18,7 @@ class Say implements Action, CallActionItem
     public static function make(
         string|callable $message,
         bool            $playBeep = false,
-        string|null     $voice = null,
+        ?string     $voice = null,
     ): Say {
         if (is_callable($message)) {
             $synthesisedSpeechParts = $message(new SynthesisedSpeech());
@@ -50,7 +50,7 @@ class Say implements Action, CallActionItem
         return $this;
     }
 
-    public function voice(string|null $voice): static
+    public function voice(?string $voice): static
     {
         $this->voice = $voice;
 
