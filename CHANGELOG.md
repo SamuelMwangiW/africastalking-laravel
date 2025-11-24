@@ -2,6 +2,14 @@
 
 All notable changes to `africastalking-laravel` will be documented in this file.
 
+## v2.2.0 - 2025-11-24
+
+### What's Changed
+
+* Add php 8.5 support by @njoguamos in https://github.com/SamuelMwangiW/africastalking-laravel/pull/30
+
+**Full Changelog**: https://github.com/SamuelMwangiW/africastalking-laravel/compare/v2.1.0...v2.2.0
+
 ## v2.1.0 - 2025-10-14
 
 * Drop support for Laravel 11
