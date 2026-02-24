@@ -28,6 +28,8 @@ jobs:
         include:
           - laravel: "^12.0"
             testbench: 10.5
+          - laravel: "^13.0"
+            testbench: 11.0
 
     name: Tests P${{ matrix.php }} - L${{ matrix.laravel }} - ${{ matrix.stability }} - ${{ matrix.os }}
 
