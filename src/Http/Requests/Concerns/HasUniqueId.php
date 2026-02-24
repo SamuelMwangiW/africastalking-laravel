@@ -11,7 +11,7 @@ trait HasUniqueId
 {
     public function id(): string
     {
-        return $this->get(
+        return $this->input(
             $this->idKey(),
         );
     }

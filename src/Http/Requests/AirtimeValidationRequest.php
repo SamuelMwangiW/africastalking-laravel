@@ -45,17 +45,17 @@ class AirtimeValidationRequest extends FormRequest
 
     public function sourceIp(): string
     {
-        return $this->get(key: 'sourceIpAddress');
+        return $this->str(key: 'sourceIpAddress')->value();
     }
 
     public function amount(): float
     {
-        return floatval($this->get(key: 'amount'));
+        return $this->float(key: 'amount');
     }
 
     public function currencyCode(): string
     {
-        return $this->get(key: 'currencyCode');
+        return $this->str(key: 'currencyCode')->value();
     }
 
     protected function idKey(): string

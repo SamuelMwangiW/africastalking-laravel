@@ -17,7 +17,10 @@ it('validates request', function (string $direction, array $data): void {
 })->with('call-directions', 'voice-event-notification');
 
 it('retrieves request data', function (array $data): void {
-    $request = new VoiceEventRequest(request: $data);
+    $request = new VoiceEventRequest(
+        request: $data,
+        server: ['REQUEST_METHOD' => 'POST'],
+    );
 
     expect($request)
         ->phone()->toBe(data_get($data, 'callerNumber'))
