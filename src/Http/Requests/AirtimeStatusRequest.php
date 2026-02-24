@@ -54,20 +54,17 @@ class AirtimeStatusRequest extends FormRequest
 
     public function value(): string
     {
-        return $this->get(key: 'value');
+        return $this->str(key: 'value')->value();
     }
 
     public function discount(): string
     {
-        return $this->get(key: 'discount');
+        return $this->str(key: 'discount')->value();
     }
 
     public function deliveryFailed(): bool
     {
-        return in_array(
-            needle: $this->get(key: 'status'),
-            haystack: ['Rejected', 'Failed'],
-        );
+        return $this->str(key: 'status')->is(['Rejected', 'Failed']);
     }
 
     protected function idKey(): string

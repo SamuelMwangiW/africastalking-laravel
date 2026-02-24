@@ -14,7 +14,10 @@ it('validates request', function (array $data): void {
 })->with('incoming-voice-call-notification');
 
 it('retrieves request data', function (array $data): void {
-    $request = new VoiceCallRequest(request: $data);
+    $request = new VoiceCallRequest(
+        request: $data,
+        server: ['REQUEST_METHOD' => 'POST'],
+    );
 
     expect($request)
         ->phone()->toBe(data_get($data, 'callerNumber'))

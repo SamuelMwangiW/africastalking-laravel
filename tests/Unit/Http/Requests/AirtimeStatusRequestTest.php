@@ -23,7 +23,10 @@ it('retrieves request data', function (string $status, array $data): void {
 
     $deliveryStatusIsFailed = in_array(needle: $status, haystack: ['Rejected', 'Failed']);
 
-    $request = new AirtimeStatusRequest(request: $data);
+    $request = new AirtimeStatusRequest(
+        request: $data,
+        server: ['REQUEST_METHOD' => 'POST'],
+    );
 
     expect($request)
         ->id()->not->toBeNull()->toBe(data_get($data, 'requestId'))

@@ -11,7 +11,7 @@ trait HasPhoneNumber
 {
     public function phone(): string
     {
-        return $this->get($this->phoneNumberKey());
+        return $this->str($this->phoneNumberKey())->value();
     }
 
     protected function phoneNumberKey(): string

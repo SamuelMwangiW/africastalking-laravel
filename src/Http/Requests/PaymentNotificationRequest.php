@@ -47,34 +47,42 @@ class PaymentNotificationRequest extends FormRequest
 
     public function amount(): int
     {
-        return intval(
-            str($this->get('value'))->after(' ')->value(),
-        );
+        return $this->str('value')->after(' ')->toInteger();
     }
 
     public function category(): ?PaymentCategory
     {
-        return PaymentCategory::tryFrom($this->get('category'));
+        return PaymentCategory::tryFrom(
+            $this->input('category'),
+        );
     }
 
     public function direction(): ?Direction
     {
-        return Direction::tryFrom($this->get('direction'));
+        return Direction::tryFrom(
+            $this->input('direction'),
+        );
     }
 
     public function provider(): ?PaymentProvider
     {
-        return PaymentProvider::tryFrom($this->get('provider'));
+        return PaymentProvider::tryFrom(
+            $this->input('provider'),
+        );
     }
 
     public function status(): ?Status
     {
-        return Status::tryFrom($this->get('status'));
+        return Status::tryFrom(
+            $this->input('status'),
+        );
     }
 
     public function sourceType(): ?PaymentSourceType
     {
-        return PaymentSourceType::tryFrom($this->get('sourceType'));
+        return PaymentSourceType::tryFrom(
+            $this->input('sourceType'),
+        );
     }
 
     protected function idKey(): string

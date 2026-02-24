@@ -60,10 +60,7 @@ class MessageDeliveryRequest extends FormRequest
 
     public function deliveryFailed(): bool
     {
-        return in_array(
-            needle: $this->get(key: 'status'),
-            haystack: ['Rejected', 'Failed'],
-        );
+        return $this->str(key: 'status')->is(['Rejected', 'Failed']);
     }
 
     protected function prepareForValidation(): void
