@@ -46,23 +46,23 @@ class UssdEventRequest extends FormRequest
 
     public function userInput(): ?string
     {
-        return $this->get('input');
+        return $this->input('input');
     }
 
     public function cost(): float
     {
-        return floatval($this->get('cost'));
+        return $this->float('cost');
     }
 
     public function hops(): int
     {
-        return $this->get('hopsCount');
+        return $this->integer('hopsCount');
     }
 
     public function duration(): CarbonInterval
     {
         return CarbonInterval::microseconds(
-            $this->get('durationInMillis', 0),
+            $this->integer('durationInMillis', 0),
         );
     }
 

@@ -30,7 +30,7 @@ class UssdSessionRequest extends FormRequest
 
     public function userInput(): ?string
     {
-        return $this->get('text');
+        return $this->input('text');
     }
 
     protected function prepareForValidation(): void

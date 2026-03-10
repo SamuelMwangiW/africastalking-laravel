@@ -19,7 +19,10 @@ it('validates request', function (string $provider, array $data): void {
 it('retrieves request data', function (string $provider, array $data): void {
     $data = array_merge(['provider' => $provider], $data);
 
-    $request = new MobileC2BValidationRequest(request: $data);
+    $request = new MobileC2BValidationRequest(
+        request: $data,
+        server: ['REQUEST_METHOD' => 'POST'],
+    );
 
     expect($request)
         ->phone()->toBe(data_get($data, 'phoneNumber'))
