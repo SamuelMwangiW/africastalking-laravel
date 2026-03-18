@@ -30,9 +30,6 @@ jobs:
             testbench: "^10.5"
           - laravel: "^13.0"
             testbench: "^11.0"
-        exclude:
-          - laravel: "^13.0"
-            stability: prefer-stable
 
     name: Tests P${{ matrix.php }} - L${{ matrix.laravel }} - ${{ matrix.stability }} - ${{ matrix.os }}
 
