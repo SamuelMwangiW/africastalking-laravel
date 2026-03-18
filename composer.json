@@ -18,7 +18,7 @@
     "require": {
         "php": "^8.3",
         "illuminate/contracts": "^12.39||^13.0",
-        "saloonphp/laravel-plugin": "dev-l13-compatibility",
+        "saloonphp/laravel-plugin": "^3.5",
         "spatie/laravel-package-tools": "^1.93"
     },
     "require-dev": {
@@ -67,12 +67,6 @@
             }
         }
     },
-    "repositories": [
-        {
-            "type": "vcs",
-            "url": "https://github.com/laravel-shift/laravel-plugin.git"
-        }
-    ],
     "minimum-stability": "dev",
     "prefer-stable": true
 }
