@@ -2,6 +2,14 @@
 
 All notable changes to `africastalking-laravel` will be documented in this file.
 
+## v2.3.0 - 2026-03-25
+
+### What's Changed
+
+* Support Laravel 13 by @SamuelMwangiW in https://github.com/SamuelMwangiW/africastalking-laravel/pull/37
+
+**Full Changelog**: https://github.com/SamuelMwangiW/africastalking-laravel/compare/v2.2.0...v2.3.0
+
 ## v2.2.0 - 2025-11-24
 
 ### What's Changed
