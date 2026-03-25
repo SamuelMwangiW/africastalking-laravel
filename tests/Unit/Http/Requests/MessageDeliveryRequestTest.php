@@ -27,7 +27,10 @@ it('retrieves request data', function (string $status, string $reason, int $netw
         $data,
     );
 
-    $request = new MessageDeliveryRequest(request: $data);
+    $request = new MessageDeliveryRequest(
+        request: $data,
+        server: ['REQUEST_METHOD' => 'POST'],
+    );
 
     expect($request)
         ->id()->not->toBeNull()->toBe(data_get($data, 'id'))

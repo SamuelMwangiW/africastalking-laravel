@@ -12,8 +12,8 @@ trait HasStatus
 {
     public function status(): Status|string
     {
-        return Status::tryFrom(
-            $this->get('status'),
-        ) ?? $this->get('status');
+        $status = $this->str(key: 'status')->value();
+
+        return Status::tryFrom($status) ?? $status;
     }
 }

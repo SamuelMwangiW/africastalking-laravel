@@ -58,12 +58,12 @@ class IncomingMessageRequest extends FormRequest
 
     public function linkId(): ?string
     {
-        return $this->get(key: 'linkId');
+        return $this->input(key: 'linkId');
     }
 
     public function recipient(): string
     {
-        return $this->get(key: 'to');
+        return $this->str(key: 'to')->value();
     }
 
     protected function prepareForValidation(): void

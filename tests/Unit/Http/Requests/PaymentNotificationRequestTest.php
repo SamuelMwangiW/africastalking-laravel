@@ -29,6 +29,7 @@ it('retrieves request data', function (string $provider, string $category, strin
             ['provider' => $provider, 'category' => $category, 'sourceType' => $source, 'destinationType' => $source, 'status' => $status],
             $data,
         ),
+        server: ['REQUEST_METHOD' => 'POST'],
     );
 
     expect($request)

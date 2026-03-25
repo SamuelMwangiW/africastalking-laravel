@@ -16,7 +16,10 @@ it('validates request', function (array $data): void {
 })->with('subscription-notification');
 
 it('retrieves request data', function (array $data): void {
-    $request = new SubscriptionRequest(request: $data);
+    $request = new SubscriptionRequest(
+        request: $data,
+        server: ['REQUEST_METHOD' => 'POST'],
+    );
 
     expect($request)
         ->phone()->toBe(data_get($data, 'phoneNumber'))

@@ -26,6 +26,7 @@ it('retrieves request data', function (int $networkCode, array $data): void {
             $data,
             ['networkCode' => $networkCode],
         ),
+        server: ['REQUEST_METHOD' => 'POST'],
     );
 
     expect($request)
