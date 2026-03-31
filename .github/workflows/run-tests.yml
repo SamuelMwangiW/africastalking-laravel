@@ -63,7 +63,7 @@ jobs:
         run: vendor/bin/pest --coverage-clover coverage.xml --color=always
 
       - name: Upload coverage reports to Codecov
-        uses: codecov/codecov-action@v5
+        uses: codecov/codecov-action@v6
         env:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
 
