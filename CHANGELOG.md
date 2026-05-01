@@ -2,6 +2,15 @@
 
 All notable changes to `africastalking-laravel` will be documented in this file.
 
+## v2.4.1 - 2026-05-01
+
+### What's Changed
+
+* Upgrade to to laravel-plugin 4.0 by @njoguamos in https://github.com/SamuelMwangiW/africastalking-laravel/pull/41
+* Added CLAUDE support and Laravel Boost skill by @SamuelMwangiW in https://github.com/SamuelMwangiW/africastalking-laravel/pull/46
+
+**Full Changelog**: https://github.com/SamuelMwangiW/africastalking-laravel/compare/v2.4.0...v2.4.1
+
 ## v2.3.0 - 2026-03-25
 
 ### What's Changed
