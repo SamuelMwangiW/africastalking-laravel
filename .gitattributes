@@ -9,6 +9,7 @@
 /phpunit.xml.dist   export-ignore
 /art                export-ignore
 /docs               export-ignore
+/CLAUDE.md          export-ignore
 /tests              export-ignore
 /.editorconfig      export-ignore
 /.codecov.yml       export-ignore
