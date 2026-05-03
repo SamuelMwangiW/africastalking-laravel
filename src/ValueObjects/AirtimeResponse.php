@@ -18,10 +18,10 @@ class AirtimeResponse implements DTOContract
      * @param Collection<int,AirtimeRecipientResponse> $responses
      */
     public function __construct(
-        public readonly string $errorMessage,
-        public readonly string $amount,
-        public readonly string $discount,
-        public readonly int $numSent,
+        public readonly string     $errorMessage,
+        public readonly string     $amount,
+        public readonly string     $discount,
+        public readonly int        $numSent,
         public readonly Collection $responses,
     ) {}
 
@@ -46,10 +46,9 @@ class AirtimeResponse implements DTOContract
             amount: $response->json('totalAmount'),
             discount: $response->json('totalDiscount'),
             numSent: $response->json('numSent'),
-            responses: $response->collect('responses')
-                ->map(
-                    fn(array $response) => AirtimeRecipientResponse::make($response),
-                ),
+            responses: $response->collect('responses')->map(
+                fn(array $response) => AirtimeRecipientResponse::make($response),
+            ),
         );
     }
 
