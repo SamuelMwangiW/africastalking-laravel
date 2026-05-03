@@ -31,7 +31,7 @@ it('adds section to about command', function (): void {
         ->expectsOutputToContain('USD 999,999,590')
         ->expectsOutputToContain('KES 116,085,350')
         ->doesntExpectOutputToContain('FAILED');
-})->only();
+});
 
 it('about command shows FAILED when it is unable to fetch balance', function (): void {
     \Saloon\Config::preventStrayRequests();
