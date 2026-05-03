@@ -78,5 +78,14 @@ it('requests a webrtc capability token', function (): void {
         ->clientName->toBe('John.Doe')
         ->incoming->toBeTrue()
         ->outgoing->toBeTrue()
-        ->lifeTimeSec->toBeInt()->toBe(86400);
+        ->lifeTimeSec->toBeInt()->toBe(86400)
+        ->__toArray()->toBe([
+            'clientName' => 'John.Doe',
+            'incoming' => true,
+            'lifeTimeSec' => 86400,
+            'outgoing' => true,
+            'token' => 'ATCAPtkn_934e54aobviouslyfaketextheretomaskanvalidtokenforsecurityreasons',
+            'phoneNumber' => '+254710000000',
+        ])
+        ->and((string) $response)->toBe('ATCAPtkn_934e54aobviouslyfaketextheretomaskanvalidtokenforsecurityreasons');
 });
