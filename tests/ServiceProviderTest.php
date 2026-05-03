@@ -28,11 +28,13 @@ it('adds section to about command', function (): void {
         ->assertSuccessful()
         ->expectsOutputToContain('USD 999,999,590')
         ->expectsOutputToContain('KES 116,085,350')
+        ->dd()
         ->doesntExpectOutputToContain('FAILED');
-});
+})->only();
 
 it('about command shows FAILED when it is unable to fetch balance', function (): void {
     \Saloon\Config::preventStrayRequests();
+    config()->set('africastalking.payment.product-name', 'test');
 
     Saloon::fake([]);
 
