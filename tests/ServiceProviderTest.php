@@ -16,6 +16,8 @@ it('uses a singleton GuzzleSender', function (): void {
 });
 
 it('adds section to about command', function (): void {
+    config()->set('africastalking.payment.product-name', 'test');
+
     \Saloon\Config::preventStrayRequests();
 
     Saloon::fake([
