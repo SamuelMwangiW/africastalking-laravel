@@ -66,13 +66,6 @@ class IncomingMessageRequest extends FormRequest
         return $this->str(key: 'to')->value();
     }
 
-    protected function prepareForValidation(): void
-    {
-        $this->merge([
-            'networkCode' => $this->integer('networkCode'),
-        ]);
-    }
-
     protected function idKey(): string
     {
         return 'id';

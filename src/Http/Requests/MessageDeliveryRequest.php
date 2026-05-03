@@ -63,13 +63,6 @@ class MessageDeliveryRequest extends FormRequest
         return $this->str(key: 'status')->is(['Rejected', 'Failed']);
     }
 
-    protected function prepareForValidation(): void
-    {
-        $this->merge([
-            'networkCode' => $this->integer('networkCode'),
-        ]);
-    }
-
     protected function idKey(): string
     {
         return 'id';
