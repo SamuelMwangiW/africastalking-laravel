@@ -63,6 +63,7 @@ it('generates data array', function (string $word, string $phone, int $duration)
 
 it('requests a webrtc capability token', function (): void {
     config()->set('africastalking.username', 'not_sandbox');
+    config()->set('africastalking.voice.from', '+254710000000');
 
     Saloon::fake([
         CapabilityTokenRequest::class => MockResponse::fixture('voice/capability-token'),
