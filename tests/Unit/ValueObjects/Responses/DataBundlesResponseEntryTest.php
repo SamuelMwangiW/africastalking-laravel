@@ -18,5 +18,15 @@ it('can be instantiated', function (): void {
 
     expect($subject)
         ->toBeInstanceOf(DataBundlesResponseEntry::class)
-        ->and((string) $subject)->toBe($subject->__toString());
+        ->and((string) $subject)->toBe($subject->__toString())
+        ->and($subject->__toArray())
+        ->toBeArray()
+        ->toBe([
+            'phoneNumber' => '+254722000000',
+            'provider' => 'provider',
+            'status' => 'Success',
+            'transactionId' => 'transactionId',
+            'value' => 'USD 1',
+            'error' => null,
+        ]);
 });
