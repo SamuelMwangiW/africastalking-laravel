@@ -25,6 +25,6 @@ it('retrieves request data', function (array $data): void {
         ->phone()->toBe(data_get($data, 'phoneNumber'))
         ->type()->toBeInstanceOf(UpdateType::class)
         ->type()->value->toBe(data_get($data, 'updateType'))
-        ->get('shortCode')->toBe(data_get($data, 'shortCode'))
-        ->get('keyword')->toBe(data_get($data, 'keyword'));
+        ->input('shortCode')->toBe(data_get($data, 'shortCode'))
+        ->input('keyword')->toBe(data_get($data, 'keyword'));
 })->with('subscription-notification');

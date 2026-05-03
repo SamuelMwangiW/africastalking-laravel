@@ -37,6 +37,6 @@ it('retrieves request data', function (int $networkCode, array $data): void {
         ->network()->toBeInstanceOf(Network::class)
         ->network()->value->toEqual($networkCode)
         ->linkId()->toBe(data_get($data, 'linkId'))
-        ->get('text')->toBe(data_get($data, 'text'))
+        ->input('text')->toBe(data_get($data, 'text'))
         ->recipient()->toBe(data_get($data, 'to'));
 })->with('network-codes', 'incoming-message-notification');

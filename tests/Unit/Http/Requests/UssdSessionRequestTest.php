@@ -35,5 +35,5 @@ it('retrieves request data', function (int $networkCode, array $data): void {
         ->network()->toBeInstanceOf(Network::class)
         ->network()->value->toEqual($networkCode)
         ->userInput()->toBe(data_get($data, 'text'))
-        ->get('serviceCode')->toBe(data_get($data, 'serviceCode'));
+        ->input('serviceCode')->toBe(data_get($data, 'serviceCode'));
 })->with('network-codes', 'ussd-session-notification');

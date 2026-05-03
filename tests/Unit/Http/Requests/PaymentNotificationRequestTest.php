@@ -40,5 +40,5 @@ it('retrieves request data', function (string $provider, string $category, strin
         ->sourceType()->toBeInstanceOf(PaymentSourceType::class)
         ->amount()->toBeInt()->toBe(10000)
         ->id()->toBe(data_get($data, 'transactionId'))
-        ->get('value')->toBe(data_get($data, 'value'));
+        ->input('value')->toBe(data_get($data, 'value'));
 })->with('payment-providers', 'payment-categories', 'payment-source-types', 'status-values', 'payment-notification');
