@@ -30,7 +30,8 @@ class VoiceCallDTO implements DTOContract
             'requestId' => $this->clientRequestId,
             'to' => $this->to
                 ->filter(fn(PhoneNumber $number) => $number->isValid())
-                ->map(fn(PhoneNumber $number) => $number->number),
+                ->map(fn(PhoneNumber $number) => $number->number)
+                ->toArray(),
         ];
     }
 }
