@@ -63,6 +63,7 @@ it('generates data array', function (string $word, string $phone, int $duration)
 
 it('requests a webrtc capability token', function (): void {
     config()->set('africastalking.username', 'not_sandbox');
+    config()->set('africastalking.voice.from', '+254710000000');
 
     Saloon::fake([
         CapabilityTokenRequest::class => MockResponse::fixture('voice/capability-token'),
@@ -78,5 +79,14 @@ it('requests a webrtc capability token', function (): void {
         ->clientName->toBe('John.Doe')
         ->incoming->toBeTrue()
         ->outgoing->toBeTrue()
-        ->lifeTimeSec->toBeInt()->toBe(86400);
+        ->lifeTimeSec->toBeInt()->toBe(86400)
+        ->__toArray()->toBe([
+            'clientName' => 'John.Doe',
+            'incoming' => true,
+            'lifeTimeSec' => 86400,
+            'outgoing' => true,
+            'token' => 'ATCAPtkn_934e54aobviouslyfaketextheretomaskanvalidtokenforsecurityreasons',
+            'phoneNumber' => '+254710000000',
+        ])
+        ->and((string) $response)->toBe('ATCAPtkn_934e54aobviouslyfaketextheretomaskanvalidtokenforsecurityreasons');
 });

@@ -33,13 +33,6 @@ class UssdSessionRequest extends FormRequest
         return $this->input('text');
     }
 
-    protected function prepareForValidation(): void
-    {
-        $this->merge([
-            'networkCode' => $this->integer('networkCode'),
-        ]);
-    }
-
     protected function idKey(): string
     {
         return 'sessionId';

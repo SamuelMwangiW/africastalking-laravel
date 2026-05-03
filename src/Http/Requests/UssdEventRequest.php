@@ -66,13 +66,6 @@ class UssdEventRequest extends FormRequest
         );
     }
 
-    protected function prepareForValidation(): void
-    {
-        $this->merge([
-            'networkCode' => $this->integer('networkCode'),
-        ]);
-    }
-
     protected function idKey(): string
     {
         return 'sessionId';

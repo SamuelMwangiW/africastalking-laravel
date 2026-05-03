@@ -25,11 +25,11 @@ it('retrieves request data', function (array $data): void {
     expect($request)
         ->phone()->toBe(data_get($data, 'callerNumber'))
         ->id()->toBe(data_get($data, 'sessionId'))
-        ->get('direction')->toBe(data_get($data, 'direction'))
-        ->get('destinationNumber')->toBe(data_get($data, 'destinationNumber'))
-        ->get('dtmfDigits')->toBe(data_get($data, 'dtmfDigits'))
-        ->get('callSessionState')->toBe(data_get($data, 'callSessionState'))
-        ->get('callerCarrierName')->toBe(data_get($data, 'callerCarrierName'))
-        ->get('callerCountryCode')->toBe(data_get($data, 'callerCountryCode'))
-        ->get('callStartTime')->toBe(data_get($data, 'callStartTime'));
+        ->input('direction')->toBe(data_get($data, 'direction'))
+        ->input('destinationNumber')->toBe(data_get($data, 'destinationNumber'))
+        ->input('dtmfDigits')->toBe(data_get($data, 'dtmfDigits'))
+        ->input('callSessionState')->toBe(data_get($data, 'callSessionState'))
+        ->input('callerCarrierName')->toBe(data_get($data, 'callerCarrierName'))
+        ->input('callerCountryCode')->toBe(data_get($data, 'callerCountryCode'))
+        ->input('callStartTime')->toBe(data_get($data, 'callStartTime'));
 })->with('voice-event-notification');

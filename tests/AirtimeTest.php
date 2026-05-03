@@ -96,6 +96,7 @@ it('can add multiple recipients', function (string $phone, string $currency, cal
     expect($service)
         ->recipients->toBeInstanceOf(Collection::class)
         ->toHaveCount(2)
+        ->transactions()->toBe([])
         ->recipients->each(
             fn($recipient) => $recipient
                 ->phoneNumber->toBeInstanceOf(PhoneNumber::class)

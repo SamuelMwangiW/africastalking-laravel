@@ -39,6 +39,6 @@ it('retrieves request data', function (int $networkCode, string $status, array $
         ->cost()->toEqual(data_get($data, 'cost'))
         ->hops()->toBeInt()->toBe(data_get($data, 'hopsCount'))
         ->duration()->not->toBeNull()->toBeInstanceOf(Carbon\CarbonInterval::class)
-        ->get('serviceCode')->toBe(data_get($data, 'serviceCode'))
-        ->get('lastAppResponse')->toBe(data_get($data, 'lastAppResponse'));
+        ->input('serviceCode')->toBe(data_get($data, 'serviceCode'))
+        ->input('lastAppResponse')->toBe(data_get($data, 'lastAppResponse'));
 })->with('network-codes', 'status-values', 'ussd-event-notification');

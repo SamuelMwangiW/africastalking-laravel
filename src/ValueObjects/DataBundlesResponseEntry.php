@@ -25,6 +25,13 @@ class DataBundlesResponseEntry implements DTOContract
 
     public function __toArray(): array
     {
-        return [];
+        return [
+            'phoneNumber' => $this->number->number,
+            'provider' => $this->provider,
+            'status' => $this->status->value,
+            'transactionId' => $this->transactionId,
+            'value' => "{$this->value->currency->value} {$this->value->amount}",
+            'error' => $this->errorMessage,
+        ];
     }
 }

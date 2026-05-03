@@ -5,6 +5,7 @@ declare(strict_types=1);
 use Illuminate\Support\Collection;
 use Saloon\Http\Faking\MockResponse;
 use Saloon\Laravel\Facades\Saloon;
+use SamuelMwangiW\Africastalking\Enum\Status;
 use SamuelMwangiW\Africastalking\Exceptions\AfricastalkingException;
 use SamuelMwangiW\Africastalking\Facades\Africastalking;
 use SamuelMwangiW\Africastalking\Saloon\Requests\Messaging\BulkSmsRequest;
@@ -68,7 +69,16 @@ it('can enqueue bulk message', function (string $phone, string $message): void {
         ->and($response->recipients->first())
         ->toBeInstanceOf(SentMessageRecipient::class)
         ->number->toBeInstanceOf(PhoneNumber::class)
-        ->number->number->toBe($phone);
+        ->number->number->toBe($phone)
+        ->__toArray()->toBe([
+            'statusCode' => 102,
+            'number' => '+254700072929',
+            'cost' => 'KES 0.8000',
+            'status' => Status::SUCCESS->value,
+            'messageId' => 'ATXid_af55810d4d7c07ed9ad5f887096487ea',
+        ])
+        ->and((string) $response->recipients->first())
+        ->toBe('{"id":"ATXid_af55810d4d7c07ed9ad5f887096487ea","statusCode":102,"number":{"number":"+254700072929","carrier":null,"countryCode":null,"networkCode":null,"numberType":null},"cost":"KES 0.8000","status":"Success"}');
 })->with('phone-numbers', 'sentence');
 
 it('can send message without enqueue', function (string $phone, string $message): void {
