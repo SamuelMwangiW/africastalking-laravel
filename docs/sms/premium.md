@@ -44,13 +44,14 @@ $response = Africastalking::sms('Your premium content update for this week.')
 
 ## The Response
 
-`send()` returns a Laravel `Collection` of `\SamuelMwangiW\Africastalking\ValueObjects\RecipientsApiResponse` objects:
+`send()` returns a `SentMessageResponse` object. Per-recipient results are in the `->recipients` collection, each a `SentMessageRecipient`:
 
 ```php
-foreach ($response as $recipient) {
-    echo $recipient->number;  // +254712345678
-    echo $recipient->status;  // Success | InvalidPhoneNumber | etc.
-    echo $recipient->cost;    // KES 5.0000
+foreach ($response->recipients as $recipient) {
+    echo $recipient->number->number; // +254712345678
+    echo $recipient->status->value;  // "Success" | "InvalidPhoneNumber" | etc.
+    echo $recipient->cost;           // "KES 5.0000"
+    echo $recipient->id;             // AT message ID
 }
 ```
 

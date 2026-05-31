@@ -45,7 +45,10 @@ $result = Africastalking::insights()
 
 ## Example: Block Suspicious Transactions
 
+`send()` returns an `InsightsResponse`. Per-number results are in the `->items` collection, each an `InsightsResponseItem` with a `status` property. A status other than `Success` (e.g. `Failed` or `UnsupportedPhoneNumber`) should be treated as a risk signal:
+
 ```php
+use SamuelMwangiW\Africastalking\Enum\Status;
 use SamuelMwangiW\Africastalking\Facades\Africastalking;
 
 public function initiateTransfer(Request $request)
@@ -54,7 +57,11 @@ public function initiateTransfer(Request $request)
         ->for($request->user()->phone)
         ->send();
 
-    if ($result->simSwapped) {
+    $isAtRisk = $result->items->contains(
+        fn($item) => $item->status !== Status::SUCCESS
+    );
+
+    if ($isAtRisk) {
         return response()->json([
             'error' => 'Your SIM card was recently changed. For your security, please visit a branch to verify your identity.',
         ], 403);

@@ -11,7 +11,7 @@ africastalking()->voice()
     ->getDigits(
         say: 'Press 1 for sales, 2 for support, or 3 to leave a message.',
         finishOnKey: '#',
-        timeout: '10',
+        timeout: 10,
         callbackUrl: 'https://myapp.com/api/voice/digits',
     )
     ->dial(
@@ -25,7 +25,7 @@ africastalking()->voice()
     ->record(
         say: 'Please leave a message after the tone.',
         finishOnKey: '#',
-        timeout: '30',
+        timeout: 30,
         maxLength: 60,
         playBeep: true,
         trimSilence: true,
@@ -72,7 +72,7 @@ class HandleCallsController
             ->getDigits(
                 say: 'Press 1 for your balance, 2 to speak to an agent, or 3 to leave a message.',
                 finishOnKey: '#',
-                timeout: '10',
+                timeout: 10,
             );
     }
 }

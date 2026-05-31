@@ -43,8 +43,8 @@ use SamuelMwangiW\Africastalking\ValueObjects\PhoneNumber;
 use SamuelMwangiW\Africastalking\Enum\Currency;
 
 $transaction = new AirtimeTransaction(
-    phone: PhoneNumber::make('+254712345678'),
-    currency: Currency::KENYA,
+    phoneNumber: PhoneNumber::make('+254712345678'),
+    currencyCode: Currency::KENYA,
     amount: 100
 );
 
@@ -77,13 +77,17 @@ Chunking avoids loading thousands of records into memory at once. The `send()` c
 
 ## The Response
 
-`send()` returns a Laravel `Collection` of response objects. Each entry contains the recipient's number, the amount sent, and a transaction status.
+`send()` returns an `AirtimeResponse` object. Per-recipient results are in the `->responses` collection, each an `AirtimeRecipientResponse`:
 
 ```php
-foreach ($results as $result) {
-    echo $result->phoneNumber;   // +254712345678
-    echo $result->amount;        // KES 50.0000
-    echo $result->status;        // Success | Failed
-    echo $result->errorMessage;  // null on success
+echo $results->numSent;      // 3 (total recipients processed)
+echo $results->amount;       // "KES 150.0000" (total amount sent)
+echo $results->errorMessage; // "" on success
+
+foreach ($results->responses as $recipient) {
+    echo $recipient->phoneNumber->number; // +254712345678
+    echo $recipient->amount;              // "KES 50.0000"
+    echo $recipient->status->value;       // "Success" | "Failed"
+    echo $recipient->errorMessage;        // "" on success
 }
 ```
