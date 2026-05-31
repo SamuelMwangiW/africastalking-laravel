@@ -1,43 +1,78 @@
-# SIM Swap
+# SIM Swap Detection
 
-The API operates by providing an additional layer of security for transactions and sensitive operations. When a service detects a request that requires authentication, such as a bank transaction or account login, the API can check the status of the user’s SIM card. It looks for red flags, such as a recent SIM Swap, that could indicate a potential fraud attempt. If suspicious activity is detected, the transaction can be halted, and additional verification steps can be initiated.
+The SIM Swap API checks whether a phone number has had its SIM card recently swapped. A recent SIM swap is a common indicator of fraud — attackers swap a victim's SIM to intercept OTPs and bypass two-factor authentication.
 
+Use this API as an additional security layer before processing sensitive operations like fund transfers, password resets, or account changes.
+
+## Basic Usage
 
 ```php
-// Simple Example
+use SamuelMwangiW\Africastalking\Facades\Africastalking;
+
 $result = Africastalking::insights()
-        ->for('+254722000000')
-        ->send();
+    ->for('+254722000000')
+    ->send();
 ```
 
+`simSwap()` is an alias for `insights()`:
+
 ```php
-// Alternative
 $result = Africastalking::simSwap()
-        ->for('+254722000000')
-        ->send();
+    ->for('+254722000000')
+    ->send();
 ```
+
+## Checking Multiple Numbers
 
 ```php
-// With Multiple numbers
 $result = Africastalking::insights()
-        ->for('+254711000000')
-        ->add('+254722000000')
-        ->add('+256786000000')
-        ->send();
+    ->for('+254711000000')
+    ->add('+254722000000')
+    ->add('+256786000000')
+    ->send();
 ```
+
+## Idempotency
+
+Pass a unique idempotency key to prevent duplicate API calls from being processed more than once:
 
 ```php
-// With Idempotency Key
 $result = Africastalking::insights()
-        ->for('+254722000000')
-        ->idempotent('b457c437-72cd-46b1-b450-d3a12c400810')
-        ->send();
+    ->for('+254722000000')
+    ->idempotent('b457c437-72cd-46b1-b450-d3a12c400810')
+    ->send();
 ```
 
-### Possible Use Cases
+## Example: Block Suspicious Transactions
 
-- **Financial Institutions**: Enhance the security of online banking and transactions by detecting and preventing unauthorized SIM swaps.
-- **Healthcare Providers**: Protect patient confidentiality and secure telemedicine communications against SIM swap attacks.
-- **Logistics Companies**: Safeguard supply chain operations and communication channels from unauthorized access and tampering.
-- **Manufacturing Enterprises**: Secure mobile-based systems and ensure the integrity of remote asset tracking and control processes.
+```php
+use SamuelMwangiW\Africastalking\Facades\Africastalking;
 
+public function initiateTransfer(Request $request)
+{
+    $result = Africastalking::insights()
+        ->for($request->user()->phone)
+        ->send();
+
+    if ($result->simSwapped) {
+        return response()->json([
+            'error' => 'Your SIM card was recently changed. For your security, please visit a branch to verify your identity.',
+        ], 403);
+    }
+
+    // Proceed with the transfer...
+}
+```
+
+## Use Cases
+
+| Sector | Application |
+|---|---|
+| **Financial Services** | Block transactions when a recent SIM swap is detected before funds move |
+| **Healthcare** | Protect patient account access and telemedicine logins |
+| **Logistics** | Prevent unauthorised access to shipment tracking or driver accounts |
+| **E-Commerce** | Add a fraud check during high-value purchases or account changes |
+
+::: warning
+SIM Swap detection is an additional signal, not a definitive fraud verdict. Combine it with other controls (e.g. biometrics, security questions) for robust fraud prevention.
+:::

@@ -1,40 +1,73 @@
-# Sending Bulk Messages
+# Sending Bulk SMS
 
-The most basic example to send out a message is
+Bulk SMS is the standard way to send transactional or marketing messages to one or many recipients.
 
-```php
-use SamuelMwangiW\Africastalking\Facades\Africastalking;
-
-$response = Africastalking::sms('Hello mom!')
-        ->to('+254712345678')
-        ->send();
-
-// Or using the global helper function
-$response = africastalking()->sms("Hello Mom")
-        ->to('+254712345678')
-        ->send();
-```
-
-Other valid examples are
+## Basic Example
 
 ```php
 use SamuelMwangiW\Africastalking\Facades\Africastalking;
 
-$response = Africastalking::sms('It is quality rather than quantity that matters. - Lucius Annaeus Seneca')
-        ->message("We made it!") //overwrites any text previously set
-        ->text("Look, am on the internet") //alias to message()
-        ->as('MyBIZ') // optional: When the senderId is different from `config('africastalking.sms.from')`
-        ->to(['+254712345678','+256706123567'])
-        ->bulk() // optional: Messages are bulk by default
-        ->enqueue() //used for Bulk SMS clients that would like to deliver as many messages to the API before waiting for an acknowledgement from the Telcos
-        ->send()
-
-// Or using the global helper function
-$response = africastalking()->sms()
-        ->message("Hello Mom") //overwrites any text previously set
-        ->to('+254712345678')
-        ->send();
+$response = Africastalking::sms('Hello from MyApp!')
+    ->to('+254712345678')
+    ->send();
 ```
 
-The response is Collection of `\SamuelMwangiW\Africastalking\ValueObjects\RecipientsApiResponse` objects
+Or with the global helper:
 
+```php
+$response = africastalking()->sms('Hello from MyApp!')
+    ->to('+254712345678')
+    ->send();
+```
+
+## Sending to Multiple Recipients
+
+Pass an array of phone numbers to `to()`:
+
+```php
+$response = Africastalking::sms('Your OTP is 123456')
+    ->to(['+254712345678', '+256706123567', '+255712000000'])
+    ->send();
+```
+
+## Full Method Reference
+
+| Method | Description |
+|---|---|
+| `sms(string $text)` | Set the message text (can also be set later with `message()`) |
+| `message(string $text)` | Set or overwrite the message text |
+| `text(string $text)` | Alias for `message()` |
+| `to(string\|array $numbers)` | Set recipient phone number(s) |
+| `as(string $senderId)` | Override the sender ID from config |
+| `bulk()` | Mark as bulk (default — usually not needed explicitly) |
+| `enqueue()` | Optimise throughput by batching with the API before waiting for telco acknowledgement |
+| `send()` | Dispatch the request and return the response |
+
+## Advanced Example
+
+```php
+use SamuelMwangiW\Africastalking\Facades\Africastalking;
+
+$response = Africastalking::sms()
+    ->message('Your order #1234 has been shipped and will arrive in 2–3 days.')
+    ->as('MyStore')                              // custom sender ID
+    ->to(['+254712345678', '+256706123567'])
+    ->enqueue()                                  // for high-volume sends
+    ->send();
+```
+
+## The Response
+
+`send()` returns a Laravel `Collection` of `\SamuelMwangiW\Africastalking\ValueObjects\RecipientsApiResponse` objects — one entry per recipient with their individual delivery status.
+
+```php
+foreach ($response as $recipient) {
+    echo $recipient->number;  // +254712345678
+    echo $recipient->status;  // Success | InvalidPhoneNumber | etc.
+    echo $recipient->cost;    // KES 0.8000
+}
+```
+
+::: tip Sender IDs
+In the sandbox environment you may use any alphanumeric sender ID. In production, sender IDs must be registered with Africa's Talking for your account.
+:::

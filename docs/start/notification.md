@@ -1,9 +1,10 @@
-# Notification
+# Laravel Notifications via SMS
 
-The package ships with a Channel to allow for easily routing of notifications via Africastalking SMS.
+This package includes a Laravel notification channel that lets you send SMS messages through Africa's Talking using Laravel's standard `Notification` system — no custom HTTP calls needed.
 
-To route a notification via Africastalking, return `SamuelMwangiW\Africastalking\Notifications\AfricastalkingChannel` in
-your notifications `via` method and the text message to be sent in the `toAfricastalking` method
+## Step 1: Create a Notification
+
+Return `AfricastalkingChannel::class` from the `via()` method and implement `toAfricastalking()` to return the message text:
 
 ```php
 <?php
@@ -11,26 +12,25 @@ your notifications `via` method and the text message to be sent in the `toAfrica
 namespace App\Notifications;
 
 use Illuminate\Notifications\Notification;
-use SamuelMwangiW\Africastalking\Facades\Africastalking;
 use SamuelMwangiW\Africastalking\Notifications\AfricastalkingChannel;
 
 class WelcomeNotification extends Notification
 {
-    public function via($notifiable)
+    public function via(object $notifiable): array
     {
         return [AfricastalkingChannel::class];
     }
 
-    public function toAfricastalking($notifiable)
+    public function toAfricastalking(object $notifiable): string
     {
-        return "Hi {$notifiable->name}. Your account at Unicorn Bank has been created. Hope you enjoy the service";
+        return "Hi {$notifiable->name}, your account has been created. Welcome aboard!";
     }
 }
-
 ```
 
-Also ensure that the notifiable model implements `SamuelMwangiW\Africastalking\Contracts\ReceivesSmsMessages` and that
-the model's `routeNotificationForAfricastalking()` returns the phone number to receive the message
+## Step 2: Implement the Contract on Your Model
+
+Your notifiable model (usually `User`) must implement `ReceivesSmsMessages` and define `routeNotificationForAfricastalking()` to return the recipient's phone number:
 
 ```php
 <?php
@@ -44,12 +44,43 @@ use SamuelMwangiW\Africastalking\Contracts\ReceivesSmsMessages;
 
 class User extends Model implements ReceivesSmsMessages
 {
-    protected $fillable = ['email','name','phone'];
+    use Notifiable;
+
+    protected $fillable = ['email', 'name', 'phone'];
 
     public function routeNotificationForAfricastalking(Notification $notification): string
     {
         return $this->phone;
     }
 }
-
 ```
+
+## Step 3: Send the Notification
+
+Use Laravel's standard `notify()` method — nothing new to learn:
+
+```php
+$user->notify(new WelcomeNotification());
+```
+
+Or notify multiple users at once:
+
+```php
+use Illuminate\Support\Facades\Notification;
+
+Notification::send(User::all(), new WelcomeNotification());
+```
+
+## On-Demand Notifications
+
+To send an SMS to a phone number not associated with any model, use Laravel's on-demand notification routing:
+
+```php
+use Illuminate\Support\Facades\Notification;
+use SamuelMwangiW\Africastalking\Notifications\AfricastalkingChannel;
+
+Notification::route(AfricastalkingChannel::class, '+254722000000')
+    ->notify(new WelcomeNotification());
+```
+
+See the [On-Demand SMS](../sms/ondemand) page for a full example notification class designed for this pattern.
