@@ -9,8 +9,8 @@ use SamuelMwangiW\Africastalking\Facades\Africastalking;
 
 $balance = Africastalking::application()->balance();
 
-echo $balance->amount;   // "100.5000"
-echo $balance->currency; // "KES"
+echo $balance->amount;          // 100.5
+echo $balance->currency->value; // "KES"
 ```
 
 You can also use the global helper function:
@@ -25,8 +25,8 @@ The response is an instance of `\SamuelMwangiW\Africastalking\ValueObjects\Balan
 
 | Property | Type | Description |
 |---|---|---|
-| `amount` | `string` | Account balance as a decimal string |
-| `currency` | `string` | ISO 4217 currency code (e.g. `KES`, `UGX`) |
+| `amount` | `float` | Account balance |
+| `currency` | `Currency` | Backed enum — use `->value` to get the ISO 4217 code string (e.g. `KES`, `UGX`) |
 
 ## Example: Display Balance in a Controller
 
@@ -45,7 +45,7 @@ class DashboardController
 
         return view('dashboard', [
             'balance'  => $balance->amount,
-            'currency' => $balance->currency,
+            'currency' => $balance->currency->value,
         ]);
     }
 }

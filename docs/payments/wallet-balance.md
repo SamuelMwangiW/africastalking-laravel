@@ -7,8 +7,8 @@ Fetch the current balance of your Africa's Talking payment wallet. This is the f
 ```php
 $balance = africastalking()->wallet()->balance();
 
-echo $balance->amount;   // "5000.0000"
-echo $balance->currency; // "KES"
+echo $balance->amount;          // 5000.0
+echo $balance->currency->value; // "KES"
 ```
 
 Or using the facade:
@@ -24,8 +24,8 @@ $balance = Africastalking::wallet()->balance();
 
 | Property | Type | Description |
 |---|---|---|
-| `amount` | `string` | Available wallet balance as a decimal string |
-| `currency` | `string` | ISO 4217 currency code (e.g. `KES`, `UGX`) |
+| `amount` | `float` | Available wallet balance |
+| `currency` | `Currency` | Backed enum — use `->value` to get the ISO 4217 code string (e.g. `KES`, `UGX`) |
 
 ## Example: Low-Balance Alert
 
@@ -47,14 +47,14 @@ class CheckWalletBalance extends Command
     {
         $balance = africastalking()->wallet()->balance();
 
-        if ((float) $balance->amount < 1000) {
+        if ($balance->amount < 1000) {
             Mail::to('finance@example.com')->send(
                 new \App\Mail\LowWalletBalanceAlert($balance)
             );
 
-            $this->warn("Low balance: {$balance->currency} {$balance->amount}");
+            $this->warn("Low balance: {$balance->currency->value} {$balance->amount}");
         } else {
-            $this->info("Wallet OK: {$balance->currency} {$balance->amount}");
+            $this->info("Wallet OK: {$balance->currency->value} {$balance->amount}");
         }
     }
 }
