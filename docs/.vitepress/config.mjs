@@ -2,8 +2,8 @@ import { defineConfig } from 'vitepress'
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
-  title: "AT Laravel",
-  description: "This is an unofficial Laravel SDK for interacting with Africa's Talking APIs",
+  title: "AT Laravel SDK",
+  description: "An unofficial Laravel SDK for Africa's Talking APIs — SMS, Airtime, Payments, Voice, USSD, and more.",
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
     nav: [
@@ -15,14 +15,14 @@ export default defineConfig({
       {
         text: 'Getting Started',
         items: [
-          { text: 'Installing', link: '/start/installation' },
-          { text: 'About', link: '/start/about' },
-          { text: 'HTTP Requests', link: '/start/requests' },
-          { text: 'Notification', link: '/start/notification' },
+          { text: 'Installation', link: '/start/installation' },
+          { text: 'About This Package', link: '/start/about' },
+          { text: 'Callback Requests', link: '/start/requests' },
+          { text: 'SMS Notifications', link: '/start/notification' },
         ]
       },
       {
-        text: 'Applicaton',
+        text: 'Application',
         items: [
           { text: 'Application Balance', link: '/app/balance' },
         ]
@@ -30,9 +30,9 @@ export default defineConfig({
       {
         text: 'SMS',
         items: [
-          { text: 'Sending Bulk Messages', link: '/sms/sending' },
-          { text: 'Sending Premium Messages', link: '/sms/premium' },
-          { text: 'Sending OnDemand', link: '/sms/ondemand' },
+          { text: 'Bulk SMS', link: '/sms/sending' },
+          { text: 'Premium SMS', link: '/sms/premium' },
+          { text: 'On-Demand SMS', link: '/sms/ondemand' },
         ]
       },
       {
@@ -44,13 +44,13 @@ export default defineConfig({
       {
         text: 'USSD',
         items: [
-          { text: 'Interact with USSD', link: '/ussd/interact' },
+          { text: 'USSD Sessions', link: '/ussd/interact' },
         ]
       },
       {
         text: 'Insights',
         items: [
-          { text: 'Insights (SIM Swap)', link: '/insights/sim-swap' },
+          { text: 'SIM Swap Detection', link: '/insights/sim-swap' },
         ]
       },
       {
@@ -58,21 +58,21 @@ export default defineConfig({
         items: [
           { text: 'Mobile Checkout', link: '/payments/mobile-checkout' },
           { text: 'Wallet Balance', link: '/payments/wallet-balance' },
-          { text: 'Stash top up', link: '/payments/stash-topup' },
+          { text: 'Stash Top-Up', link: '/payments/stash-topup' },
         ]
       },
       {
         text: 'Voice',
         items: [
-          { text: 'Voice Responses', link: '/voice/responses' },
-          { text: 'Synthesized Speech Attributes', link: '/voice/attributes' },
           { text: 'Making Calls', link: '/voice/calls' },
+          { text: 'Voice Responses (IVR)', link: '/voice/responses' },
+          { text: 'Synthesized Speech', link: '/voice/attributes' },
         ]
       },
       {
         text: 'WebRTC',
         items: [
-          { text: 'WebRTC Token', link: '/webrtc/token' },
+          { text: 'Browser Token', link: '/webrtc/token' },
         ]
       }
     ],

@@ -1,20 +1,25 @@
 ---
-# https://vitepress.dev/reference/default-theme-home-page
 layout: home
 
 hero:
-  name: "Africa's Talking SDK"
-  text: ""
-  tagline: An unofficial Laravel SDK for interacting with Africa's Talking APIs
+  name: "Africa's Talking Laravel SDK"
+  text: "Build Africa-ready apps, faster."
+  tagline: An unofficial Laravel SDK for Africa's Talking APIs — SMS, Airtime, Payments, Voice, USSD, and more.
   actions:
     - theme: brand
-      text: Getting Started
+      text: Get Started
       link: /start/installation
+    - theme: alt
+      text: View on GitHub
+      link: https://github.com/SamuelMwangiW/africastalking-laravel
 
 features:
-  - title: Modern & Elegant
-    details: The SDK is written using modern PHP with the Elegance you have come to expect from the Laravel community. We have also strived to ensure 100% test coverage and maximum type safety.
+  - title: Laravel-Native
+    details: Built on top of Laravel's HTTP Client, Service Container, Notifications, and Collections — no Guzzle, no boilerplate.
+  - title: Fluent & Expressive
+    details: A chainable API that reads like English. Send SMS, disburse airtime, initiate payments, and handle voice calls with minimal code.
+  - title: Fully Tested
+    details: 100% test coverage and strict PHPStan analysis ensure reliability and type safety across the entire SDK.
   - title: Well Documented
-    details: This documentation and SDK serves to complement the official documentation but we still highly recommend that you keep yourself updated with the official docs.
+    details: Every feature includes working examples drawn from real-world use cases, complementing Africa's Talking's official docs.
 ---
-
