@@ -270,28 +270,7 @@ Africastalking::airtime()
 
 ## Testing
 
-Call `Africastalking::fake()` in a test to prevent real HTTP calls. Fakes are available for SMS, Airtime, and Voice.
-
-```php
-use SamuelMwangiW\Africastalking\Facades\Africastalking;
-
-it('sends an SMS on order creation', function () {
-    Africastalking::fake();
-
-    // ... trigger the code under test ...
-
-    Africastalking::assertSmsSent();
-    Africastalking::assertAirtimeSent();
-    Africastalking::assertVoiceCallSent();
-
-    // Negative assertions
-    Africastalking::assertNoSmsSent();
-    Africastalking::assertNoAirtimeSent();
-    Africastalking::assertNoVoiceCallSent();
-});
-```
-
-`fake()` replaces `Message`, `Airtime`, and `VoiceCall` container bindings with in-memory fakes for the duration of that test only — state does not leak between tests.
+Testing support (`Africastalking::fake()` and related assert helpers) has been extracted to a dedicated package. Refer to that package's documentation for faking HTTP calls in tests.
 
 ## Key constraints to follow
 
