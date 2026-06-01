@@ -65,6 +65,9 @@
             "aliases": {
                 "Africastalking": "SamuelMwangiW\\Africastalking\\Facades\\Africastalking"
             }
+        },
+        "branch-alias": {
+            "dev-master": "3.0.x-dev"
         }
     },
     "minimum-stability": "stable",
