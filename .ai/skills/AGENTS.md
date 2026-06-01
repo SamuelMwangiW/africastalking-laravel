@@ -39,9 +39,7 @@ Domain objects (in `src/Domain/`) build up state (e.g. recipients, body text) an
 
 The `Service` enum (`src/Enum/Service.php`) maps each API domain to both live and sandbox base URLs — this is the single source of truth for endpoint routing.
 
-### Faking / Testing
-
-`Africastalking::fake()` swaps domain implementations with test fakes (in `src/Testing/Fakes/`). After calling `fake()`, the facade exposes assertion methods like `assertSmsSent()`, `assertAirtimeSent()`, `assertVoiceCallSent()`.
+### Testing
 
 Tests use Pest and are in `tests/`. Fixtures for HTTP responses live in `tests/Fixtures/`. Datasets (reusable Pest data providers) are in `tests/Datasets/`.
 
