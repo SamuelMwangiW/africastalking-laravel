@@ -35,7 +35,7 @@ readonly class CapabilityToken implements DTOContract
         ];
     }
 
-    public static function fromSaloon(Response $response, ?string $phoneNumber = null): CapabilityToken
+    public static function fromSaloon(Response $response, string $phoneNumber): CapabilityToken
     {
         $data = $response->json();
 
