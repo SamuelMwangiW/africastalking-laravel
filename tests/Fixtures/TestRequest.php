@@ -17,6 +17,8 @@ class TestRequest extends Request implements HasBody
 
     protected Method $method = Method::POST;
 
+    public function __construct(public string $phoneNumber = '') {}
+
     public function resolveEndpoint(): string
     {
         return 'capability-token/request';
@@ -24,6 +26,6 @@ class TestRequest extends Request implements HasBody
 
     public function createDtoFromResponse(Response $response): CapabilityToken
     {
-        return CapabilityToken::fromSaloon($response);
+        return CapabilityToken::fromSaloon($response, $this->phoneNumber);
     }
 }
