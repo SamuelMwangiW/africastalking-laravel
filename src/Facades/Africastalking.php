@@ -13,6 +13,7 @@ use SamuelMwangiW\Africastalking\Africastalking as BaseClass;
  */
 class Africastalking extends Facade
 {
+    // @todo: implement fake
     protected static function getFacadeAccessor(): string
     {
         return BaseClass::class;
