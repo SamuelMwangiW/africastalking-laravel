@@ -15,6 +15,10 @@ class TestRequest extends Request implements HasBody
 {
     use HasJsonBody;
 
+    public function __construct(public string $phoneNumber = '')
+    {
+    }
+
     protected Method $method = Method::POST;
 
     public function resolveEndpoint(): string
@@ -24,6 +28,6 @@ class TestRequest extends Request implements HasBody
 
     public function createDtoFromResponse(Response $response): CapabilityToken
     {
-        return CapabilityToken::fromSaloon($response);
+        return CapabilityToken::fromSaloon($response, $this->phoneNumber);
     }
 }

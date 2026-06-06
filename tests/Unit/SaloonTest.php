@@ -20,7 +20,7 @@ it('fakes requests', function (): void {
     ]);
 
     $connector = new TestConnector();
-    $response = $connector->send(TestRequest::make())->dto();
+    $response = $connector->send(TestRequest::make('+254722123456'))->dto();
 
     expect($response)
         ->toBeInstanceOf(CapabilityToken::class)
@@ -28,5 +28,6 @@ it('fakes requests', function (): void {
         ->incoming->toBeTrue()
         ->outgoing->toBeTrue()
         ->lifeTimeSec->toBeInt()->toBe(86400)
-        ->token->toBe('ATCAPtkn_somerandomtexthere');
+        ->token->toBe('ATCAPtkn_somerandomtexthere')
+        ->phoneNumber->toBe('+254722123456');
 });

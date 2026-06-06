@@ -7,15 +7,15 @@ namespace SamuelMwangiW\Africastalking\ValueObjects;
 use Saloon\Http\Response;
 use SamuelMwangiW\Africastalking\Contracts\DTOContract;
 
-class CapabilityToken implements DTOContract
+readonly class CapabilityToken implements DTOContract
 {
     public function __construct(
-        public readonly string $clientName,
-        public readonly bool $incoming,
-        public readonly int $lifeTimeSec,
-        public readonly bool $outgoing,
-        public readonly string $token,
-        public readonly ?string $phoneNumber = null,
+        public string $clientName,
+        public bool   $incoming,
+        public int    $lifeTimeSec,
+        public bool   $outgoing,
+        public string $token,
+        public string $phoneNumber,
     ) {}
 
     public function __toString(): string
