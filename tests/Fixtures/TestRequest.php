@@ -15,6 +15,10 @@ class TestRequest extends Request implements HasBody
 {
     use HasJsonBody;
 
+    public function __construct(public string $phoneNumber = '')
+    {
+    }
+
     protected Method $method = Method::POST;
 
     public function __construct(public string $phoneNumber = '') {}
