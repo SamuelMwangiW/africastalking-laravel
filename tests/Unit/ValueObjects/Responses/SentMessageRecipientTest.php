@@ -47,4 +47,5 @@ test('statusMessage() helper function', function (int $statusCode, string $statu
     [500, 'InternalServerError'],
     [501, 'GatewayError'],
     [502, 'RejectedByGateway'],
+    [random_int(503, 999), 'UnKnown'],
 ]);
