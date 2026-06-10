@@ -30,6 +30,7 @@ it('can send bulk message when from is not set', function (string $phone, string
         ->recipients->toBeInstanceOf(Collection::class)->toHaveCount(1)
         ->and($response->recipients->first())
         ->toBeInstanceOf(SentMessageRecipient::class)
+        ->statusMessage()->toBe('Queued')
         ->number->toBeInstanceOf(PhoneNumber::class)
         ->number->number->toBe($phone);
 })->with('phone-numbers', 'sentence');
@@ -49,7 +50,8 @@ it('can send bulk message', function (string $phone, string $message): void {
         ->and($response->recipients->first())
         ->toBeInstanceOf(SentMessageRecipient::class)
         ->number->toBeInstanceOf(PhoneNumber::class)
-        ->number->number->toBe($phone);
+        ->number->number->toBe($phone)
+        ->statusMessage()->toBe('Queued');
 })->with('phone-numbers', 'sentence');
 
 it('can enqueue bulk message', function (string $phone, string $message): void {
@@ -70,6 +72,7 @@ it('can enqueue bulk message', function (string $phone, string $message): void {
         ->toBeInstanceOf(SentMessageRecipient::class)
         ->number->toBeInstanceOf(PhoneNumber::class)
         ->number->number->toBe($phone)
+        ->statusMessage()->toBe('Queued')
         ->__toArray()->toBe([
             'statusCode' => 102,
             'number' => '+254700072929',
@@ -99,7 +102,8 @@ it('can send message without enqueue', function (string $phone, string $message)
         ->and($response->recipients->first())
         ->toBeInstanceOf(SentMessageRecipient::class)
         ->number->toBeInstanceOf(PhoneNumber::class)
-        ->number->number->toBe($phone);
+        ->number->number->toBe($phone)
+        ->statusMessage()->toBe('Sent');
 })->with('phone-numbers', 'sentence');
 
 it('can change message senderID', function (string $phone, string $message): void {
@@ -119,7 +123,8 @@ it('can change message senderID', function (string $phone, string $message): voi
         ->and($response->recipients->first())
         ->toBeInstanceOf(SentMessageRecipient::class)
         ->number->toBeInstanceOf(PhoneNumber::class)
-        ->number->number->toBe($phone);
+        ->number->number->toBe($phone)
+        ->statusMessage()->toBe('Queued');
 })->with('phone-numbers', 'sentence');
 
 it('thows an exception for an invalid request', function (): void {
