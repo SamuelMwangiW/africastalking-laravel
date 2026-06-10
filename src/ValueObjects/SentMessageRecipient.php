@@ -15,9 +15,7 @@ class SentMessageRecipient implements DTOContract
         public readonly PhoneNumber $number,
         public readonly string      $cost,
         public readonly Status      $status,
-    )
-    {
-    }
+    ) {}
 
     public function __toString(): string
     {
