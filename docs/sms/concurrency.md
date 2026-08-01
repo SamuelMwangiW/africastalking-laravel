@@ -33,7 +33,7 @@ try {
 
 ## Concurrency: `pool()`
 
-`pool()` sends many `Message` instances concurrently, capped at a maximum number of requests in flight at once, using [Saloon's request pool](https://docs.saloon.dev/digging-deeper/concurrency-and-pools) under the hood.
+Unlike `async()`, calling `pool()` is a blocking call: it dispatches every message concurrently — capped at a maximum number of requests in flight at once — waits for all of them to finish, and only then returns. There's no separate `send()` or `wait()` step; `pool()` does both internally and hands you back the finished results.
 
 ```php
 use SamuelMwangiW\Africastalking\Facades\Africastalking;
@@ -45,7 +45,10 @@ $messages = [
 ];
 
 $results = Africastalking::sms()->pool($messages, concurrency: 5);
+// By the time execution reaches here, every message above has already been sent.
 ```
+
+Under the hood this uses [Saloon's request pool](https://docs.saloon.dev/digging-deeper/concurrency-and-pools), which is itself built on Guzzle promises — but that's an implementation detail; `pool()` resolves the promise for you before returning.
 
 `pool()` returns an `Illuminate\Support\Collection` keyed the same way as the input — numeric or string keys are both preserved:
 
