@@ -72,3 +72,7 @@ foreach ($response->recipients as $recipient) {
 ::: tip Sender IDs
 In the sandbox environment you may use any alphanumeric sender ID. In production, sender IDs must be registered with Africa's Talking for your account.
 :::
+
+::: tip Sending Many Messages
+Sending in a loop blocks on every request. See [Async & Concurrency](/sms/concurrency) for non-blocking sends and concurrent batch sending.
+:::

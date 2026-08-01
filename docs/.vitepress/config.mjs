@@ -33,6 +33,7 @@ export default defineConfig({
           { text: 'Bulk SMS', link: '/sms/sending' },
           { text: 'Premium SMS', link: '/sms/premium' },
           { text: 'On-Demand SMS', link: '/sms/ondemand' },
+          { text: 'Async & Concurrency', link: '/sms/concurrency' },
         ]
       },
       {

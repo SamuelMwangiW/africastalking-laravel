@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace SamuelMwangiW\Africastalking\Exceptions;
 
 use Exception;
+use SamuelMwangiW\Africastalking\ValueObjects\SentMessageResponse;
 use SamuelMwangiW\Africastalking\ValueObjects\Voice\SynthesisedSpeech;
 
 class AfricastalkingException extends Exception
@@ -76,6 +77,13 @@ class AfricastalkingException extends Exception
     {
         return new AfricastalkingException(
             message: 'A single pool() cannot mix bulk and premium SMS messages, since they resolve to different API endpoints',
+        );
+    }
+
+    public static function unexpectedAsyncResponse(): AfricastalkingException
+    {
+        return new AfricastalkingException(
+            message: 'Expected a '.SentMessageResponse::class.', but received a promise instead',
         );
     }
 }

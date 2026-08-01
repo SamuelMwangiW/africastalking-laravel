@@ -186,7 +186,7 @@ class Message implements DTOContract
      * require resolving a different base URL per request while they're
      * in flight concurrently.
      *
-     * @param iterable<int|string,Message> $messages
+     * @param iterable<int|string,mixed> $messages
      * @param int|Closure(int):int $concurrency
      * @return Collection<int|string,SentMessageResponse|Throwable>
      */
