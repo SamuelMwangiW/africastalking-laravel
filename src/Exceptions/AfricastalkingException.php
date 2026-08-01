@@ -59,4 +59,23 @@ class AfricastalkingException extends Exception
             message: 'The returned object must be an instance of '.SynthesisedSpeech::class,
         );
     }
+
+    /**
+     * @param class-string $expectedClass
+     */
+    public static function invalidPoolItem(string $expectedClass, mixed $item): AfricastalkingException
+    {
+        $type = is_object($item) ? $item::class : gettype($item);
+
+        return new AfricastalkingException(
+            message: "Every item passed to pool() must be an instance of {$expectedClass}, {$type} given",
+        );
+    }
+
+    public static function mixedSmsPoolModes(): AfricastalkingException
+    {
+        return new AfricastalkingException(
+            message: 'A single pool() cannot mix bulk and premium SMS messages, since they resolve to different API endpoints',
+        );
+    }
 }
