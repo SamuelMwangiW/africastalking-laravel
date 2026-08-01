@@ -19,6 +19,7 @@ export default defineConfig({
           { text: 'About This Package', link: '/start/about' },
           { text: 'Callback Requests', link: '/start/requests' },
           { text: 'SMS Notifications', link: '/start/notification' },
+          { text: 'Testing', link: '/start/testing' },
         ]
       },
       {
