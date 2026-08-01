@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 it('overrides the idKey', function (): void {
-    $classWithoutKeyOverridden = new class () {
+    $classWithoutKeyOverridden = new class {
         use SamuelMwangiW\Africastalking\Http\Requests\Concerns\HasUniqueId;
 
         public function getKey(): string
@@ -12,7 +12,7 @@ it('overrides the idKey', function (): void {
         }
     };
 
-    $classWithKeyOverridden = new class () {
+    $classWithKeyOverridden = new class {
         use SamuelMwangiW\Africastalking\Http\Requests\Concerns\HasUniqueId;
 
         public function getKey(): string
