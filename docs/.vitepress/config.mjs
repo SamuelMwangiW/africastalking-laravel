@@ -19,7 +19,6 @@ export default defineConfig({
           { text: 'About This Package', link: '/start/about' },
           { text: 'Callback Requests', link: '/start/requests' },
           { text: 'SMS Notifications', link: '/start/notification' },
-          { text: 'Testing', link: '/start/testing' },
         ]
       },
       {
@@ -74,6 +73,12 @@ export default defineConfig({
         text: 'WebRTC',
         items: [
           { text: 'Browser Token', link: '/webrtc/token' },
+        ]
+      },
+      {
+        text: 'Testing',
+        items: [
+          { text: 'Testing Your Application', link: '/testing/writing-tests' },
         ]
       }
     ],
