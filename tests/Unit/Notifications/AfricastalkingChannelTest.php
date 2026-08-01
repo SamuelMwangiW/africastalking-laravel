@@ -13,6 +13,7 @@ use SamuelMwangiW\Africastalking\Tests\Fixtures\BasicNotifiable;
 use SamuelMwangiW\Africastalking\Tests\Fixtures\BasicNotifiableNoTrait;
 use SamuelMwangiW\Africastalking\Tests\Fixtures\BasicNotification;
 use SamuelMwangiW\Africastalking\Tests\Fixtures\BasicNotificationNoToAfricastalking;
+use SamuelMwangiW\Africastalking\Tests\Fixtures\BasicNotificationReturnsAsyncMessage;
 use SamuelMwangiW\Africastalking\Tests\Fixtures\BasicNotificationReturnsObject;
 use SamuelMwangiW\Africastalking\Tests\Fixtures\BasicNotificationReturnsString;
 use SamuelMwangiW\Africastalking\Tests\Fixtures\FakeChannel;
@@ -101,6 +102,18 @@ it('sends a notification when toAfricastalking() returns a message object', func
         ->toBeInstanceOf(SentMessageRecipient::class)
         ->number->number->toBe($phone);
 })->with('phone-numbers');
+
+it('rejects a Message marked async(), since notifications are always sent synchronously', function (string $phone): void {
+    Saloon::fake([
+        BulkSmsRequest::class => MockResponse::fixture('messaging/bulk/notification'),
+    ]);
+
+    $channel = app(AfricastalkingChannel::class);
+    $notifiable = new BasicNotifiable(phone: $phone);
+    $notification = new BasicNotificationReturnsAsyncMessage();
+
+    $channel->send($notifiable, $notification);
+})->with('phone-numbers')->throws(AfricastalkingException::class, 'promise');
 
 it('supports AnonymousNotifiable', function (string $phone): void {
     Saloon::fake([
