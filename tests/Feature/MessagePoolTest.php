@@ -88,6 +88,29 @@ it('collects a per-item exception instead of failing the whole pool', function (
         ->getMessage()->toContain('InvalidSenderId');
 });
 
+it('collects a transport-level exception via the pool exceptionHandler', function (): void {
+    Saloon::fake([
+        BulkSmsRequest::class => function (PendingRequest $pendingRequest) {
+            $to = (string) $pendingRequest->body()?->get('to');
+
+            if ('+254700000500' === $to) {
+                return MockResponse::make(status: 500)->throw(new Exception('Simulated connection failure'));
+            }
+
+            return MockResponse::fixture('messaging/bulk/with-sender');
+        },
+    ]);
+
+    $results = Africastalking::sms()->pool([
+        Africastalking::sms('Hi Alice')->to('+254700072929'),
+        Africastalking::sms('Hi Bad')->to('+254700000500'),
+    ]);
+
+    expect($results->get(0))->toBeInstanceOf(SentMessageResponse::class)
+        ->and($results->get(1))->toBeInstanceOf(Throwable::class)
+        ->getMessage()->toContain('Simulated connection failure');
+});
+
 it('returns an empty collection for an empty pool', function (): void {
     expect(Africastalking::sms()->pool([]))->toBeInstanceOf(Collection::class)->toBeEmpty();
 });
