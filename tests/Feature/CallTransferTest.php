@@ -32,13 +32,13 @@ it('transfers a call to another number', function (): void {
         ->and($response->isSuccessful())->toBeTrue();
 });
 
-it('sends the sessionId, phoneNumber and username in the request body', function (): void {
+it('sends the sessionId, phoneNumber, username and a default callLeg of callee in the request body', function (): void {
     Saloon::fake([
         CallTransferRequest::class => function (PendingRequest $pendingRequest) {
             expect($pendingRequest->body()?->get('sessionId'))->toBe('ATVId_47ef478e918923e7b2d0921ebd5b66a6')
                 ->and($pendingRequest->body()?->get('phoneNumber'))->toBe('+254728900922')
                 ->and($pendingRequest->body()?->get('username'))->not->toBeNull()
-                ->and($pendingRequest->body()?->all())->not->toHaveKey('callLeg')
+                ->and($pendingRequest->body()?->get('callLeg'))->toBe('callee')
                 ->and($pendingRequest->body()?->all())->not->toHaveKey('holdMusicUrl');
 
             return MockResponse::fixture('voice/call-transfer');

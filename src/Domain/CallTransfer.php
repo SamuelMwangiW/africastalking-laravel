@@ -12,7 +12,7 @@ class CallTransfer
 {
     private ?string $sessionId = null;
     private ?string $phoneNumber = null;
-    private ?CallLeg $callLeg = null;
+    private CallLeg $callLeg = CallLeg::CALLEE;
     private ?string $holdMusicUrl = null;
 
     public function session(?string $sessionId): static
@@ -53,11 +53,11 @@ class CallTransfer
 
     private function data(): array
     {
-        return [
+        return array_filter([
             'sessionId' => $this->sessionId,
             'phoneNumber' => $this->phoneNumber,
-            'callLeg' => $this->callLeg?->value,
+            'callLeg' => $this->callLeg->value,
             'holdMusicUrl' => $this->holdMusicUrl,
-        ];
+        ]);
     }
 }

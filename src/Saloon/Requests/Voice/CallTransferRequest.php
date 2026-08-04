@@ -27,7 +27,7 @@ class CallTransferRequest extends BaseRequest implements HasBody
     public function defaultBody(): array
     {
         return array_merge(
-            array_filter($this->data),
+            $this->data,
             ['username' => $this->username()],
         );
     }
