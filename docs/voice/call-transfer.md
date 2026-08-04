@@ -29,7 +29,7 @@ class TransferToSupervisorController
     public function __invoke(VoiceEventRequest $request)
     {
         africastalking()->voice()
-            ->transferCall($request->id()) // sessionId
+            ->transfer($request->id()) // sessionId
             ->to('+254728900922')
             ->send();
 
@@ -42,7 +42,7 @@ class TransferToSupervisorController
 
 | Method | Description |
 |---|---|
-| `transferCall(?string $sessionId)` | Start building a transfer for the given call session |
+| `transferCall(?string $sessionId)` / `transfer(?string $sessionId)` | Start building a transfer for the given call session |
 | `to(string $phoneNumber)` | The phone number to transfer the call to |
 | `callLeg(string\|CallLeg $leg)` | Which leg to transfer — `CallLeg::CALLER` or `CallLeg::CALLEE`. Defaults to the callee if not set |
 | `holdMusic(?string $url)` | A media file URL to play to the other party while the transfer is in progress |

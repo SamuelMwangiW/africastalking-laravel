@@ -17,6 +17,28 @@ it('resolves a CallTransfer instance', function (): void {
     expect(Africastalking::voice()->transferCall())->toBeInstanceOf(CallTransfer::class);
 });
 
+it('resolves a CallTransfer instance via the transfer() alias', function (): void {
+    expect(Africastalking::voice()->transfer())->toBeInstanceOf(CallTransfer::class);
+});
+
+it('transfers a call via the transfer() alias, sending the same sessionId', function (): void {
+    Saloon::fake([
+        CallTransferRequest::class => function (PendingRequest $pendingRequest) {
+            expect($pendingRequest->body()?->get('sessionId'))->toBe('ATVId_47ef478e918923e7b2d0921ebd5b66a6');
+
+            return MockResponse::fixture('voice/call-transfer');
+        },
+    ]);
+
+    $response = Africastalking::voice()
+        ->transfer('ATVId_47ef478e918923e7b2d0921ebd5b66a6')
+        ->to('+254728900922')
+        ->send();
+
+    expect($response)->toBeInstanceOf(CallTransferResponse::class)
+        ->status->toBe(Status::SUCCESS);
+});
+
 it('transfers a call to another number', function (): void {
     Saloon::fake([
         CallTransferRequest::class => MockResponse::fixture('voice/call-transfer'),

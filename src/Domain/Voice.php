@@ -41,4 +41,9 @@ class Voice
     {
         return app(CallTransfer::class)->session($sessionId);
     }
+
+    public function transfer(?string $sessionId = null): CallTransfer
+    {
+        return $this->transferCall($sessionId);
+    }
 }
