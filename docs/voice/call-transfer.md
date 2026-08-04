@@ -44,14 +44,14 @@ class TransferToSupervisorController
 |---|---|
 | `transfer(?string $sessionId)` | Start building a transfer for the given call session |
 | `to(string $phoneNumber)` | The phone number to transfer the call to |
-| `callLeg(string\|CallLeg $leg)` | Which leg to transfer — `CallLeg::CALLER` or `CallLeg::CALLEE`. Defaults to the callee if not set |
+| `leg(string\|CallLeg $leg)` | Which leg to transfer — `CallLeg::CALLER` or `CallLeg::CALLEE`. Defaults to the callee if not set |
 | `holdMusic(?string $url)` | A media file URL to play to the other party while the transfer is in progress |
 | `send()` | Dispatch the transfer request |
 | `transferCall(?string $sessionId)` | Alias for `transfer()` |
 
 ## Choosing Which Leg to Transfer
 
-By default, Africa's Talking transfers the callee leg. Use `callLeg()` to transfer the caller instead, passing either the `CallLeg` enum or its raw string value:
+By default, Africa's Talking transfers the callee leg. Use `leg()` to transfer the caller instead, passing either the `CallLeg` enum or its raw string value:
 
 ```php
 use SamuelMwangiW\Africastalking\Enum\CallLeg;
@@ -59,7 +59,7 @@ use SamuelMwangiW\Africastalking\Enum\CallLeg;
 africastalking()->voice()
     ->transfer($sessionId)
     ->to('+254728900922')
-    ->callLeg(CallLeg::CALLER)
+    ->leg(CallLeg::CALLER)
     ->send();
 ```
 

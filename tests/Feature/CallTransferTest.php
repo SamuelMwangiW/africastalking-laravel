@@ -73,7 +73,7 @@ it('sends the sessionId, phoneNumber, username and a default callLeg of callee i
         ->send();
 });
 
-it('sends the callLeg when set, accepting either a string or the CallLeg enum', function (string|CallLeg $callLeg): void {
+it('sends the callLeg when set via leg(), accepting either a string or the CallLeg enum', function (string|CallLeg $leg): void {
     Saloon::fake([
         CallTransferRequest::class => function (PendingRequest $pendingRequest) {
             expect($pendingRequest->body()?->get('callLeg'))->toBe('caller');
@@ -85,7 +85,7 @@ it('sends the callLeg when set, accepting either a string or the CallLeg enum', 
     Africastalking::voice()
         ->transferCall('ATVId_47ef478e918923e7b2d0921ebd5b66a6')
         ->to('+254728900922')
-        ->callLeg($callLeg)
+        ->leg($leg)
         ->send();
 })->with([
     'string' => 'caller',

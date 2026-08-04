@@ -29,9 +29,9 @@ class CallTransfer
         return $this;
     }
 
-    public function callLeg(string|CallLeg $callLeg): static
+    public function leg(string|CallLeg $leg): static
     {
-        $this->callLeg = is_string($callLeg) ? CallLeg::from($callLeg) : $callLeg;
+        $this->callLeg = is_string($leg) ? CallLeg::from($leg) : $leg;
 
         return $this;
     }
