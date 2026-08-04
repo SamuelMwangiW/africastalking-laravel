@@ -36,4 +36,14 @@ class Voice
     {
         return app(QueueStatus::class)->for($phoneNumbers);
     }
+
+    public function transferCall(?string $sessionId = null): CallTransfer
+    {
+        return app(CallTransfer::class)->session($sessionId);
+    }
+
+    public function transfer(?string $sessionId = null): CallTransfer
+    {
+        return $this->transferCall($sessionId);
+    }
 }

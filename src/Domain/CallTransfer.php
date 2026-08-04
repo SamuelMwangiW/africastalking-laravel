@@ -1,0 +1,63 @@
+<?php
+
+declare(strict_types=1);
+
+namespace SamuelMwangiW\Africastalking\Domain;
+
+use SamuelMwangiW\Africastalking\Enum\CallLeg;
+use SamuelMwangiW\Africastalking\Saloon\Requests\Voice\CallTransferRequest;
+use SamuelMwangiW\Africastalking\ValueObjects\CallTransferResponse;
+
+class CallTransfer
+{
+    private ?string $sessionId = null;
+    private ?string $phoneNumber = null;
+    private CallLeg $callLeg = CallLeg::CALLEE;
+    private ?string $holdMusicUrl = null;
+
+    public function session(?string $sessionId): static
+    {
+        $this->sessionId = $sessionId;
+
+        return $this;
+    }
+
+    public function to(string $phoneNumber): static
+    {
+        $this->phoneNumber = $phoneNumber;
+
+        return $this;
+    }
+
+    public function leg(string|CallLeg $leg): static
+    {
+        $this->callLeg = is_string($leg) ? CallLeg::from($leg) : $leg;
+
+        return $this;
+    }
+
+    public function holdMusic(?string $url): static
+    {
+        $this->holdMusicUrl = $url;
+
+        return $this;
+    }
+
+    public function send(): CallTransferResponse
+    {
+        return CallTransferRequest::make($this->data())
+            ->send()
+            ->throw()
+            ->dto();
+    }
+
+    private function data(): array
+    {
+        return array_filter([
+            'sessionId' => $this->sessionId,
+            'phoneNumber' => $this->phoneNumber,
+            'callLeg' => $this->callLeg->value,
+            'holdMusicUrl' => $this->holdMusicUrl,
+        ]);
+    }
+}

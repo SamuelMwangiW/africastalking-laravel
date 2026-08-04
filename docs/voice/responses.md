@@ -139,6 +139,8 @@ class ForwardCallsController
 }
 ```
 
+Once connected, that call can later be moved to a different number without hanging up — see [Transferring an Active Call](./call-transfer).
+
 ### Reject After Hours
 
 ```php

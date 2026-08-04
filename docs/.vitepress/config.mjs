@@ -67,6 +67,7 @@ export default defineConfig({
         items: [
           { text: 'Making Calls', link: '/voice/calls' },
           { text: 'Voice Responses (IVR)', link: '/voice/responses' },
+          { text: 'Transferring an Active Call', link: '/voice/call-transfer' },
           { text: 'Synthesized Speech', link: '/voice/attributes' },
         ]
       },
