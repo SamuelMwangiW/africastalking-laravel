@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace SamuelMwangiW\Africastalking\ValueObjects;
 
-use Closure;
 use GuzzleHttp\Promise\PromiseInterface;
 use Illuminate\Support\Collection;
 use ReflectionException;
@@ -187,10 +186,10 @@ class Message implements DTOContract
      * in flight concurrently.
      *
      * @param iterable<int|string,mixed> $messages
-     * @param int|Closure(int):int $concurrency
+     * @param int|callable(int):int $concurrency
      * @return Collection<int|string,SentMessageResponse|Throwable>
      */
-    public function pool(iterable $messages, int|Closure $concurrency = 5): Collection
+    public function pool(iterable $messages, int|callable $concurrency = 5): Collection
     {
         $requests = collect($messages)->map(function (mixed $message): BulkSmsRequest|PremiumSmsRequest {
             if ( ! $message instanceof self) {

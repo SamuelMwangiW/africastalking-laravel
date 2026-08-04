@@ -78,7 +78,7 @@ foreach ($results as $key => $result) {
 
 ### Controlling concurrency
 
-Pass an `int` for a fixed cap, or a `Closure` that receives the number of pending requests and returns the concurrency to use at that point:
+Pass an `int` for a fixed cap, or any callable that receives the number of pending requests and returns the concurrency to use at that point:
 
 ```php
 Africastalking::sms()->pool($messages, concurrency: fn(int $pendingRequests) => min($pendingRequests, 10));
