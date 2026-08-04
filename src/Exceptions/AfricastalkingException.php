@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace SamuelMwangiW\Africastalking\Exceptions;
 
 use Exception;
+use SamuelMwangiW\Africastalking\ValueObjects\SentMessageResponse;
 use SamuelMwangiW\Africastalking\ValueObjects\Voice\SynthesisedSpeech;
 
 class AfricastalkingException extends Exception
@@ -57,6 +58,32 @@ class AfricastalkingException extends Exception
     {
         return new AfricastalkingException(
             message: 'The returned object must be an instance of '.SynthesisedSpeech::class,
+        );
+    }
+
+    /**
+     * @param class-string $expectedClass
+     */
+    public static function invalidPoolItem(string $expectedClass, mixed $item): AfricastalkingException
+    {
+        $type = is_object($item) ? $item::class : gettype($item);
+
+        return new AfricastalkingException(
+            message: "Every item passed to pool() must be an instance of {$expectedClass}, {$type} given",
+        );
+    }
+
+    public static function mixedSmsPoolModes(): AfricastalkingException
+    {
+        return new AfricastalkingException(
+            message: 'A single pool() cannot mix bulk and premium SMS messages, since they resolve to different API endpoints',
+        );
+    }
+
+    public static function unexpectedAsyncResponse(): AfricastalkingException
+    {
+        return new AfricastalkingException(
+            message: 'Expected a '.SentMessageResponse::class.', but received a promise instead',
         );
     }
 }

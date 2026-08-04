@@ -4,10 +4,13 @@ declare(strict_types=1);
 
 namespace SamuelMwangiW\Africastalking\ValueObjects;
 
+use GuzzleHttp\Promise\PromiseInterface;
 use Illuminate\Support\Collection;
 use ReflectionException;
+use Saloon\Http\Response;
 use SamuelMwangiW\Africastalking\Contracts\DTOContract;
 use SamuelMwangiW\Africastalking\Exceptions\AfricastalkingException;
+use SamuelMwangiW\Africastalking\Saloon\AfricastalkingConnector;
 use SamuelMwangiW\Africastalking\Saloon\Requests\Messaging\BulkSmsRequest;
 use SamuelMwangiW\Africastalking\Saloon\Requests\Messaging\PremiumSmsRequest;
 use Throwable;
@@ -16,6 +19,7 @@ class Message implements DTOContract
 {
     public int $bulkSMSMode = 1;
     public bool $isBulk = true;
+    public bool $async = false;
     public int $enqueue = 1;
     public ?string $keyword = null;
     public ?string $linkId = null;
@@ -123,6 +127,13 @@ class Message implements DTOContract
         return $this;
     }
 
+    public function async(bool $async = true): static
+    {
+        $this->async = $async;
+
+        return $this;
+    }
+
     public function keyword(?string $value): static
     {
         $this->keyword = $value;
@@ -145,28 +156,80 @@ class Message implements DTOContract
     }
 
     /**
-     * @return SentMessageResponse
+     * @return SentMessageResponse|PromiseInterface
      * @throws AfricastalkingException
      * @throws ReflectionException
      * @throws \Saloon\Exceptions\InvalidResponseClassException
      * @throws \Saloon\Exceptions\PendingRequestException
      * @throws Throwable
      */
-    public function send(): SentMessageResponse
+    public function send(): SentMessageResponse|PromiseInterface
     {
         $request = $this->request();
 
-        $response = $request
-            ->send()
-            ->throw();
-
-        if ( ! $response->json('SMSMessageData.Recipients')) {
-            throw AfricastalkingException::messageSendingFailed(
-                message: $response->json('SMSMessageData.Message'),
+        if ($this->async) {
+            return $request->sendAsync()->then(
+                fn(Response $response) => $this->parse($response),
             );
         }
 
-        return $response->dto();
+        return $this->parse($request->send());
+    }
+
+    /**
+     * Sends many messages concurrently using Saloon's request pool, capped
+     * at $concurrency requests in flight at once.
+     *
+     * All messages in a single pool must share the same sending mode
+     * (bulk or premium) — mixing them isn't supported, since it would
+     * require resolving a different base URL per request while they're
+     * in flight concurrently.
+     *
+     * @param iterable<int|string,mixed> $messages
+     * @param int|callable(int):int $concurrency
+     * @return Collection<int|string,SentMessageResponse|Throwable>
+     */
+    public function pool(iterable $messages, int|callable $concurrency = 5): Collection
+    {
+        $requests = collect($messages)->map(function (mixed $message): BulkSmsRequest|PremiumSmsRequest {
+            if ( ! $message instanceof self) {
+                throw AfricastalkingException::invalidPoolItem(self::class, $message);
+            }
+
+            return $message->request();
+        });
+
+        $firstRequest = $requests->first();
+
+        if (null === $firstRequest) {
+            return collect();
+        }
+
+        $service = $firstRequest->service;
+
+        if ($requests->contains(fn(BulkSmsRequest|PremiumSmsRequest $request) => $request->service !== $service)) {
+            throw AfricastalkingException::mixedSmsPoolModes();
+        }
+
+        $connector = (new AfricastalkingConnector())->service($service);
+        $results = collect();
+
+        $connector->pool(
+            requests: $requests,
+            concurrency: $concurrency,
+            responseHandler: function (Response $response, int|string $key) use (&$results): void {
+                try {
+                    $results[$key] = $this->parse($response);
+                } catch (Throwable $exception) {
+                    $results[$key] = $exception;
+                }
+            },
+            exceptionHandler: function (mixed $reason, int|string $key) use (&$results): void {
+                $results[$key] = $reason instanceof Throwable ? $reason : new AfricastalkingException((string) $reason);
+            },
+        )->send()->wait();
+
+        return $results->sortKeys();
     }
 
     /**
@@ -202,6 +265,22 @@ class Message implements DTOContract
             array_filter($data),
             ['from' => $this->from(), 'bulkSMSMode' => $this->bulkSMSMode],
         );
+    }
+
+    /**
+     * @throws AfricastalkingException
+     */
+    private function parse(Response $response): SentMessageResponse
+    {
+        $response->throw();
+
+        if ( ! $response->json('SMSMessageData.Recipients')) {
+            throw AfricastalkingException::messageSendingFailed(
+                message: $response->json('SMSMessageData.Message'),
+            );
+        }
+
+        return $response->dto();
     }
 
     private function request(): BulkSmsRequest|PremiumSmsRequest

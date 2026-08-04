@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace SamuelMwangiW\Africastalking\Saloon\Requests;
 
+use GuzzleHttp\Promise\PromiseInterface;
 use ReflectionException;
 use Saloon\Contracts\Body\HasBody;
 use Saloon\Enums\Method;
@@ -32,6 +33,22 @@ abstract class BaseRequest extends Request implements HasBody
         return app(AfricastalkingConnector::class)
             ->service($this->service)
             ->send($this);
+    }
+
+    /**
+     * Sends this request asynchronously.
+     *
+     * Deliberately uses a fresh connector instance rather than the shared
+     * container-bound one: Saloon only resolves the base URL once the
+     * deferred async task actually runs, so reusing the shared connector's
+     * mutable service() across concurrent async requests targeting
+     * different services would race.
+     */
+    public function sendAsync(): PromiseInterface
+    {
+        return (new AfricastalkingConnector())
+            ->service($this->service)
+            ->sendAsync($this);
     }
 
     public function defaultHeaders(): array

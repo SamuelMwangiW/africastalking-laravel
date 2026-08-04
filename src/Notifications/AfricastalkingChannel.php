@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace SamuelMwangiW\Africastalking\Notifications;
 
+use GuzzleHttp\Promise\PromiseInterface;
 use Illuminate\Notifications\AnonymousNotifiable;
 use Illuminate\Notifications\Notification;
 use ReflectionException;
@@ -37,13 +38,28 @@ class AfricastalkingChannel
         $message = $notification->toAfricastalking($notifiable);
 
         if ($message instanceof Message) {
-            return $message->send();
+            return $this->assertSync($message->send());
         }
 
         $to = $notifiable instanceof ReceivesSmsMessages
             ? $notifiable->routeNotificationForAfricastalking($notification)
             : $notifiable->routeNotificationFor(AfricastalkingChannel::class);
 
-        return Africastalking::sms($message)->to($to)->send();
+        return $this->assertSync(Africastalking::sms($message)->to($to)->send());
+    }
+
+    /**
+     * Notifications are always sent synchronously — {@see Message::async()}
+     * is not exposed here — so the result is always a SentMessageResponse.
+     *
+     * @throws AfricastalkingException
+     */
+    private function assertSync(SentMessageResponse|PromiseInterface $response): SentMessageResponse
+    {
+        if ( ! $response instanceof SentMessageResponse) {
+            throw AfricastalkingException::unexpectedAsyncResponse();
+        }
+
+        return $response;
     }
 }
