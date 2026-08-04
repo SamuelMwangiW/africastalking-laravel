@@ -8,7 +8,7 @@ This is useful for scenarios like transferring a customer from a first-line agen
 
 ```php
 africastalking()->voice()
-    ->transferCall($sessionId)
+    ->transfer($sessionId)
     ->to('+254728900922')
     ->send();
 ```
@@ -42,11 +42,12 @@ class TransferToSupervisorController
 
 | Method | Description |
 |---|---|
-| `transferCall(?string $sessionId)` / `transfer(?string $sessionId)` | Start building a transfer for the given call session |
+| `transfer(?string $sessionId)` | Start building a transfer for the given call session |
 | `to(string $phoneNumber)` | The phone number to transfer the call to |
 | `callLeg(string\|CallLeg $leg)` | Which leg to transfer — `CallLeg::CALLER` or `CallLeg::CALLEE`. Defaults to the callee if not set |
 | `holdMusic(?string $url)` | A media file URL to play to the other party while the transfer is in progress |
 | `send()` | Dispatch the transfer request |
+| `transferCall(?string $sessionId)` | Alias for `transfer()` |
 
 ## Choosing Which Leg to Transfer
 
@@ -56,7 +57,7 @@ By default, Africa's Talking transfers the callee leg. Use `callLeg()` to transf
 use SamuelMwangiW\Africastalking\Enum\CallLeg;
 
 africastalking()->voice()
-    ->transferCall($sessionId)
+    ->transfer($sessionId)
     ->to('+254728900922')
     ->callLeg(CallLeg::CALLER)
     ->send();
@@ -66,7 +67,7 @@ africastalking()->voice()
 
 ```php
 africastalking()->voice()
-    ->transferCall($sessionId)
+    ->transfer($sessionId)
     ->to('+254728900922')
     ->holdMusic('https://example.com/hold-music.mp3')
     ->send();
@@ -78,7 +79,7 @@ africastalking()->voice()
 
 ```php
 $response = africastalking()->voice()
-    ->transferCall($sessionId)
+    ->transfer($sessionId)
     ->to('+254728900922')
     ->send();
 
@@ -108,7 +109,7 @@ class HandleDtmfController
         $supervisor = Supervisor::query()->onDuty()->first();
 
         africastalking()->voice()
-            ->transferCall($request->id())
+            ->transfer($request->id())
             ->to($supervisor->phone)
             ->holdMusic('https://example.com/hold-music.mp3')
             ->send();
