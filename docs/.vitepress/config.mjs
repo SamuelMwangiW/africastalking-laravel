@@ -74,6 +74,12 @@ export default defineConfig({
         items: [
           { text: 'Browser Token', link: '/webrtc/token' },
         ]
+      },
+      {
+        text: 'Testing',
+        items: [
+          { text: 'Testing Your Application', link: '/testing/writing-tests' },
+        ]
       }
     ],
 
