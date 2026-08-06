@@ -52,7 +52,7 @@ class DownloadCallRecording implements ShouldBeUnique, ShouldQueue
             $this->disk(),
         )->put($path, $file);
 
-        CallRecordingDownloaded::dispatch($this->callSessionId, $this->url, $path, $this->disk());
+        CallRecordingDownloaded::dispatch($this->callSessionId, $this->url, $path, $this->disk(), mb_strlen($file, '8bit'));
     }
 
     public function uniqueId(): string

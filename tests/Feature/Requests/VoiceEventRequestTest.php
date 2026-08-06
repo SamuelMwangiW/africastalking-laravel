@@ -117,7 +117,10 @@ it('can fail to downloads a recording to disk', function (string $url): void {
 it('dispatches an event after downloading a recording', function (string $url): void {
     Storage::fake();
     Event::fake([CallRecordingDownloaded::class]);
-    Http::fake();
+    $body = 'a fake recording body';
+    Http::fake([
+        '*' => Http::response($body),
+    ]);
 
     Storage::deleteDirectory('call-recordings');
 
@@ -127,7 +130,9 @@ it('dispatches an event after downloading a recording', function (string $url): 
         event: CallRecordingDownloaded::class,
         callback: fn(
             CallRecordingDownloaded $event,
-        ) => $event->recordingUrl === $url && 'sessionId' === $event->sessionId,
+        ) => $event->recordingUrl === $url
+            && 'sessionId' === $event->sessionId
+            && mb_strlen($body, '8bit') === $event->size,
     );
 })->with([
     'https://example.com/Free_Test_Data_100KB_MP3.mp3',

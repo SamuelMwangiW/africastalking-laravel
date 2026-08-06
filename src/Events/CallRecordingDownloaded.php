@@ -18,5 +18,6 @@ class CallRecordingDownloaded
         public readonly string $recordingUrl,
         public readonly string $path,
         public readonly string $disk,
+        public readonly int $size,
     ) {}
 }
