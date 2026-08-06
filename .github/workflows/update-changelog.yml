@@ -5,6 +5,9 @@ on:
     types: [released]
   workflow_call:
 
+permissions:
+  contents: write
+
 jobs:
   update:
     runs-on: ubuntu-latest
