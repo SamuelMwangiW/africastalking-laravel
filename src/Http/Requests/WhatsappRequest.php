@@ -6,6 +6,7 @@ namespace SamuelMwangiW\Africastalking\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
+use InvalidArgumentException;
 
 class WhatsappRequest extends FormRequest
 {
@@ -54,6 +55,10 @@ class WhatsappRequest extends FormRequest
 
     public function mediaUrl(): string
     {
+        if ( ! $this->hasMedia()) {
+            throw new InvalidArgumentException('This request does not contain media');
+        }
+
         return $this->str(key: 'body.url')->value();
     }
 }
