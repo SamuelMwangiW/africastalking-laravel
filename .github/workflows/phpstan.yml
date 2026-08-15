@@ -8,6 +8,9 @@ on:
       - 'composer.lock'
       - 'phpstan.neon.dist'
 
+permissions:
+  contents: read
+
 jobs:
   phpstan:
     name: phpstan ${{ matrix.php }}
