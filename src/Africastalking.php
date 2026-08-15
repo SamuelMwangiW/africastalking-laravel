@@ -12,6 +12,7 @@ use SamuelMwangiW\Africastalking\Domain\SimSwap;
 use SamuelMwangiW\Africastalking\Domain\Stash;
 use SamuelMwangiW\Africastalking\Domain\Voice;
 use SamuelMwangiW\Africastalking\Domain\Wallet;
+use SamuelMwangiW\Africastalking\Domain\Whatsapp;
 use SamuelMwangiW\Africastalking\Response\UssdResponse;
 use SamuelMwangiW\Africastalking\ValueObjects\Message;
 
@@ -80,5 +81,10 @@ class Africastalking
     public function wallet(): Wallet
     {
         return app(Wallet::class);
+    }
+
+    public function whatsapp(): Whatsapp
+    {
+        return app(Whatsapp::class);
     }
 }

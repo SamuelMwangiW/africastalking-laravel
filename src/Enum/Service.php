@@ -18,6 +18,8 @@ enum Service
     case VOICE;
     case WEBRTC;
 
+    case WHATSAPP;
+
     public function liveBaseUrl(): string
     {
         return match ($this) {
@@ -30,6 +32,7 @@ enum Service
             self::PAYMENT => 'https://payments.africastalking.com/',
             self::VOICE => 'https://voice.africastalking.com/',
             self::WEBRTC => 'https://webrtc.africastalking.com',
+            self::WHATSAPP => 'https://chat.africastalking.com/whatsapp',
         };
     }
 
@@ -48,6 +51,7 @@ enum Service
             self::DATA => 'https://bundles.sandbox.africastalking.com/',
             self::INSIGHTS => 'https://insights.sandbox.africastalking.com/v1',
             self::WEBRTC => throw new Exception('WebRTC not supported on Sandbox environment'),
+            self::WHATSAPP => throw new Exception('WhatsApp not supported on Sandbox environment'),
         };
     }
 }
