@@ -2,6 +2,15 @@
 
 All notable changes to `africastalking-laravel` will be documented in this file.
 
+## v3.0.0 - 2026-11-02
+
+### What's Changed
+
+* Potential fix for code scanning alert no. 4: Workflow does not contain permissions by @njoguamos in https://github.com/SamuelMwangiW/africastalking-laravel/pull/67
+* Add an explicit permissions by @SamuelMwangiW in https://github.com/SamuelMwangiW/africastalking-laravel/pull/70
+
+**Full Changelog**: https://github.com/SamuelMwangiW/africastalking-laravel/compare/v3.0.0-alpha4...v3.0.0-rc1
+
 ## v2.4.1 - 2026-05-01
 
 ### What's Changed
